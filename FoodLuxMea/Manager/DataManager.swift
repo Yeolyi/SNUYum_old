@@ -35,7 +35,7 @@ class DataManager: ObservableObject {
     }
     
     func getData(at date: Date) -> [Cafe]{
-        let uRLString = makeURL(from: date)
+        let uRLString = HTMLManager().makeURL(from: date)
         if let data = cafeData[uRLString] {
             return data
         }
@@ -55,7 +55,7 @@ class DataManager: ObservableObject {
     }
     
     func getData(at date: Date, name: String) -> Cafe {
-        let uRLString = makeURL(from: date)
+        let uRLString = HTMLManager().makeURL(from: date)
         if let data = cafeData[uRLString] {
             for cafe in data {
                 if (cafe.name == name) {
