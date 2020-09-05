@@ -100,7 +100,10 @@ struct CafeView: View {
     
     func mealSection(mealType: MealType, mealMenus: [Menu]) -> AnyView {
         
-        if (mealMenus.isEmpty == false && cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.meal(mealType) != nil) {
+        //&& cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.meal(mealType) != nil
+        //이 조건은 왜?????
+        
+        if (mealMenus.isEmpty == false ) {
             return AnyView(
                 Section(header:
                     Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.meal(mealType)!)!  + ")")

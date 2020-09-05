@@ -44,7 +44,7 @@ class ListManager: ObservableObject{
     
     func update(date: Date) {
         if (isInternetConnected) {
-            for cafe in HTMLManager().cafeData(at: date) {
+            for cafe in DataManager().getData(at: date) {
                 if (cafeList.contains(where: {$0.name == cafe.name}) == false ) {
                     cafeList.append(.init(name: cafe.name))
                     print("ListManager/update: \(cafe.name)이 추가되었습니다.")
@@ -96,7 +96,7 @@ class ListManager: ObservableObject{
             return true
         }
         else {
-            //assertionFailure("ListMananer/toggleFixed: 존재하지 않는 카페값에 접근했습니다.")
+            assertionFailure("ListMananer/toggleFixed: 존재하지 않는 카페값에 접근했습니다.")
             return false
         }
     }
@@ -106,7 +106,7 @@ class ListManager: ObservableObject{
             return cafeList[index].isFixed
         }
         else {
-            //assertionFailure("ListMananer/isFixed: 존재하지 않는 카페값에 접근했습니다.")
+            assertionFailure("ListMananer/isFixed: 존재하지 않는 카페값에 접근했습니다.")
             return false
         }
     }

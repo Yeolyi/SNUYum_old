@@ -11,6 +11,7 @@ class DataManager: ObservableObject {
     
     private var cafeData: [URL: [Cafe]] = [:]
     private var hTMLManager = HTMLManager()
+    private var ourhomeManager = OurhomeManager()
     
     init() {
         if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeData") as? Data {
@@ -42,7 +43,7 @@ class DataManager: ObservableObject {
         else {
             if (isInternetConnected) {
                 print("CafeDataManager.getData(at: ): 다운로드 중, \(date)")
-                let newData = hTMLManager.cafeData(at: date)
+                let newData = hTMLManager.cafeData(at: date) + ourhomeManager.getCafe(date: date)
                 cafeData[uRLString] = newData
                 save()
                 return newData
@@ -55,18 +56,18 @@ class DataManager: ObservableObject {
     }
     
     func getData(at date: Date, name: String) -> Cafe {
-        let uRLString = HTMLManager().makeURL(from: date)
+        let uRLString = hTMLManager.makeURL(from: date)
         if let data = cafeData[uRLString] {
-            for cafe in data {
+            for cafe in data { //first 함수로 간단하게 바꾸기
                 if (cafe.name == name) {
                     return cafe
                 }
             }
         }
         else {
-            if (isInternetConnected) {
+            if isInternetConnected {
                 print("CafeDataManager.getData(at: name: ): 다운로드 중, \(uRLString)")
-                let newData = hTMLManager.cafeData(at: date)
+                let newData = self.getData(at: date)
                 cafeData[uRLString] = newData
                 save()
                 for cafe in newData {
