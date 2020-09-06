@@ -52,6 +52,7 @@ class DataManager: ObservableObject {
                 print("CafeDataManager.getData(at: ): 다운로드 중, \(date)")
                 let newData = hTMLManager.cafeData(at: date) + [ourhomeManager.getCafe(date: date)]
                 cafeData[uRLString] = newData
+                save()
                 return newData
             }
             else {

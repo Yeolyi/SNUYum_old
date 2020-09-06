@@ -29,7 +29,25 @@ class OurhomeManager {
     
     
     init() {
-        cafeData[makeURL(from: Date())] = loadCafe(date: Date())
+        if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "ourhomeData") as? Data {
+            cafeData = try! PropertyListDecoder().decode([URL : [Int : Cafe]].self, from: loadedData)
+            print("OurhomeManager/init(): ourhomeData가 로드되었습니다")
+        }
+    }
+    
+    func save() {
+        if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea"){
+            if let encodedData = try? PropertyListEncoder().encode(cafeData) {
+                userDefault.set(encodedData, forKey: "ourhomeData")
+                print("OurhomeManager/save(): ourhomeData가 저장되었습니다")
+            }
+            else {
+                print("OurhomeManager/save(): 데이터 인코딩에 실패했습니다.")
+            }
+        }
+        else {
+            print("OurhomeManager/save(): UserDefaults 로딩에 실패했습니다.")
+        }
     }
     
     func getCafe(date: Date) -> Cafe {
@@ -42,6 +60,7 @@ class OurhomeManager {
             cafeData[makeURL(from: date)] = loadCafe(date: date)
             let data = cafeData[makeURL(from: date)]!
             let dayOfTheWeek = getDayOfWeek(date)
+            save()
             return data[dayOfTheWeek]!
         }
     }
@@ -63,7 +82,9 @@ class OurhomeManager {
 
         let uRLContents = makeURL(from: date)
         let parsed = parse(uRLContents)
-
+        
+        print("OurhomeManager/loadCafe: 아워홈 정보 불러오는 중,,,")
+        
         //가로줄 구분
         let rawCafeList = try! parsed.select("div#container").select("tbody").select("tr").array()
         
