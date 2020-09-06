@@ -44,7 +44,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         monitor.start(queue: queue)
         
         if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea"){
-           userDefault.set(true as Bool, forKey: "firstRun")
+            userDefault.set(true as Bool, forKey: "firstRun")
+            userDefault.set(true as Bool, forKey: "1.1firstRun")
         }
         
         settingManager.update(date: settingManager.date)
