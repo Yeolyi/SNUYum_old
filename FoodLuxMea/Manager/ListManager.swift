@@ -16,9 +16,8 @@ struct ListElement: Hashable, Codable, Identifiable {
 }
 
 class ListManager: ObservableObject{
-    @Published var cafeList: [ListElement] = [] 
-    var cafeListBackup: [ListElement] = []
-    private var defaultCafeList = ["학생회관식당", "자하연식당", "예술계식당", "두레미담", "동원관식당", "기숙사식당", "공대간이식당", "3식당", "302동식당", "301동식당", "220동식당"]
+    
+    @Published var cafeList: [ListElement] = []
     
     var fixedList: [ListElement] {
         cafeList.filter {
@@ -35,22 +34,16 @@ class ListManager: ObservableObject{
         if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeList") as? Data {
              cafeList = try! PropertyListDecoder().decode([ListElement].self, from: loadedData)
         }
-        else {
-            for defaultCafeName in defaultCafeList {
-                cafeList.append(.init(name: defaultCafeName, isFixed: false, isShown: true))
-            }
-        }
     }
     
-    func update(date: Date) {
+    func update(newCafeList: [Cafe]) {
         if (isInternetConnected) {
-            for cafe in HTMLManager().cafeData(at: date) {
+            for cafe in newCafeList {
                 if (cafeList.contains(where: {$0.name == cafe.name}) == false ) {
                     cafeList.append(.init(name: cafe.name))
                     print("ListManager/update: \(cafe.name)이 추가되었습니다.")
                 }
             }
-            print("ListManager/update: 리스트 값을 업데이트했습니다")
         }
         else {
             print("ListManager/update: 인터넷이 연결되어있지 않습니다.")
@@ -72,16 +65,6 @@ class ListManager: ObservableObject{
         }
     }
     
-    func backup() {
-        cafeListBackup = cafeList
-    }
-    
-    func restore() {
-        if (cafeListBackup != []) {
-            cafeList = cafeListBackup
-        }
-    }
-    
     func index(of str: String) -> Int? {
         let value = cafeList.firstIndex(where: {$0.name == str})
         if (value == nil) {
@@ -96,7 +79,7 @@ class ListManager: ObservableObject{
             return true
         }
         else {
-            //assertionFailure("ListMananer/toggleFixed: 존재하지 않는 카페값에 접근했습니다.")
+            assertionFailure("ListMananer/toggleFixed: 존재하지 않는 카페값에 접근했습니다.")
             return false
         }
     }
@@ -106,7 +89,7 @@ class ListManager: ObservableObject{
             return cafeList[index].isFixed
         }
         else {
-            //assertionFailure("ListMananer/isFixed: 존재하지 않는 카페값에 접근했습니다.")
+            assertionFailure("ListMananer/isFixed: 존재하지 않는 카페값에 접근했습니다.")
             return false
         }
     }

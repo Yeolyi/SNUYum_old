@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ListReorder: View {
-    
+    @EnvironmentObject var listManager: ListManager
     var body: some View {
-            AnyView(ListReorderOriginal()
+        AnyView(ListReorderOriginal(cafeList: listManager.cafeList)
                 .listStyle(GroupedListStyle()))
     }
 }
@@ -25,6 +25,10 @@ struct ListReorderOriginal: View {
     let themeColor = ThemeColor()
     
     @State var tempListManager = ListManager()
+    
+    init(cafeList: [ListElement]) {
+        self.tempListManager.cafeList = cafeList
+    }
 
     var body: some View {
         NavigationView {
@@ -52,9 +56,6 @@ struct ListReorderOriginal: View {
                     .onMove(perform: moveUnfixed)
                 }
             }
-            .onAppear(perform: {
-                self.tempListManager.cafeList = self.listManager.cafeList
-            })
             .environment(\.editMode, .constant(EditMode.active))
             .navigationBarTitle("목록 수정", displayMode: .inline)
             .navigationBarItems(leading:
@@ -66,6 +67,7 @@ struct ListReorderOriginal: View {
                                 , trailing:
                                         Button(action: {
                                                 self.listManager.cafeList = self.tempListManager.cafeList
+                                                self.listManager.save()
                                                 self.presentationMode.wrappedValue.dismiss()}) {
                                             Text("저장")
                                                 .foregroundColor(themeColor.colorTitle(colorScheme))

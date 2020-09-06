@@ -143,10 +143,7 @@ class HTMLManager {
                 isTitle2 = true
                 continue
             }
-            
-            
-            
-            
+             
             if isGettingCost {
                 
                 
@@ -210,13 +207,6 @@ class HTMLManager {
                 return menuList
             }
         }
-    
-
-        //var replaced = trimmedContinuousMenus.replacingOccurrences(of: "00원~", with: "10원") //물결표시 ~원 이상으로 바꾸기 위함
-        //replaced = replaced.replacingOccurrences(of: "0원", with: "꿇") //아래 components 함수가 한글자로만 작동함
-        
-        //let menuArray = replaced.components(separatedBy: ["꿇", ">"]) //원과 >으로 나눠 배열 생성
-         assertionFailure("여기까지 오면 안돼요")
         return menuList
     }
     private func parse(_ uRL: URL) -> Document {
@@ -231,17 +221,20 @@ class HTMLManager {
         return .init("https://snuco.snu.ac.kr/ko/foodmenu")
     }
     
+    
+    func makeURL(from date: Date) -> URL { //DataManager에서 [String:[Cafe]]에 사용
+        let targetDate = Calendar.current.dateComponents([.day, .year, .month], from: date)
+        let targetURLString = "https://snuco.snu.ac.kr/ko/foodmenu?field_menu_date_value_1%5Bvalue%5D%5Bdate%5D=&field_menu_date_value%5Bvalue%5D%5Bdate%5D=" + String(targetDate.month!) + "%2F" + String(targetDate.day!) + "%2F" + String(targetDate.year!)
+        if let targetURL = URL(string: targetURLString) {
+            return targetURL
+        }
+        else{
+            assertionFailure("HTMLManager/makeURL(from: ): 문자열을 URL로 변환하는데 실패하였습니다.")
+            return URL(string: "https://snuco.snu.ac.kr/ko/foodmenu")!
+        }
+    }
+    
 }
 
 
-func makeURL(from date: Date) -> URL { //DataManager에서 [String:[Cafe]]에 사용
-    let targetDate = Calendar.current.dateComponents([.day, .year, .month], from: date)
-    let targetURLString = "https://snuco.snu.ac.kr/ko/foodmenu?field_menu_date_value_1%5Bvalue%5D%5Bdate%5D=&field_menu_date_value%5Bvalue%5D%5Bdate%5D=" + String(targetDate.month!) + "%2F" + String(targetDate.day!) + "%2F" + String(targetDate.year!)
-    if let targetURL = URL(string: targetURLString) {
-        return targetURL
-    }
-    else{
-        assertionFailure("HTMLManager/makeURL(from: ): 문자열을 URL로 변환하는데 실패하였습니다.")
-        return URL(string: "https://snuco.snu.ac.kr/ko/foodmenu")!
-    }
-}
+

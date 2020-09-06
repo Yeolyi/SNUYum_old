@@ -31,15 +31,8 @@ struct SettingView: View {
                 self.settingManager.isCustomDate
             }, set: {
                 self.settingManager.isCustomDate = $0
-                if ($0) {
-                    self.settingManager.update(date: self.debugDate.wrappedValue)
-                    self.listManager.update(date: self.debugDate.wrappedValue)
-                }
-                else {
-                    self.settingManager.update(date: Date())
-                    self.listManager.update(date: Date())
-                }
-                self.settingManager.save()
+                self.settingManager.update(date: self.debugDate.wrappedValue)
+                self.listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
             })
     }
     
@@ -47,10 +40,9 @@ struct SettingView: View {
         Binding<Date>(get: {
             self.settingManager.debugDate
         }, set: {
-            self.listManager.update(date: $0)
+           self.listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
             self.settingManager.debugDate = $0
             self.settingManager.update(date: $0)
-            self.settingManager.save()
         })
     }
     
@@ -61,7 +53,6 @@ struct SettingView: View {
             },
             set: {
                 self.settingManager.hideEmptyCafe = $0
-                self.settingManager.save()
             })
     }
     

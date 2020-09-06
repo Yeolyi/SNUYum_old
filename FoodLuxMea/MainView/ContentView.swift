@@ -23,9 +23,10 @@ struct ContentViewComponent: View {
     @EnvironmentObject var settingManager: SettingManager
     
     let themeColor = ThemeColor()
-
+    
     @State var searchedText = ""
     @State var isSettingSheet = false
+    
     
     var body: some View {
         NavigationView {
@@ -38,8 +39,8 @@ struct ContentViewComponent: View {
                         Section(header: Text("안내").modifier(SectionText())) {
                                 NavigationLink(destination: CafeView(cafeInfo: self.dataManager.getData(at: self.settingManager.date, name: settingManager.alimiCafeName!))) {
                                     TimerText(cafeName: settingManager.alimiCafeName!)
-                                            .modifier(CenterModifier())
-                                            .modifier(TitleText())
+                                        .modifier(CenterModifier())
+                                        .modifier(TitleText())
                                         .foregroundColor(themeColor.tempColor(colorScheme))
                                 }
                             }
