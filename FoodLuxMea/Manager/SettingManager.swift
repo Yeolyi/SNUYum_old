@@ -86,6 +86,6 @@ class SettingManager: ObservableObject { //자료형? 버전 만들어서 userde
         }
         isSuggestedTomorrow = smartSuggestion.isTomorrow(date)
         suggestedMeal = smartSuggestion.mealType(at: date)
-        print("SettingManager/updateSuggestion(date: ): 추천값 업데이트 완료")
+        print("SettingManager/update(date: ): 추천값 업데이트 완료")
     }
 }

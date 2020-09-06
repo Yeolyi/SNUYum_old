@@ -19,42 +19,39 @@ struct TimerText: View {
     }
     
     func text() -> String {
-        let tempSettingManager = SettingManager()
-        tempSettingManager.alimiCafeName = cafeName
-        tempSettingManager.update(date: settingManager.date)
-        let currentHour = Calendar.current.component(.hour, from: tempSettingManager.date)
-        let currentMinute = Calendar.current.component(.minute, from: tempSettingManager.date)
+        let currentHour = Calendar.current.component(.hour, from: settingManager.date)
+        let currentMinute = Calendar.current.component(.minute, from: settingManager.date)
         
-        a: if let endDate = cafeOperatingHour[cafeName]?.dayOfTheWeek(date: tempSettingManager.date)?.mealTypeToEndTime(tempSettingManager.suggestedMeal) {
-            let cafeData = dataManager.getData(at: tempSettingManager.date, name: cafeName)
+        a: if let endDate = cafeOperatingHour[cafeName]?.dayOfTheWeek(date: settingManager.date)?.mealTypeToEndTime(settingManager.suggestedMeal) {
+            let cafeData = dataManager.getData(at: settingManager.date, name: cafeName)
             
-            if (cafeData.isEmpty(mealType: tempSettingManager.suggestedMeal, keywords: tempSettingManager.closedKeywords)) {
+            if (cafeData.isEmpty(mealType: settingManager.suggestedMeal, keywords: settingManager.closedKeywords)) {
                 break a
             }
             
-            let startTime = cafeOperatingHour[cafeName]!.dayOfTheWeek(date: tempSettingManager.date)!.mealTypeToStartTime(tempSettingManager.suggestedMeal)!
+            let startTime = cafeOperatingHour[cafeName]!.dayOfTheWeek(date: settingManager.date)!.mealTypeToStartTime(settingManager.suggestedMeal)!
             if (currentHour < 5 || currentHour > endDate.hour) {
                 return "식당 영업 종료🌙"
             }
             else if (isRhsBigger(lhs: (currentHour, currentMinute), rhs: startTime)) { //시작시간 전
-                return "\(cafeName)에서 \(tempSettingManager.isSuggestedTomorrow ? "내일" : "오늘") \(tempSettingManager.suggestedMeal.rawValue)밥 준비중!"
+                return "\(cafeName)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!"
             }
-            var newEndDate = Calendar.current.date(bySettingHour: endDate.hour, minute: endDate.minute, second: 0, of: tempSettingManager.date)!
-            if (newEndDate < tempSettingManager.date) {
+            var newEndDate = Calendar.current.date(bySettingHour: endDate.hour, minute: endDate.minute, second: 0, of: settingManager.date)!
+            if (newEndDate < settingManager.date) {
                 newEndDate = newEndDate.addingTimeInterval(86400)
             }
-            let (hour, minute) = remainTime(from: tempSettingManager.date, to: newEndDate)
-            return "\(cafeName) \(tempSettingManager.suggestedMeal.rawValue)마감까지 \(hour)시간 \(minute)분!"
+            let (hour, minute) = remainTime(from: settingManager.date, to: newEndDate)
+            return "\(cafeName) \(settingManager.suggestedMeal.rawValue)마감까지 \(hour)시간 \(minute)분!"
         }
         else {
             if (currentHour < 5 || currentHour > SmartSuggestion.dinnerDefaultTime.0) {
                 return "식당 영업 종료🌙"
             }
             else {
-                return "\(cafeName)은 \(dayOfTheWeek(of: tempSettingManager.date)) \(tempSettingManager.suggestedMeal.rawValue)에 미운영해요"
+                return "\(dayOfTheWeek(of: settingManager.date)) \(settingManager.suggestedMeal.rawValue)에는 운영하지 않아요"
             }
         }
-        return "\(cafeName)은 오늘 미운영해요"
+        return "오늘은 운영하지 않아요"
     }
         
 
