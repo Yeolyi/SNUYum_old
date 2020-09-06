@@ -14,6 +14,13 @@ class DataManager: ObservableObject {
     private var ourhomeManager = OurhomeManager()
     
     init() {
+        if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
+            if userDefaults.bool(forKey: "1.1firstRun") == false {
+                print("DataManager/init: 1.1버전 설치가 처음입니다. 데이터를 삭제합니다. ")
+                userDefaults.removeObject(forKey: "cafeData")
+                return
+            }
+        }
         if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeData") as? Data {
             cafeData = try! PropertyListDecoder().decode([URL:[Cafe]].self, from: loadedData)
             print("CafeDataManager/init(): cafeData가 로드되었습니다")
@@ -45,6 +52,7 @@ class DataManager: ObservableObject {
                 print("CafeDataManager.getData(at: ): 다운로드 중, \(date)")
                 let newData = hTMLManager.cafeData(at: date) + [ourhomeManager.getCafe(date: date)]
                 cafeData[uRLString] = newData
+                save()
                 return newData
             }
             else {

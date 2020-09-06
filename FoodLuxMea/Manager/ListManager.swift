@@ -19,8 +19,6 @@ class ListManager: ObservableObject{
     
     @Published var cafeList: [ListElement] = []
     
-    private var defaultCafeList = ["학생회관식당", "자하연식당", "예술계식당", "두레미담", "동원관식당", "기숙사식당", "공대간이식당", "3식당", "302동식당", "301동식당", "220동식당"]
-    
     var fixedList: [ListElement] {
         cafeList.filter {
             $0.isFixed == true
@@ -35,11 +33,6 @@ class ListManager: ObservableObject{
     init() {
         if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeList") as? Data {
              cafeList = try! PropertyListDecoder().decode([ListElement].self, from: loadedData)
-        }
-        else {
-            for defaultCafeName in defaultCafeList {
-                cafeList.append(.init(name: defaultCafeName, isFixed: false, isShown: true))
-            }
         }
     }
     

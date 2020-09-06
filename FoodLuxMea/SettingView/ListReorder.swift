@@ -67,6 +67,7 @@ struct ListReorderOriginal: View {
                                 , trailing:
                                         Button(action: {
                                                 self.listManager.cafeList = self.tempListManager.cafeList
+                                                self.listManager.save()
                                                 self.presentationMode.wrappedValue.dismiss()}) {
                                             Text("저장")
                                                 .foregroundColor(themeColor.colorTitle(colorScheme))

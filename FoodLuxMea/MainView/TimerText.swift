@@ -31,7 +31,7 @@ struct TimerText: View {
             
             let startTime = cafeOperatingHour[cafeName]!.dayOfTheWeek(date: settingManager.date)!.mealTypeToStartTime(settingManager.suggestedMeal)!
             if (currentHour < 5 || currentHour > endDate.hour) {
-                return "식당 영업 종료🌙"
+                return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
             }
             else if (isRhsBigger(lhs: (currentHour, currentMinute), rhs: startTime)) { //시작시간 전
                 return "\(cafeName)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!"
@@ -45,13 +45,13 @@ struct TimerText: View {
         }
         else {
             if (currentHour < 5 || currentHour > SmartSuggestion.dinnerDefaultTime.0) {
-                return "식당 영업 종료🌙"
+                return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
             }
             else {
-                return "\(dayOfTheWeek(of: settingManager.date)) \(settingManager.suggestedMeal.rawValue)에는 운영하지 않아요"
+                return "\(dayOfTheWeek(of: settingManager.date)) \(settingManager.suggestedMeal.rawValue)에는 운영하지 않아요."
             }
         }
-        return "오늘은 운영하지 않아요"
+        return "오늘은 운영하지 않아요."
     }
         
 
