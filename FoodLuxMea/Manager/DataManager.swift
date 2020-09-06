@@ -43,7 +43,7 @@ class DataManager: ObservableObject {
         else {
             if (isInternetConnected) {
                 print("CafeDataManager.getData(at: ): 다운로드 중, \(date)")
-                let newData = hTMLManager.cafeData(at: date) + ourhomeManager.getCafe(date: date)
+                let newData = hTMLManager.cafeData(at: date) + [ourhomeManager.getCafe(date: date)]
                 cafeData[uRLString] = newData
                 return newData
             }
