@@ -88,16 +88,4 @@ class SettingManager: ObservableObject { //자료형? 버전 만들어서 userde
         suggestedMeal = smartSuggestion.mealType(at: date)
         print("SettingManager/updateSuggestion(date: ): 추천값 업데이트 완료")
     }
-    
-    func dateToStr(_ date: Date) -> String {
-        let df = DateFormatter()
-        df.dateFormat = "dd/MM/yyyy HH:mm"
-        return df.string(from: date)
-    }
-    
-    func strToDate(_ str: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-        return dateFormatter.date(from: str)!
-    }
 }
