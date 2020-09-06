@@ -9,11 +9,11 @@ import SwiftSoup
 import SwiftUI
 
 
-
+//0: Sun - 6:Sat
 class OurhomeManager {
     
-    var cafeNameList = ["가마", "인터쉐프", "해피존"]
-    var cafeData: [URL : [dayOfWeek : [Cafe]]] = [:]
+    var nameList = ["가마", "인터쉐프", "해피존"]
+    var cafeData: [URL : [Int : [Cafe]]] = [:]
     private let isIgnore: [[Bool]] = [
         [true, true, true, false, false, false, false, false, false, false],
         [true, false, false, false, false, false, false, false],
@@ -33,13 +33,13 @@ class OurhomeManager {
 
         if let data = cafeData[makeURL(from: date)] {
             let dayOfTheWeek = getDayOfWeek(date)
-            return data[dayOfWeek(rawValue: dayOfTheWeek)!]!
+            return data[dayOfTheWeek]!
         }
         else {
             cafeData[makeURL(from: date)] = loadCafe(date: date)
             let data = cafeData[makeURL(from: date)]!
             let dayOfTheWeek = getDayOfWeek(date)
-            return data[dayOfWeek(rawValue: dayOfTheWeek)!]!
+            return data[dayOfTheWeek]!
         }
     }
     
@@ -50,12 +50,12 @@ class OurhomeManager {
     }
     
     
-    func loadCafe(date: Date) -> [dayOfWeek : [Cafe]]{
-        var cafeList: [dayOfWeek : [Cafe]] = [:]
-        var cafeDayofWeek: [dayOfWeek: [[Menu]]] = [:]
+    func loadCafe(date: Date) -> [Int : [Cafe]]{
+        var cafeList: [Int : [Cafe]] = [:]
+        var cafeDayofWeek: [Int: [[Menu]]] = [:]
         
         for i in 0..<7 {
-            cafeDayofWeek[dayOfWeek.init(rawValue: i)!] = []
+            cafeDayofWeek[i] = []
         }
 
         let uRLContents = makeURL(from: date)
@@ -75,23 +75,17 @@ class OurhomeManager {
                     let menu = try! mealArray[columnNum].select("li").text()
                     let cost = getCost(menuName: try! mealArray[columnNum].select("li").attr("class"))
                     //print("\(menu), \(cost)")
-                    cafeDayofWeek[dayOfWeek.init(rawValue: dayCount)!]!.append([Menu(name: menu, cost: cost)])
+                    cafeDayofWeek[dayCount]!.append([Menu(name: menu, cost: cost)])
                     dayCount += 1
                 }
             }
         }
-        
-        for day in 0..<7 {
-            let targetDay = dayOfWeek.init(rawValue: day)!
-            //print(cafeDayofWeek[targetDay]![0])
-        }
 
         for day in 0..<7 {
-            var targetDay = dayOfWeek.init(rawValue: day)!
-            cafeList[targetDay] = [
-                Cafe(name: "가마", phoneNum: "", bkfMenuList: cafeDayofWeek[targetDay]![0], lunchMenuList: cafeDayofWeek[targetDay]![2], dinnerMenuList: cafeDayofWeek[targetDay]![5]),
-                Cafe(name: "인터쉐프", phoneNum: "", bkfMenuList: cafeDayofWeek[targetDay]![1], lunchMenuList: cafeDayofWeek[targetDay]![3], dinnerMenuList: cafeDayofWeek[targetDay]![6]),
-                Cafe(name: "해피존", phoneNum: "", bkfMenuList: [], lunchMenuList: cafeDayofWeek[targetDay]![4], dinnerMenuList: cafeDayofWeek[targetDay]![7])
+            cafeList[day] = [
+                Cafe(name: "가마", phoneNum: "", bkfMenuList: cafeDayofWeek[day]![0], lunchMenuList: cafeDayofWeek[day]![2], dinnerMenuList: cafeDayofWeek[day]![5]),
+                Cafe(name: "인터쉐프", phoneNum: "", bkfMenuList: cafeDayofWeek[day]![1], lunchMenuList: cafeDayofWeek[day]![3], dinnerMenuList: cafeDayofWeek[day]![6]),
+                Cafe(name: "해피존", phoneNum: "", bkfMenuList: [], lunchMenuList: cafeDayofWeek[day]![4], dinnerMenuList: cafeDayofWeek[day]![7])
             ]
         }
         return cafeList
@@ -100,22 +94,10 @@ class OurhomeManager {
     
     func makeURL(from date: Date) -> URL {
         let baseNum = 1597503600
-        let baseDate = getDate(from: "2020/08/16 00:00")
+        let baseDate = getTrimmedDate(from: "2020/08/16 00:00")
         let components = Calendar.current.dateComponents([.weekOfYear], from: baseDate, to: date)
         //print("\(baseDate)부터 \(date)까지 \(components.weekOfYear!)주 지났습니다")
         return URL(string: "https://dorm.snu.ac.kr/dk_board/facility/food.php?start_date2=\(baseNum + components.weekOfYear! * 604800)")!
-    }
-
-    ///yyyy/MM/dd HH:mm 형식을 Date로 변환
-    func getDate(from string: String) -> Date{
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        let date = formatter.date(from: string)!
-        guard let trimmedDate = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: date)) else {
-            assertionFailure("")
-            return Date()
-        }
-        return trimmedDate
     }
 
     func parse(_ uRL: URL) -> Document {
@@ -148,18 +130,4 @@ class OurhomeManager {
             return 0
         }
     }
-    
-    enum dayOfWeek: Int {
-        case Sun = 0
-        case Mon = 1
-        case Tues = 2
-        case Wed = 3
-        case Thur = 4
-        case Fri = 5
-        case Sat = 6
-    }
-
-
 }
-
-

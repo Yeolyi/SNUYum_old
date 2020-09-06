@@ -143,10 +143,7 @@ class HTMLManager {
                 isTitle2 = true
                 continue
             }
-            
-            
-            
-            
+             
             if isGettingCost {
                 
                 
@@ -210,13 +207,6 @@ class HTMLManager {
                 return menuList
             }
         }
-    
-
-        //var replaced = trimmedContinuousMenus.replacingOccurrences(of: "00원~", with: "10원") //물결표시 ~원 이상으로 바꾸기 위함
-        //replaced = replaced.replacingOccurrences(of: "0원", with: "꿇") //아래 components 함수가 한글자로만 작동함
-        
-        //let menuArray = replaced.components(separatedBy: ["꿇", ">"]) //원과 >으로 나눠 배열 생성
-         assertionFailure("여기까지 오면 안돼요")
         return menuList
     }
     private func parse(_ uRL: URL) -> Document {
