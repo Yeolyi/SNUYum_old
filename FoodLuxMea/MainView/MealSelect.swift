@@ -21,7 +21,7 @@ struct MealSelect: View {
             MealTypeButton(imageName: "sun.max", buttonType: .lunch)
             MealTypeButton(imageName: "sunset", buttonType: .dinner)
             Button(action: {self.settingManager.isAuto = true; self.settingManager.save()}) {
-                Image(systemName: "a.circle")
+                Image(systemName: "arrow.clockwise.circle")
                     .font(.system(size: 20, weight: .regular))
                     .padding([.leading, .trailing], 2)
                     .foregroundColor(settingManager.isAuto == true ? themeColor.colorIcon((colorScheme)) : Color(.systemFill))
