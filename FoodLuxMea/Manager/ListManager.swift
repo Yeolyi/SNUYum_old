@@ -16,8 +16,9 @@ struct ListElement: Hashable, Codable, Identifiable {
 }
 
 class ListManager: ObservableObject{
-    @Published var cafeList: [ListElement] = [] 
-    var cafeListBackup: [ListElement] = []
+    
+    @Published var cafeList: [ListElement] = []
+    
     private var defaultCafeList = ["학생회관식당", "자하연식당", "예술계식당", "두레미담", "동원관식당", "기숙사식당", "공대간이식당", "3식당", "302동식당", "301동식당", "220동식당"]
     
     var fixedList: [ListElement] {
@@ -42,15 +43,14 @@ class ListManager: ObservableObject{
         }
     }
     
-    func update(date: Date) {
+    func update(newCafeList: [Cafe]) {
         if (isInternetConnected) {
-            for cafe in HTMLManager().cafeData(at: date) {
+            for cafe in newCafeList {
                 if (cafeList.contains(where: {$0.name == cafe.name}) == false ) {
                     cafeList.append(.init(name: cafe.name))
                     print("ListManager/update: \(cafe.name)이 추가되었습니다.")
                 }
             }
-            print("ListManager/update: 리스트 값을 업데이트했습니다")
         }
         else {
             print("ListManager/update: 인터넷이 연결되어있지 않습니다.")
@@ -69,16 +69,6 @@ class ListManager: ObservableObject{
         }
         else {
             assertionFailure("CafeListManager/save: UserDefaults 로딩에 실패했습니다.")
-        }
-    }
-    
-    func backup() {
-        cafeListBackup = cafeList
-    }
-    
-    func restore() {
-        if (cafeListBackup != []) {
-            cafeList = cafeListBackup
         }
     }
     

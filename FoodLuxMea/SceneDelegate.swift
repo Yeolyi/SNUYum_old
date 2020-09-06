@@ -48,7 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         settingManager.update(date: settingManager.date)
-        listManager.update(date: settingManager.date)
+        self.listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
         
         //requestPermission()
         
@@ -85,13 +85,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
         settingManager.update(date: settingManager.date)
-        listManager.update(date: settingManager.date)
+        listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        dataManager.save()
+        listManager.save()
     }
 
 
