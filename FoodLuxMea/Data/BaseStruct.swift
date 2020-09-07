@@ -60,15 +60,13 @@ struct Cafe: Hashable, Codable, Identifiable {
         }
     }
     
-    func searchText(_ str: String) -> Bool {
+    func searchText(_ str: String, mealType: MealType) -> Bool {
         if (name.contains(str)) {
             return true
         }
-        if (phoneNum.contains(str)) {
-            return true
-        }
-        for menu in bkfMenuList + lunchMenuList + dinnerMenuList{
-            if (menu.name.contains(str) || String(menu.cost).contains(str)) {
+        let menuList = getMenuList(MealType: mealType)
+        for menu in menuList{
+            if (menu.name.contains(str)) {
                 return true
             }
         }

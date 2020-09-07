@@ -101,7 +101,7 @@ struct CafeListFiltered: View {
         if targetCafe.bkfMenuList.isEmpty && targetCafe.lunchMenuList.isEmpty  && targetCafe.dinnerMenuList.isEmpty  {
              return .noData //카페가 cafedata에 존재 안함
         }
-            if (searchedText.isEmpty || targetCafe.searchText(searchedText)) { 
+        if (searchedText.isEmpty || targetCafe.searchText(searchedText, mealType: settingManager.mealViewMode)) { 
                 if (targetCafe.isEmpty(mealType: settingManager.meal, keywords: settingManager.closedKeywords) == false ) {
                     return .show
                 }
