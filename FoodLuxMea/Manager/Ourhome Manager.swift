@@ -98,7 +98,7 @@ class OurhomeManager {
                 if isIgnore[rowNum][columnNum] == false {
                     let menu = try! mealArray[columnNum].select("li").text()
                     let cost = getCost(menuName: try! mealArray[columnNum].select("li").attr("class"))
-                    if menu != "" && cost != 0 {
+                    if menu != "" {
                         cafeDayofWeek[dayCount]!.append(Menu(name: "(\(cafeNameOrder[rowNum]))\(menu)", cost: cost))
                     }
                     else {
