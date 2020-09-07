@@ -27,8 +27,6 @@ struct SearchCafeRow: View {
                     HStack {
                         self.text(target: menu.name, search: self.searchText)
                             .font(.system(size: 15))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .lineLimit(1)
                         Spacer()
                         Text(self.costInterpret(menu.cost))
                             .font(.system(size: 15))
