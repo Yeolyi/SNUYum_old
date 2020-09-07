@@ -7,7 +7,7 @@
 
 import Foundation
 
-var previewCafe = Cafe(name: "3식당", phoneNum: "3280-8642", bkfMenuList: [Menu(name: "bkfMenu1", cost: 1000)], lunchMenuList: [Menu(name: "lunchMenu1", cost: 3000), Menu(name: "lunchMenu1", cost: 2500)], dinnerMenuList: [])
+var previewCafe = Cafe(name: "3식당", phoneNum: "3280-8642", bkfMenuList: [Menu(name: "bkfMenu1", cost: 1000)], lunchMenuList: [Menu(name: "lunchMenu1", cost: 3000), Menu(name: "lunchMenu2", cost: 2500)], dinnerMenuList: [Menu(name: "dinnerMenu1", cost: 1700), Menu(name: "dinnerMenu2", cost: 5000)])
 
 var coordList: [String:(lat: Double, lng: Double)] =
     [

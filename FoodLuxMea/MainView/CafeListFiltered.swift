@@ -60,9 +60,17 @@ struct CafeListFiltered: View {
     
     func nameToCafeRow(_ listElement: ListElement) -> AnyView {
         let cafe = self.dataManager.getData(at: self.settingManager.date, name: listElement.name)
-        return AnyView(
-            CafeRow(cafe: cafe, suggestedMeal: settingManager.meal)
-       )
+        if searchedText == "" {
+             return AnyView(
+                 CafeRow(cafe: cafe, suggestedMeal: settingManager.meal)
+            )
+        }
+        else {
+             return AnyView(
+                SearchCafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchedText)
+            )
+        }
+
     }
 
     func ifEmptyReturnView(list: [ListElement]) -> AnyView? {
