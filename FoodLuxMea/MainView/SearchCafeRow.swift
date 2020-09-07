@@ -42,7 +42,7 @@ struct SearchCafeRow: View {
     }
     
     
-    func text(target: String, search: String) -> AnyView {
+    func text(target: String, search: String) -> Text {
         
         var colorSet: Set<Int> = []
         let range: Range<String.Index> = target.range(of: search)!
@@ -51,14 +51,19 @@ struct SearchCafeRow: View {
             colorSet.insert(index + i)
         }
         
-        return AnyView (
-            HStack(spacing: 0) {
-                ForEach(0..<target.count) { index in
-                    Text(String(target[target.index(target.startIndex, offsetBy: index)]))
-                        .foregroundColor(colorSet.contains(index) ? self.themeColor.colorTitle(self.colorScheme) : Color(.label))
-                }
+        var tempView: Text = .init("")
+        
+        func getView(cnt: Int) -> Text{
+            if cnt == target.count {
+                return tempView
             }
-        )
+            tempView = tempView +
+                (Text(String(target[target.index(target.startIndex, offsetBy: cnt)]))
+                .foregroundColor(colorSet.contains(cnt) ? self.themeColor.colorTitle(self.colorScheme) : Color(.label)))
+            return getView(cnt: cnt + 1)
+        }
+        
+        return getView(cnt: 0)
     }
 
     func costInterpret(_ cost: Int) -> String{
