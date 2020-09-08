@@ -16,23 +16,32 @@ struct MealSelect: View {
     var body: some View {
         HStack {
             Text("\(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.meal.rawValue) 식단이에요")
+                .foregroundColor(.secondary)
+                .padding(.leading)
             Spacer()
-            MealTypeButton(imageName: "sunrise", buttonType: .breakfast)
-            MealTypeButton(imageName: "sun.max", buttonType: .lunch)
-            MealTypeButton(imageName: "sunset", buttonType: .dinner)
-            Button(action: {self.settingManager.isAuto = true; self.settingManager.save()}) {
-                Image(systemName: "arrow.clockwise.circle")
-                    .font(.system(size: 20, weight: .regular))
-                    .padding([.leading, .trailing], 2)
-                    .foregroundColor(settingManager.isAuto == true ? themeColor.colorIcon((colorScheme)) : Color(.systemFill))
+            HStack {
+                Group {
+                    MealTypeButton(imageName: "sunrise", buttonType: .breakfast)
+                    MealTypeButton(imageName: "sun.max", buttonType: .lunch)
+                    MealTypeButton(imageName: "sunset", buttonType: .dinner)
+                    ZStack {
+                       RoundedRectangle(cornerRadius: 10)
+                           .frame(width: 40, height: 40)
+                           .foregroundColor(settingManager.isAuto == true ? themeColor.colorTitle(colorScheme) : Color.clear)
+                           .opacity(0.2)
+                        Button(action: {self.settingManager.isAuto = true; self.settingManager.save()}) {
+                            Image(systemName: "arrow.clockwise.circle")
+                                .font(.system(size: 20, weight: .regular))
+                                .padding([.leading, .trailing], 2)
+                                .foregroundColor(settingManager.isAuto == true ? themeColor.colorIcon((colorScheme)) : Color(.systemFill))
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                    }
+                }
             }
-            .buttonStyle(BorderlessButtonStyle())
+            .modifier(ListRow())
         }
-        .padding(12)
-        .background(
-            (colorScheme == .dark ? Color.white.opacity(0.13) : Color.gray.opacity(0.13))
-                .cornerRadius(8)
-        )
+
     }
 }
 
@@ -46,19 +55,31 @@ struct MealTypeButton: View {
     
     var body: some View {
         Button(action: {self.settingManager.mealViewMode = self.buttonType; self.settingManager.isAuto = false; self.settingManager.save()}) {
-                Image(systemName: imageName)
-                    .font(.system(size: 20, weight: .regular))
-                    .padding([.leading, .trailing], 2)
-                    .foregroundColor(settingManager.mealViewMode == buttonType && settingManager.isAuto == false ? themeColor.colorIcon((colorScheme)) : Color(.systemFill))
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(settingManager.mealViewMode == buttonType && settingManager.isAuto == false ? themeColor.colorTitle(colorScheme) : Color.clear)
+                        .opacity(0.2)
+                    Image(systemName: imageName)
+                        .font(.system(size: 20, weight: .regular))
+                        .padding([.leading, .trailing], 2)
+                        .foregroundColor(settingManager.mealViewMode == buttonType && settingManager.isAuto == false ? themeColor.colorIcon((colorScheme)) : Color(.systemFill))
+                }
             }
             .buttonStyle(BorderlessButtonStyle())
     }
 }
 
 struct MealTypeSelectView_Previews: PreviewProvider {
+    static var settingManager = SettingManager()
+    
     static var previews: some View {
-        MealSelect()
-            .environmentObject(ThemeColor())
-            .environmentObject(SettingManager())
+        settingManager.mealViewMode = .lunch
+        settingManager.isAuto = false
+        return (
+            MealSelect()
+                .environmentObject(ThemeColor())
+                .environmentObject(settingManager)
+        )
     }
 }

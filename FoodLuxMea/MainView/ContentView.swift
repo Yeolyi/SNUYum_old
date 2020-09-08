@@ -80,6 +80,7 @@ struct ContentViewComponent: View {
                             .padding()
                             .offset(y: 10)
                         }
+                        
                         Group {
                         MealSelect()
                         }
