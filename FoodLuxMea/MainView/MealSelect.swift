@@ -30,7 +30,7 @@ struct MealSelect: View {
         }
         .padding(12)
         .background(
-            Color.gray.opacity(0.1)
+            (colorScheme == .dark ? Color.white.opacity(0.13) : Color.gray.opacity(0.13))
                 .cornerRadius(8)
         )
     }

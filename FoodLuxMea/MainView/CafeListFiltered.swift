@@ -50,6 +50,7 @@ struct CafeListFiltered: View {
                         if (self.settingManager.hideEmptyCafe == false) {
                             CafeRow(cafe: self.dataManager.getData(at: self.settingManager.date, name: listElement.name), suggestedMeal: self.settingManager.meal)
                                     .environmentObject(self.themeColor)
+                                    .modifier(ListRow())
                         }
                     }
                          

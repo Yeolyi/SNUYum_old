@@ -9,16 +9,6 @@ import SwiftUI
 
 struct InfoView: View {
     
-    var body: some View {
-        listByVersion(view: AnyView(
-            InfoViewContent()
-        ))
-    }
-
-}
-
-struct InfoViewContent: View {
-    
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
     
@@ -40,10 +30,15 @@ struct InfoViewContent: View {
                             .offset(y: 10)
                     }
                 }
+                
+                Divider()
+                
                 Image("Icon-1024")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 150.0,height:150)
+            
+                
                 ScrollView{
                     
                     Text("버전")

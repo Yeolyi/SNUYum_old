@@ -42,14 +42,15 @@ struct CenterModifier: ViewModifier {
 }
 
 struct ListRow: ViewModifier {
+    @Environment(\.colorScheme) var colorScheme
     func body(content: Content) -> some View {
         Group {
             content
                 .padding(10)
-                .background(Color.gray.opacity(0.05))
+                .background(colorScheme == .dark ? Color.white.opacity(0.05) : Color.gray.opacity(0.05))
                 .cornerRadius(13)
         }
-        .padding([.top, .bottom], 4)
+        .padding([.top, .bottom], 5)
         .padding([.leading, .trailing], 10)
     }
 }

@@ -21,6 +21,7 @@ struct CafeRow: View {
                 .modifier(TitleText())
                 .foregroundColor(themeColor.colorTitle(colorScheme))
                 .padding(.bottom, 3)
+            Spacer()
             ForEach(cafe.getMenuList(MealType: suggestedMeal)) { menu in
                 HStack {
                     Text(menu.name)

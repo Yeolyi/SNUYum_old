@@ -23,24 +23,27 @@ struct SearchBar: View {
     }
   
     var body: some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-                .foregroundColor(themeColor.colorIcon(colorScheme))
-            TextField(placeholder, text: $text)
-            if text != "" {
-                Image(systemName: "xmark.circle.fill")
-                    .imageScale(.medium)
+        Group {
+            HStack {
+                Image(systemName: "magnifyingglass")
                     .foregroundColor(themeColor.colorIcon(colorScheme))
-                    .padding(3)
-                    .onTapGesture {
-                        withAnimation {
-                            self.text = ""
-                          }
-                    }
+                TextField(placeholder, text: $text)
+                if text != "" {
+                    Image(systemName: "xmark.circle.fill")
+                        .imageScale(.medium)
+                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .padding(3)
+                        .onTapGesture {
+                            withAnimation {
+                                self.text = ""
+                              }
+                        }
+                }
             }
+            //.padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+            .foregroundColor(.secondary)
         }
-        .padding(EdgeInsets(top: 12, leading: 6, bottom: 12, trailing: 6))
-        .foregroundColor(.secondary)
+        .modifier(ListRow())
     }
 
 }

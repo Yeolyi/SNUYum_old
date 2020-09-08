@@ -41,7 +41,7 @@ struct ContentViewComponent: View {
                 }
                 if self.isCafeView || self.isAlimiView {
                     Rectangle()
-                        .foregroundColor(Color.white.opacity(0.2))
+                        .foregroundColor(self.colorScheme == .dark ? Color.white.opacity(0.2) : Color.black.opacity(0.2))
                         .brightness(-2)
                         .edgesIgnoringSafeArea(.all)
                         .zIndex(1)
@@ -49,15 +49,15 @@ struct ContentViewComponent: View {
                 if self.isCafeView {
                     CafeView(cafeInfo: self.activatedCafe, isCafeView: self.$isCafeView)
                         .frame(width: geo.size.width * 0.9, height: geo.size.height * 0.9)
-                        .shadow(radius: 8)
-                        .cornerRadius(25)
+                        .shadow(color: self.colorScheme == .dark ? Color.white : Color.black, radius: 15)
+                        .cornerRadius(15)
                         .zIndex(2)
                 }
                 if self.isAlimiView {
                     CafeView(cafeInfo: self.dataManager.getData(at: self.settingManager.date, name: self.settingManager.alimiCafeName ?? "학생회관식당"), isCafeView: self.$isAlimiView)
                     .frame(width: geo.size.width * 0.9, height: geo.size.height * 0.85)
-                    .shadow(radius: 8)
-                    .cornerRadius(25)
+                    .shadow(color: self.colorScheme == .dark ? Color.white : Color.black, radius: 15)
+                    .cornerRadius(15)
                     .zIndex(2)
                 }
                 
@@ -91,21 +91,20 @@ struct ContentViewComponent: View {
                     
                     ScrollView {
                         SearchBar(text: self.$searchedText)
-                            .background(Color.gray.opacity(0.1)                         .cornerRadius(8))
-                            .padding([.trailing, .leading], 10)
                         
                         //안내 섹션
                         if (self.settingManager.alimiCafeName != nil) {
                             Text("안내")
                                 .modifier(SectionTextModifier())
                             Button(action: {self.isAlimiView = true}) {
-                                TimerText(cafeName: self.settingManager.alimiCafeName!)
-                                    .modifier(CenterModifier())
-                                    .padding(10)
-                                    .background(Color.gray.opacity(0.05))
-                                    .cornerRadius(15)
+                                HStack {
+                                    Spacer()
+                                    TimerText(cafeName: self.settingManager.alimiCafeName!)
+                                    Spacer()
                                 }
-                                .padding([.leading, .trailing], 10)
+                                .modifier(ListRow())
+                            }
+                                
                         }
                         //고정 섹션
                         if (self.listManager.fixedList.isEmpty == false) {

@@ -26,7 +26,7 @@ struct CafeView: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("스누냠")
+                    Text("식단 자세히 보기")
                         .font(.system(size: CGFloat(18), weight: .bold))
                         .foregroundColor(.secondary)
                     Text(cafeInfo.name)
@@ -133,8 +133,8 @@ struct CafeView: View {
             .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
  */
         }
-        .background(Color.white)
-        .cornerRadius(20)
+        .background(colorScheme == .dark ? Color.black : Color.white)
+        .cornerRadius(15)
         .shadow(radius: 5)
         .sheet(isPresented: $isMapView) {
             MapView(cafeInfo: self.cafeInfo)
