@@ -17,7 +17,6 @@ struct SearchCafeRow: View {
     let searchText: String
     
     var body: some View {
-        NavigationLink(destination: CafeView(cafeInfo: cafe)) {
             VStack(alignment: .leading){
                 Text(cafe.name)
                     .modifier(TitleText())
@@ -35,8 +34,6 @@ struct SearchCafeRow: View {
                     }
                 }
             }
-        }
-        .contentShape(Rectangle())
     }
     
     

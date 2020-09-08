@@ -11,7 +11,7 @@ import SwiftUI
 struct TitleText: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.system(size: CGFloat(18), weight: .bold, design: .default))
+            .font(.system(size: CGFloat(18), weight: .medium, design: .default))
         //.font(.custom("NanumBarunpenR", size: 18))
     }
 }

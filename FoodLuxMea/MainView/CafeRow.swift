@@ -16,29 +16,26 @@ struct CafeRow: View {
     var suggestedMeal: MealType
     
     var body: some View {
-        NavigationLink(destination: CafeView(cafeInfo: cafe)) {
-            VStack(alignment: .leading){
-                Text(cafe.name)
-                    .modifier(TitleText())
-                    .foregroundColor(themeColor.colorTitle(colorScheme))
-                    .padding(.bottom, 3)
-                ForEach(cafe.getMenuList(MealType: suggestedMeal)) { menu in
-                    HStack {
-                        Text(menu.name)
-                            .font(.system(size: 15))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .lineLimit(1)
-                            .foregroundColor(Color(.label))
-                        Spacer()
-                        Text(self.costInterpret(menu.cost))
-                            .font(.system(size: 15))
-                            .padding(.trailing, 10)
-                            .foregroundColor(Color(.secondaryLabel))
-                    }
+        VStack(alignment: .leading){
+            Text(cafe.name)
+                .modifier(TitleText())
+                .foregroundColor(themeColor.colorTitle(colorScheme))
+                .padding(.bottom, 3)
+            ForEach(cafe.getMenuList(MealType: suggestedMeal)) { menu in
+                HStack {
+                    Text(menu.name)
+                        .font(.system(size: 15))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(1)
+                        .foregroundColor(Color(.label))
+                    Spacer()
+                    Text(self.costInterpret(menu.cost))
+                        .font(.system(size: 15))
+                        .padding(.trailing, 10)
+                        .foregroundColor(Color(.secondaryLabel))
                 }
             }
         }
-        .contentShape(Rectangle())
     }
 
     func costInterpret(_ cost: Int) -> String{

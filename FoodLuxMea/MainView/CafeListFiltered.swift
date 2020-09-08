@@ -20,6 +20,9 @@ struct CafeListFiltered: View {
     @EnvironmentObject var settingManager: SettingManager
     @EnvironmentObject var dataManager: DataManager
     
+    @Binding var isCafeView: Bool
+    @Binding var activatedCafe: Cafe
+    
     let themeColor = ThemeColor()
     let isFixed: Bool
     let searchedText: String
@@ -62,12 +65,19 @@ struct CafeListFiltered: View {
         let cafe = self.dataManager.getData(at: self.settingManager.date, name: listElement.name)
         if searchedText == "" {
              return AnyView(
-                 CafeRow(cafe: cafe, suggestedMeal: settingManager.meal)
+                Button(action: {self.isCafeView = true; self.activatedCafe = cafe}) {
+                    CafeRow(cafe: cafe, suggestedMeal: settingManager.meal)
+                                 .modifier(ListRow())
+                }
             )
         }
         else {
              return AnyView(
-                SearchCafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchedText)
+                Button(action: {self.isCafeView = true; self.activatedCafe = cafe}) {
+                    SearchCafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchedText)
+                }
+             .padding([.top, .bottom], 5)
+             .padding([.leading, .trailing], 10)
             )
         }
 

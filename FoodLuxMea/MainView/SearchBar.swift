@@ -39,6 +39,8 @@ struct SearchBar: View {
                     }
             }
         }
+        .padding(EdgeInsets(top: 12, leading: 6, bottom: 12, trailing: 6))
+        .foregroundColor(.secondary)
     }
 
 }

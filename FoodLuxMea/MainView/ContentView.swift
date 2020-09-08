@@ -25,67 +25,131 @@ struct ContentViewComponent: View {
     let themeColor = ThemeColor()
     
     @State var searchedText = ""
-    @State var isSettingSheet = false
+    @State var isSettingView = false
+    @State var isCafeView = false
+    @State var activatedCafe = previewCafe
+    @State var isAlimiView = false
     
     
     var body: some View {
-        NavigationView {
-            VStack{
-                List {
-                    //검색창
-                    SearchBar(text: $searchedText)
-                    //안내 섹션
-                    if (settingManager.alimiCafeName != nil) {
-                        Section(header: Text("안내").modifier(SectionText())) {
-                                NavigationLink(destination: CafeView(cafeInfo: self.dataManager.getData(at: self.settingManager.date, name: settingManager.alimiCafeName!))) {
-                                    TimerText(cafeName: settingManager.alimiCafeName!)
-                                        .modifier(CenterModifier())
-                                        .modifier(TitleText())
-                                        .foregroundColor(themeColor.tempColor(colorScheme))
-                                }
-                            }
-                        }
-                    //고정 섹션
-                    if (listManager.fixedList.isEmpty == false) {
-                        Section(header: Text("고정됨").modifier(SectionText())) {
-                            MealSelect()
-                            CafeListFiltered(isFixed: true, searchedText: searchedText)
-                        }
-                    }
-                    //식당 목록 섹션
-                    Section(header: Text("식당 목록").modifier(SectionText())) {
-                        if (listManager.fixedList.isEmpty != false) {
-                            MealSelect()
-                        }
-                        CafeListFiltered(isFixed: false, searchedText: searchedText)
-                    }
+        GeometryReader{ geo in
+            ZStack {
+                if (self.isSettingView) {
+                    SettingView(isPresented: self.$isSettingView)
+                    .zIndex(2)
                 }
-                .navigationBarTitle(Text("식단 바로보기"))
-                .navigationBarItems(trailing:
-                                        NavigationLink(destination: SettingView()) {
-                                            Image(systemName: "gear")
-                                                .foregroundColor(themeColor.colorIcon(colorScheme))
-                                                .font(.system(size: 25, weight: .regular))
-                                        }
-                            )
-                                
-                GADBannerViewController()
-                .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+                if self.isCafeView || self.isAlimiView {
+                    Rectangle()
+                        .foregroundColor(Color.white.opacity(0.2))
+                        .brightness(-2)
+                        .edgesIgnoringSafeArea(.all)
+                        .zIndex(1)
+                }
+                if self.isCafeView {
+                    CafeView(cafeInfo: self.activatedCafe, isCafeView: self.$isCafeView)
+                        .frame(width: geo.size.width * 0.9, height: geo.size.height * 0.9)
+                        .shadow(radius: 8)
+                        .cornerRadius(25)
+                        .zIndex(2)
+                }
+                if self.isAlimiView {
+                    CafeView(cafeInfo: self.dataManager.getData(at: self.settingManager.date, name: self.settingManager.alimiCafeName ?? "학생회관식당"), isCafeView: self.$isAlimiView)
+                    .frame(width: geo.size.width * 0.9, height: geo.size.height * 0.85)
+                    .shadow(radius: 8)
+                    .cornerRadius(25)
+                    .zIndex(2)
+                }
+                
+                VStack(){
+                    VStack {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("스누냠")
+                                    .font(.system(size: CGFloat(18), weight: .bold))
+                                    .foregroundColor(.secondary)
+                                Text("식단 바로보기")
+                                    .font(.system(size: CGFloat(25), weight: .bold))
+                            }
+                            .padding([.leading, .top])
+                            Spacer()
+                            Button(action: {self.isSettingView.toggle()}) {
+                               Image(systemName: "gear")
+                                   .font(.system(size: 25, weight: .regular))
+                            }
+                            .padding()
+                            .offset(y: 10)
+                        }
+                        Group {
+                        MealSelect()
+                            .padding()
+                            .background(Color.gray.opacity(0.1)                         .cornerRadius(8))
+                        }
+                        .padding([.trailing, .leading], 10)
+                    }
+                    
+                    Divider()
+                    
+                    
+                    ScrollView {
+                        SearchBar(text: self.$searchedText)
+                            .background(Color.gray.opacity(0.1)                         .cornerRadius(8))
+                            .padding([.trailing, .leading], 10)
+                        
+                        //안내 섹션
+                        if (self.settingManager.alimiCafeName != nil) {
+                            Text("안내")
+                                .modifier(SectionTextModifier())
+                            Button(action: {self.isAlimiView = true}) {
+                                TimerText(cafeName: self.settingManager.alimiCafeName!)
+                                    .modifier(CenterModifier())
+                                    .padding(10)
+                                    .background(Color.gray.opacity(0.05))
+                                    .cornerRadius(15)
+                                }
+                                .padding([.leading, .trailing], 10)
+                        }
+                        //고정 섹션
+                        if (self.listManager.fixedList.isEmpty == false) {
+                            
+                            Text("고정됨")
+                                .foregroundColor(.secondary)
+                                .modifier(SectionTextModifier())
+                            
+                            CafeListFiltered(isCafeView: self.$isCafeView, activatedCafe: self.$activatedCafe, isFixed: true, searchedText: self.searchedText)
+                        }
+                        //식당 목록 섹션
+                        
+                        Text("식당목록")
+                            .modifier(SectionTextModifier())
+                        
+                        CafeListFiltered(isCafeView: self.$isCafeView, activatedCafe: self.$activatedCafe, isFixed: false, searchedText: self.searchedText)
+                    }
+                    GADBannerViewController()
+                    .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+                }
+                .accentColor(self.themeColor.colorIcon(self.colorScheme))
+                .resignKeyboardOnDragGesture()
+                .alert(isPresented: .constant(!isInternetConnected)) {
+                            Alert(title: Text("인터넷이 연결되지 않았어요"), message: Text("저장된 식단은 볼 수 있지만 \n 기능이 제한될 수 있어요"), dismissButton: .default(Text("확인")))
+                        }
+                .blur(radius: self.isCafeView || self.isAlimiView ? 15 : 0)
             }
         }
-        .accentColor(themeColor.colorIcon(colorScheme))
-        .resignKeyboardOnDragGesture()
-        .alert(isPresented: .constant(!isInternetConnected)) {
-                    Alert(title: Text("인터넷이 연결되지 않았어요"), message: Text("저장된 식단은 볼 수 있지만 \n 기능이 제한될 수 있어요"), dismissButton: .default(Text("확인")))
-                }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
+    static var dataManager = DataManager()
+    static var listManager = ListManager()
+    
+    init() {
+        ContentView_Previews.listManager.update(newCafeList: ContentView_Previews.dataManager.getData(at: Date()))
+    }
+    
     static var previews: some View {
         ContentView()
-            .environmentObject(ListManager())
-            .environmentObject(DataManager())
+            .environmentObject(listManager)
+            .environmentObject(dataManager)
             .environmentObject(SettingManager())
     }
 }

@@ -41,3 +41,44 @@ struct CenterModifier: ViewModifier {
     }
 }
 
+struct ListRow: ViewModifier {
+    func body(content: Content) -> some View {
+        Group {
+            content
+                .padding(10)
+                .background(Color.gray.opacity(0.05))
+                .cornerRadius(13)
+        }
+        .padding([.top, .bottom], 4)
+        .padding([.leading, .trailing], 10)
+    }
+}
+
+struct SectionTextModifier: ViewModifier {
+    func body(content: Content) -> some View {
+         HStack {
+             content
+                 .modifier(TitleText())
+                 .padding([.top, .bottom], 5)
+                 .padding(.leading, 12)
+             Spacer()
+         }
+    }
+}
+
+func TitleView(title: String, subTitle: String) -> AnyView{
+    return AnyView (
+        HStack {
+            VStack(alignment: .leading) {
+                Text(subTitle)
+                    .font(.system(size: CGFloat(18), weight: .bold))
+                    .foregroundColor(.secondary)
+                Text(title)
+                    .font(.system(size: CGFloat(25), weight: .bold))
+            }
+            .padding([.leading, .top])
+            Spacer()
+        }
+    )
+}
+

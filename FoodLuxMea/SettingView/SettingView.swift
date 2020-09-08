@@ -17,12 +17,14 @@ enum ActiveSheet: Identifiable {
 
 struct SettingView: View {
     @Environment(\.colorScheme) var colorScheme
+    
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var settingManager: SettingManager
     
     let themeColor = ThemeColor()
     
+    @Binding var isPresented: Bool
     @State var isSheet = false
     @State var activeSheet: ActiveSheet?
     
@@ -57,10 +59,24 @@ struct SettingView: View {
     }
     
     var body: some View {
-        List {
-            
-            
-            Section(header: Text("앱 설정")) {
+        VStack {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("스누냠")
+                        .font(.system(size: CGFloat(18), weight: .bold))
+                        .foregroundColor(.secondary)
+                    Text("설정")
+                        .font(.system(size: CGFloat(25), weight: .bold))
+                }
+                .padding([.leading, .top])
+                Spacer()
+            }
+            ScrollView {
+                VStack(spacing: 0) {
+                    
+                    Text("앱 설정")
+                        .modifier(SectionTextModifier())
+                
                 HStack {
                     Text("식당 순서 변경")
                     Spacer()
@@ -80,6 +96,8 @@ struct SettingView: View {
                     self.isSheet = true
                     self.activeSheet = .reorder
                 }
+                .modifier(ListRow())
+                
                 HStack {
                     Text("알리미 설정")
                     Spacer()
@@ -92,34 +110,25 @@ struct SettingView: View {
                     self.isSheet = true
                     self.activeSheet = .timer
                 }
-                iOS1314Toggle(isOn: isHideBinding, label: "정보가 없는 식당 숨기기")
-            }
+                .modifier(ListRow())
             
-            /*
-            if #available(iOS 14.0, *) {
-                Section(header: Text("위젯 설정")){
-                    HStack{
-                        Text("표시할 식당 선택하기")
-                        Spacer()
-                        Text("\(widgetManager.cafeName)/\(settingManager.isWidgetAuto ? "자동" : settingManager.widgetMealViewMode.rawValue + " 고정")")
-                            .font(.system(size: 15))
-                            .foregroundColor(Color(.gray))
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        isSheet = true
-                        activeSheet = .widget
-                    }
-                }
-            }
- */
-            Section(header: Text("고급")) {
+                iOS1314Toggle(isOn: isHideBinding, label: "정보가 없는 식당 숨기기")
+                    .modifier(ListRow())
+                
+                 Text("고급")
+                    .modifier(SectionTextModifier())
+                
                 iOS1314Toggle(isOn: isCustomDate, label: "사용자 설정 날짜")
+                    .modifier(ListRow())
+                
                 if (settingManager.isCustomDate) {
                     DatePicker(selection: debugDate, label: { EmptyView() })
+                        .modifier(ListRow())
                 }
-            }
-            Section(header: Text("정보")) {
+                
+                Text("정보")
+                    .modifier(SectionTextModifier())
+                
                 HStack {
                     Text("스누냠 정보")
                     Spacer()
@@ -129,10 +138,18 @@ struct SettingView: View {
                     self.isSheet = true
                     self.activeSheet = .info
                 }
-            }
-            
-        } //List 끝
-            .sheet(isPresented: $isSheet) {
+                .modifier(ListRow())
+                
+                Button(action: { self.isPresented = false }) {
+                    Text("나가기")
+                        .foregroundColor(.secondary)
+                }
+                .modifier(CenterModifier())
+                .modifier(SectionTextModifier())
+                }
+            } //List 끝
+        }
+           .sheet(isPresented: $isSheet) {
                 if self.activeSheet == .reorder {
                 ListReorder()
                     .environmentObject(self.listManager)
@@ -147,14 +164,14 @@ struct SettingView: View {
                 InfoView()
                     .environmentObject(ThemeColor())
                 }
-        }
-        .navigationBarTitle(Text("설정"))
+            }
+        .background(Color.white)
     }
 }
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
+        SettingView(isPresented: .constant(true))
             .environmentObject(ListManager())
             .environmentObject(DataManager())
             .environmentObject(SettingManager())

@@ -31,7 +31,18 @@ struct ListReorderOriginal: View {
     }
 
     var body: some View {
-        NavigationView {
+        VStack {
+            HStack {
+                TitleView(title: "목록 수정", subTitle: "설정")
+                Button(action: {
+                         self.presentationMode.wrappedValue.dismiss()}) {
+                     Text("취소")
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(Color.black)
+                        .padding()
+                        .offset(y: 10)
+                 }
+            }
             List {
                 Section(header:
                            Text("고정됨").modifier(SectionText())
@@ -57,21 +68,17 @@ struct ListReorderOriginal: View {
                 }
             }
             .environment(\.editMode, .constant(EditMode.active))
-            .navigationBarTitle("목록 수정", displayMode: .inline)
-            .navigationBarItems(leading:
-                                    Button(action: {
-                                            self.presentationMode.wrappedValue.dismiss()}) {
-                                        Text("취소")
-                                            .foregroundColor(themeColor.colorTitle(colorScheme))
-                                    }
-                                , trailing:
-                                        Button(action: {
-                                                self.listManager.cafeList = self.tempListManager.cafeList
-                                                self.listManager.save()
-                                                self.presentationMode.wrappedValue.dismiss()}) {
-                                            Text("저장")
-                                                .foregroundColor(themeColor.colorTitle(colorScheme))
-                                        })
+                                       
+           Button(action: {
+              self.listManager.cafeList = self.tempListManager.cafeList
+              self.listManager.save()
+              self.presentationMode.wrappedValue.dismiss()}) {
+                  Text("저장")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(Color.black)
+                    .offset(y: 10)
+           }
+            
         }
     }
     

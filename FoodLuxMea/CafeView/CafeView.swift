@@ -10,6 +10,7 @@ import GoogleMobileAds
 
 struct CafeView: View {
     @State var cafeInfo: Cafe
+    @Binding var isCafeView: Bool
     @State var isMapView = false
     @State var showActionSheet = false
 
@@ -23,19 +24,46 @@ struct CafeView: View {
     
     var body: some View {
         VStack {
-            List {
-                
-                Section(header: Text("안내").modifier(SectionTextSmaller())) {
-                    TimerText(cafeName: cafeInfo.name)
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("스누냠")
+                        .font(.system(size: CGFloat(18), weight: .bold))
+                        .foregroundColor(.secondary)
+                    Text(cafeInfo.name)
+                        .font(.system(size: CGFloat(25), weight: .bold))
                 }
+                .padding([.leading, .top])
+                Spacer()
+            }
+            
+            Divider()
+        
+            ScrollView {
+                
+                
+                Text("안내")
+                    .modifier(SectionTextModifier())
+                
+                HStack {
+                    Spacer()
+                    TimerText(cafeName: cafeInfo.name)
+                    Spacer()
+                }
+                    .modifier(ListRow())
                 
                 mealSection(mealType: .breakfast, mealMenus: cafeInfo.bkfMenuList)
                 mealSection(mealType: .lunch, mealMenus: cafeInfo.lunchMenuList)
                 mealSection(mealType: .dinner, mealMenus: cafeInfo.dinnerMenuList)
                 
-                Section(header: Text("식당 정보").modifier(SectionTextSmaller())) {
+                
+                Text("식당목록")
+                .modifier(SectionTextModifier())
+                
+                VStack {
+                
                     Text(cafeDescription[cafeInfo.name] ?? "정보 없음")
                         .font(.system(size: 16))
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding()
                     
                     HStack() {
@@ -76,11 +104,29 @@ struct CafeView: View {
                         }
                     }
                 }
+                .padding(.top, 5)
+                .modifier(ListRow())
+                
             }
+                .padding(5)
+            
+            Divider()
+            
+            Button(action: { self.isCafeView = false }) {
+                Text("닫기")
+                    .font(.system(size: CGFloat(20), weight: .bold))
+                    .foregroundColor(.secondary)
+                    .padding(5)
+            }
+            
+            /*
             GADBannerViewController()
             .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+ */
         }
-        .navigationBarTitle(Text(cafeInfo.name))
+        .background(Color.white)
+        .cornerRadius(20)
+        .shadow(radius: 5)
         .navigationBarItems(trailing:
             HStack {
                 Button(action: {
@@ -105,10 +151,9 @@ struct CafeView: View {
         
         if (mealMenus.isEmpty == false ) {
             return AnyView(
-                Section(header:
+                VStack {
                     Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.meal(mealType)!)!  + ")")
-                        .modifier(SectionTextSmaller())
-                ) {
+                            .modifier(SectionTextModifier())
                 ForEach(mealMenus) { menu in
                     HStack{
                         Text(menu.name)
@@ -122,12 +167,14 @@ struct CafeView: View {
                         Text(self.costInterpret(menu.cost) ?? "")
                             .foregroundColor(Color(.gray))
                     }
+                .modifier(ListRow())
                 }
-            })
+            }
+            )
         }
-        else {
-            return AnyView(EmptyView())
-        }
+    else {
+        return AnyView(EmptyView())
+    }
 
         
     }
@@ -146,16 +193,17 @@ struct CafeView: View {
 }
 
 struct CafeView_Previews: PreviewProvider {
+    static var dataManager = DataManager()
+    static var listManager = ListManager()
+    
+    init() {
+        CafeView_Previews.listManager.update(newCafeList: CafeView_Previews.dataManager.getData(at: Date()))
+    }
+    
     static var previews: some View {
-        listByVersion(view:
-            AnyView(
-                NavigationView {
-                    CafeView(cafeInfo: previewCafe)
-                        .environmentObject(ListManager())
-                        .environmentObject(DataManager())
-                        .environmentObject(SettingManager())
-                }
-                )
-        )
+        CafeView(cafeInfo: previewCafe, isCafeView: .constant(true))
+            .environmentObject(listManager)
+            .environmentObject(dataManager)
+            .environmentObject(SettingManager())
     }
 }

@@ -25,18 +25,32 @@ struct iOS1314Toggle: View {
             //.toggleStyle(SwitchToggleStyle(tint: themeColor.colorIcon(colorScheme)))
             )
             
-        } else {
-            return AnyView(Toggle(isOn: $isOn) {
-                Text(label)
-            })
+        }
+        else {
+            return AnyView(
+                Toggle(isOn: $isOn) {
+                    Text(label)
+                }
+            )
         }
     }
 }
 
 struct iOS1314Toggle_Previews: PreviewProvider {
     static var previews: some View {
-        iOS1314Toggle(isOn: .constant(true), label: "test")
-            .environmentObject(ThemeColor())
+        ScrollView{
+            iOS1314Toggle(isOn: .constant(true), label: "test")
+                .environmentObject(ThemeColor())
+                .modifier(ListRow())
+            iOS1314Toggle(isOn: .constant(true), label: "test")
+                .environmentObject(ThemeColor())
+                .modifier(ListRow())
+            HStack {
+                Text("Text")
+                Spacer()
+            }
+                .modifier(ListRow())
+        }
         
     }
 }
