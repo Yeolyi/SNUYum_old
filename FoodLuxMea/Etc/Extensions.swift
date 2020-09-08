@@ -50,7 +50,7 @@ struct ListRow: ViewModifier {
                 .background(colorScheme == .dark ? Color.white.opacity(0.05) : Color.gray.opacity(0.05))
                 .cornerRadius(13)
         }
-        .padding([.top, .bottom], 5)
+        .padding([.top, .bottom], 2)
         .padding([.leading, .trailing], 10)
     }
 }

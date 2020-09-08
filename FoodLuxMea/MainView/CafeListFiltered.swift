@@ -33,8 +33,8 @@ struct CafeListFiltered: View {
             return noCafeText
         }
         return AnyView(
-            ForEach(list, id: \.self) { (listElement: ListElement) in
-                Group {
+            VStack(spacing: 0) {
+                ForEach(list, id: \.self) { (listElement: ListElement) in
                     
                     if (self.listFilter(name: listElement.name) == .show) {
                         self.nameToCafeRow(listElement)
@@ -77,8 +77,6 @@ struct CafeListFiltered: View {
                 Button(action: {self.isCafeView = true; self.activatedCafe = cafe}) {
                     SearchCafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchedText)
                 }
-             .padding([.top, .bottom], 5)
-             .padding([.leading, .trailing], 10)
             )
         }
 
