@@ -41,8 +41,8 @@ struct ContentViewComponent: View {
                 }
                 if self.isCafeView || self.isAlimiView {
                     Rectangle()
-                        .foregroundColor(self.colorScheme == .dark ? Color.white.opacity(0.2) : Color.black.opacity(0.2))
-                        .brightness(-2)
+                        .foregroundColor(Color.white.opacity(self.colorScheme == .light ? 0.2 : 0.05))
+                        .brightness(self.colorScheme == .light ? -2 : 2)
                         .edgesIgnoringSafeArea(.all)
                         .zIndex(1)
                 }
