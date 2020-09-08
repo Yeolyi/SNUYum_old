@@ -89,7 +89,7 @@ class ListManager: ObservableObject{
             return cafeList[index].isFixed
         }
         else {
-            assertionFailure("ListMananer/isFixed: 존재하지 않는 카페값에 접근했습니다.")
+            assertionFailure("ListManager/isFixed: 존재하지 않는 카페값에 접근했습니다.")
             return false
         }
     }

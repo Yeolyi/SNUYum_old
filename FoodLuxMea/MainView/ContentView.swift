@@ -32,6 +32,7 @@ struct ContentViewComponent: View {
     
     
     var body: some View {
+        
         GeometryReader{ geo in
             ZStack {
                 if (self.isSettingView) {
@@ -60,7 +61,7 @@ struct ContentViewComponent: View {
                     .zIndex(2)
                 }
                 
-                VStack(){
+                VStack {
                     VStack {
                         HStack {
                             VStack(alignment: .leading) {
@@ -81,8 +82,6 @@ struct ContentViewComponent: View {
                         }
                         Group {
                         MealSelect()
-                            .padding()
-                            .background(Color.gray.opacity(0.1)                         .cornerRadius(8))
                         }
                         .padding([.trailing, .leading], 10)
                     }
@@ -112,7 +111,6 @@ struct ContentViewComponent: View {
                         if (self.listManager.fixedList.isEmpty == false) {
                             
                             Text("고정됨")
-                                .foregroundColor(.secondary)
                                 .modifier(SectionTextModifier())
                             
                             CafeListFiltered(isCafeView: self.$isCafeView, activatedCafe: self.$activatedCafe, isFixed: true, searchedText: self.searchedText)
@@ -141,15 +139,15 @@ struct ContentViewComponent: View {
 struct ContentView_Previews: PreviewProvider {
     static var dataManager = DataManager()
     static var listManager = ListManager()
-    
-    init() {
-        ContentView_Previews.listManager.update(newCafeList: ContentView_Previews.dataManager.getData(at: Date()))
-    }
+    static var settingManager = SettingManager()
+
     
     static var previews: some View {
-        ContentView()
+        ContentView_Previews.settingManager.update(date: ContentView_Previews.settingManager.date)
+        ContentView_Previews.self.listManager.update(newCafeList:ContentView_Previews.self.dataManager.getData(at: ContentView_Previews.self.settingManager.date))
+        return ContentView()
             .environmentObject(listManager)
             .environmentObject(dataManager)
-            .environmentObject(SettingManager())
+            .environmentObject(settingManager)
     }
 }

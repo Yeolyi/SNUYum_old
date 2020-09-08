@@ -27,8 +27,12 @@ struct MealSelect: View {
                     .foregroundColor(settingManager.isAuto == true ? themeColor.colorIcon((colorScheme)) : Color(.systemFill))
             }
             .buttonStyle(BorderlessButtonStyle())
-            
         }
+        .padding(12)
+        .background(
+            Color.gray.opacity(0.1)
+                .cornerRadius(8)
+        )
     }
 }
 

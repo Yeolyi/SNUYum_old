@@ -34,6 +34,22 @@ struct CafeView: View {
                 }
                 .padding([.leading, .top])
                 Spacer()
+                Button(action: {
+                        let _ = self.cafeList.toggleFixed(cafeName: self.cafeInfo.name)
+                        self.cafeList.save()
+                }) {
+                    Image(systemName: cafeList.isFixed(cafeName: self.cafeInfo.name) ? "pin" : "pin.slash")
+                        .font(.system(size: 25, weight: .light))
+                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .offset(y: 10)
+                }
+                Button(action: { self.isCafeView = false }) {
+                    Text("닫기")
+                        .font(.system(size: CGFloat(20), weight: .light))
+                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .padding()
+                        .offset(y: 10)
+                }
             }
             
             Divider()
@@ -112,13 +128,6 @@ struct CafeView: View {
             
             Divider()
             
-            Button(action: { self.isCafeView = false }) {
-                Text("닫기")
-                    .font(.system(size: CGFloat(20), weight: .bold))
-                    .foregroundColor(.secondary)
-                    .padding(5)
-            }
-            
             /*
             GADBannerViewController()
             .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
@@ -127,17 +136,6 @@ struct CafeView: View {
         .background(Color.white)
         .cornerRadius(20)
         .shadow(radius: 5)
-        .navigationBarItems(trailing:
-            HStack {
-                Button(action: {
-                        let _ = self.cafeList.toggleFixed(cafeName: self.cafeInfo.name)
-                        self.cafeList.save()
-                }) {
-                    Image(systemName: cafeList.isFixed(cafeName: self.cafeInfo.name) ? "pin" : "pin.slash")
-                        .font(.system(size: 25, weight: .light))
-                        .foregroundColor(themeColor.colorIcon(colorScheme))
-                }
-            })
         .sheet(isPresented: $isMapView) {
             MapView(cafeInfo: self.cafeInfo)
                 .environmentObject(self.themeColor)
@@ -195,15 +193,17 @@ struct CafeView: View {
 struct CafeView_Previews: PreviewProvider {
     static var dataManager = DataManager()
     static var listManager = ListManager()
+    static var settingManager = SettingManager()
     
-    init() {
-        CafeView_Previews.listManager.update(newCafeList: CafeView_Previews.dataManager.getData(at: Date()))
-    }
     
     static var previews: some View {
-        CafeView(cafeInfo: previewCafe, isCafeView: .constant(true))
-            .environmentObject(listManager)
-            .environmentObject(dataManager)
-            .environmentObject(SettingManager())
+        
+        CafeView_Previews.settingManager.update(date: Date())
+        CafeView_Previews.listManager.update(newCafeList: CafeView_Previews.dataManager.getData(at: Date()))
+        
+        return CafeView(cafeInfo: previewCafe, isCafeView: .constant(true))
+            .environmentObject(self.dataManager)
+            .environmentObject(self.listManager)
+            .environmentObject(self.settingManager)
     }
 }

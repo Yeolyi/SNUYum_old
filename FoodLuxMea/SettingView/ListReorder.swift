@@ -37,11 +37,20 @@ struct ListReorderOriginal: View {
                 Button(action: {
                          self.presentationMode.wrappedValue.dismiss()}) {
                      Text("취소")
-                        .font(.system(size: 20, weight: .semibold))
-                        .foregroundColor(Color.black)
-                        .padding()
+                        .font(.system(size: CGFloat(20), weight: .semibold))
+                        .foregroundColor(themeColor.colorIcon(colorScheme))
                         .offset(y: 10)
                  }
+                Button(action: {
+                   self.listManager.cafeList = self.tempListManager.cafeList
+                   self.listManager.save()
+                   self.presentationMode.wrappedValue.dismiss()}) {
+                       Text("저장")
+                         .font(.system(size: CGFloat(20), weight: .semibold))
+                         .foregroundColor(themeColor.colorIcon(colorScheme))
+                         .padding()
+                         .offset(y: 10)
+                }
             }
             List {
                 Section(header:
@@ -68,17 +77,6 @@ struct ListReorderOriginal: View {
                 }
             }
             .environment(\.editMode, .constant(EditMode.active))
-                                       
-           Button(action: {
-              self.listManager.cafeList = self.tempListManager.cafeList
-              self.listManager.save()
-              self.presentationMode.wrappedValue.dismiss()}) {
-                  Text("저장")
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(Color.black)
-                    .offset(y: 10)
-           }
-            
         }
     }
     

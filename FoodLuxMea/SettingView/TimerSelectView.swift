@@ -32,48 +32,66 @@ struct TimerSelectViewContent: View {
     @State var tempIsTimerCafe: Bool = false
     
     var body: some View {
-        NavigationView {
-            List {
+        VStack {
+            HStack {
+                TitleView(title: "알리미 설정", subTitle: "설정")
+                Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()}) {
+                    Text("취소")
+                        .font(.system(size: CGFloat(20), weight: .semibold))
+                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .offset(y: 10)
+                }
+                Button(action: {
+                        self.settingManager.alimiCafeName = self.tempIsTimerCafe ? self.selectedCafeName : nil
+                        self.settingManager.update(date: self.settingManager.date)
+                        self.settingManager.save()
+                        self.presentationMode.wrappedValue.dismiss()}) {
+                    Text("저장")
+                        .font(.system(size: CGFloat(20), weight: .semibold))
+                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .padding()
+                        .offset(y: 10)
+                }
+            }
+            
+            Divider()
+            
+            ScrollView {
+                
+                VStack(spacing: 0) {
                 Text("""
-*식당 사정에 따라 조금 일찍/늦게 끝날 수도 있습니다
+식당 사정에 따라 조금 일찍/늦게 끝날 수도 있습니다.
 학생회관식당: 1층 기준
 자하연 식당: 2층(학생식당) 기준
 3식당: 4층 기준
 301동 식당: 지하 기준
 """)
-                    .font(.subheadline)
-                Section(header: Text("설정")) {
-                    iOS1314Toggle(isOn: $tempIsTimerCafe, label: "알리미 켜기")
-                }
+                    .modifier(ListRow())
+                Text("설정")
+                    .modifier(SectionTextModifier())
+                
+                iOS1314Toggle(isOn: $tempIsTimerCafe, label: "알리미 켜기")
+                    .modifier(ListRow())
+                
                 if (tempIsTimerCafe) {
-                    Section(header: Text("목록")) {
+                    Text("목록")
+                        .modifier(SectionTextModifier())
                         ForEach(listManager.cafeList) { listElement in
                             Button(action: {self.selectedCafeName = listElement.name}) {
-                                Text(listElement.name)
-                                    .modifier(TitleText())
-                                    .foregroundColor(self.getColor(cafeName: listElement.name))
+                                HStack {
+                                    Spacer()
+                                    Text(listElement.name)
+                                    Spacer()
+                                }
+                                .modifier(ListRow())
+                                .foregroundColor(self.getColor(cafeName: listElement.name))
                             }
                         }
-                    }
                 }
                 
             }
-            .navigationBarTitle("알리미 설정", displayMode: .inline)
-            .navigationBarItems(leading:
-                                    Button(action: {
-                                            self.presentationMode.wrappedValue.dismiss()}) {
-                                        Text("취소")
-                                            .foregroundColor(themeColor.colorTitle(colorScheme))
-                                    }
-                                , trailing:
-                                        Button(action: {
-                                                self.settingManager.alimiCafeName = self.tempIsTimerCafe ? self.selectedCafeName : nil
-                                                self.settingManager.update(date: self.settingManager.date)
-                                                self.settingManager.save()
-                                                self.presentationMode.wrappedValue.dismiss()}) {
-                                            Text("저장")
-                                                .foregroundColor(themeColor.colorTitle(colorScheme))
-                                        })
+            }
         }
         .onAppear(perform: {
             self.tempIsTimerCafe = self.settingManager.alimiCafeName != nil

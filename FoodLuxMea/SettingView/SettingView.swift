@@ -70,7 +70,17 @@ struct SettingView: View {
                 }
                 .padding([.leading, .top])
                 Spacer()
+                Button(action: { self.isPresented = false }) {
+                    Text("닫기")
+                        .font(.system(size: CGFloat(20), weight: .light))
+                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .padding()
+                        .offset(y: 10)
+                }
             }
+            
+            Divider()
+            
             ScrollView {
                 VStack(spacing: 0) {
                     
@@ -140,12 +150,6 @@ struct SettingView: View {
                 }
                 .modifier(ListRow())
                 
-                Button(action: { self.isPresented = false }) {
-                    Text("나가기")
-                        .foregroundColor(.secondary)
-                }
-                .modifier(CenterModifier())
-                .modifier(SectionTextModifier())
                 }
             } //List 끝
         }

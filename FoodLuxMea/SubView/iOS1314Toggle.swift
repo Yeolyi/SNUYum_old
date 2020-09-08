@@ -14,24 +14,16 @@ struct iOS1314Toggle: View {
     let themeColor = ThemeColor()
     
     var body: some View {
-        getView()
-    }
-    
-    func getView() -> AnyView {
-        if #available(iOS 14.0, *) {
-            return AnyView(Toggle(isOn: $isOn) {
-                Text(label)
-            }
-            //.toggleStyle(SwitchToggleStyle(tint: themeColor.colorIcon(colorScheme)))
-            )
-            
+        HStack {
+            Text(label)
+            Spacer()
+            Image(systemName: isOn ? "checkmark" : "xmark")
+                .offset(x: -5)
+                .foregroundColor(themeColor.colorIcon(colorScheme))
         }
-        else {
-            return AnyView(
-                Toggle(isOn: $isOn) {
-                    Text(label)
-                }
-            )
+    .contentShape(Rectangle())
+        .onTapGesture{
+            self.isOn.toggle()
         }
     }
 }

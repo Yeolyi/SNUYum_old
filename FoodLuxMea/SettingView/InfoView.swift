@@ -28,34 +28,72 @@ struct InfoViewContent: View {
     let build = Bundle.main.infoDictionary!["CFBundleVersion"] as? String ?? ""
     
     var body: some View {
-        NavigationView {
             VStack {
+                HStack {
+                    TitleView(title: "스누냠 정보", subTitle: "설정")
+                    Spacer()
+                    Button(action: {self.presentationMode.wrappedValue.dismiss()}){
+                        Text("닫기")
+                            .font(.system(size: CGFloat(20), weight: .semibold))
+                            .foregroundColor(themeColor.colorIcon(colorScheme))
+                            .padding()
+                            .offset(y: 10)
+                    }
+                }
                 Image("Icon-1024")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 150.0,height:150)
-                List {
-                    Section(header: Text("버전")) {
+                ScrollView{
+                    
+                    Text("버전")
+                        .modifier(SectionTextModifier())
+                    
+                    HStack {
+                        Spacer()
                         Text(appVersion)
+                        Spacer()
                     }
-                    Section(header: Text("빌드")) {
+                    .modifier(ListRow())
+                    
+                    Text("빌드")
+                        .modifier(SectionTextModifier())
+                    
+                    HStack {
+                        Spacer()
                         Text(build)
+                        Spacer()
                     }
-                    Section(header: Text("자료 참조")) {
+                    .modifier(ListRow())
+                    
+                    Text("자료 참조")
+                        .modifier(SectionTextModifier())
+                    
+                    HStack {
+                        Spacer()
                         Text("서울대학교생활협동조합 홈페이지\n(snuco.snu.ac.kr)")
+                        Spacer()
+                    }
+                    .modifier(ListRow())
+                    
+                    HStack {
+                        Spacer()
                         Text("서울대학교 캠퍼스 맵\n(map.snu.ac.kr)")
+                        Spacer()
                     }
-                    Section(header: Text("개발자")) {
+                    .modifier(ListRow())
+                    
+                    Text("개발자")
+                        .modifier(SectionTextModifier())
+                    
+                    HStack {
+                        Spacer()
                         Text("이성열")
+                        Spacer()
                     }
+                        .modifier(ListRow())
                 }
-            }
-            .navigationBarTitle(Text("스누냠 정보"), displayMode: .inline)
-            .navigationBarItems(trailing:
-                                    Button(action: {self.presentationMode.wrappedValue.dismiss()}){
-                                        Text("닫기")
-                                            .foregroundColor(themeColor.colorTitle(colorScheme))
-                                    })
+
         }
     }
 }
