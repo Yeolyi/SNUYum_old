@@ -35,27 +35,28 @@ struct CafeListFiltered: View {
         return AnyView(
             VStack(spacing: 0) {
                 ForEach(list, id: \.self) { (listElement: ListElement) in
-                    
-                    if (self.listFilter(name: listElement.name) == .show) {
-                        self.nameToCafeRow(listElement)
-                    }
-                        
-                    else if (self.listFilter(name: listElement.name) == .closed) {
-                        if (self.settingManager.hideEmptyCafe == false) {
+                        Group {
+                        if (self.listFilter(name: listElement.name) == .show) {
                             self.nameToCafeRow(listElement)
-                            }
-                    }
-                           
-                    else if (self.listFilter(name: listElement.name) == .noData) {
-                        if (self.settingManager.hideEmptyCafe == false) {
-                            CafeRow(cafe: self.dataManager.getData(at: self.settingManager.date, name: listElement.name), suggestedMeal: self.settingManager.meal)
-                                    .environmentObject(self.themeColor)
-                                    .modifier(ListRow())
                         }
-                    }
-                         
-                    else {
-                        EmptyView()
+                            
+                        else if (self.listFilter(name: listElement.name) == .closed) {
+                            if (self.settingManager.hideEmptyCafe == false) {
+                                self.nameToCafeRow(listElement)
+                                }
+                        }
+                               
+                        else if (self.listFilter(name: listElement.name) == .noData) {
+                            if (self.settingManager.hideEmptyCafe == false) {
+                                CafeRow(cafe: self.dataManager.getData(at: self.settingManager.date, name: listElement.name), suggestedMeal: self.settingManager.meal)
+                                        .environmentObject(self.themeColor)
+                                        .modifier(ListRow())
+                            }
+                        }
+                             
+                        else {
+                            EmptyView()
+                        }
                     }
                 }
             }

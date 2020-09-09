@@ -92,16 +92,17 @@ struct SettingView: View {
                 
                 HStack {
                     Text("식당 순서 변경")
+                        .font(.system(size: 18))
                     Spacer()
                     if (listManager.fixedList.count != 0) {
                         Text("\(listManager.fixedList.count)개 식당이 고정되었어요")
-                            .font(.system(size: 15))
+                            .font(.system(size: 16))
                             .foregroundColor(Color(.gray))
                     }
                     else {
                         Text("고정된 식당이 없어요")
                             .font(.system(size: 15))
-                            .foregroundColor(Color(.gray))
+                            .foregroundColor(.secondary)
                     }
                 }
                 .contentShape(Rectangle())
@@ -113,10 +114,11 @@ struct SettingView: View {
                 
                 HStack {
                     Text("알리미 설정")
+                    .font(.system(size: 18))
                     Spacer()
                     Text(settingManager.alimiCafeName == nil ? "꺼짐" : settingManager.alimiCafeName!)
-                        .font(.system(size: 15))
-                        .foregroundColor(Color(.gray))
+                        .font(.system(size: 16))
+                        .foregroundColor(.secondary)
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
@@ -126,12 +128,14 @@ struct SettingView: View {
                 .modifier(ListRow())
             
                 iOS1314Toggle(isOn: isHideBinding, label: "정보가 없는 식당 숨기기")
+                    .font(.system(size: 18))
                     .modifier(ListRow())
                 
                  Text("고급")
                     .modifier(SectionTextModifier())
                 
                 iOS1314Toggle(isOn: isCustomDate, label: "사용자 설정 날짜")
+                    .font(.system(size: 18))
                     .modifier(ListRow())
                 
                 if (settingManager.isCustomDate) {
@@ -144,6 +148,7 @@ struct SettingView: View {
                 
                 HStack {
                     Text("스누냠 정보")
+                    .font(.system(size: 18))
                     Spacer()
                 }
                 .contentShape(Rectangle())
