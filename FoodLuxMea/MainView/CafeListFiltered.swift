@@ -20,7 +20,7 @@ struct CafeListFiltered: View {
     @EnvironmentObject var settingManager: SettingManager
     @EnvironmentObject var dataManager: DataManager
     
-    @Binding var isCafeView: Bool
+    @Binding var isCafeView: sheetEnum?
     @Binding var activatedCafe: Cafe
     
     let themeColor = ThemeColor()
@@ -67,7 +67,7 @@ struct CafeListFiltered: View {
         let cafe = self.dataManager.getData(at: self.settingManager.date, name: listElement.name)
         if searchedText == "" {
              return AnyView(
-                Button(action: {self.isCafeView = true; self.activatedCafe = cafe}) {
+                Button(action: {self.isCafeView = .cafeView; self.activatedCafe = cafe}) {
                     CafeRow(cafe: cafe, suggestedMeal: settingManager.meal)
                                  .modifier(ListRow())
                 }
@@ -75,7 +75,7 @@ struct CafeListFiltered: View {
         }
         else {
              return AnyView(
-                Button(action: {self.isCafeView = true; self.activatedCafe = cafe}) {
+                Button(action: {self.isCafeView = .cafeView; self.activatedCafe = cafe}) {
                     SearchCafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchedText)
                 }
             )

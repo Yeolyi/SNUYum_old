@@ -25,7 +25,6 @@ struct SettingView: View {
     let themeColor = ThemeColor()
     
     @Binding var isPresented: Bool
-    @State var isSheet = false
     @State var activeSheet: ActiveSheet?
     
     var isCustomDate: Binding<Bool> {
@@ -107,7 +106,6 @@ struct SettingView: View {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    self.isSheet = true
                     self.activeSheet = .reorder
                 }
                 .modifier(ListRow())
@@ -122,7 +120,6 @@ struct SettingView: View {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    self.isSheet = true
                     self.activeSheet = .timer
                 }
                 .modifier(ListRow())
@@ -153,7 +150,6 @@ struct SettingView: View {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    self.isSheet = true
                     self.activeSheet = .info
                 }
                 .modifier(ListRow())
@@ -161,13 +157,13 @@ struct SettingView: View {
                 }
             } //List 끝
         }
-           .sheet(isPresented: $isSheet) {
-                if self.activeSheet == .reorder {
+           .sheet(item: self.$activeSheet) { item in
+                if item == .reorder {
                 ListReorder()
                     .environmentObject(self.listManager)
                     .environmentObject(self.settingManager)
                 }
-                else if self.activeSheet == .timer {
+                else if item == .timer {
                 TimerSelectView()
                     .environmentObject(self.listManager)
                     .environmentObject(self.settingManager)

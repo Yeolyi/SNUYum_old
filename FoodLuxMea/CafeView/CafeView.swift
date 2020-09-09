@@ -10,7 +10,6 @@ import GoogleMobileAds
 
 struct CafeView: View {
     @State var cafeInfo: Cafe
-    @Binding var isCafeView: Bool
     @State var isMapView = false
     @State var showActionSheet = false
 
@@ -43,7 +42,7 @@ struct CafeView: View {
                         .foregroundColor(themeColor.colorIcon(colorScheme))
                         .offset(y: 10)
                 }
-                Button(action: { self.isCafeView = false }) {
+                Button(action: { self.presentationMode.wrappedValue.dismiss()}) {
                     Text("닫기")
                         .font(.system(size: CGFloat(20), weight: .light))
                         .foregroundColor(themeColor.colorIcon(colorScheme))
@@ -82,9 +81,9 @@ struct CafeView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .padding()
                     
-                    HStack() {
+                    HStack {
                         
-                        HStack() {
+                        HStack {
                             Spacer()
                             Image(systemName: "phone")
                                 .font(.system(size: 20))
@@ -120,11 +119,9 @@ struct CafeView: View {
                         }
                     }
                 }
-                .padding(.top, 5)
                 .modifier(ListRow())
                 
             }
-                .padding(5)
             
             Divider()
             
@@ -133,9 +130,6 @@ struct CafeView: View {
             .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
  */
         }
-        .background(colorScheme == .dark ? Color.black : Color.white)
-        .cornerRadius(15)
-        .shadow(radius: 5)
         .sheet(isPresented: $isMapView) {
             MapView(cafeInfo: self.cafeInfo)
                 .environmentObject(self.themeColor)
@@ -201,7 +195,7 @@ struct CafeView_Previews: PreviewProvider {
         CafeView_Previews.settingManager.update(date: Date())
         CafeView_Previews.listManager.update(newCafeList: CafeView_Previews.dataManager.getData(at: Date()))
         
-        return CafeView(cafeInfo: previewCafe, isCafeView: .constant(true))
+        return CafeView(cafeInfo: previewCafe)
             .environmentObject(self.dataManager)
             .environmentObject(self.listManager)
             .environmentObject(self.settingManager)
