@@ -106,7 +106,7 @@ struct CafeView: View {
         if (mealMenus.isEmpty == false ) {
             return AnyView(
                 Section(header:
-                    Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.meal(mealType)!)!  + ")")
+                    Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.meal(mealType) ?? "시간 정보 없음")  + ")")
                         .modifier(SectionTextSmaller())
                 ) {
                 ForEach(mealMenus) { menu in

@@ -62,7 +62,12 @@ struct ContentViewComponent: View {
                 }
                 .navigationBarTitle(Text("식단 바로보기"))
                 .navigationBarItems(trailing:
-                                        NavigationLink(destination: SettingView()) {
+                                        NavigationLink(destination:
+                                        SettingView()
+                                            .environmentObject(self.listManager)
+                                            .environmentObject(self.dataManager)
+                                            .environmentObject(self.settingManager)
+                                        ) {
                                             Image(systemName: "gear")
                                                 .foregroundColor(themeColor.colorIcon(colorScheme))
                                                 .font(.system(size: 25, weight: .regular))
