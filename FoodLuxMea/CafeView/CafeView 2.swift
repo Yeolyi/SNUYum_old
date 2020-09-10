@@ -144,7 +144,7 @@ struct CafeView: View {
         if (mealMenus.isEmpty == false ) {
             return AnyView(
                 VStack {
-                    Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.meal(mealType) ?? "시간 정보 없음")  + ")")
+                    Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.meal(mealType)!)!  + ")")
                             .modifier(SectionTextModifier())
                 ForEach(mealMenus) { menu in
                     HStack{

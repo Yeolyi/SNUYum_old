@@ -51,29 +51,29 @@ var cafeOperatingHour: [String : WeeklyOperatingHour] =
     [
         "학생회관식당" : .init(weekday: .init("08:00-10:00", "11:00-15:00", "17:00-19:00"), saturday: .init(nil, "11:30-14:00", "17:00-19:00"), sunday: .init(nil, "11:30-14:00", "17:00-19:00")),
         
-        "자하연식당" : .init(weekday: .init(nil, "11:00-14:00", "17:00-19:00"), saturday: nil, sunday: nil),
+        "자하연식당" : .init(weekday: .init(nil, "11:30-14:00", "17:00-18:30"), saturday: nil, sunday: nil),
         
-        "예술계식당" : .init(weekday: .init(nil, "11:30-14:00", "17:00-19:00"), saturday: nil, sunday: nil),
+        "예술계식당" : .init(weekday: .init(nil, "11:30-13:30", "17:00-18:30"), saturday: nil, sunday: nil),
         
-        "두레미담" : .init(weekday: .init(nil, "11:00-17:00", "17:00-19:00"), saturday: .init(nil, "11:00-19:00", "11:00-19:00"), sunday: nil),
+        "두레미담" : .init(weekday: .init(nil, "11:00-14:00", "17:00-19:00"), saturday: .init(nil, "11:00-19:00", "11:00-19:00"), sunday: nil),
         
         "동원관식당" : .init(weekday: .init(nil, "11:00-14:00", nil), saturday: nil, sunday: nil),
         
         "기숙사식당" : .init(weekday: .init("07:30-09:30", "11:30-13:30", "17:30-19:00"), saturday: .init("08:00-09:30", "11:30-13:30", "17:30-19:00"), sunday: .init("08:00-09:30", "11:30-13:30", "17:30-19:00")),
         
-        "공대간이식당" : .init(weekday: .init(nil, "11:00-19:00", "11:00-19:00"), saturday: nil, sunday: nil),
+        "공대간이식당" : .init(weekday: .init(nil, "11:00-18:30", "11:00-18:30"), saturday: nil, sunday: nil),
         
-        "3식당" : .init(weekday: .init(nil, "11:30-13:30", "17:00-19:00"), saturday: nil, sunday: nil), //일단은 4층 기준
+        "3식당" : .init(weekday: .init(nil, "11:00-14:00", "17:00-19:00"), saturday: nil, sunday: nil), //일단은 4층 기준
         
-        "302동식당" : .init(weekday: .init(nil, "11:15-14:00", "17:00-19:00"), saturday: nil, sunday: nil),
+        "302동식당" : .init(weekday: .init(nil, "11:30-13:30", "17:00-19:00"), saturday: nil, sunday: nil),
         
-        "301동식당" : .init(weekday: .init(nil, "11:00-14:00", "17:00-19:00"), saturday: nil, sunday: nil),
+        "301동식당" : .init(weekday: .init(nil, "11:30-13:10", "17:00-19:00"), saturday: nil, sunday: nil),
         
-        "220동식당" : .init(weekday: .init(nil, "11:00-14:00", "17:00-19:00"), saturday: nil, sunday: nil),
+        "220동식당" : .init(weekday: .init(nil, "11:30-13:30", "17:00-19:00"), saturday: nil, sunday: nil),
         
         "소담마루" : .init(weekday: .init(nil, "11:00-15:00", "17:00-19:40"), saturday: .init(nil, "11:00-15:00", "17:00-19:40"), sunday: nil),
         
-        "라운지오" : .init(weekday: .init("11:00-21:00", "11:00-21:00", "11:00-21:00"), saturday: .init("11:00-21:00", "11:00-21:00", "11:00-21:00"), sunday: .init("11:00-21:00", "11:00-21:00", "11:00-21:00")),
+        "라운지오" : .init(weekday: .init("11:00-21:00", "11:00-21:00", "11:00-21:00"), saturday: .init(nil, "11:00-19:00", "11:00-19:00"), sunday: .init(nil, "11:00-21:00", "11:00-21:00")),
         "샤반" : .init(weekday: .init(nil, "11:00-14:30", "16:30-20:00"), saturday: .init(nil, "11:30-14:00", nil), sunday: nil),
         
         "아워홈" : .init(weekday: .init("07:30-09:30", "11:30-13:30", "17:30-19:30"), saturday: .init("08:00-09:30", "11:30-13:30", "17:30-19:30"), sunday: .init("08:00-09:30", "11:30-13:30", "17:30-19:30"))

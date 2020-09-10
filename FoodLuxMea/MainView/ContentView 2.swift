@@ -96,35 +96,6 @@ struct ContentViewComponent: View {
                                 }
                                 .modifier(ListRow())
                             }
-                        }
-                    //고정 섹션
-                    if (listManager.fixedList.isEmpty == false) {
-                        Section(header: Text("고정됨").modifier(SectionText())) {
-                            MealSelect()
-                            CafeListFiltered(isFixed: true, searchedText: searchedText)
-                        }
-                    }
-                    //식당 목록 섹션
-                    Section(header: Text("식당 목록").modifier(SectionText())) {
-                        if (listManager.fixedList.isEmpty != false) {
-                            MealSelect()
-                        }
-                        CafeListFiltered(isFixed: false, searchedText: searchedText)
-                    }
-                }
-                .navigationBarTitle(Text("식단 바로보기"))
-                .navigationBarItems(trailing:
-                                        NavigationLink(destination:
-                                        SettingView()
-                                            .environmentObject(self.listManager)
-                                            .environmentObject(self.dataManager)
-                                            .environmentObject(self.settingManager)
-                                        ) {
-                                            Image(systemName: "gear")
-                                                .foregroundColor(themeColor.colorIcon(colorScheme))
-                                                .font(.system(size: 25, weight: .regular))
-                                        }
-                            )
                                 
                         }
                         //고정 섹션
