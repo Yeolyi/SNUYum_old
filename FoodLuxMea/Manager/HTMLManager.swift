@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftSoup
 
+///
 class HTMLManager {
     
     func cafeData(at date: Date) -> [Cafe]{
@@ -87,10 +88,10 @@ class HTMLManager {
             var temp = try! rawMenu.html()
             temp = temp.replacingOccurrences(of: "<br>", with: "꿇")
             temp = try! SwiftSoup.parse(temp).text()
-            var list = temp.split(separator: "꿇").map(String.init)
+            let list = temp.split(separator: "꿇").map(String.init)
             for i in list { //여기서 메뉴와 가격 분리
                 print(i)
-                var trimmedValue = whiteSpaceTrim(i)
+                let trimmedValue = whiteSpaceTrim(i)
                 
                 if trimmedValue.isEmpty {
                     continue
