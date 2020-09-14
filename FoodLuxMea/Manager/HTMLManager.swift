@@ -8,9 +8,10 @@
 import SwiftUI
 import SwiftSoup
 
-///
+/// Get data from snuco website and process into Cafe struct
 class HTMLManager {
     
+    /// Get Cafe array from specific date; sum of below functions
     func cafeData(at date: Date) -> [Cafe]{
         var cafeData: [Cafe] = []
         let targetURL = makeURL(from: date)
@@ -41,6 +42,7 @@ class HTMLManager {
         return []
     }
     
+    /// Simply divide whole URL Element to cafe struct elements
     private func SplitCafeData(_ rawCafe: Element) -> (name: String, callNum: String, rawBreakfasts: [Element], rawLunches: [Element], rawDinners: [Element]){
         do {
             let rawCafeArray = try rawCafe.select("td").array() //식당 구성요소 배열 [이름전번, 아침, 점심, 저녁] 생성
@@ -73,6 +75,7 @@ class HTMLManager {
         return (name, callNum)
     }
         
+    /// Get cost and menu name from elements; important function
     private func splitMenuList(_ menuList: [Element]) -> [Menu] {
         
         var returnValue: [Menu] = []
@@ -128,6 +131,7 @@ class HTMLManager {
         return returnValue
     }
 
+    /// Parse URL with SwiftSoup
     private func parse(_ uRL: URL) -> Document {
         do {
             let uRLContents = try String(contentsOf: uRL)
@@ -140,7 +144,7 @@ class HTMLManager {
         return .init("https://snuco.snu.ac.kr/ko/foodmenu")
     }
     
-    
+    /// Make URL which has access to input date's data
     func makeURL(from date: Date) -> URL { //DataManager에서 [String:[Cafe]]에 사용
         let targetDate = Calendar.current.dateComponents([.day, .year, .month], from: date)
         let targetURLString = "https://snuco.snu.ac.kr/ko/foodmenu?field_menu_date_value_1%5Bvalue%5D%5Bdate%5D=&field_menu_date_value%5Bvalue%5D%5Bdate%5D=" + String(targetDate.month!) + "%2F" + String(targetDate.day!) + "%2F" + String(targetDate.year!)

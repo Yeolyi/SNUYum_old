@@ -7,27 +7,24 @@
 
 import SwiftUI
 
-
+/// Searchbar containing magnifying glass symbol and text clear feature.
 struct SearchBar: View {
     @Environment(\.colorScheme) var colorScheme
-    
-    let themeColor = ThemeColor()
-    var placeholder: String = "식당이나 메뉴 이름을 검색하세요"
     @Binding var text: String
-    var backgroundColor: Color {
-      if colorScheme == .dark {
-           return Color(.systemGray5)
-       } else {
-           return Color(.systemGray6)
-       }
+    let themeColor = ThemeColor()
+    
+    /// - Parameter text: Binding string which passes entered text.
+    init(text: Binding<String>) {
+        self._text = text
     }
-  
+
     var body: some View {
         Group {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(themeColor.colorIcon(colorScheme))
-                TextField(placeholder, text: $text)
+                TextField("식당이나 메뉴 이름을 검색하세요", text: $text)
+                // When text exists, show delete button.
                 if text != "" {
                     Image(systemName: "xmark.circle.fill")
                         .imageScale(.medium)
@@ -40,13 +37,12 @@ struct SearchBar: View {
                         }
                 }
             }
-            //.padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
             .foregroundColor(.secondary)
         }
         .modifier(ListRow())
     }
-
 }
+
 struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
         SearchBar(text: .constant("Test"))

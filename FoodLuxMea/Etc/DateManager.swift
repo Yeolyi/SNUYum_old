@@ -8,7 +8,7 @@
 import Foundation
 
 
-///yyyy/MM/dd HH:mm 형식을 Date로 변환
+/// Convert yyyy/MM/dd HH:mm style string to Date 
 func getTrimmedDate(from string: String) -> Date{
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy/MM/dd HH:mm"

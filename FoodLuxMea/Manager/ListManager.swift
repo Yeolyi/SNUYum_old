@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+/// About how struct Cafe should shown
 struct ListElement: Hashable, Codable, Identifiable {
     var id = UUID()
     var name: String = ""
@@ -15,27 +16,32 @@ struct ListElement: Hashable, Codable, Identifiable {
     var isShown: Bool = true
 }
 
+/// Manage ListElements
 class ListManager: ObservableObject{
     
     @Published var cafeList: [ListElement] = []
     
+    /// Return data about fixed cafe
     var fixedList: [ListElement] {
         cafeList.filter {
             $0.isFixed == true
         }
     }
+    /// Return data about unfixed cafe
     var unfixedList: [ListElement] {
         cafeList.filter {
             $0.isFixed == false
         }
     }
     
+    /// If stored value exists, get
     init() {
         if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeList") as? Data {
              cafeList = try! PropertyListDecoder().decode([ListElement].self, from: loadedData)
         }
     }
     
+    /// If DataManager get new cafe array, add new cafe in list.
     func update(newCafeList: [Cafe]) {
         if (isInternetConnected) {
             for cafe in newCafeList {
@@ -65,6 +71,7 @@ class ListManager: ObservableObject{
         }
     }
     
+    /// Get specific cafe's index
     func index(of str: String) -> Int? {
         let value = cafeList.firstIndex(where: {$0.name == str})
         if (value == nil) {

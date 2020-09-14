@@ -7,32 +7,20 @@
 
 import SwiftUI
 
+/// Select which cafe to show in main view's timer.
 struct TimerSelectView: View {
-    @EnvironmentObject var listManager: ListManager
-    @EnvironmentObject var settingManager: SettingManager
-    var body: some View {
-        listByVersion(view: AnyView(
-            TimerSelectViewContent()
-            )
-        )
-    }
-}
-    
-struct TimerSelectViewContent: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
-    
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var settingManager: SettingManager
-    
     let themeColor = ThemeColor()
-    
     @State var selectedCafeName: String? = nil
     @State var tempIsTimerCafe: Bool = false
     
     var body: some View {
         VStack {
+            // Custom Navigation bar
             HStack {
                 TitleView(title: "알리미 설정", subTitle: "설정")
                 Button(action: {
@@ -54,11 +42,9 @@ struct TimerSelectViewContent: View {
                         .offset(y: 10)
                 }
             }
-            
             Divider()
-            
+            // Selectable cafe list
             ScrollView {
-                
                 VStack(spacing: 0) {
                 Text("""
 식당 사정에 따라 조금 일찍/늦게 끝날 수도 있습니다.
@@ -68,12 +54,12 @@ struct TimerSelectViewContent: View {
 301동 식당: 지하 기준
 """)
                     .modifier(ListRow())
+                // Toggle for timer on off
                 Text("설정")
                     .modifier(SectionTextModifier())
-                
                 iOS1314Toggle(isOn: $tempIsTimerCafe, label: "알리미 켜기")
                     .modifier(ListRow())
-                
+                // Selectable cafe list
                 if (tempIsTimerCafe) {
                     Text("목록")
                         .modifier(SectionTextModifier())
@@ -88,9 +74,8 @@ struct TimerSelectViewContent: View {
                                 .foregroundColor(self.getColor(cafeName: listElement.name))
                             }
                         }
+                    }
                 }
-                
-            }
             }
         }
         .onAppear(perform: {
@@ -98,7 +83,7 @@ struct TimerSelectViewContent: View {
             self.selectedCafeName = self.settingManager.alimiCafeName
         })
     }
-
+    // Highlight cafe color if selected
     func getColor(cafeName: String) -> Color{
         if (cafeName == settingManager.alimiCafeName) {
             return themeColor.colorIcon(colorScheme)
@@ -110,11 +95,7 @@ struct TimerSelectViewContent: View {
             return Color(.systemFill)
         }
     }
-    
-    
 }
-
-
 
 struct TimerSelectView_Previews: PreviewProvider {
     static var previews: some View {

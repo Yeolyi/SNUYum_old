@@ -9,10 +9,13 @@ import SwiftSoup
 import SwiftUI
 
 
-//0: Sun - 6:Sat
+/// Get data about our home cafeteria
+///
+/// - Note: Ourhome data uses one cafe struct. 
 class OurhomeManager {
     
     var cafeData: [URL : [Int : Cafe]] = [:]
+    /// Unnessessary data position in ourhome HTML
     private let isIgnore: [[Bool]] = [
         [true, true, true, false, false, false, false, false, false, false],
         [true, false, false, false, false, false, false, false],
@@ -22,11 +25,12 @@ class OurhomeManager {
         [true, true, false, false, false, false, false, false, false],
         [true, false, false, false, false, false, false, false],
         [true, false, false, false, false, false, false, false]]
+    
+    /// Cafe order and meal type indexes in ourhome HTML
     private let cafeNameOrder = ["가마", "인터쉐프", "가마", "인터쉐프", "해피존", "가마", "인터쉐프", "해피존"]
     private let bkfIndex = [0, 1]
     private let lunchIndex = [2, 3, 4]
     private let dinnerIndex = [5, 6, 7]
-    
     
     init() {
         if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "ourhomeData") as? Data {
@@ -35,6 +39,7 @@ class OurhomeManager {
         }
     }
     
+    /// Save retrieved data for loading time optimization
     func save() {
         if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea"){
             if let encodedData = try? PropertyListEncoder().encode(cafeData) {
@@ -50,8 +55,8 @@ class OurhomeManager {
         }
     }
     
+    
     func getCafe(date: Date) -> Cafe {
-
         if let data = cafeData[makeURL(from: date)] {
             let dayOfTheWeek = getDayOfWeek(date)
             return data[dayOfTheWeek]!
@@ -65,12 +70,12 @@ class OurhomeManager {
         }
     }
     
+    /// Get day of week from input date and convert it into Int
     func getDayOfWeek(_ date: Date) -> Int {
         let myCalendar = Calendar(identifier: .gregorian)
         let weekDay = myCalendar.component(.weekday, from: date)
         return weekDay - 1
     }
-    
     
     func loadCafe(date: Date) -> [Int : Cafe]{
         var cafeList: [Int : Cafe] = [:]
@@ -108,8 +113,6 @@ class OurhomeManager {
                 }
             }
         }
-
-        
         for day in 0..<7 {
             var tempBkfMenuList: [Menu] = []
             var tempLunchMenuList: [Menu] = []
@@ -132,7 +135,6 @@ class OurhomeManager {
                     tempDinnerMenuList.append(tempMenu)
                 }
             }
-            
             cafeList[day] = Cafe(name: "아워홈", phoneNum: "", bkfMenuList: tempBkfMenuList, lunchMenuList: tempLunchMenuList, dinnerMenuList: tempDinnerMenuList)
         }
         return cafeList
@@ -143,9 +145,9 @@ class OurhomeManager {
         let baseDate = getTrimmedDate(from: "2020/08/16 00:00")
         let components = Calendar.current.dateComponents([.weekOfYear], from: baseDate, to: date)
         //print("\(baseDate)부터 \(date)까지 \(components.weekOfYear!)주 지났습니다")
-        return URL(string: "https://dorm.snu.ac.kr/dk_board/facility/food.php?start_date2=\(baseNum + components.weekOfYear! * 604800)")!
+        return URL(string: "https://dorm.snu.ac.kr/dk_board/facility/food.php?start_date2=\(baseNum + components.weekOfYear! * 60 * 60 * 24 * 7)")!
     }
-
+    
     func parse(_ uRL: URL) -> Document {
         do {
             let uRLContents = try String(contentsOf: uRL)
@@ -158,6 +160,7 @@ class OurhomeManager {
         return .init("https://dorm.snu.ac.kr/dk_board/facility/food.php")
     }
 
+    /// Convert HTML class attrubution to cost value
     func getCost(menuName: String) -> Int {
         switch menuName {
         case "menu_a":

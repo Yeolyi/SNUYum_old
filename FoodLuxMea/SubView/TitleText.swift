@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-
+/// Modifier for highlight-needing important text
 struct TitleText: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.system(size: CGFloat(18), weight: .medium, design: .default))
-        //.font(.custom("NanumBarunpenR", size: 18))
     }
 }
 

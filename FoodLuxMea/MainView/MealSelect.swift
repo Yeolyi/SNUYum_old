@@ -7,10 +7,10 @@
 
 import SwiftUI
 
+/// View with buttons to select meal type.
 struct MealSelect: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var settingManager: SettingManager
-    
     let themeColor = ThemeColor()
 
     var body: some View {
@@ -21,9 +21,9 @@ struct MealSelect: View {
             Spacer()
             HStack {
                 Group {
-                    MealTypeButton(imageName: "sunrise", buttonType: .breakfast)
-                    MealTypeButton(imageName: "sun.max", buttonType: .lunch)
-                    MealTypeButton(imageName: "sunset", buttonType: .dinner)
+                    MealTypeButton(buttonType: .breakfast)
+                    MealTypeButton(buttonType: .lunch)
+                    MealTypeButton(buttonType: .dinner)
                     ZStack {
                        RoundedRectangle(cornerRadius: 10)
                            .frame(width: 40, height: 40)
@@ -45,13 +45,26 @@ struct MealSelect: View {
     }
 }
 
+/// Single meal type button.
 struct MealTypeButton: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var settingManager: SettingManager
-    
     var themeColor = ThemeColor()
-    let imageName: String
+    var imageName: String = ""
     @State var buttonType: MealType
+    
+    /// - Parameter buttonType: Select which meal type this button represents
+    init(buttonType: MealType) {
+        self._buttonType = State(initialValue: buttonType)
+        switch buttonType {
+        case .breakfast:
+            imageName = "sunrise"
+        case .lunch:
+            imageName = "sun.max"
+        case .dinner:
+            imageName = "sunset"
+        }
+    }
     
     var body: some View {
         Button(action: {self.settingManager.mealViewMode = self.buttonType; self.settingManager.isAuto = false; self.settingManager.save()}) {

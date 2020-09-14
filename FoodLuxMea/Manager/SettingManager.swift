@@ -7,7 +7,12 @@
 
 import SwiftUI
 
-class SettingManager: ObservableObject { //자료형? 버전 만들어서 userdefault로 버전이 맞지 않는 경우 초기화하는 방법 만들기
+/**
+ Manages overall user settings.
+ 
+ - ToDo: Make version compatible - solution to userdefault error
+ */
+class SettingManager: ObservableObject {
     
     @Published var mealViewMode: MealType = .lunch
     @Published var widgetMealViewMode: MealType = .lunch
@@ -28,7 +33,7 @@ class SettingManager: ObservableObject { //자료형? 버전 만들어서 userde
         let date = isCustomDate ? debugDate : Date()
         if (isSuggestedTomorrow) {
             var dayComponent    = DateComponents()
-            dayComponent.day    = 1 // For removing one day (yesterday): -1
+            dayComponent.day    = 1
             let theCalendar     = Calendar.current
             return theCalendar.date(byAdding: dayComponent, to: date)!
         }
@@ -36,10 +41,12 @@ class SettingManager: ObservableObject { //자료형? 버전 만들어서 userde
             return date
         }
     }
+    
     var meal: MealType {
         isAuto ? suggestedMeal : mealViewMode
     }
     
+    /// If setting data is stored, retrieve it
     init() {
         isSuggestedTomorrow = smartSuggestion.isTomorrow(Date())
         suggestedMeal = smartSuggestion.mealType(at: Date())
@@ -80,6 +87,7 @@ class SettingManager: ObservableObject { //자료형? 버전 만들어서 userde
         print("SettingManaver/save(): 세팅 저장됨")
     }
     
+    /// If date is changed suggested value should also be updated
     func update(date: Date) {
         if let cafeName = alimiCafeName {
             smartSuggestion.update(dailyOperatingHour: cafeOperatingHour[cafeName]?.dayOfTheWeek(date: date))

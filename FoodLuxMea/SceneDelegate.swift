@@ -16,6 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     var window: UIWindow?
+    
+    //Initialize essential manager class.
     let listManager = ListManager()
     let dataManager = DataManager()
     let contentView = ContentView()
@@ -29,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
 
-        
+        // Update variable isInternetConnected using Network framework
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
                 isInternetConnected = true
@@ -39,15 +41,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 print("인터넷 연결되지 않음")
             }
         }
-    
         let queue = DispatchQueue(label: "Monitor")
         monitor.start(queue: queue)
         
+        // As essential class is alreay initialized, mark it is no longer first run.
         if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea"){
             userDefault.set(true as Bool, forKey: "firstRun")
             userDefault.set(true as Bool, forKey: "1.1firstRun")
         }
         
+        // Update classes to set date.
         settingManager.update(date: settingManager.date)
         self.listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
         
@@ -85,6 +88,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        
+        // Update class values preventing old view is shown.
         settingManager.update(date: settingManager.date)
         listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
     }
@@ -93,6 +98,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        
+        // Save class values when scene enters background. 
         dataManager.save()
         listManager.save()
     }

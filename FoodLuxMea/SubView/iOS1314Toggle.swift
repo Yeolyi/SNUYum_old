@@ -7,11 +7,22 @@
 
 import SwiftUI
 
+/// Custom simple toggle
 struct iOS1314Toggle: View {
     @Environment(\.colorScheme) var colorScheme
+    let themeColor = ThemeColor()
     @Binding var isOn: Bool
     let label: String
-    let themeColor = ThemeColor()
+    
+    /**
+     - Parameters:
+        - isOn: Passes toggle value to parent view
+        - label: String to show next to toggle
+     */
+    init(isOn: Binding<Bool>, label: String) {
+        self._isOn = isOn
+        self.label = label
+    }
     
     var body: some View {
         HStack {
@@ -21,7 +32,7 @@ struct iOS1314Toggle: View {
                 .offset(x: -5)
                 .foregroundColor(themeColor.colorIcon(colorScheme))
         }
-    .contentShape(Rectangle())
+        .contentShape(Rectangle())
         .onTapGesture{
             self.isOn.toggle()
         }

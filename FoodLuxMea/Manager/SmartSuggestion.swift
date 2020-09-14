@@ -7,8 +7,10 @@
 
 import Foundation
 
+/// Suggest adequate meal type based on current time
 class SmartSuggestion {
     
+    // Hour and minute tuples used when operating hour does not exists
     static let bkfDefaultTime = (10, 0)
     static let lunchDefaultTime = (15, 0)
     static let dinnerDefaultTime = (19,0)
@@ -17,6 +19,7 @@ class SmartSuggestion {
     var lunchEndTime: (Int, Int)? = nil
     var dinnerEndTime: (Int, Int)? = nil
     
+    /// Update each meal's end time based on some cafe's dailyOperatingHour
     func update(dailyOperatingHour: DailyOperatingHour?) {
         if let dailyOperatingHourUnwrapped = dailyOperatingHour {
             bkfEndTime = dailyOperatingHourUnwrapped.mealTypeToEndTime(.breakfast)
@@ -30,12 +33,14 @@ class SmartSuggestion {
         }
     }
     
+    /// If time is too late, show tomorrows menus
     func isTomorrow(_ date: Date) -> Bool {
         let hour = Calendar.current.component(.hour, from: date)
         let minute = Calendar.current.component(.minute, from: date)
         return isRhsBigger(lhs: dinnerEndTime ?? SmartSuggestion.dinnerDefaultTime, rhs: (hour, minute))
     }
     
+    /// Returns adequate meal type to see based on input time
     func mealType(at date: Date) -> MealType {
         let hour = Calendar.current.component(.hour, from: date)
         let minute = Calendar.current.component(.minute, from: date)
@@ -56,6 +61,7 @@ class SmartSuggestion {
     
 }
 
+/// Compare two (hour, minute) tuple
 func isRhsBigger(lhs: (hour: Int, minute: Int), rhs: (hour: Int, minute: Int)) -> Bool{
     if (lhs.hour < rhs.hour) {
         return true

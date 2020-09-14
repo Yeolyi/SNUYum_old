@@ -28,7 +28,6 @@
 		250BBC2824F3FAC800FC0C84 /* SectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1B24F3FAC700FC0C84 /* SectionText.swift */; };
 		250BBC2924F3FAC800FC0C84 /* CafeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1C24F3FAC800FC0C84 /* CafeView.swift */; };
 		250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */; };
-		2510CEDD24FF6680007ACE79 /* iOS1314List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2510CEDC24FF6680007ACE79 /* iOS1314List.swift */; };
 		2549427224F505730049F32E /* iOS1314Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2549427124F505730049F32E /* iOS1314Toggle.swift */; };
 		255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */; };
 		25647B6F24F9FFC900E1C3F0 /* CafeDataList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25647B6E24F9FFC900E1C3F0 /* CafeDataList.swift */; };
@@ -87,7 +86,6 @@
 		250BBC1B24F3FAC700FC0C84 /* SectionText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionText.swift; sourceTree = "<group>"; };
 		250BBC1C24F3FAC800FC0C84 /* CafeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeView.swift; sourceTree = "<group>"; };
 		250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealSelect.swift; sourceTree = "<group>"; };
-		2510CEDC24FF6680007ACE79 /* iOS1314List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS1314List.swift; sourceTree = "<group>"; };
 		2549427124F505730049F32E /* iOS1314Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS1314Toggle.swift; sourceTree = "<group>"; };
 		255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparency.swift; sourceTree = "<group>"; };
 		25647B6E24F9FFC900E1C3F0 /* CafeDataList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDataList.swift; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 				250BBC1B24F3FAC700FC0C84 /* SectionText.swift */,
 				2593233124FBB5F40036C148 /* TitleText.swift */,
 				2549427124F505730049F32E /* iOS1314Toggle.swift */,
-				2510CEDC24FF6680007ACE79 /* iOS1314List.swift */,
 				259B889424F68B6F001C710C /* AdmobBanner.swift */,
 			);
 			path = SubView;
@@ -416,7 +413,6 @@
 				255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */,
 				250BBBF324F3F92E00FC0C84 /* BaseStruct.swift in Sources */,
 				25647B6F24F9FFC900E1C3F0 /* CafeDataList.swift in Sources */,
-				2510CEDD24FF6680007ACE79 /* iOS1314List.swift in Sources */,
 				250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */,
 				2593233024FAE8310036C148 /* CafeListFiltered.swift in Sources */,
 				259B889524F68B6F001C710C /* AdmobBanner.swift in Sources */,

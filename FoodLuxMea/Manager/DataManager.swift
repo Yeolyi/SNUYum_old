@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Manages overall cafeteria datas
 class DataManager: ObservableObject {
     
     private var cafeData: [URL: [Cafe]] = [:]
@@ -15,6 +16,7 @@ class DataManager: ObservableObject {
     
     init() {
         if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
+            // If some algorithm changes, existing data should be deleted and reloaded
             if userDefaults.bool(forKey: "1.1firstRun") == false {
                 print("DataManager/init: 1.1버전 설치가 처음입니다. 데이터를 삭제합니다. ")
                 userDefaults.removeObject(forKey: "cafeData")
@@ -65,11 +67,7 @@ class DataManager: ObservableObject {
     func getData(at date: Date, name: String) -> Cafe {
         let uRLString = hTMLManager.makeURL(from: date)
         if let data = cafeData[uRLString] {
-            for cafe in data { //first 함수로 간단하게 바꾸기
-                if (cafe.name == name) {
-                    return cafe
-                }
-            }
+            return data.first{ $0.name == name }!
         }
         else {
             if isInternetConnected {

@@ -7,14 +7,26 @@
 
 import SwiftUI
 
+/// Another type of cafe row when user is searching something.
 struct SearchCafeRow: View {
     
     @Environment(\.colorScheme) var colorScheme
-    
     let themeColor = ThemeColor()
     var cafe: Cafe
     var suggestedMeal: MealType
     let searchText: String
+    
+    /**
+    - Parameters:
+        - cafe: Cafe struct which this view shows
+        - suggestedMeal: Meal type of cafe struct which this view shows
+        - searchedText: Tells which text is searched
+    */
+    init(cafe: Cafe, suggestedMeal: MealType, searchText: String) {
+        self.cafe = cafe
+        self.suggestedMeal = suggestedMeal
+        self.searchText = searchText
+    }
     
     var body: some View {
             VStack(alignment: .leading){
@@ -22,7 +34,7 @@ struct SearchCafeRow: View {
                     .modifier(TitleText())
                     .foregroundColor(themeColor.colorTitle(colorScheme))
                     .padding(.bottom, 3)
-                ForEach(cafe.getMenuList(MealType: suggestedMeal).filter{$0.name.contains(searchText)}) { menu in
+                ForEach(cafe.getMenuList(mealType: suggestedMeal).filter{$0.name.contains(searchText)}) { menu in
                     HStack {
                         self.text(target: menu.name, search: self.searchText)
                             .font(.system(size: 15))
@@ -36,7 +48,7 @@ struct SearchCafeRow: View {
             }
     }
     
-    
+    /// Highlights certain texts which is searched.
     func text(target: String, search: String) -> Text {
         
         var colorSet: Set<Int> = []
@@ -60,7 +72,12 @@ struct SearchCafeRow: View {
         
         return getView(cnt: 0)
     }
-
+    
+    /**
+    Interpret cost value to adequate string.
+    
+    - ToDo: Search appropriate class to place this function.
+    */
     func costInterpret(_ cost: Int) -> String{
         if (cost == -1) {
             return ""

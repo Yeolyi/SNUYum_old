@@ -7,13 +7,23 @@
 
 import SwiftUI
 
+/// Single cafe row in main view.
 struct CafeRow: View {
     
     @Environment(\.colorScheme) var colorScheme
-    
     let themeColor = ThemeColor()
     var cafe: Cafe
     var suggestedMeal: MealType
+
+    /**
+     - Parameters:
+        - cafe: Cafe struct which this view shows.
+        - suggestedMeal: Meal type of cafe struct which this view shows.
+     */
+    init(cafe: Cafe, suggestedMeal: MealType) {
+        self.cafe = cafe
+        self.suggestedMeal = suggestedMeal
+    }
     
     var body: some View {
         VStack(alignment: .leading){
@@ -22,7 +32,7 @@ struct CafeRow: View {
                 .foregroundColor(themeColor.colorTitle(colorScheme))
                 .padding(.bottom, 3)
             Spacer()
-            ForEach(cafe.getMenuList(MealType: suggestedMeal)) { menu in
+            ForEach(cafe.getMenuList(mealType: suggestedMeal)) { menu in
                 HStack {
                     Text(menu.name)
                         .font(.system(size: 15))
@@ -38,7 +48,12 @@ struct CafeRow: View {
             }
         }
     }
-
+    
+    /**
+     Interpret cost value to adequate string.
+     
+     - ToDo: Search appropriate class to place this function.
+     */
     func costInterpret(_ cost: Int) -> String{
         if (cost == -1) {
             return ""

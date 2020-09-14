@@ -7,8 +7,10 @@
 
 import Foundation
 
+/// Cafe struct for debug/preview/canvas
 var previewCafe = Cafe(name: "아워홈", phoneNum: "3280-8642", bkfMenuList: [Menu(name: "bkfMenu1", cost: 1000)], lunchMenuList: [Menu(name: "lunchMenu1", cost: 3000), Menu(name: "lunchMenu2", cost: 2500)], dinnerMenuList: [Menu(name: "dinnerMenu1", cost: 1700), Menu(name: "dinnerMenu2", cost: 5000)])
 
+/// Cafeteria position coordinate for Naver map
 var coordList: [String:(lat: Double, lng: Double)] =
     [
         "학생회관식당" : (37.459225, 126.950646),
@@ -28,6 +30,7 @@ var coordList: [String:(lat: Double, lng: Double)] =
         "아워홈" : (37.462050, 126.957779)
     ]
 
+/// Cafeteria phone number
 var phoneNumList: [String: String] =
     [
         "학생회관식당" : "880-5543",
@@ -47,6 +50,7 @@ var phoneNumList: [String: String] =
         "아워홈" : ""
     ]
 
+/// Weekly cafeteria operating hour
 var cafeOperatingHour: [String : WeeklyOperatingHour] =
     [
         "학생회관식당" : .init(weekday: .init("08:00-10:00", "11:00-15:00", "17:00-19:00"), saturday: .init(nil, "11:30-14:00", "17:00-19:00"), sunday: .init(nil, "11:30-14:00", "17:00-19:00")),
@@ -80,6 +84,7 @@ var cafeOperatingHour: [String : WeeklyOperatingHour] =
         
     ]
 
+/// Cafeteria position string for user
 var cafePosition: [String : String] =
     [
         "학생회관식당" : "63동[학생회관] 지상1층/지하1층(점심)",
@@ -99,6 +104,7 @@ var cafePosition: [String : String] =
         "아워홈" : "901동[학생생활관] 지상1층"
     ]
 
+/// Cafeteria description
 var cafeDescription: [String : String] =
     [
         "학생회관식당" : "A,B,C 코너에서 각각 양식, 뚝배기 등 2~3가지의 메뉴를 판매합니다. 지하는 평일 점심을 11:00-13:30, 분식을 14:00-18:00에 운영합니다.",

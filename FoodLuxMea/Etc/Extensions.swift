@@ -7,12 +7,19 @@
 
 import SwiftUI
 
+/// Extension and modifier to hide keyboard(searchbar) when list scrolls
 extension UIApplication {
     func endEditing(_ force: Bool) {
         self.windows
             .filter{$0.isKeyWindow}
             .first?
             .endEditing(force)
+    }
+}
+
+extension View {
+    func resignKeyboardOnDragGesture() -> some View {
+        return modifier(ResignKeyboardOnDragGesture())
     }
 }
 
@@ -25,22 +32,8 @@ struct ResignKeyboardOnDragGesture: ViewModifier {
     }
 }
 
-extension View {
-    func resignKeyboardOnDragGesture() -> some View {
-        return modifier(ResignKeyboardOnDragGesture())
-    }
-}
 
-struct CenterModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        HStack {
-            Spacer()
-            content
-            Spacer()
-        }
-    }
-}
-
+/// Cornered list row background
 struct ListRow: ViewModifier {
     @Environment(\.colorScheme) var colorScheme
     func body(content: Content) -> some View {
@@ -55,6 +48,7 @@ struct ListRow: ViewModifier {
     }
 }
 
+/// Replaces list section header
 struct SectionTextModifier: ViewModifier {
     func body(content: Content) -> some View {
          HStack {
@@ -67,6 +61,7 @@ struct SectionTextModifier: ViewModifier {
     }
 }
 
+/// Simple custom navigaion bar
 func TitleView(title: String, subTitle: String) -> AnyView{
     return AnyView (
         HStack {
