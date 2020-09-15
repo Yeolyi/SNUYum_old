@@ -113,7 +113,7 @@ struct CafeListFiltered: View {
         if targetCafe.bkfMenuList.isEmpty && targetCafe.lunchMenuList.isEmpty  && targetCafe.dinnerMenuList.isEmpty  {
              return .noData
         }
-        if (searchedText.isEmpty || targetCafe.searchText(searchedText, mealType: settingManager.mealViewMode)) { 
+        if (searchedText.isEmpty || targetCafe.search(searchedText, at: settingManager.mealViewMode)) {
                 if (targetCafe.isEmpty(mealType: settingManager.meal, keywords: settingManager.closedKeywords) == false ) {
                     return .show
                 }

@@ -8,54 +8,78 @@
 import Foundation
 import CoreData
 
-/// About how struct Cafe should shown
+/**
+ Determines how cafe data will be displayed.
+ 
+ Includes information about if cafe is fixed and shown.
+ 
+ - Important: There always should be corresponding ListElement for each cafe data.
+ 
+ - Note: Default value is unfixed.
+ */
 struct ListElement: Hashable, Codable, Identifiable {
     var id = UUID()
+    /// Cafe's name
     var name: String = ""
+    /// Always show cafe on the top of the /list
     var isFixed: Bool = false
+    /// Show cafe in list
     var isShown: Bool = true
 }
 
-/// Manage ListElements
+/**
+ Manages how whole cafe data will be displayed.
+ */
 class ListManager: ObservableObject{
     
+    /**
+     ListElement storage.
+     
+     - Note: Published variable because scene should be updated every time it changes.
+     */
     @Published var cafeList: [ListElement] = []
     
-    /// Return data about fixed cafe
+    /// Return fixed cafe ListElement array.
     var fixedList: [ListElement] {
         cafeList.filter {
             $0.isFixed == true
         }
     }
-    /// Return data about unfixed cafe
+    /// Return unfixed cafe ListElement array.
     var unfixedList: [ListElement] {
         cafeList.filter {
             $0.isFixed == false
         }
     }
     
-    /// If stored value exists, get
+    /**
+     If stored value exists, restore it.
+     
+     - Important: Variable 'cafeList' remains empty if stored value does not exists.
+     */
     init() {
         if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeList") as? Data {
              cafeList = try! PropertyListDecoder().decode([ListElement].self, from: loadedData)
         }
     }
     
-    /// If DataManager get new cafe array, add new cafe in list.
+    /**
+     Add new 'ListElement' in manager based on new cafe list.
+     
+     If cafe data is updated, list data should also be updated.
+     */
     func update(newCafeList: [Cafe]) {
-        if (isInternetConnected) {
-            for cafe in newCafeList {
-                if (cafeList.contains(where: {$0.name == cafe.name}) == false ) {
-                    cafeList.append(.init(name: cafe.name))
-                    print("ListManager/update: \(cafe.name)이 추가되었습니다.")
-                }
+        for cafe in newCafeList {
+            if (cafeList.contains(where: {$0.name == cafe.name}) == false ) {
+                cafeList.append(.init(name: cafe.name))
+                print("ListManager/update: \(cafe.name)이 추가되었습니다.")
             }
-        }
-        else {
-            print("ListManager/update: 인터넷이 연결되어있지 않습니다.")
         }
     }
     
+    /**
+         Save 'ListElement'
+         */
     func save() {
         if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea"){
             if let encodedData = try? PropertyListEncoder().encode(cafeList) {

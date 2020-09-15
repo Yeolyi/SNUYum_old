@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
-
-/// Simple text view showing remaining cafe operating hours.
+/**
+ Simple text view showing remaining cafe operating hours.
+ 
+ - Bug: Alimi crashed on some circumstances.
+ */
 struct TimerText: View {
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var settingManager: SettingManager
@@ -31,8 +34,8 @@ struct TimerText: View {
         let cafeData = dataManager.getData(at: settingManager.date, name: cafeName)
         
         // When cafe operating hour data exists
-        a: if let endDate = cafeOperatingHour[cafeName]?.dayOfTheWeek(date: settingManager.date)?.mealTypeToEndTime(settingManager.suggestedMeal) {
-            let startTime = cafeOperatingHour[cafeName]!.dayOfTheWeek(date: settingManager.date)!.mealTypeToStartTime(settingManager.suggestedMeal)!
+        a: if let endDate = cafeOperatingHour[cafeName]?.dayOfTheWeek(date: settingManager.date)?.endTime(at: settingManager.suggestedMeal) {
+            let startTime = cafeOperatingHour[cafeName]!.dayOfTheWeek(date: settingManager.date)!.startTime(at: settingManager.suggestedMeal)!
             
             if (cafeData.isEmpty(mealType: settingManager.suggestedMeal, keywords: settingManager.closedKeywords)) {
                 break a

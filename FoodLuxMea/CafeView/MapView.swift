@@ -12,8 +12,14 @@ struct MapView: View {
     let themeColor = ThemeColor()
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
-    /// Determine which cafe's location to show.
+    
+    
     var cafeInfo: Cafe
+    
+    /// - Parameter cafeInfo: Determine which cafe's location to show.
+    init(cafeInfo: Cafe) {
+        self.cafeInfo = cafeInfo
+    }
     
     var body: some View {
         NavigationView {

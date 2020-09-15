@@ -16,7 +16,7 @@ struct ListReorder: View {
     let themeColor = ThemeColor()
     @State var tempListManager = ListManager()
     
-    /// - Parameter cafeListBackup: Backup [ListElement] to restore data when sheet closed/canceled
+    /// - Parameter cafeListBackup: Backup [ListElement] to restore data when sheet is closed or dismissed
     init(cafeListBackup: [ListElement]) {
         tempListManager.cafeList = cafeListBackup
     }

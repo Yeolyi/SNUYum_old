@@ -7,21 +7,68 @@
 
 import Foundation
 
-/// Indicates one of three meals; breakfast, lunch and dinner
+/**
+ Indicates one of these three meals; breakfast, lunch and dinner.
+ 
+ Support raw string value in korean.
+ 
+ - Note: Codable protocol adopted to encoded/decoded while using Userdefault.
+ */
 enum MealType: String, Codable {
     case breakfast = "아침"
     case lunch = "점심"
     case dinner = "저녁"
 }
 
-/// Data of single menu
+/**
+ Data of a single menu.
+ 
+ If there's no cost data in server, cost value is -1.
+ 
+ - Precondition: 'cost' variable cannot be negative other than -1.
+ 
+ - Note: Hashable protocol to make Menu array.
+ 
+ Codable protocol to encoded/decoded while using Userdefault.
+ 
+ Identifiable adopted to give id in list view.
+ 
+ - Todo: Change cost type to optional Int to stop using -1.
+ */
 struct Menu: Hashable, Codable, Identifiable {
     var id = UUID()
     let name: String
     let cost: Int
+    
+    /**
+     Creates an menu struct.
+     
+     - Parameter cost: Defult value is -1.
+     */
+    init(name: String, cost: Int = -1) {
+        self.name = name
+        guard cost >= 0 || cost == -1 else {
+            assertionFailure("Menu/init: Inappropriate cost value - \(cost)")
+            self.cost = -1
+            return
+        }
+        self.cost = cost
+    }
 }
 
-/// Struct representing single cafeteria
+/**
+ Data of a single cafeteria.
+ 
+ Includes cafe name, cafe phone number, three meals' menus.
+ 
+ - Note: Hashable protocol to make Menu array.
+ 
+ Codable protocol to encoded/decoded while using Userdefault.
+ 
+ Identifiable adopted to give id in list view.
+ 
+ - ToDo: As phoneNum variable is available in another struct, delete it and let settingmanager manage it. Change name of bkfMenuList to breakfastMenuList.
+ */
 struct Cafe: Hashable, Codable, Identifiable {
     var id = UUID()
     let name: String
@@ -31,22 +78,14 @@ struct Cafe: Hashable, Codable, Identifiable {
     let dinnerMenuList: [Menu]
     
     /**
-     True if there is no menu in selected meal type
+     True if there is no menu in selected meal type.
      
      - Parameters:
         - mealType: Select which meal type to search
         - keywords: Exceptional strings which means menu is empty.
      */
     func isEmpty(mealType: MealType, keywords: [String]) -> Bool {
-        let targetMenuList: [Menu]
-        switch (mealType) {
-        case .breakfast:
-            targetMenuList = bkfMenuList
-        case .lunch:
-            targetMenuList = lunchMenuList
-        case .dinner:
-            targetMenuList = dinnerMenuList
-        }
+        let targetMenuList = getMenuList(mealType: mealType)
         if (targetMenuList.count == 0 ) { return true }
         else if (targetMenuList.count > 1) { return false}
         else {
@@ -76,18 +115,18 @@ struct Cafe: Hashable, Codable, Identifiable {
     }
     
     /**
-     True if list contains searching text
+     True if cafe name or meal array contains searching text
      
-     - Parameter mealType: Select which meal list to search
-     - Parameter str: Searching text
+     - Parameter keyword: Text to search.
+     - Parameter mealType: Meal type array to search.
     */
-    func searchText(_ str: String, mealType: MealType) -> Bool {
-        if (name.contains(str)) {
+    func search(_ keyword: String, at mealType: MealType) -> Bool {
+        if (name.contains(keyword)) {
             return true
         }
         let menuList = getMenuList(mealType: mealType)
         for menu in menuList{
-            if (menu.name.contains(str)) {
+            if (menu.name.contains(keyword)) {
                 return true
             }
         }
@@ -95,12 +134,21 @@ struct Cafe: Hashable, Codable, Identifiable {
     }
 }
 
-/// Cafeteria operating hour of one day three meals; nil if cafe does not open
+/**
+ Cafeteria operating hour of one day three meals; nil if cafe does not open.
+ 
+ 
+ */
 struct DailyOperatingHour {
     var bkf: String?
     var lunch: String?
     var dinner: String?
     
+    /**
+     Creates a cafe operating hour information.
+     
+     - Todo: Set default value to nil.
+     */
     init(_ bkf: String?, _ lunch: String?, _ dinner: String?) {
         self.bkf = bkf
         self.lunch = lunch
@@ -108,7 +156,7 @@ struct DailyOperatingHour {
     }
     
     /// Get operating time info of specific meal time
-    func meal(_ mealType: MealType) -> String? {
+    func operatingHour(at mealType: MealType) -> String? {
         switch (mealType) {
         case .breakfast:
             return bkf
@@ -120,8 +168,8 @@ struct DailyOperatingHour {
     }
     
     /// Convert operation start time string to hour and minute tuple
-    func mealTypeToStartTime(_ mealType: MealType) -> (hour: Int, minute: Int)? {
-        if let str = meal(mealType) {
+    func startTime(at mealType: MealType) -> (hour: Int, minute: Int)? {
+        if let str = operatingHour(at: mealType) {
             let splited = str.components(separatedBy: "-")
             let endTimeStr = splited[0]
             let hourNMinute = endTimeStr.components(separatedBy: ":")
@@ -133,8 +181,8 @@ struct DailyOperatingHour {
     }
     
     /// Convert operation end time string to hour and minute tuple
-    func mealTypeToEndTime(_ mealType: MealType) -> (hour: Int, minute: Int)? {
-        if let str = meal(mealType) {
+    func endTime(at mealType: MealType) -> (hour: Int, minute: Int)? {
+        if let str = operatingHour(at: mealType) {
             let splited = str.components(separatedBy: "-")
             let endTimeStr = splited[1]
             let hourNMinute = endTimeStr.components(separatedBy: ":")

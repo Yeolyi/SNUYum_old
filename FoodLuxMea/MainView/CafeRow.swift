@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// Single cafe row in main view.
+/// Single row in main view which shows one meal info
 struct CafeRow: View {
     
     @Environment(\.colorScheme) var colorScheme
@@ -18,7 +18,7 @@ struct CafeRow: View {
     /**
      - Parameters:
         - cafe: Cafe struct which this view shows.
-        - suggestedMeal: Meal type of cafe struct which this view shows.
+        - suggestedMeal: Meal type in cafe struct which this view shows.
      */
     init(cafe: Cafe, suggestedMeal: MealType) {
         self.cafe = cafe
