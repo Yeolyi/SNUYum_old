@@ -7,22 +7,42 @@
 
 import SwiftUI
 
-
+/// Results cafe data can have after filtering.
 enum filterResult {
+    /// Show cafe data.
     case show
-    case closed //자동 숨기기 기능에서 분기가 갈림
+    /// Show cafe data when 'hide empty cafe' option is off.
+    case closed
+    /// Hide cafe data.
     case hide
+    /// There's no data we are looking for.
     case noData
 }
+/**
+ Return VStack of CafeRows after filtering.
 
+ **Cafe name in ListManager is converted to cafe struct in Datamanager.**
+ */
 struct CafeListFiltered: View {
+    
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var settingManager: SettingManager
     @EnvironmentObject var dataManager: DataManager
-    
     let themeColor = ThemeColor()
     let isFixed: Bool
-    let searchedText: String
+    let searchedText: String 
+    
+    /**
+     - Parameters:
+        - isCafeView: Binding sheetEnum to tell main view to show cafe sheet or not.
+        - activatedCafe: Passes cafe struct to main view.
+        - isFixed: Show fixed cafe only or not
+        - searchedText: If something is searched, filters the cafe list
+     */
+    init(isFixed: Bool, searchedText: String) {
+        self.isFixed = isFixed
+        self.searchedText = searchedText
+    }
     
     var body: some View {
         let list = isFixed ? listManager.fixedList : listManager.unfixedList
@@ -30,41 +50,83 @@ struct CafeListFiltered: View {
             return noCafeText
         }
         return AnyView(
-            ForEach(list, id: \.self) { (listElement: ListElement) in
-                Group {
-                    
-                    if (self.listFilter(name: listElement.name) == .show) {
-                        self.nameToCafeRow(listElement)
-                    }
-                        
-                    else if (self.listFilter(name: listElement.name) == .closed) {
-                        if (self.settingManager.hideEmptyCafe == false) {
+            VStack(spacing: 0) {
+                ForEach(list, id: \.self) { (listElement: ListElement) in
+                        Group {
+                        if (self.listFilter(name: listElement.name) == .show) {
                             self.nameToCafeRow(listElement)
-                            }
-                    }
-                           
-                    else if (self.listFilter(name: listElement.name) == .noData) {
-                        if (self.settingManager.hideEmptyCafe == false) {
-                            CafeRow(cafe: self.dataManager.getData(at: self.settingManager.date, name: listElement.name), suggestedMeal: self.settingManager.meal)
-                                    .environmentObject(self.themeColor)
                         }
-                    }
-                         
-                    else {
-                        EmptyView()
+                            
+                        else if (self.listFilter(name: listElement.name) == .closed) {
+                            if (self.settingManager.hideEmptyCafe == false) {
+                                self.nameToCafeRow(listElement)
+                                }
+                        }
+                               
+                        else if (self.listFilter(name: listElement.name) == .noData) {
+                            if (self.settingManager.hideEmptyCafe == false) {
+                                CafeRow(cafe: self.dataManager.getData(at: self.settingManager.date, name: listElement.name), suggestedMeal: self.settingManager.meal)
+                                    .environmentObject(self.listManager)
+                                    .environmentObject(self.settingManager)
+                                    .environmentObject(self.dataManager)
+                                        .environmentObject(self.themeColor)
+                                        .modifier(ListRow())
+                            }
+                        }
+                             
+                        else {
+                            EmptyView()
+                        }
                     }
                 }
             }
         )
     }
-    
+    ///
     func nameToCafeRow(_ listElement: ListElement) -> AnyView {
         let cafe = self.dataManager.getData(at: self.settingManager.date, name: listElement.name)
-        return AnyView(
-            CafeRow(cafe: cafe, suggestedMeal: settingManager.meal)
-       )
-    }
+        if searchedText == "" {
+             return AnyView(
+                    CafeRow(cafe: cafe, suggestedMeal: settingManager.meal)
+                        .environmentObject(self.listManager)
+                        .environmentObject(self.settingManager)
+                        .environmentObject(self.dataManager)
+                                 .modifier(ListRow())
+            )
+        }
+        else {
+             return AnyView(
+                    SearchCafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchedText)
+                        .environmentObject(self.listManager)
+                        .environmentObject(self.settingManager)
+                        .environmentObject(self.dataManager)
+            )
+        }
 
+    }
+    /**
+     Evaluate ListElement and return appropriate filter result.
+     
+     - ToDo: DataManager.getData is used twice in this function and nameToCafeRow. Optimization required.
+     */
+    func listFilter(name: String) -> filterResult {
+        let targetCafe = dataManager.getData(at: settingManager.date, name: name)
+        if targetCafe.bkfMenuList.isEmpty && targetCafe.lunchMenuList.isEmpty  && targetCafe.dinnerMenuList.isEmpty  {
+             return .noData
+        }
+        if (searchedText.isEmpty || targetCafe.search(searchedText, at: settingManager.mealViewMode)) {
+                if (targetCafe.isEmpty(mealType: settingManager.meal, keywords: settingManager.closedKeywords) == false ) {
+                    return .show
+                }
+                else {
+                    return .closed
+                }
+            }
+        else {
+            return .hide
+        }
+    }
+    /// If cafe data is completely empty, return text view.
     func ifEmptyReturnView(list: [ListElement]) -> AnyView? {
        var rowNum = 0
        for cafeListElement in list {
@@ -86,24 +148,6 @@ struct CafeListFiltered: View {
            }
        }
         return nil
-    }
-    
-    func listFilter(name: String) -> filterResult {
-        let targetCafe = dataManager.getData(at: settingManager.date, name: name)
-        if targetCafe.bkfMenuList.isEmpty && targetCafe.lunchMenuList.isEmpty  && targetCafe.dinnerMenuList.isEmpty  {
-             return .noData //카페가 cafedata에 존재 안함
-        }
-            if (searchedText.isEmpty || targetCafe.searchText(searchedText)) { 
-                if (targetCafe.isEmpty(mealType: settingManager.meal, keywords: settingManager.closedKeywords) == false ) {
-                    return .show
-                }
-                else {
-                    return .closed
-                }
-            }
-            else { //검색 안됨
-                return .hide
-            }
     }
 
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-
+/// Theme colors for app changing at dark mode
 class ThemeColor: ObservableObject {
 
     private var colorTitleDark = Color(hex: "#6F77A6")
@@ -29,6 +29,7 @@ class ThemeColor: ObservableObject {
 }
 
 extension Color {
+    /// Changes hex string to color
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0

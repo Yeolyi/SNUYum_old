@@ -7,31 +7,44 @@
 
 import SwiftUI
 
+/// Provides list edit mode to reorder cafe list in main view.
 struct ListReorder: View {
-    @EnvironmentObject var listManager: ListManager
-    var body: some View {
-        AnyView(ListReorderOriginal(cafeList: listManager.cafeList)
-                .listStyle(GroupedListStyle()))
-    }
-}
-
-struct ListReorderOriginal: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
-    
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var settingManager: SettingManager
-    
     let themeColor = ThemeColor()
-    
     @State var tempListManager = ListManager()
     
-    init(cafeList: [ListElement]) {
-        self.tempListManager.cafeList = cafeList
+    /// - Parameter cafeListBackup: Backup [ListElement] to restore data when sheet is closed or dismissed
+    init(cafeListBackup: [ListElement]) {
+        tempListManager.cafeList = cafeListBackup
     }
 
     var body: some View {
-        NavigationView {
+        VStack {
+            // Custom navigation bar
+            HStack {
+                TitleView(title: "목록 수정", subTitle: "설정")
+                Button(action: {
+                         self.presentationMode.wrappedValue.dismiss()}) {
+                     Text("취소")
+                        .font(.system(size: CGFloat(20), weight: .semibold))
+                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .offset(y: 10)
+                 }
+                Button(action: {
+                   self.listManager.cafeList = self.tempListManager.cafeList
+                   self.listManager.save()
+                   self.presentationMode.wrappedValue.dismiss()}) {
+                       Text("저장")
+                         .font(.system(size: CGFloat(20), weight: .semibold))
+                         .foregroundColor(themeColor.colorIcon(colorScheme))
+                         .padding()
+                         .offset(y: 10)
+                }
+            }
+            // Edit mode list.
             List {
                 Section(header:
                            Text("고정됨").modifier(SectionText())
@@ -57,24 +70,10 @@ struct ListReorderOriginal: View {
                 }
             }
             .environment(\.editMode, .constant(EditMode.active))
-            .navigationBarTitle("목록 수정", displayMode: .inline)
-            .navigationBarItems(leading:
-                                    Button(action: {
-                                            self.presentationMode.wrappedValue.dismiss()}) {
-                                        Text("취소")
-                                            .foregroundColor(themeColor.colorTitle(colorScheme))
-                                    }
-                                , trailing:
-                                        Button(action: {
-                                                self.listManager.cafeList = self.tempListManager.cafeList
-                                                self.listManager.save()
-                                                self.presentationMode.wrappedValue.dismiss()}) {
-                                            Text("저장")
-                                                .foregroundColor(themeColor.colorTitle(colorScheme))
-                                        })
+            .listStyle(GroupedListStyle())
         }
     }
-    
+    /// Move ListElement which is fixed
     func moveFixed(from source: IndexSet, to destination: Int) {
         var intIndexSet: [Int] = []
         for index in source {
@@ -85,6 +84,7 @@ struct ListReorderOriginal: View {
         let newSource = IndexSet(intIndexSet)
         tempListManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
     }
+    /// Move ListElement which is not fixed
     func moveUnfixed(from source: IndexSet, to destination: Int) {
         var intIndexSet: [Int] = []
         for index in source {
@@ -100,7 +100,7 @@ struct ListReorderOriginal: View {
 
 struct ListReorder_Previews: PreviewProvider {
     static var previews: some View {
-        ListReorder()
+        ListReorder(cafeListBackup: [])
             .environmentObject(ListManager())
             .environmentObject(DataManager())
             .environmentObject(SettingManager())

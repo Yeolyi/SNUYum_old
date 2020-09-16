@@ -11,9 +11,12 @@ import CoreLocation
 
 var locationManager = CLLocationManager()
 
+/// Map view element; shows cafe location using Naver map API.
 struct NaverMap: UIViewRepresentable {
-    let coord: NMGLatLng  //Camera&marker position
-    let zoomValue: Double = 16  //Camera zoom
+    ///Camera&marker position
+    let coord: NMGLatLng
+    ///Camera zoom
+    let zoomValue: Double = 16
     
     init(cafeName: String) {
         if let cafeCoord = coordList[cafeName] {

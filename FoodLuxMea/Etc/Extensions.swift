@@ -7,12 +7,19 @@
 
 import SwiftUI
 
+/// Extension and modifier to hide keyboard(searchbar) when list scrolls
 extension UIApplication {
     func endEditing(_ force: Bool) {
         self.windows
             .filter{$0.isKeyWindow}
             .first?
             .endEditing(force)
+    }
+}
+
+extension View {
+    func resignKeyboardOnDragGesture() -> some View {
+        return modifier(ResignKeyboardOnDragGesture())
     }
 }
 
@@ -25,19 +32,49 @@ struct ResignKeyboardOnDragGesture: ViewModifier {
     }
 }
 
-extension View {
-    func resignKeyboardOnDragGesture() -> some View {
-        return modifier(ResignKeyboardOnDragGesture())
+
+/// Cornered list row background
+struct ListRow: ViewModifier {
+    @Environment(\.colorScheme) var colorScheme
+    func body(content: Content) -> some View {
+        Group {
+            content
+                .padding(10)
+                .background(colorScheme == .dark ? Color.white.opacity(0.05) : Color.gray.opacity(0.05))
+                .cornerRadius(10)
+        }
+        .padding([.top, .bottom], 2)
+        .padding([.leading, .trailing], 10)
     }
 }
 
-struct CenterModifier: ViewModifier {
+/// Replaces list section header
+struct SectionTextModifier: ViewModifier {
     func body(content: Content) -> some View {
+         HStack {
+             content
+                 .modifier(TitleText())
+                 .padding([.top, .bottom], 5)
+                 .padding(.leading, 12)
+             Spacer()
+         }
+    }
+}
+
+/// Simple custom navigaion bar
+func TitleView(title: String, subTitle: String) -> AnyView{
+    return AnyView (
         HStack {
-            Spacer()
-            content
+            VStack(alignment: .leading) {
+                Text(subTitle)
+                    .font(.system(size: CGFloat(18), weight: .bold))
+                    .foregroundColor(.secondary)
+                Text(title)
+                    .font(.system(size: CGFloat(25), weight: .bold))
+            }
+            .padding([.leading, .top])
             Spacer()
         }
-    }
+    )
 }
 

@@ -7,36 +7,53 @@
 
 import SwiftUI
 
+/// Custom simple toggle
 struct iOS1314Toggle: View {
     @Environment(\.colorScheme) var colorScheme
+    let themeColor = ThemeColor()
     @Binding var isOn: Bool
     let label: String
-    let themeColor = ThemeColor()
     
-    var body: some View {
-        getView()
+    /**
+     - Parameters:
+        - isOn: Passes toggle value to parent view
+        - label: String to show next to toggle
+     */
+    init(isOn: Binding<Bool>, label: String) {
+        self._isOn = isOn
+        self.label = label
     }
     
-    func getView() -> AnyView {
-        if #available(iOS 14.0, *) {
-            return AnyView(Toggle(isOn: $isOn) {
-                Text(label)
-            }
-            //.toggleStyle(SwitchToggleStyle(tint: themeColor.colorIcon(colorScheme)))
-            )
-            
-        } else {
-            return AnyView(Toggle(isOn: $isOn) {
-                Text(label)
-            })
+    var body: some View {
+        HStack {
+            Text(label)
+            Spacer()
+            Image(systemName: isOn ? "checkmark" : "xmark")
+                .offset(x: -5)
+                .foregroundColor(themeColor.colorIcon(colorScheme))
+        }
+        .contentShape(Rectangle())
+        .onTapGesture{
+            self.isOn.toggle()
         }
     }
 }
 
 struct iOS1314Toggle_Previews: PreviewProvider {
     static var previews: some View {
-        iOS1314Toggle(isOn: .constant(true), label: "test")
-            .environmentObject(ThemeColor())
+        ScrollView{
+            iOS1314Toggle(isOn: .constant(true), label: "test")
+                .environmentObject(ThemeColor())
+                .modifier(ListRow())
+            iOS1314Toggle(isOn: .constant(true), label: "test")
+                .environmentObject(ThemeColor())
+                .modifier(ListRow())
+            HStack {
+                Text("Text")
+                Spacer()
+            }
+                .modifier(ListRow())
+        }
         
     }
 }

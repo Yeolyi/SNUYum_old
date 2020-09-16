@@ -7,13 +7,19 @@
 
 import SwiftUI
 
+/// Show naver map and cafe location text. 
 struct MapView: View {
     let themeColor = ThemeColor()
-    
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
     
+    
     var cafeInfo: Cafe
+    
+    /// - Parameter cafeInfo: Determine which cafe's location to show.
+    init(cafeInfo: Cafe) {
+        self.cafeInfo = cafeInfo
+    }
     
     var body: some View {
         NavigationView {
@@ -21,6 +27,7 @@ struct MapView: View {
                 ZStack {
                     NaverMap(cafeName: self.cafeInfo.name)
                         .edgesIgnoringSafeArea(.bottom)
+                    // Cafe location info in text.
                     Text(cafePosition[self.cafeInfo.name] ?? "")
                         .font(.system(size: CGFloat(20), weight: .bold, design: .default))
                         .background(Color.white.opacity(0.8))

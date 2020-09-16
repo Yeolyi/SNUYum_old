@@ -7,22 +7,37 @@
 
 import SwiftUI
 
+/// Single row in main view which shows one meal info
 struct CafeRow: View {
     
     @Environment(\.colorScheme) var colorScheme
-    
+    @EnvironmentObject var listManager: ListManager
+    @EnvironmentObject var dataManager: DataManager
+    @EnvironmentObject var settingManager: SettingManager
+    @State var isSheet = false
     let themeColor = ThemeColor()
     var cafe: Cafe
     var suggestedMeal: MealType
+
+    /**
+     - Parameters:
+        - cafe: Cafe struct which this view shows.
+        - suggestedMeal: Meal type in cafe struct which this view shows.
+     */
+    init(cafe: Cafe, suggestedMeal: MealType) {
+        self.cafe = cafe
+        self.suggestedMeal = suggestedMeal
+    }
     
     var body: some View {
-        NavigationLink(destination: CafeView(cafeInfo: cafe)) {
+        Button(action: {isSheet = true}) {
             VStack(alignment: .leading){
                 Text(cafe.name)
                     .modifier(TitleText())
                     .foregroundColor(themeColor.colorTitle(colorScheme))
                     .padding(.bottom, 3)
-                ForEach(cafe.getMenuList(MealType: suggestedMeal)) { menu in
+                Spacer()
+                ForEach(cafe.getMenuList(mealType: suggestedMeal)) { menu in
                     HStack {
                         Text(menu.name)
                             .font(.system(size: 15))
@@ -38,9 +53,19 @@ struct CafeRow: View {
                 }
             }
         }
-        .contentShape(Rectangle())
+        .sheet(isPresented: $isSheet) {
+            CafeView(cafeInfo: cafe)
+                .environmentObject(self.listManager)
+                .environmentObject(self.settingManager)
+                .environmentObject(self.dataManager)
+        }
     }
-
+    
+    /**
+     Interpret cost value to adequate string.
+     
+     - ToDo: Search appropriate class to place this function.
+     */
     func costInterpret(_ cost: Int) -> String{
         if (cost == -1) {
             return ""

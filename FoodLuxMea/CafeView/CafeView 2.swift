@@ -8,25 +8,21 @@
 import SwiftUI
 import GoogleMobileAds
 
-/// Show single Cafe struct's information.
 struct CafeView: View {
     @State var cafeInfo: Cafe
     @State var isMapView = false
     @State var showActionSheet = false
+
     @EnvironmentObject var cafeList: ListManager
     @EnvironmentObject var settingManager: SettingManager
+    
     let themeColor = ThemeColor()
+    
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
     
-    /// - Parameter cafeInfo: Cafe data to show in this view.
-    init(cafeInfo: Cafe) {
-        self._cafeInfo = State(initialValue: cafeInfo)
-    }
-    
     var body: some View {
         VStack {
-            // Custom navigationbar view.
             HStack {
                 VStack(alignment: .leading) {
                     Text("식단 자세히 보기")
@@ -54,33 +50,39 @@ struct CafeView: View {
                         .offset(y: 10)
                 }
             }
+            
             Divider()
-            // Various cafe information.
+        
             ScrollView {
+                
+                
                 Text("안내")
                     .modifier(SectionTextModifier())
-                // Cafe timer.
+                
                 HStack {
                     Spacer()
                     TimerText(cafeName: cafeInfo.name)
                     Spacer()
                 }
-                .modifier(ListRow())
-                // Full meal view.
+                    .modifier(ListRow())
+                
                 mealSection(mealType: .breakfast, mealMenus: cafeInfo.bkfMenuList)
                 mealSection(mealType: .lunch, mealMenus: cafeInfo.lunchMenuList)
                 mealSection(mealType: .dinner, mealMenus: cafeInfo.dinnerMenuList)
-                // Cafe information with phone call and map view.
-                Text("식당 정보")
+                
+                
+                Text("식당목록")
                 .modifier(SectionTextModifier())
+                
                 VStack {
+                
                     Text(cafeDescription[cafeInfo.name] ?? "정보 없음")
                         .font(.system(size: 16))
                         .fixedSize(horizontal: false, vertical: true)
                         .padding()
-                    // Phone call and map view.
+                    
                     HStack {
-                        // Phone call
+                        
                         HStack {
                             Spacer()
                             Image(systemName: "phone")
@@ -98,8 +100,9 @@ struct CafeView: View {
                             guard let url = URL(string: formattedString) else { return }
                             UIApplication.shared.open(url)
                         }
+                    
                         Divider()
-                        // Map view.
+                        
                         HStack {
                             Spacer()
                             Image(systemName: "map")
@@ -117,11 +120,15 @@ struct CafeView: View {
                     }
                 }
                 .modifier(ListRow())
+                
             }
+            
             Divider()
-            // Google admob. 
+            
+            /*
             GADBannerViewController()
             .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+ */
         }
         .sheet(isPresented: $isMapView) {
             MapView(cafeInfo: self.cafeInfo)
@@ -129,18 +136,15 @@ struct CafeView: View {
         }
     }
     
-    /**
-     Single meal information section.
-     
-     - Parameters:
-        - mealType: Determines which data to show.
-        - mealMenus: Data to show.
-     */
     func mealSection(mealType: MealType, mealMenus: [Menu]) -> AnyView {
+        
+        //&& cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.meal(mealType) != nil
+        //이 조건은 왜?????
+        
         if (mealMenus.isEmpty == false ) {
             return AnyView(
                 VStack {
-                    Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.operatingHour(at: mealType) ?? "시간 정보 없음")  + ")")
+                    Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.meal(mealType)!)!  + ")")
                             .modifier(SectionTextModifier())
                 ForEach(mealMenus) { menu in
                     HStack{
@@ -160,16 +164,13 @@ struct CafeView: View {
             }
             )
         }
-        else {
-            return AnyView(EmptyView())
-        }
+    else {
+        return AnyView(EmptyView())
+    }
+
+        
     }
     
-    /**
-    Interpret cost value to adequate string.
-    
-    - ToDo: Search appropriate class to place this function.
-    */
     func costInterpret(_ cost: Int) -> String?{
         if (cost == -1) {
             return nil

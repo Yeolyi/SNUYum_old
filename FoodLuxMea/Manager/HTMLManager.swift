@@ -8,8 +8,10 @@
 import SwiftUI
 import SwiftSoup
 
+/// Get data from snuco website and process into Cafe struct
 class HTMLManager {
     
+    /// Get Cafe array from specific date; sum of below functions
     func cafeData(at date: Date) -> [Cafe]{
         var cafeData: [Cafe] = []
         let targetURL = makeURL(from: date)
@@ -17,7 +19,9 @@ class HTMLManager {
         
         
         do {
-            let rawCafeList: [Element] = try parsedDocument.select("div.view-content").select("tbody").select("tr").array() //식당 배열 [학관, 자하연, 3식당,,] 생성
+            let rawCafeList: [Element] = try
+                //식당 배열 [학관, 자하연, 3식당,,] 생성
+                parsedDocument.select("div.view-content").select("tbody").select("tr").array()
             
             for rawCafe in rawCafeList { 
                 let tempCafe = SplitCafeData(rawCafe)
@@ -38,25 +42,26 @@ class HTMLManager {
         return []
     }
     
-    private func SplitCafeData(_ rawCafe: Element) -> (name: String, callNum: String, rawBreakfasts: String, rawLunches: String, rawDinners: String){
+    /// Simply divide whole URL Element to cafe struct elements
+    private func SplitCafeData(_ rawCafe: Element) -> (name: String, callNum: String, rawBreakfasts: [Element], rawLunches: [Element], rawDinners: [Element]){
         do {
             let rawCafeArray = try rawCafe.select("td").array() //식당 구성요소 배열 [이름전번, 아침, 점심, 저녁] 생성
             guard rawCafeArray.count == 4 else {
                 assertionFailure("HTMLManager/process: 구성요소가 4개가 아닙니다.")
-                return ("로딩 실패😢"," "," "," "," ")
+                return ("로딩 실패😢"," ",[], [], [])
             }
             let nameNum = try rawCafeArray[0].text() //[학생회관식당(880-5543)]
             let (cafeName, cafeCallNum) = separateNameNum(nameNum) //이름 전번 분할
             
-            let rawBreakfasts = try rawCafeArray[1].select("p").text()
-            let rawLunches = try rawCafeArray[2].select("p").text()
-            let rawDinners = try rawCafeArray[3].select("p").text()
+            let rawBreakfasts = try rawCafeArray[1].select("p").array()
+            let rawLunches = try rawCafeArray[2].select("p").array()
+            let rawDinners = try rawCafeArray[3].select("p").array()
             return (cafeName, cafeCallNum, rawBreakfasts, rawLunches, rawDinners)
         }
         catch {
             assertionFailure("HTMLManager/process(): 문자열 처리에 실패하였습니다.")
         }
-        return ("로딩 실패😢"," "," "," "," ")
+        return ("로딩 실패😢"," ",[], [], [])
     }
     
     private func separateNameNum(_ str: String) -> (name: String, callNum: String){
@@ -70,145 +75,63 @@ class HTMLManager {
         return (name, callNum)
     }
         
-    
-    
-    
-    private func splitMenuList(_ continuousMenus: String) -> [Menu]{ //메뉴 가격 Menu 구조체로 변환. 핵심
+    /// Get cost and menu name from elements; important function
+    private func splitMenuList(_ menuList: [Element]) -> [Menu] {
+        
+        var returnValue: [Menu] = []
         
         func whiteSpaceTrim(_ str: String) -> String {
             return str.trimmingCharacters(in: .whitespacesAndNewlines)
         }
-        
-        func decimalTrimInverted(_ str: String) -> String {
-            return str.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        func decimalTrimInverted(_ str: String) -> Int {
+            return Int(str.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())!
         }
         
-        let trimmedContinuousMenus = whiteSpaceTrim(continuousMenus)
-        
-        if trimmedContinuousMenus.count < 3 {
-            return []
-        }
-        
-        var menuList: [Menu] = []
-        var startIndex = trimmedContinuousMenus.startIndex
-        var isGettingCost  = false
-        var menuName: String = ""
-        var isTitle = false
-        var isTitle2 = false
-        var isPass = false
-        
-        
-        for index in trimmedContinuousMenus.indices {
-            
-            if isPass {
-                isPass = false
-                continue
-            }
-            
-            
-            if isTitle && trimmedContinuousMenus[index] == ">" {
-                menuName = whiteSpaceTrim(menuName)
-                menuName = String(trimmedContinuousMenus[startIndex...index])
-                menuList.append(.init(name: menuName, cost: -1))
-                isTitle = false
-                startIndex = trimmedContinuousMenus.index(after: index)
-                continue
-            }
-            
-            if isTitle {
-                continue
-            }
-            
-            if trimmedContinuousMenus[index] == "<" && trimmedContinuousMenus[trimmedContinuousMenus.index(index, offsetBy: 2)] != ">" {
-                startIndex = index
-                isTitle = true
-                continue
-            }
-            
-            if isTitle2 && trimmedContinuousMenus[index] == ")" {
-                menuName = whiteSpaceTrim(menuName)
-                menuName = String(trimmedContinuousMenus[startIndex...index])
-                menuList.append(.init(name: menuName, cost: -1))
-                isTitle2 = false
-                startIndex = trimmedContinuousMenus.index(after: index)
-                continue
-            }
-            
-            if isTitle2 {
-                continue
-            }
-            
-            if trimmedContinuousMenus[index] == "(" && trimmedContinuousMenus[trimmedContinuousMenus.index(index, offsetBy: 2)] != ")" {
-                startIndex = index
-                isTitle2 = true
-                continue
-            }
-             
-            if isGettingCost {
+        for rawMenu in menuList {
+            var temp = try! rawMenu.html()
+            temp = temp.replacingOccurrences(of: "<br>", with: "꿇")
+            temp = try! SwiftSoup.parse(temp).text()
+            let list = temp.split(separator: "꿇").map(String.init)
+            for i in list { //여기서 메뉴와 가격 분리
+                print(i)
+                let trimmedValue = whiteSpaceTrim(i)
                 
-                
-                if index == trimmedContinuousMenus.index(before: trimmedContinuousMenus.endIndex) {
-                    var menuCostString = String(trimmedContinuousMenus[startIndex...])
-                    menuCostString = menuCostString.components(separatedBy: [",", " ", "원"]).joined()
-                    if let tempMenuCost = Int(menuCostString) {
-                        menuList.append(.init(name: menuName, cost: tempMenuCost))
-                        return menuList
-                    }
-                    else {
-                        assertionFailure("HTMLManager/splitMenuList: \(menuCostString) 가격을 INT로 변환할 수 없습니다.")
-                    }
-                }
-                
-                
-                if String(trimmedContinuousMenus[trimmedContinuousMenus.index(after: index)]) == "," ||
-                    String(trimmedContinuousMenus[trimmedContinuousMenus.index(after: index)]) == " " ||
-                    String(trimmedContinuousMenus[trimmedContinuousMenus.index(after: index)]) == "원" || Int(String(trimmedContinuousMenus[trimmedContinuousMenus.index(after: index)])) != nil {
-                    continue
-                }
-                else {
-                    var menuCostString = String(trimmedContinuousMenus[startIndex...index])
-                    menuCostString = menuCostString.components(separatedBy: [",", " ", "원"]).joined()
-                    if let tempMenuCost = Int(menuCostString) {
-                        if trimmedContinuousMenus[trimmedContinuousMenus.index(after: index)] == "~" {
-                            let amenuCost = tempMenuCost + 10
-                            menuList.append(.init(name: menuName, cost: amenuCost))
-                            startIndex = trimmedContinuousMenus.index(index, offsetBy: 2)
-                            isGettingCost = false
-                            continue
-                        }
-                        menuList.append(.init(name: menuName, cost: tempMenuCost))
-                        startIndex = index
-                        isGettingCost = false
-                    }
-                    else {
-                        assertionFailure("HTMLManager/splitMenuList: \(menuCostString) 가격을 INT로 변환할 수 없습니다.")
-                    }
-                }
-                
-                
-            }
-            
-            if Int(String(trimmedContinuousMenus[index])) != nil {
-                guard String(trimmedContinuousMenus[trimmedContinuousMenus.index(after: index)]) == "," || Int(String(trimmedContinuousMenus[trimmedContinuousMenus.index(after: index)])) != nil else {
+                if trimmedValue.isEmpty {
                     continue
                 }
                 
-                menuName = String(trimmedContinuousMenus[startIndex..<index])
-                menuName = whiteSpaceTrim(menuName)
-                startIndex = index
-                isGettingCost = true
+                else if (trimmedValue[trimmedValue.startIndex] == "※") {
+                    continue
+                }
+                else if (trimmedValue[trimmedValue.startIndex] == "<") {
+                    returnValue.append(.init(name: trimmedValue, cost: -1))
+                    continue
+                }
+                
+                var isCost = false
+                
+                for index in trimmedValue.indices {
+                    if Int(String(trimmedValue[index])) != nil && (String(trimmedValue[trimmedValue.index(after: index)]) == "," || Int(String(trimmedValue[trimmedValue.index(after: index)])) != nil) {
+                        let menu = whiteSpaceTrim(String(trimmedValue[..<index]))
+                        let cost = decimalTrimInverted(whiteSpaceTrim(String(trimmedValue[index...])))
+                        print("\(menu) \(cost)")
+                        returnValue.append(.init(name: menu, cost: cost))
+                        isCost = true
+                        break
+                    }
+                }
+                
+                if isCost == false {
+                    returnValue.append(.init(name: trimmedValue, cost: -1))
+                }
             }
             
-            if index == trimmedContinuousMenus.index(before: trimmedContinuousMenus.endIndex) {
-                let trimmedResidue = whiteSpaceTrim(String(trimmedContinuousMenus[startIndex...]))
-                if trimmedResidue.count > 3 {
-                    menuList.append(.init(name: trimmedResidue, cost: -1))
-                }
-                return menuList
-            }
         }
-        return menuList
+        print(returnValue)
+        return returnValue
     }
+
+    /// Parse URL with SwiftSoup
     private func parse(_ uRL: URL) -> Document {
         do {
             let uRLContents = try String(contentsOf: uRL)
@@ -221,7 +144,7 @@ class HTMLManager {
         return .init("https://snuco.snu.ac.kr/ko/foodmenu")
     }
     
-    
+    /// Make URL which has access to input date's data
     func makeURL(from date: Date) -> URL { //DataManager에서 [String:[Cafe]]에 사용
         let targetDate = Calendar.current.dateComponents([.day, .year, .month], from: date)
         let targetURLString = "https://snuco.snu.ac.kr/ko/foodmenu?field_menu_date_value_1%5Bvalue%5D%5Bdate%5D=&field_menu_date_value%5Bvalue%5D%5Bdate%5D=" + String(targetDate.month!) + "%2F" + String(targetDate.day!) + "%2F" + String(targetDate.year!)

@@ -5,7 +5,7 @@
 //  Created by Seong Yeol Yi on 2020/08/31.
 //
 
-/*
+
 
 import AppTrackingTransparency
 import AdSupport
@@ -39,4 +39,3 @@ func requestPermission() {
 }
 //
 
- */

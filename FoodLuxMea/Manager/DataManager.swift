@@ -7,12 +7,27 @@
 
 import SwiftUI
 
+/// Retrieves, saves and updates all cafe datas.
 class DataManager: ObservableObject {
     
+    /**
+     Cafe struct storage.
+     
+     - Note: Using dictionary with URL key to find stored data efficient.
+     */
     private var cafeData: [URL: [Cafe]] = [:]
+    /// Downloads snuco cafe datas.
     private var hTMLManager = HTMLManager()
+    /// Downloads ourhome cafe data.
     private var ourhomeManager = OurhomeManager()
     
+    /**
+     Loads existing datas or initializes them into default values.
+     
+     - Attention: This class should be managed in every version change.
+     
+     - Important: If data managing algorithm changes, existing data should be deleted and reloaded
+     */
     init() {
         if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
             if userDefaults.bool(forKey: "1.1firstRun") == false {
@@ -42,6 +57,7 @@ class DataManager: ObservableObject {
         }
     }
     
+    /// Get all data of certain date.
     func getData(at date: Date) -> [Cafe]{
         let uRLString = HTMLManager().makeURL(from: date)
         if let data = cafeData[uRLString] {
@@ -62,14 +78,15 @@ class DataManager: ObservableObject {
         }
     }
     
+    /**
+     Get specific cafe data from selected date.
+     
+     - Remark: If there's no such cafe, returns empty cafe struct with same name.
+     */
     func getData(at date: Date, name: String) -> Cafe {
         let uRLString = hTMLManager.makeURL(from: date)
         if let data = cafeData[uRLString] {
-            for cafe in data { //first 함수로 간단하게 바꾸기
-                if (cafe.name == name) {
-                    return cafe
-                }
-            }
+            return data.first{ $0.name == name }!
         }
         else {
             if isInternetConnected {
