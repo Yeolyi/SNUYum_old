@@ -11,6 +11,10 @@ import SwiftUI
 struct CafeRow: View {
     
     @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var listManager: ListManager
+    @EnvironmentObject var dataManager: DataManager
+    @EnvironmentObject var settingManager: SettingManager
+    @State var isSheet = false
     let themeColor = ThemeColor()
     var cafe: Cafe
     var suggestedMeal: MealType
@@ -26,26 +30,34 @@ struct CafeRow: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading){
-            Text(cafe.name)
-                .modifier(TitleText())
-                .foregroundColor(themeColor.colorTitle(colorScheme))
-                .padding(.bottom, 3)
-            Spacer()
-            ForEach(cafe.getMenuList(mealType: suggestedMeal)) { menu in
-                HStack {
-                    Text(menu.name)
-                        .font(.system(size: 15))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .lineLimit(1)
-                        .foregroundColor(Color(.label))
-                    Spacer()
-                    Text(self.costInterpret(menu.cost))
-                        .font(.system(size: 15))
-                        .padding(.trailing, 10)
-                        .foregroundColor(Color(.secondaryLabel))
+        Button(action: {isSheet = true}) {
+            VStack(alignment: .leading){
+                Text(cafe.name)
+                    .modifier(TitleText())
+                    .foregroundColor(themeColor.colorTitle(colorScheme))
+                    .padding(.bottom, 3)
+                Spacer()
+                ForEach(cafe.getMenuList(mealType: suggestedMeal)) { menu in
+                    HStack {
+                        Text(menu.name)
+                            .font(.system(size: 15))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .lineLimit(1)
+                            .foregroundColor(Color(.label))
+                        Spacer()
+                        Text(self.costInterpret(menu.cost))
+                            .font(.system(size: 15))
+                            .padding(.trailing, 10)
+                            .foregroundColor(Color(.secondaryLabel))
+                    }
                 }
             }
+        }
+        .sheet(isPresented: $isSheet) {
+            CafeView(cafeInfo: cafe)
+                .environmentObject(self.listManager)
+                .environmentObject(self.settingManager)
+                .environmentObject(self.dataManager)
         }
     }
     

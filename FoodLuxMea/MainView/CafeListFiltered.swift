@@ -29,8 +29,6 @@ struct CafeListFiltered: View {
     @EnvironmentObject var settingManager: SettingManager
     @EnvironmentObject var dataManager: DataManager
     let themeColor = ThemeColor()
-    @Binding var isCafeView: sheetEnum?
-    @Binding var activatedCafe: Cafe
     let isFixed: Bool
     let searchedText: String 
     
@@ -41,9 +39,7 @@ struct CafeListFiltered: View {
         - isFixed: Show fixed cafe only or not
         - searchedText: If something is searched, filters the cafe list
      */
-    init(isCafeView: Binding<sheetEnum?>, activatedCafe: Binding<Cafe>, isFixed: Bool, searchedText: String) {
-        self._isCafeView = isCafeView
-        self._activatedCafe = activatedCafe
+    init(isFixed: Bool, searchedText: String) {
         self.isFixed = isFixed
         self.searchedText = searchedText
     }
@@ -70,6 +66,9 @@ struct CafeListFiltered: View {
                         else if (self.listFilter(name: listElement.name) == .noData) {
                             if (self.settingManager.hideEmptyCafe == false) {
                                 CafeRow(cafe: self.dataManager.getData(at: self.settingManager.date, name: listElement.name), suggestedMeal: self.settingManager.meal)
+                                    .environmentObject(self.listManager)
+                                    .environmentObject(self.settingManager)
+                                    .environmentObject(self.dataManager)
                                         .environmentObject(self.themeColor)
                                         .modifier(ListRow())
                             }
@@ -88,17 +87,19 @@ struct CafeListFiltered: View {
         let cafe = self.dataManager.getData(at: self.settingManager.date, name: listElement.name)
         if searchedText == "" {
              return AnyView(
-                Button(action: {self.isCafeView = .cafeView; self.activatedCafe = cafe}) {
                     CafeRow(cafe: cafe, suggestedMeal: settingManager.meal)
+                        .environmentObject(self.listManager)
+                        .environmentObject(self.settingManager)
+                        .environmentObject(self.dataManager)
                                  .modifier(ListRow())
-                }
             )
         }
         else {
              return AnyView(
-                Button(action: {self.isCafeView = .cafeView; self.activatedCafe = cafe}) {
                     SearchCafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchedText)
-                }
+                        .environmentObject(self.listManager)
+                        .environmentObject(self.settingManager)
+                        .environmentObject(self.dataManager)
             )
         }
 

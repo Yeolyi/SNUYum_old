@@ -181,17 +181,16 @@ struct SettingView: View {
                 }
                 // Caution: Sheet modifier position matters.
                 .sheet(item: self.$activeSheet) { item in
-                    if item == .reorder {
+                    switch(item) {
+                    case .reorder:
                         ListReorder(cafeListBackup: self.listManager.cafeList)
                             .environmentObject(self.listManager)
                             .environmentObject(self.settingManager)
-                    }
-                    else if item == .timer {
+                    case .timer:
                         TimerSelectView()
                             .environmentObject(self.listManager)
                             .environmentObject(self.settingManager)
-                    }
-                    else {
+                    case .info:
                         InfoView()
                     }
                 }

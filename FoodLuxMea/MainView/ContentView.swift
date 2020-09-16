@@ -9,14 +9,6 @@ import SwiftUI
 import GoogleMobileAds
 import Network
 
-/// Indicate which type of sheet is shown.
-enum sheetEnum: Identifiable {
-    // ID to use iOS 14 compatible 'item' syntax in sheet modifier.
-    var id: Int {
-        self.hashValue
-    }
-    case cafeView, alimiView
-}
 
 struct ContentView: View {
     
@@ -27,8 +19,7 @@ struct ContentView: View {
     let themeColor = ThemeColor()
     @State var searchedText = ""
     @State var isSettingView = false
-    @State var isSheet: sheetEnum?
-    @State var activatedCafe = previewCafe
+    @State var isTimerSheet = false
 
     var body: some View {
         GeometryReader{ geo in
@@ -69,12 +60,12 @@ struct ContentView: View {
                     // Cafe row starts here.
                     ScrollView {
                         //Searchbar
-                        SearchBar(text: self.$searchedText)
+                        //SearchBar(text: self.$searchedText)
                         // Cafe timer section.
                         if (self.settingManager.alimiCafeName != nil) {
                             Text("안내")
                                 .modifier(SectionTextModifier())
-                            Button(action: {self.isSheet = .alimiView}) {
+                            Button(action: {isTimerSheet = true}) {
                                 HStack {
                                     Spacer()
                                     TimerText(cafeName: self.settingManager.alimiCafeName!)
@@ -82,17 +73,23 @@ struct ContentView: View {
                                 }
                                 .modifier(ListRow())
                             }
+                            .sheet(isPresented: $isTimerSheet) {
+                                CafeView(cafeInfo: dataManager.getData(at: settingManager.date, name: settingManager.alimiCafeName!))
+                                    .environmentObject(self.listManager)
+                                    .environmentObject(self.settingManager)
+                                    .environmentObject(self.dataManager)
+                            }
                         }
                         // Fixed cafe section.
                         if (self.listManager.fixedList.isEmpty == false) {
                             Text("고정됨")
                                 .modifier(SectionTextModifier())
-                            CafeListFiltered(isCafeView: self.$isSheet, activatedCafe: self.$activatedCafe, isFixed: true, searchedText: self.searchedText)
+                            CafeListFiltered(isFixed: true, searchedText: self.searchedText)
                         }
                         // Ordinary cafe section.
                         Text("식당목록")
                             .modifier(SectionTextModifier())
-                        CafeListFiltered(isCafeView: self.$isSheet, activatedCafe: self.$activatedCafe, isFixed: false, searchedText: self.searchedText)
+                        CafeListFiltered(isFixed: false, searchedText: self.searchedText)
                     }
                     Divider()
                     // Google Admob.
@@ -104,20 +101,6 @@ struct ContentView: View {
             .alert(isPresented: .constant(!isInternetConnected)) {
                         Alert(title: Text("인터넷이 연결되지 않았어요"), message: Text("저장된 식단은 볼 수 있지만 \n 기능이 제한될 수 있어요"), dismissButton: .default(Text("확인")))
                     }
-            .sheet(item: self.$isSheet) { item in
-               if item == .cafeView {
-                   CafeView(cafeInfo: self.activatedCafe)
-                       .environmentObject(self.dataManager)
-                       .environmentObject(self.listManager)
-                       .environmentObject(self.settingManager)
-               }
-               else {
-                   CafeView(cafeInfo: self.dataManager.getData(at: self.settingManager.date, name: self.settingManager.alimiCafeName ?? "학생회관식당"))
-                       .environmentObject(self.dataManager)
-                       .environmentObject(self.listManager)
-                       .environmentObject(self.settingManager)
-               }
-            }
         }
         // TODO: Make theme elements to delete this. 
         .accentColor(themeColor.colorIcon(colorScheme))
