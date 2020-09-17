@@ -24,66 +24,16 @@ struct SettingView: View {
     @EnvironmentObject var settingManager: SettingManager
     let themeColor = ThemeColor()
     
-    @Binding var isPresented: Bool
+    @Binding var isPresented: Bool {
+        willSet {
+            listManager.update(newCafeList: dataManager.getData(at: self.settingManager.date))
+        }
+    }
     @State var activeSheet: ActiveSheet?
     
     /// - Parameter isPresented: Pass main view to show current view or not.
     init(isPresented: Binding<Bool>) {
         self._isPresented = isPresented
-    }
-    
-    /**
-     Is custom date is turned on or not.
-     
-     Automatically update SettingManager and ListManager whan value changes.
-     
-     - ToDo: Move to SettingManager.
-     */
-    var isCustomDate: Binding<Bool> {
-        Binding<Bool>(get: {
-            self.settingManager.isCustomDate
-        }, set: {
-            self.settingManager.isCustomDate = $0
-            self.settingManager.update(date: self.debugDate.wrappedValue)
-            self.listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
-            self.settingManager.save()
-        })
-    }
-    
-    /**
-     Actual custom date value.
-    
-     Automatically update SettingManager and ListManager whan value changes.
-    
-    - ToDo: Move to SettingManager.
-    */
-    var debugDate: Binding<Date> {
-        Binding<Date>(get: {
-            self.settingManager.debugDate
-        }, set: {
-           self.listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
-            self.settingManager.debugDate = $0
-            self.settingManager.update(date: $0)
-            self.settingManager.save()
-        })
-    }
-    
-    /**
-     Is hide empty cafe option is on.
-    
-     Automatically update SettingManager and ListManager whan value changes.
-    
-    - ToDo: Move to SettingManager.
-    */
-    var isHideBinding: Binding<Bool> {
-        Binding<Bool>(
-            get: {
-                self.settingManager.hideEmptyCafe
-            },
-            set: {
-                self.settingManager.hideEmptyCafe = $0
-                self.settingManager.save()
-            })
     }
     
     var body: some View {
@@ -151,18 +101,18 @@ struct SettingView: View {
                     }
                     .modifier(ListRow())
                     // Basic setting - Hide empty cafe.
-                    iOS1314Toggle(isOn: isHideBinding, label: "정보가 없는 식당 숨기기")
+                    iOS1314Toggle(isOn: $settingManager.hideEmptyCafe, label: "정보가 없는 식당 숨기기")
                         .font(.system(size: 18))
                         .modifier(ListRow())
                     // Advanced setting.
                     Text("고급")
                         .modifier(SectionTextModifier())
                     // Advanced setting - custom date.
-                    iOS1314Toggle(isOn: isCustomDate, label: "사용자 설정 날짜")
+                    iOS1314Toggle(isOn: $settingManager.isCustomDate, label: "사용자 설정 날짜")
                         .font(.system(size: 18))
                         .modifier(ListRow())
                     if (settingManager.isCustomDate) {
-                        DatePicker(selection: debugDate, label: { EmptyView() })
+                        DatePicker(selection: $settingManager.debugDate, label: { EmptyView() })
                             .modifier(ListRow())
                     }
                     // Info

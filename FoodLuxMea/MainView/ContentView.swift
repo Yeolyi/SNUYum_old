@@ -113,7 +113,7 @@ struct ContentView_Previews: PreviewProvider {
     static var settingManager = SettingManager()
 
     static var previews: some View {
-        ContentView_Previews.settingManager.update(date: ContentView_Previews.settingManager.date)
+        ContentView_Previews.settingManager.update()
         ContentView_Previews.self.listManager.update(newCafeList:ContentView_Previews.self.dataManager.getData(at: ContentView_Previews.self.settingManager.date))
         return ContentView()
             .environmentObject(listManager)

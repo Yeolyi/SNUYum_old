@@ -179,4 +179,17 @@ class OurhomeManager {
             return 0
         }
     }
+    
+    /// Convert yyyy/MM/dd HH:mm style string to Date
+    func getTrimmedDate(from string: String) -> Date{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let date = formatter.date(from: string)!
+        guard let trimmedDate = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: date)) else {
+            assertionFailure("")
+            return Date()
+        }
+        return trimmedDate
+    }
+    
 }

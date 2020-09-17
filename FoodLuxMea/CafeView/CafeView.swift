@@ -191,7 +191,7 @@ struct CafeView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        CafeView_Previews.settingManager.update(date: Date())
+        CafeView_Previews.settingManager.update()
         CafeView_Previews.listManager.update(newCafeList: CafeView_Previews.dataManager.getData(at: Date()))
         
         return CafeView(cafeInfo: previewCafe)

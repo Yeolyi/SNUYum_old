@@ -51,7 +51,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         // Update classes to set date.
-        settingManager.update(date: settingManager.date)
+        settingManager.update()
         self.listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
         
         //requestPermission()
@@ -90,7 +90,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to undo the changes made on entering the background.
         
         // Update class values preventing old view is shown.
-        settingManager.update(date: settingManager.date)
+        settingManager.update()
         listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
     }
 

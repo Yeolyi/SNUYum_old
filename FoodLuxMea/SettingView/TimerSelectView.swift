@@ -32,8 +32,6 @@ struct TimerSelectView: View {
                 }
                 Button(action: {
                         self.settingManager.alimiCafeName = self.tempIsTimerCafe ? self.selectedCafeName : nil
-                        self.settingManager.update(date: self.settingManager.date)
-                        self.settingManager.save()
                         self.presentationMode.wrappedValue.dismiss()}) {
                     Text("저장")
                         .font(.system(size: CGFloat(20), weight: .semibold))

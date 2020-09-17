@@ -20,19 +20,41 @@ class SettingManager: ObservableObject {
      
      - Important: Overwritten when 'isAuto' is true!
      */
-    @Published var mealViewMode: MealType = .lunch
+    @Published var mealViewMode: MealType = .lunch {
+        didSet {
+            save()
+        }
+    }
     
     /// Turn on meal type suggestion.
-    @Published var isAuto: Bool = true
+    @Published var isAuto: Bool = true {
+        didSet {
+            save()
+        }
+    }
     
     /// Activate custom date which makes whole app uses fixed date.
-    @Published var isCustomDate: Bool = false
+    @Published var isCustomDate: Bool = false {
+        didSet {
+            update()
+            save()
+        }
+    }
     
     /// Date variable used when isCustomDate is true.
-    @Published var debugDate: Date = Date()
+    @Published var debugDate: Date = Date() {
+        didSet {
+            update()
+            save()
+        }
+    }
     
     /// If true, filter empty cafes in list.
-    @Published var hideEmptyCafe: Bool = true
+    @Published var hideEmptyCafe: Bool = true {
+        didSet {
+            save()
+        }
+    }
     
     /**
      Suggested meal type based on current setting time.
@@ -49,7 +71,11 @@ class SettingManager: ObservableObject {
     @Published var isSuggestedTomorrow: Bool = false
     
     /// Main view timer cafe name; nil if timer is set to be hidden.
-    @Published var alimiCafeName: String? = "학생회관식당"
+    @Published var alimiCafeName: String? = "학생회관식당" {
+        didSet {
+            save()
+        }
+    }
     
     /// Array of string which means there is no menu.
     var closedKeywords = ["방학중휴점", "폐    점", "코로나19로 당분간 휴점", "방학중 휴무", "당분간 폐점", "폐  점"]
@@ -114,8 +140,20 @@ class SettingManager: ObservableObject {
     }
     
     /// Update setting if timer cafe changes. 
-    func update(date: Date) {
+    func update() {
         (isSuggestedTomorrow, suggestedMeal) = SmartSuggestion.get(at: date, cafeName: alimiCafeName ?? "3식당")
         print("SettingManager/update(date: ): 추천값 업데이트 완료")
+    }
+    
+    func dateToStr(_ date: Date) -> String {
+        let df = DateFormatter()
+        df.dateFormat = "dd/MM/yyyy HH:mm"
+        return df.string(from: date)
+    }
+
+    func strToDate(_ str: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+        return dateFormatter.date(from: str)!
     }
 }

@@ -17,7 +17,6 @@ class SmartSuggestion {
     static let lunchDefaultTime = SimpleTime(15)
     static let dinnerDefaultTime = SimpleTime(19)
     
-    
     static func get(at date: Date, cafeName: String) -> (isTomorrow: Bool, meal: MealType) {
         let currentSimpleDate = SimpleTime(date: date)
         let bkfEndTime: SimpleTime?
