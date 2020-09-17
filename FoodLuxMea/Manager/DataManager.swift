@@ -83,7 +83,7 @@ class DataManager: ObservableObject {
      
      - Remark: If there's no such cafe, returns empty cafe struct with same name.
      */
-    func getData(at date: Date, name: String) -> Cafe {
+    func getData(at date: Date, name: String) -> Cafe? {
         let uRLString = hTMLManager.makeURL(from: date)
         if let data = cafeData[uRLString] {
             return data.first{ $0.name == name }!
@@ -104,6 +104,6 @@ class DataManager: ObservableObject {
                 return Cafe(name: name, phoneNum: phoneNumList[name] ?? "", bkfMenuList: [], lunchMenuList: [], dinnerMenuList: [])
             }
         }
-        return Cafe(name: name, phoneNum: phoneNumList[name] ?? "", bkfMenuList: [], lunchMenuList: [], dinnerMenuList: [])
+        return nil
     }
 }

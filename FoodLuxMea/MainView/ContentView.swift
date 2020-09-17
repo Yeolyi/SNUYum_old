@@ -74,10 +74,12 @@ struct ContentView: View {
                                 .listRow()
                             }
                             .sheet(isPresented: $isTimerSheet) {
-                                CafeView(cafeInfo: dataManager.getData(at: settingManager.date, name: settingManager.alimiCafeName!))
-                                    .environmentObject(self.listManager)
-                                    .environmentObject(self.settingManager)
-                                    .environmentObject(self.dataManager)
+                                if let cafe = dataManager.getData(at: settingManager.date, name: settingManager.alimiCafeName!) {
+                                    CafeView(cafeInfo: cafe)
+                                        .environmentObject(self.listManager)
+                                        .environmentObject(self.settingManager)
+                                        .environmentObject(self.dataManager)
+                                }
                             }
                         }
                         // Fixed cafe section.

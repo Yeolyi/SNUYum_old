@@ -41,15 +41,11 @@ class ListManager: ObservableObject{
     
     /// Return fixed cafe ListElement array.
     var fixedList: [ListElement] {
-        cafeList.filter {
-            $0.isFixed == true
-        }
+        cafeList.filter { $0.isFixed == true }
     }
     /// Return unfixed cafe ListElement array.
     var unfixedList: [ListElement] {
-        cafeList.filter {
-            $0.isFixed == false
-        }
+        cafeList.filter { $0.isFixed == false }
     }
     
     /**

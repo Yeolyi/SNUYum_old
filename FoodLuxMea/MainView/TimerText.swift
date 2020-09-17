@@ -31,38 +31,42 @@ struct TimerText: View {
         let currentHour = Calendar.current.component(.hour, from: settingManager.date)
         let currentMinute = Calendar.current.component(.minute, from: settingManager.date)
         
-        let cafeData = dataManager.getData(at: settingManager.date, name: cafeName)
+        if let cafeData = dataManager.getData(at: settingManager.date, name: cafeName) {
         
-        // When cafe operating hour data exists
-        a: if let endDate = cafeOperatingHour[cafeName]?.getDaily(at: settingManager.date)?.getEndTime(at: settingManager.suggestedMeal) {
-            let startTime = cafeOperatingHour[cafeName]!.getDaily(at: settingManager.date)!.getStartTime(at: settingManager.suggestedMeal)!
-            
-            if (cafeData.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords)) {
-                break a
-            }
-            
-            if (currentHour < 5 || currentHour > endDate.hour) {
-                return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
+            // When cafe operating hour data exists
+            a: if let endDate = cafeOperatingHour[cafeName]?.getDaily(at: settingManager.date)?.getEndTime(at: settingManager.suggestedMeal) {
+                let startTime = cafeOperatingHour[cafeName]!.getDaily(at: settingManager.date)!.getStartTime(at: settingManager.suggestedMeal)!
+                
+                if (cafeData.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords)) {
+                    break a
+                }
+                
+                if (currentHour < 5 || currentHour > endDate.hour) {
+                    return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
+                }
+                    
+                else if SimpleTimeBorder(currentHour, currentMinute) < startTime { //시작시간 전
+                    return "\(cafeName)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!"
+                }
+                
+                var newEndDate = Calendar.current.date(bySettingHour: endDate.hour, minute: endDate.minute, second: 0, of: settingManager.date)!
+                if (newEndDate < settingManager.date) {
+                    newEndDate = newEndDate.addingTimeInterval(60*60*24)
+                }
+                let (hour, minute) = remainTime(from: settingManager.date, to: newEndDate)
+                return "\(cafeName) \(settingManager.suggestedMeal.rawValue)마감까지 \(hour)시간 \(minute)분!"
             }
                 
-            else if SimpleTimeBorder(currentHour, currentMinute) < startTime { //시작시간 전
-                return "\(cafeName)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!"
+            // When cafe operating hour data not exists
+            if (currentHour < 5 || currentHour > SmartSuggestion.dinnerDefaultTime.hour) {
+                return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
             }
-            
-            var newEndDate = Calendar.current.date(bySettingHour: endDate.hour, minute: endDate.minute, second: 0, of: settingManager.date)!
-            if (newEndDate < settingManager.date) {
-                newEndDate = newEndDate.addingTimeInterval(60*60*24)
+            else {
+                return "\(dayOfTheWeek(of: settingManager.date)) \(settingManager.suggestedMeal.rawValue)에는 운영하지 않아요."
             }
-            let (hour, minute) = remainTime(from: settingManager.date, to: newEndDate)
-            return "\(cafeName) \(settingManager.suggestedMeal.rawValue)마감까지 \(hour)시간 \(minute)분!"
-        }
-            
-        // When cafe operating hour data not exists
-        if (currentHour < 5 || currentHour > SmartSuggestion.dinnerDefaultTime.hour) {
-            return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
         }
         else {
-            return "\(dayOfTheWeek(of: settingManager.date)) \(settingManager.suggestedMeal.rawValue)에는 운영하지 않아요."
+            return cafeName + "은" + (settingManager.isSuggestedTomorrow ? "내일" : "오늘") + "운영하지 않아요."
         }
     }
         

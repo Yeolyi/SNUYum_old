@@ -64,8 +64,8 @@ struct CafeListFiltered: View {
                         }
                                
                         else if (self.listFilter(name: listElement.name) == .noData) {
-                            if (self.settingManager.hideEmptyCafe == false) {
-                                CafeRow(cafe: self.dataManager.getData(at: self.settingManager.date, name: listElement.name), suggestedMeal: self.settingManager.meal)
+                            if (self.settingManager.hideEmptyCafe == false && self.dataManager.getData(at: self.settingManager.date, name: listElement.name) != nil) {
+                                CafeRow(cafe: self.dataManager.getData(at: self.settingManager.date, name: listElement.name)!, suggestedMeal: self.settingManager.meal)
                                     .environmentObject(self.listManager)
                                     .environmentObject(self.settingManager)
                                     .environmentObject(self.dataManager)
@@ -84,23 +84,27 @@ struct CafeListFiltered: View {
     }
     ///
     func nameToCafeRow(_ listElement: ListElement) -> AnyView {
-        let cafe = self.dataManager.getData(at: self.settingManager.date, name: listElement.name)
-        if searchedText == "" {
-             return AnyView(
-                    CafeRow(cafe: cafe, suggestedMeal: settingManager.meal)
-                        .environmentObject(self.listManager)
-                        .environmentObject(self.settingManager)
-                        .environmentObject(self.dataManager)
-                        .listRow()
-            )
+        if let cafe = self.dataManager.getData(at: self.settingManager.date, name: listElement.name) {
+            if searchedText == "" {
+                 return AnyView(
+                        CafeRow(cafe: cafe, suggestedMeal: settingManager.meal)
+                            .environmentObject(self.listManager)
+                            .environmentObject(self.settingManager)
+                            .environmentObject(self.dataManager)
+                            .listRow()
+                )
+            }
+            else {
+                 return AnyView(
+                        SearchCafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchedText)
+                            .environmentObject(self.listManager)
+                            .environmentObject(self.settingManager)
+                            .environmentObject(self.dataManager)
+                )
+            }
         }
         else {
-             return AnyView(
-                    SearchCafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchedText)
-                        .environmentObject(self.listManager)
-                        .environmentObject(self.settingManager)
-                        .environmentObject(self.dataManager)
-            )
+            return AnyView(EmptyView())
         }
 
     }
@@ -110,20 +114,24 @@ struct CafeListFiltered: View {
      - ToDo: DataManager.getData is used twice in this function and nameToCafeRow. Optimization required.
      */
     func listFilter(name: String) -> filterResult {
-        let targetCafe = dataManager.getData(at: settingManager.date, name: name)
-        if targetCafe.isEmpty(at: [.breakfast, .lunch, .dinner], emptyKeywords: settingManager.closedKeywords)  {
-             return .noData
-        }
-        if (searchedText.isEmpty || targetCafe.includes(searchedText, at: [settingManager.mealViewMode])) {
-                if (targetCafe.isEmpty(at: [settingManager.meal], emptyKeywords: settingManager.closedKeywords) == false ) {
-                    return .show
-                }
-                else {
-                    return .closed
-                }
+        if let targetCafe = dataManager.getData(at: settingManager.date, name: name) {
+            if targetCafe.isEmpty(at: [.breakfast, .lunch, .dinner], emptyKeywords: settingManager.closedKeywords)  {
+                 return .noData
             }
+            if (searchedText.isEmpty || targetCafe.includes(searchedText, at: [settingManager.mealViewMode])) {
+                    if (targetCafe.isEmpty(at: [settingManager.meal], emptyKeywords: settingManager.closedKeywords) == false ) {
+                        return .show
+                    }
+                    else {
+                        return .closed
+                    }
+                }
+            else {
+                return .hide
+            }
+        }
         else {
-            return .hide
+            return .noData
         }
     }
     /// If cafe data is completely empty, return text view.

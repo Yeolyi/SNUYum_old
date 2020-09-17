@@ -105,6 +105,11 @@ class SettingManager: ObservableObject {
      - Note: If it's app's first run, save default value and return.
      */
     init() {
+        func strToDate(_ str: String) -> Date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+            return dateFormatter.date(from: str)!
+        }
         (isSuggestedTomorrow, suggestedMeal) = SmartSuggestion.get(at: Date(), cafeName: "3식당")
         if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
             if userDefaults.bool(forKey: "firstRun") == false {
@@ -125,6 +130,11 @@ class SettingManager: ObservableObject {
     }
     
     func save() {
+        func dateToStr(_ date: Date) -> String {
+            let df = DateFormatter()
+            df.dateFormat = "dd/MM/yyyy HH:mm"
+            return df.string(from: date)
+        }
         if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea"){
             userDefault.set(mealViewMode.rawValue as String, forKey: "mealViewMode")
             userDefault.set(isAuto as Bool, forKey: "isAuto")
@@ -143,17 +153,5 @@ class SettingManager: ObservableObject {
     func update() {
         (isSuggestedTomorrow, suggestedMeal) = SmartSuggestion.get(at: date, cafeName: alimiCafeName ?? "3식당")
         print("SettingManager/update(date: ): 추천값 업데이트 완료")
-    }
-    
-    func dateToStr(_ date: Date) -> String {
-        let df = DateFormatter()
-        df.dateFormat = "dd/MM/yyyy HH:mm"
-        return df.string(from: date)
-    }
-
-    func strToDate(_ str: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-        return dateFormatter.date(from: str)!
     }
 }
