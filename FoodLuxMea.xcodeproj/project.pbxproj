@@ -17,7 +17,7 @@
 		250BBBF324F3F92E00FC0C84 /* OperatingHourStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEC24F3F92D00FC0C84 /* OperatingHourStruct.swift */; };
 		250BBBF424F3F92E00FC0C84 /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBED24F3F92D00FC0C84 /* HideKeyboard.swift */; };
 		250BBBF524F3F92E00FC0C84 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEE24F3F92D00FC0C84 /* ThemeColor.swift */; };
-		250BBBF624F3F92E00FC0C84 /* HTMLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* HTMLManager.swift */; };
+		250BBBF624F3F92E00FC0C84 /* SNUCOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* SNUCOManager.swift */; };
 		250BBC1E24F3FAC800FC0C84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1124F3FAC700FC0C84 /* AppDelegate.swift */; };
 		250BBC1F24F3FAC800FC0C84 /* ListReorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1224F3FAC700FC0C84 /* ListReorder.swift */; };
 		250BBC2024F3FAC800FC0C84 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1324F3FAC700FC0C84 /* NaverMap.swift */; };
@@ -76,7 +76,7 @@
 		250BBBEC24F3F92D00FC0C84 /* OperatingHourStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatingHourStruct.swift; sourceTree = "<group>"; usesTabs = 0; };
 		250BBBED24F3F92D00FC0C84 /* HideKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 		250BBBEE24F3F92D00FC0C84 /* ThemeColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
-		250BBBEF24F3F92E00FC0C84 /* HTMLManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLManager.swift; sourceTree = "<group>"; };
+		250BBBEF24F3F92E00FC0C84 /* SNUCOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNUCOManager.swift; sourceTree = "<group>"; };
 		250BBBFF24F3F9CD00FC0C84 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		250BBC1124F3FAC700FC0C84 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		250BBC1224F3FAC700FC0C84 /* ListReorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListReorder.swift; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				25340D64251396D000E7FA7A /* Structs */,
-				250BBBEF24F3F92E00FC0C84 /* HTMLManager.swift */,
+				250BBBEF24F3F92E00FC0C84 /* SNUCOManager.swift */,
 				25FF78002503B306006372C7 /* Ourhome Manager.swift */,
 				250BBBEB24F3F92D00FC0C84 /* DataManager.swift */,
 				2500739524F54A37009A32FA /* SettingManager.swift */,
@@ -438,7 +438,7 @@
 				25340D5F251395CC00E7FA7A /* CafeStruct.swift in Sources */,
 				250BBC2024F3FAC800FC0C84 /* NaverMap.swift in Sources */,
 				250BBC2724F3FAC800FC0C84 /* SceneDelegate.swift in Sources */,
-				250BBBF624F3F92E00FC0C84 /* HTMLManager.swift in Sources */,
+				250BBBF624F3F92E00FC0C84 /* SNUCOManager.swift in Sources */,
 				2593232E24FAE76F0036C148 /* TimerText.swift in Sources */,
 				2593233624FBCE7C0036C148 /* InfoView.swift in Sources */,
 				2591C74025020F4E00704673 /* PrivateData.swift in Sources */,

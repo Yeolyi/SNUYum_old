@@ -17,7 +17,7 @@ class DataManager: ObservableObject {
      */
     private var cafeData: [URL: [Cafe]] = [:]
     /// Downloads snuco cafe datas.
-    private var hTMLManager = HTMLManager()
+    private var hTMLManager = SNUCOManager()
     /// Downloads ourhome cafe data.
     private var ourhomeManager = OurhomeManager()
     
@@ -59,14 +59,14 @@ class DataManager: ObservableObject {
     
     /// Get all data of certain date.
     func getData(at date: Date) -> [Cafe]{
-        let uRLString = HTMLManager().makeURL(from: date)
+        let uRLString = SNUCOManager().makeURL(from: date)
         if let data = cafeData[uRLString] {
             return data
         }
         else {
             if (isInternetConnected) {
                 print("CafeDataManager.getData(at: ): 다운로드 중, \(date)")
-                let newData = hTMLManager.cafeData(at: date) + [ourhomeManager.getCafe(date: date)]
+                let newData = hTMLManager.getAll(at: date) + [ourhomeManager.getCafe(date: date)]
                 cafeData[uRLString] = newData
                 save()
                 return newData

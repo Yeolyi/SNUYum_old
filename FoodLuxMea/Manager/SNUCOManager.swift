@@ -8,11 +8,25 @@
 import SwiftUI
 import SwiftSoup
 
+/// Parse URL with SwiftSoup
+func parse(_ uRL: URL) -> Document {
+    do {
+        let uRLContents = try String(contentsOf: uRL)
+        let parsedURLContents: Document = try SwiftSoup.parse(uRLContents)
+        return parsedURLContents
+    }
+    catch {
+        assertionFailure("SNUCOManager/parse(): URL 파싱에 실패하였습니다.")
+    }
+    return .init("https://snuco.snu.ac.kr/ko/foodmenu")
+}
+
+
 /// Get data from snuco website and process into Cafe struct
-class HTMLManager {
+class SNUCOManager {
     
     /// Get Cafe array from specific date; sum of below functions
-    func cafeData(at date: Date) -> [Cafe]{
+    func getAll(at date: Date) -> [Cafe]{
         var cafeData: [Cafe] = []
         let targetURL = makeURL(from: date)
         let parsedDocument = parse(targetURL) //파싱
@@ -35,7 +49,7 @@ class HTMLManager {
             
             
         catch {
-            assertionFailure("HTMLManager/getCafeData(from: ): Html 소스 분리에 실패하였습니다.")
+            assertionFailure("SNUCOManager/getCafeData(from: ): Html 소스 분리에 실패하였습니다.")
         }
         
         
@@ -47,7 +61,7 @@ class HTMLManager {
         do {
             let rawCafeArray = try rawCafe.select("td").array() //식당 구성요소 배열 [이름전번, 아침, 점심, 저녁] 생성
             guard rawCafeArray.count == 4 else {
-                assertionFailure("HTMLManager/process: 구성요소가 4개가 아닙니다.")
+                assertionFailure("SNUCOManager/process: 구성요소가 4개가 아닙니다.")
                 return ("로딩 실패😢"," ",[], [], [])
             }
             let nameNum = try rawCafeArray[0].text() //[학생회관식당(880-5543)]
@@ -59,7 +73,7 @@ class HTMLManager {
             return (cafeName, cafeCallNum, rawBreakfasts, rawLunches, rawDinners)
         }
         catch {
-            assertionFailure("HTMLManager/process(): 문자열 처리에 실패하였습니다.")
+            assertionFailure("SNUCOManager/process(): 문자열 처리에 실패하였습니다.")
         }
         return ("로딩 실패😢"," ",[], [], [])
     }
@@ -67,7 +81,7 @@ class HTMLManager {
     private func separateNameNum(_ str: String) -> (name: String, callNum: String){
         let tempArr = str.components(separatedBy: ["("])
         guard tempArr.count == 2 else {
-            assertionFailure("HTMLManager/divideNameNCallNum: 구성요소가 두개가 아닙니다.")
+            assertionFailure("SNUCOManager/divideNameNCallNum: 구성요소가 두개가 아닙니다.")
             return ("로딩 실패😢"," ")
         }
         let name = String(tempArr[0])
@@ -130,19 +144,6 @@ class HTMLManager {
         print(returnValue)
         return returnValue
     }
-
-    /// Parse URL with SwiftSoup
-    private func parse(_ uRL: URL) -> Document {
-        do {
-            let uRLContents = try String(contentsOf: uRL)
-            let parsedURLContents: Document = try SwiftSoup.parse(uRLContents)
-            return parsedURLContents
-        }
-        catch {
-            assertionFailure("HTMLManager/parse(): URL 파싱에 실패하였습니다.")
-        }
-        return .init("https://snuco.snu.ac.kr/ko/foodmenu")
-    }
     
     /// Make URL which has access to input date's data
     func makeURL(from date: Date) -> URL { //DataManager에서 [String:[Cafe]]에 사용
@@ -152,7 +153,7 @@ class HTMLManager {
             return targetURL
         }
         else{
-            assertionFailure("HTMLManager/makeURL(from: ): 문자열을 URL로 변환하는데 실패하였습니다.")
+            assertionFailure("SNUCOManager/makeURL(from: ): 문자열을 URL로 변환하는데 실패하였습니다.")
             return URL(string: "https://snuco.snu.ac.kr/ko/foodmenu")!
         }
     }

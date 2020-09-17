@@ -142,22 +142,10 @@ class OurhomeManager {
     
     func makeURL(from date: Date) -> URL {
         let baseNum = 1597503600
-        let baseDate = getTrimmedDate(from: "2020/08/16 00:00")
+        let baseDate = trimDate(using: "2020/08/16 00:00")
         let components = Calendar.current.dateComponents([.weekOfYear], from: baseDate, to: date)
         //print("\(baseDate)부터 \(date)까지 \(components.weekOfYear!)주 지났습니다")
         return URL(string: "https://dorm.snu.ac.kr/dk_board/facility/food.php?start_date2=\(baseNum + components.weekOfYear! * 60 * 60 * 24 * 7)")!
-    }
-    
-    func parse(_ uRL: URL) -> Document {
-        do {
-            let uRLContents = try String(contentsOf: uRL)
-            let parsedURLContents: Document = try SwiftSoup.parse(uRLContents)
-            return parsedURLContents
-        }
-        catch {
-            assertionFailure("HTMLManager/parse(): URL 파싱에 실패하였습니다.")
-        }
-        return .init("https://dorm.snu.ac.kr/dk_board/facility/food.php")
     }
 
     /// Convert HTML class attrubution to cost value
@@ -181,7 +169,7 @@ class OurhomeManager {
     }
     
     /// Convert yyyy/MM/dd HH:mm style string to Date
-    func getTrimmedDate(from string: String) -> Date{
+    func trimDate(using string: String) -> Date{
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let date = formatter.date(from: string)!
