@@ -78,23 +78,29 @@ struct ListReorder: View {
     func moveFixed(from source: IndexSet, to destination: Int) {
         var intIndexSet: [Int] = []
         for index in source {
-            let moveIndex = tempListManager.index(of: tempListManager.fixedList[index].name)!
-            intIndexSet.append(moveIndex)
+            if let moveIndex = tempListManager.index(of: tempListManager.fixedList[index].name) {
+                intIndexSet.append(moveIndex)
+            }
         }
-        let newDestination = destination == tempListManager.fixedList.count ? tempListManager.cafeList.count : tempListManager.index(of: tempListManager.fixedList[destination].name)!
-        let newSource = IndexSet(intIndexSet)
-        tempListManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
+        if let destinationIndex = tempListManager.index(of: tempListManager.fixedList[destination].name) {
+            let newDestination = destination == tempListManager.fixedList.count ? tempListManager.cafeList.count : destinationIndex
+            let newSource = IndexSet(intIndexSet)
+            tempListManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
+        }
     }
     /// Move ListElement which is not fixed
     func moveUnfixed(from source: IndexSet, to destination: Int) {
         var intIndexSet: [Int] = []
         for index in source {
-            let moveName = tempListManager.index(of: tempListManager.unfixedList[index].name)!
-            intIndexSet.append(moveName)
+            if let moveName = tempListManager.index(of: tempListManager.unfixedList[index].name) {
+                intIndexSet.append(moveName)
+            }
         }
-        let newDestination = destination == tempListManager.unfixedList.count ? tempListManager.cafeList.count : tempListManager.index(of: tempListManager.unfixedList[destination].name)!
-        let newSource = IndexSet(intIndexSet)
-        tempListManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
+        if let destinationIndex = tempListManager.index(of: tempListManager.unfixedList[destination].name) {
+            let newDestination = destination == tempListManager.unfixedList.count ? tempListManager.cafeList.count : destinationIndex
+            let newSource = IndexSet(intIndexSet)
+            tempListManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
+        }
     }
 
 }

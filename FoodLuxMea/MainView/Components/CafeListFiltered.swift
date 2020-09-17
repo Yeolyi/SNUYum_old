@@ -106,7 +106,6 @@ struct CafeListFiltered: View {
         else {
             return AnyView(EmptyView())
         }
-
     }
     /**
      Evaluate ListElement and return appropriate filter result.

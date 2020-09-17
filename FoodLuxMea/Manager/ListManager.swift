@@ -93,11 +93,7 @@ class ListManager: ObservableObject{
     
     /// Get specific cafe's index
     func index(of str: String) -> Int? {
-        let value = cafeList.firstIndex(where: {$0.name == str})
-        if (value == nil) {
-            //assertionFailure("ListMananer/index: 존재하지 않는 카페값에 접근했습니다.")
-        }
-        return value
+        cafeList.firstIndex(where: {$0.name == str})
     }
     
     func toggleFixed(cafeName: String) -> Bool {
