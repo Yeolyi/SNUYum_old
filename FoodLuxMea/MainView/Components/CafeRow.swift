@@ -32,10 +32,13 @@ struct CafeRow: View {
     var body: some View {
         Button(action: {isSheet = true}) {
             VStack(alignment: .leading){
-                Text(cafe.name)
-                    .titleText()
-                    .foregroundColor(themeColor.title(colorScheme))
-                    .padding(.bottom, 3)
+                HStack {
+                    Text(cafe.name)
+                        .titleText()
+                        .foregroundColor(themeColor.title(colorScheme))
+                        .padding(.bottom, 3)
+                    Spacer()
+                }
                 Spacer()
                 ForEach(cafe.menus(at: suggestedMeal)) { menu in
                     HStack {
