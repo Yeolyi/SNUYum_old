@@ -34,8 +34,8 @@ struct TimerText: View {
         let cafeData = dataManager.getData(at: settingManager.date, name: cafeName)
         
         // When cafe operating hour data exists
-        a: if let endDate = cafeOperatingHour[cafeName]?.getDaily(at: settingManager.date)?.endTime(at: settingManager.suggestedMeal) {
-            let startTime = cafeOperatingHour[cafeName]!.getDaily(at: settingManager.date)!.startTime(at: settingManager.suggestedMeal)!
+        a: if let endDate = cafeOperatingHour[cafeName]?.getDaily(at: settingManager.date)?.getEndTime(at: settingManager.suggestedMeal) {
+            let startTime = cafeOperatingHour[cafeName]!.getDaily(at: settingManager.date)!.getStartTime(at: settingManager.suggestedMeal)!
             
             if (cafeData.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords)) {
                 break a
@@ -45,7 +45,7 @@ struct TimerText: View {
                 return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
             }
                 
-            else if SimpleTime(currentHour, currentMinute) < startTime { //시작시간 전
+            else if SimpleTimeBorder(currentHour, currentMinute) < startTime { //시작시간 전
                 return "\(cafeName)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!"
             }
             

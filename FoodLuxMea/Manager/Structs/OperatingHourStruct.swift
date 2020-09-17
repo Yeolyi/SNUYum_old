@@ -8,7 +8,7 @@
 import Foundation
 
 /// Tuple with hour and minute.
-struct SimpleTime {
+struct SimpleTimeBorder {
     let hour: Int
     let minute: Int
     
@@ -24,7 +24,7 @@ struct SimpleTime {
         self.minute = minute
     }
     
-    static func <(left: SimpleTime, right: SimpleTime) -> Bool {
+    static func <(left: SimpleTimeBorder, right: SimpleTimeBorder) -> Bool {
         if (left.hour < right.hour) {
             return true
         }
@@ -42,8 +42,8 @@ struct SimpleTime {
  Cafeteria operating hour of one day three meals; nil if cafe does not open.
  
  */
-struct DailyOperatingHour {
-    var bkf: String?
+struct DailyOperatingTime {
+    var breakfast: String?
     var lunch: String?
     var dinner: String?
     
@@ -53,16 +53,16 @@ struct DailyOperatingHour {
      - Todo: Set default value to nil.
      */
     init(_ bkf: String?, _ lunch: String?, _ dinner: String?) {
-        self.bkf = bkf
+        self.breakfast = bkf
         self.lunch = lunch
         self.dinner = dinner
     }
     
     /// Get operating time info of specific meal time
-    func operatingHour(at mealType: MealType) -> String? {
+    func operatingTimeStr(at mealType: MealType) -> String? {
         switch (mealType) {
         case .breakfast:
-            return bkf
+            return breakfast
         case .lunch:
             return lunch
         case .dinner:
@@ -71,26 +71,26 @@ struct DailyOperatingHour {
     }
     
     /// Convert operation start time string to hour and minute tuple
-    func startTime(at mealType: MealType) -> SimpleTime? {
-        if let str = operatingHour(at: mealType) {
+    func getStartTime(at mealType: MealType) -> SimpleTimeBorder? {
+        if let str = operatingTimeStr(at: mealType) {
             let splited = str.components(separatedBy: "-")
             let endTimeStr = splited[0]
             let hourNMinute = endTimeStr.components(separatedBy: ":")
             if let hour = Int(hourNMinute[0]), let minute = Int(hourNMinute[1]) {
-                return SimpleTime(hour, minute)
+                return SimpleTimeBorder(hour, minute)
             }
         }
         return nil
     }
     
     /// Convert operation end time string to hour and minute tuple
-    func endTime(at mealType: MealType) -> SimpleTime? {
-        if let str = operatingHour(at: mealType) {
+    func getEndTime(at mealType: MealType) -> SimpleTimeBorder? {
+        if let str = operatingTimeStr(at: mealType) {
             let splited = str.components(separatedBy: "-")
             let endTimeStr = splited[1]
             let hourNMinute = endTimeStr.components(separatedBy: ":")
             if let hour = Int(hourNMinute[0]), let minute = Int(hourNMinute[1]) {
-                return SimpleTime(hour, minute)
+                return SimpleTimeBorder(hour, minute)
             }
         }
         return nil
@@ -99,12 +99,12 @@ struct DailyOperatingHour {
 
 /// Cafeteria operating hour of one week
 struct WeeklyOperatingHour {
-    var weekday: DailyOperatingHour?
-    var saturday: DailyOperatingHour?
-    var sunday: DailyOperatingHour?
+    var weekday: DailyOperatingTime?
+    var saturday: DailyOperatingTime?
+    var sunday: DailyOperatingTime?
     
     /// Return daily operating hour of input date
-    func getDaily(at date: Date) -> DailyOperatingHour? {
+    func getDaily(at date: Date) -> DailyOperatingTime? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
         let str = dateFormatter.string(from: date)

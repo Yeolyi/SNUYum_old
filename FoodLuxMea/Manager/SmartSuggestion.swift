@@ -13,19 +13,19 @@ import Foundation
 class SmartSuggestion {
     
     // Hour and minute tuples for when operating hour does not exists.
-    static let bkfDefaultTime = SimpleTime(10)
-    static let lunchDefaultTime = SimpleTime(15)
-    static let dinnerDefaultTime = SimpleTime(19)
+    static let bkfDefaultTime = SimpleTimeBorder(10)
+    static let lunchDefaultTime = SimpleTimeBorder(15)
+    static let dinnerDefaultTime = SimpleTimeBorder(19)
     
     static func get(at date: Date, cafeName: String) -> (isTomorrow: Bool, meal: MealType) {
-        let currentSimpleDate = SimpleTime(date: date)
-        let bkfEndTime: SimpleTime?
-        let lunchEndTime: SimpleTime?
-        let dinnerEndTime: SimpleTime?
+        let currentSimpleDate = SimpleTimeBorder(date: date)
+        let bkfEndTime: SimpleTimeBorder?
+        let lunchEndTime: SimpleTimeBorder?
+        let dinnerEndTime: SimpleTimeBorder?
         if let weeklyOperatingHour = cafeOperatingHour[cafeName] {
-            bkfEndTime = weeklyOperatingHour.getDaily(at: date)?.endTime(at: .breakfast)
-            lunchEndTime = weeklyOperatingHour.getDaily(at: date)?.endTime(at: .lunch)
-            dinnerEndTime = weeklyOperatingHour.getDaily(at: date)?.endTime(at: .dinner)
+            bkfEndTime = weeklyOperatingHour.getDaily(at: date)?.getEndTime(at: .breakfast)
+            lunchEndTime = weeklyOperatingHour.getDaily(at: date)?.getEndTime(at: .lunch)
+            dinnerEndTime = weeklyOperatingHour.getDaily(at: date)?.getEndTime(at: .dinner)
         }
         else {
             bkfEndTime = nil
