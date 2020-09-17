@@ -34,7 +34,7 @@
 		25647B6F24F9FFC900E1C3F0 /* CafeDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25647B6E24F9FFC900E1C3F0 /* CafeDatas.swift */; };
 		2591C74025020F4E00704673 /* PrivateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2591C73F25020F4E00704673 /* PrivateData.swift */; };
 		2593232E24FAE76F0036C148 /* TimerText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593232D24FAE76F0036C148 /* TimerText.swift */; };
-		2593233024FAE8310036C148 /* CafeListFiltered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593232F24FAE8310036C148 /* CafeListFiltered.swift */; };
+		2593233024FAE8310036C148 /* CafeRowsFiltered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593232F24FAE8310036C148 /* CafeRowsFiltered.swift */; };
 		2593233224FBB5F40036C148 /* TitleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593233124FBB5F40036C148 /* TitleText.swift */; };
 		2593233424FBBDF60036C148 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593233324FBBDF60036C148 /* MapView.swift */; };
 		2593233624FBCE7C0036C148 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593233524FBCE7C0036C148 /* InfoView.swift */; };
@@ -43,7 +43,6 @@
 		25A0824A24F3FDEC00593CB3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A0824924F3FDEC00593CB3 /* ContentView.swift */; };
 		25A627942513B92600313CD3 /* ListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A627932513B92600313CD3 /* ListRow.swift */; };
 		25A627962513BB5000313CD3 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A627952513BB5000313CD3 /* TitleView.swift */; };
-		25BA9E9925064CA30056C6E4 /* SearchCafeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BA9E9825064CA30056C6E4 /* SearchCafeRow.swift */; };
 		25C805072501144A00B7E4CC /* NanumMyeongjo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25C805062501144900B7E4CC /* NanumMyeongjo.ttf */; };
 		25C8050A2501171B00B7E4CC /* NanumBarunpenR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25C805092501171B00B7E4CC /* NanumBarunpenR.ttf */; };
 		25FF78012503B306006372C7 /* Ourhome Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF78002503B306006372C7 /* Ourhome Manager.swift */; };
@@ -94,7 +93,7 @@
 		25647B6E24F9FFC900E1C3F0 /* CafeDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDatas.swift; sourceTree = "<group>"; };
 		2591C73F25020F4E00704673 /* PrivateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateData.swift; sourceTree = "<group>"; };
 		2593232D24FAE76F0036C148 /* TimerText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerText.swift; sourceTree = "<group>"; };
-		2593232F24FAE8310036C148 /* CafeListFiltered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeListFiltered.swift; sourceTree = "<group>"; };
+		2593232F24FAE8310036C148 /* CafeRowsFiltered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeRowsFiltered.swift; sourceTree = "<group>"; };
 		2593233124FBB5F40036C148 /* TitleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleText.swift; sourceTree = "<group>"; };
 		2593233324FBBDF60036C148 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		2593233524FBCE7C0036C148 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
@@ -103,7 +102,6 @@
 		25A0824924F3FDEC00593CB3 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		25A627932513B92600313CD3 /* ListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRow.swift; sourceTree = "<group>"; };
 		25A627952513BB5000313CD3 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
-		25BA9E9825064CA30056C6E4 /* SearchCafeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCafeRow.swift; sourceTree = "<group>"; };
 		25C805062501144900B7E4CC /* NanumMyeongjo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumMyeongjo.ttf; sourceTree = "<group>"; };
 		25C80508250114BA00B7E4CC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		25C805092501171B00B7E4CC /* NanumBarunpenR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumBarunpenR.ttf; sourceTree = "<group>"; };
@@ -194,8 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				250BBC1724F3FAC700FC0C84 /* CafeRow.swift */,
-				25BA9E9825064CA30056C6E4 /* SearchCafeRow.swift */,
-				2593232F24FAE8310036C148 /* CafeListFiltered.swift */,
+				2593232F24FAE8310036C148 /* CafeRowsFiltered.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -430,7 +427,6 @@
 				250BBBF524F3F92E00FC0C84 /* ThemeColor.swift in Sources */,
 				25A0824A24F3FDEC00593CB3 /* ContentView.swift in Sources */,
 				250BBC1E24F3FAC800FC0C84 /* AppDelegate.swift in Sources */,
-				25BA9E9925064CA30056C6E4 /* SearchCafeRow.swift in Sources */,
 				2500739624F54A37009A32FA /* SettingManager.swift in Sources */,
 				2549427224F505730049F32E /* SimpleToggle.swift in Sources */,
 				2593233424FBBDF60036C148 /* MapView.swift in Sources */,
@@ -454,7 +450,7 @@
 				250BBBF324F3F92E00FC0C84 /* OperatingHourStruct.swift in Sources */,
 				25647B6F24F9FFC900E1C3F0 /* CafeDatas.swift in Sources */,
 				250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */,
-				2593233024FAE8310036C148 /* CafeListFiltered.swift in Sources */,
+				2593233024FAE8310036C148 /* CafeRowsFiltered.swift in Sources */,
 				259B889524F68B6F001C710C /* AdmobBanner.swift in Sources */,
 				250BBC2924F3FAC800FC0C84 /* CafeView.swift in Sources */,
 				250BBC1F24F3FAC800FC0C84 /* ListReorder.swift in Sources */,

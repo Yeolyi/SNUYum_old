@@ -23,7 +23,7 @@ struct SearchBar: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(themeColor.icon(colorScheme))
-                TextField("식당이나 메뉴 이름을 검색하세요", text: $text)
+                TextField("메뉴 이름을 검색하세요", text: $text)
                 // When text exists, show delete button.
                 if text != "" {
                     Image(systemName: "xmark.circle.fill")

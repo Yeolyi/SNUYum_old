@@ -60,7 +60,7 @@ struct ContentView: View {
                     // Cafe row starts here.
                     ScrollView {
                         //Searchbar
-                        //SearchBar(text: self.$searchedText)
+                        SearchBar(text: self.$searchWord)
                         // Cafe timer section.
                         if (self.settingManager.alimiCafeName != nil) {
                             Text("안내")
@@ -86,12 +86,12 @@ struct ContentView: View {
                         if (self.listManager.fixedList.isEmpty == false) {
                             Text("고정됨")
                                 .sectionText()
-                            CafeListFiltered(isFixed: true, searchWord: self.searchWord)
+                            CafeRowsFiltered(isFixed: true, searchWord: self.searchWord)
                         }
                         // Ordinary cafe section.
                         Text("식당목록")
                             .sectionText()
-                        CafeListFiltered(isFixed: false, searchWord: self.searchWord)
+                        CafeRowsFiltered(isFixed: false, searchWord: self.searchWord)
                     }
                     Divider()
                     // Google Admob.

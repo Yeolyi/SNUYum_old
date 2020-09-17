@@ -137,18 +137,13 @@ struct Cafe: Hashable, Codable, Identifiable {
     */
     func includes(_ keyword: String, at mealTypes: [MealType]) -> Bool {
         for mealType in mealTypes {
-            if (name.contains(keyword)) {
-                return true
-            }
             let menuList = menus(at: mealType)
             for menu in menuList{
                 if (menu.name.contains(keyword)) {
                     return true
                 }
             }
-            return false
         }
-        assertionFailure("Unintended Blah Blah")
         return false
     }
 }
