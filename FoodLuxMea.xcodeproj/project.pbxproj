@@ -14,7 +14,7 @@
 		250BBBF024F3F92E00FC0C84 /* ListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBE924F3F92D00FC0C84 /* ListManager.swift */; };
 		250BBBF124F3F92E00FC0C84 /* SmartSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEA24F3F92D00FC0C84 /* SmartSuggestion.swift */; };
 		250BBBF224F3F92E00FC0C84 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEB24F3F92D00FC0C84 /* DataManager.swift */; };
-		250BBBF324F3F92E00FC0C84 /* OperatingTimeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEC24F3F92D00FC0C84 /* OperatingTimeStruct.swift */; };
+		250BBBF324F3F92E00FC0C84 /* OperatingHourStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEC24F3F92D00FC0C84 /* OperatingHourStruct.swift */; };
 		250BBBF424F3F92E00FC0C84 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBED24F3F92D00FC0C84 /* Extensions.swift */; };
 		250BBBF524F3F92E00FC0C84 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEE24F3F92D00FC0C84 /* ThemeColor.swift */; };
 		250BBBF624F3F92E00FC0C84 /* HTMLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* HTMLManager.swift */; };
@@ -72,7 +72,7 @@
 		250BBBE924F3F92D00FC0C84 /* ListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListManager.swift; sourceTree = "<group>"; };
 		250BBBEA24F3F92D00FC0C84 /* SmartSuggestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartSuggestion.swift; sourceTree = "<group>"; };
 		250BBBEB24F3F92D00FC0C84 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		250BBBEC24F3F92D00FC0C84 /* OperatingTimeStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatingTimeStruct.swift; sourceTree = "<group>"; usesTabs = 0; };
+		250BBBEC24F3F92D00FC0C84 /* OperatingHourStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatingHourStruct.swift; sourceTree = "<group>"; usesTabs = 0; };
 		250BBBED24F3F92D00FC0C84 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		250BBBEE24F3F92D00FC0C84 /* ThemeColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		250BBBEF24F3F92E00FC0C84 /* HTMLManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLManager.swift; sourceTree = "<group>"; };
@@ -146,6 +146,7 @@
 			children = (
 				250BBC1124F3FAC700FC0C84 /* AppDelegate.swift */,
 				250BBC1A24F3FAC700FC0C84 /* SceneDelegate.swift */,
+				25BF46AC24F40C8800CC2355 /* Manager */,
 				25DD96D724FECBC100E5A4B3 /* MainView */,
 				25DD96D824FECBF100E5A4B3 /* CafeView */,
 				25DD96D924FECC1800E5A4B3 /* SettingView */,
@@ -153,7 +154,6 @@
 				2510CEDB24FF6386007ACE79 /* Data */,
 				25340D65251396F200E7FA7A /* Theme */,
 				25BF46B024F4128A00CC2355 /* Etc */,
-				25BF46AC24F40C8800CC2355 /* Manager */,
 				250BBBD924F3F8F900FC0C84 /* Assets.xcassets */,
 				250BBBDE24F3F8F900FC0C84 /* LaunchScreen.storyboard */,
 				250BBBE124F3F8F900FC0C84 /* Info.plist */,
@@ -204,7 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				25340D5E251395CC00E7FA7A /* CafeStruct.swift */,
-				250BBBEC24F3F92D00FC0C84 /* OperatingTimeStruct.swift */,
+				250BBBEC24F3F92D00FC0C84 /* OperatingHourStruct.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -439,7 +439,7 @@
 				2593233224FBB5F40036C148 /* TitleText.swift in Sources */,
 				250BBBF024F3F92E00FC0C84 /* ListManager.swift in Sources */,
 				255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */,
-				250BBBF324F3F92E00FC0C84 /* OperatingTimeStruct.swift in Sources */,
+				250BBBF324F3F92E00FC0C84 /* OperatingHourStruct.swift in Sources */,
 				25647B6F24F9FFC900E1C3F0 /* CafeDatas.swift in Sources */,
 				250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */,
 				2593233024FAE8310036C148 /* CafeListFiltered.swift in Sources */,

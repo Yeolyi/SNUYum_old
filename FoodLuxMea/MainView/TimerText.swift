@@ -45,7 +45,7 @@ struct TimerText: View {
                 return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
             }
                 
-            else if (isRhsBigger(lhs: (currentHour, currentMinute), rhs: startTime)) { //시작시간 전
+            else if SimpleTime(currentHour, currentMinute) < startTime { //시작시간 전
                 return "\(cafeName)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!"
             }
             
@@ -58,7 +58,7 @@ struct TimerText: View {
         }
             
         // When cafe operating hour data not exists
-        if (currentHour < 5 || currentHour > SmartSuggestion.dinnerDefaultTime.0) {
+        if (currentHour < 5 || currentHour > SmartSuggestion.dinnerDefaultTime.hour) {
             return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
         }
         else {
