@@ -52,10 +52,7 @@ class SettingManager: ObservableObject {
     @Published var alimiCafeName: String? = "학생회관식당"
     
     /// Array of string which means there is no menu.
-    var closedKeywords = ["방학중휴점", "폐    점", "코로나19로 당분간 휴점", "방학중 휴무", "당분간 폐점", "폐  점"] 
-    
-    /// Class to calculate remain time and suggest meal type.
-    private var smartSuggestion = SmartSuggestion()
+    var closedKeywords = ["방학중휴점", "폐    점", "코로나19로 당분간 휴점", "방학중 휴무", "당분간 폐점", "폐  점"]
 
     /// Final cafe date considering custom date and date suggestion.
     var date: Date {
@@ -82,8 +79,7 @@ class SettingManager: ObservableObject {
      - Note: If it's app's first run, save default value and return.
      */
     init() {
-        isSuggestedTomorrow = smartSuggestion.isTomorrow(Date())
-        suggestedMeal = smartSuggestion.mealType(at: Date())
+        (isSuggestedTomorrow, suggestedMeal) = SmartSuggestion.get(at: Date(), cafeName: "3식당")
         if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
             if userDefaults.bool(forKey: "firstRun") == false {
                 save()
@@ -119,11 +115,7 @@ class SettingManager: ObservableObject {
     
     /// Update setting if timer cafe changes. 
     func update(date: Date) {
-        if let cafeName = alimiCafeName {
-            smartSuggestion.update(dailyOperatingHour: cafeOperatingHour[cafeName]?.dayOfTheWeek(date: date))
-        }
-        isSuggestedTomorrow = smartSuggestion.isTomorrow(date)
-        suggestedMeal = smartSuggestion.mealType(at: date)
+        (isSuggestedTomorrow, suggestedMeal) = SmartSuggestion.get(at: date, cafeName: alimiCafeName ?? "3식당")
         print("SettingManager/update(date: ): 추천값 업데이트 완료")
     }
 }

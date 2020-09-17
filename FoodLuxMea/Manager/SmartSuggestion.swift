@@ -17,79 +17,36 @@ class SmartSuggestion {
     static let lunchDefaultTime = SimpleTime(15)
     static let dinnerDefaultTime = SimpleTime(19)
     
-    //As suggestion only depends on closing time, starting time is unnecessary.
-    /// Some cafe's morning operating hour end time; nil if cafe does not opens.
-    var bkfEndTime: SimpleTime? = nil
-    /// Some cafe's afternoon operating hour end time; nil if cafe does not opens.
-    var lunchEndTime: SimpleTime? = nil
-    /// Some cafe's evening operating hour end time; nil if cafe does not opens.
-    var dinnerEndTime: SimpleTime? = nil
     
-    /// Update class using some cafe's 'DailyOperatingHour' value.
-    func update(dailyOperatingHour: DailyOperatingHour?) {
-        if let dailyOperatingHourUnwrapped = dailyOperatingHour {
-            bkfEndTime = dailyOperatingHourUnwrapped.endTime(at: .breakfast)
-            lunchEndTime = dailyOperatingHourUnwrapped.endTime(at: .lunch)
-            dinnerEndTime = dailyOperatingHourUnwrapped.endTime(at: .dinner)
+    static func get(at date: Date, cafeName: String) -> (isTomorrow: Bool, meal: MealType) {
+        let currentSimpleDate = SimpleTime(date: date)
+        let bkfEndTime: SimpleTime?
+        let lunchEndTime: SimpleTime?
+        let dinnerEndTime: SimpleTime?
+        if let weeklyOperatingHour = cafeOperatingHour[cafeName] {
+            bkfEndTime = weeklyOperatingHour.dayOfTheWeek(date: date)?.endTime(at: .breakfast)
+            lunchEndTime = weeklyOperatingHour.dayOfTheWeek(date: date)?.endTime(at: .lunch)
+            dinnerEndTime = weeklyOperatingHour.dayOfTheWeek(date: date)?.endTime(at: .dinner)
         }
         else {
             bkfEndTime = nil
             lunchEndTime = nil
             dinnerEndTime = nil
         }
-    }
-    
-    /**
-     Returns true if time is too late.
-     */
-    func isTomorrow(_ date: Date) -> Bool {
-        let hour = Calendar.current.component(.hour, from: date)
-        let minute = Calendar.current.component(.minute, from: date)
-        
-        return (dinnerEndTime ?? SmartSuggestion.dinnerDefaultTime) < SimpleTime(hour, minute)
-    }
-    
-    /// Returns adequate meal type based on date parameter.
-    func mealType(at date: Date) -> MealType {
-        let hour = Calendar.current.component(.hour, from: date)
-        let minute = Calendar.current.component(.minute, from: date)
-        let inputDate = SimpleTime(hour, minute)
-        if inputDate < (bkfEndTime ?? SmartSuggestion.bkfDefaultTime) {
-            return .breakfast
+        let isTomorrow = (dinnerEndTime ?? SmartSuggestion.dinnerDefaultTime) < currentSimpleDate
+        let suggestedMeal: MealType
+        if currentSimpleDate < (bkfEndTime ?? SmartSuggestion.bkfDefaultTime) {
+            suggestedMeal = .breakfast
         }
-        else if inputDate < (lunchEndTime ?? SmartSuggestion.lunchDefaultTime) {
-            return .lunch
+        else if currentSimpleDate < (lunchEndTime ?? SmartSuggestion.lunchDefaultTime) {
+            suggestedMeal = .lunch
         }
-        else if inputDate < (dinnerEndTime ?? SmartSuggestion.dinnerDefaultTime) {
-            return .dinner
+        else if currentSimpleDate < (dinnerEndTime ?? SmartSuggestion.dinnerDefaultTime) {
+            suggestedMeal = .dinner
         }
         else {
-            return .breakfast
+            suggestedMeal = .breakfast
         }
-    }
-    
-}
-
-
-/// Tuple with hour and minute.
-struct SimpleTime {
-    let hour: Int
-    let minute: Int
-    
-    init(_ hour: Int, _ minute: Int = 0) {
-        self.hour = hour
-        self.minute = minute
-    }
-    
-    static func <(left: SimpleTime, right: SimpleTime) -> Bool {
-        if (left.hour < right.hour) {
-            return true
-        }
-        else if (left.hour == right.hour) {
-            return left.minute < right.minute
-        }
-        else {
-            return false
-        }
+        return (isTomorrow, suggestedMeal)
     }
 }
