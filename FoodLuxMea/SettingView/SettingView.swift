@@ -52,7 +52,7 @@ struct SettingView: View {
                 Button(action: { self.isPresented = false }) {
                     Text("닫기")
                         .font(.system(size: CGFloat(20), weight: .light))
-                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .foregroundColor(themeColor.icon(colorScheme))
                         .padding()
                         .offset(y: 10)
                 }
@@ -64,7 +64,7 @@ struct SettingView: View {
                 VStack(spacing: 0) {
                     
                     Text("기본 설정")
-                        .modifier(SectionTextModifier())
+                        .sectionText()
                     // Basic setting - Cafe reorder.
                     HStack {
                         Text("식당 순서 변경")
@@ -85,7 +85,7 @@ struct SettingView: View {
                     .onTapGesture {
                         self.activeSheet = .reorder
                     }
-                    .modifier(ListRow())
+                    .listRow()
                     // Basic setting - Cafe timer.
                     HStack {
                         Text("알리미 설정")
@@ -99,25 +99,25 @@ struct SettingView: View {
                     .onTapGesture {
                         self.activeSheet = .timer
                     }
-                    .modifier(ListRow())
+                    .listRow()
                     // Basic setting - Hide empty cafe.
-                    iOS1314Toggle(isOn: $settingManager.hideEmptyCafe, label: "정보가 없는 식당 숨기기")
+                    SimpleToggle(isOn: $settingManager.hideEmptyCafe, label: "정보가 없는 식당 숨기기")
                         .font(.system(size: 18))
-                        .modifier(ListRow())
+                        .listRow()
                     // Advanced setting.
                     Text("고급")
-                        .modifier(SectionTextModifier())
+                        .sectionText()
                     // Advanced setting - custom date.
-                    iOS1314Toggle(isOn: $settingManager.isCustomDate, label: "사용자 설정 날짜")
+                    SimpleToggle(isOn: $settingManager.isCustomDate, label: "사용자 설정 날짜")
                         .font(.system(size: 18))
-                        .modifier(ListRow())
+                        .listRow()
                     if (settingManager.isCustomDate) {
                         DatePicker(selection: $settingManager.debugDate, label: { EmptyView() })
-                            .modifier(ListRow())
+                            .listRow()
                     }
                     // Info
                     Text("정보")
-                        .modifier(SectionTextModifier())
+                        .sectionText()
                     HStack {
                         Text("스누냠 정보")
                         .font(.system(size: 18))
@@ -127,7 +127,7 @@ struct SettingView: View {
                     .onTapGesture {
                         self.activeSheet = .info
                     }
-                    .modifier(ListRow())
+                    .listRow()
                 }
                 // Caution: Sheet modifier position matters.
                 .sheet(item: self.$activeSheet) { item in

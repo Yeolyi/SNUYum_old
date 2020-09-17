@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-/// Custom simple toggle
-struct iOS1314Toggle: View {
+/// Custom toggle with static images.
+struct SimpleToggle: View {
     @Environment(\.colorScheme) var colorScheme
     let themeColor = ThemeColor()
     @Binding var isOn: Bool
@@ -30,7 +30,7 @@ struct iOS1314Toggle: View {
             Spacer()
             Image(systemName: isOn ? "checkmark" : "xmark")
                 .offset(x: -5)
-                .foregroundColor(themeColor.colorIcon(colorScheme))
+                .foregroundColor(themeColor.icon(colorScheme))
         }
         .contentShape(Rectangle())
         .onTapGesture{
@@ -42,17 +42,17 @@ struct iOS1314Toggle: View {
 struct iOS1314Toggle_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView{
-            iOS1314Toggle(isOn: .constant(true), label: "test")
+            SimpleToggle(isOn: .constant(true), label: "test")
                 .environmentObject(ThemeColor())
-                .modifier(ListRow())
-            iOS1314Toggle(isOn: .constant(true), label: "test")
+                .listRow()
+            SimpleToggle(isOn: .constant(true), label: "test")
                 .environmentObject(ThemeColor())
-                .modifier(ListRow())
+                .listRow()
             HStack {
                 Text("Text")
                 Spacer()
             }
-                .modifier(ListRow())
+            .listRow()
         }
         
     }

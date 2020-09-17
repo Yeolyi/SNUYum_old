@@ -10,21 +10,17 @@ import SwiftUI
 
 /// Theme colors for app changing at dark mode
 class ThemeColor: ObservableObject {
+    private var titleDark = Color(hex: "#6F77A6")
+    private var titleLight = Color(hex: "#3B568C")
 
-    private var colorTitleDark = Color(hex: "#6F77A6")
-    private var colorTitleLight = Color(hex: "#3B568C")
-
-    private var colorIconLight = Color(hex: "#3F4D59")
-    private var colorIconDark = Color(hex: "#7B848C")
+    private var iconLight = Color(hex: "#3F4D59")
+    private var iconDark = Color(hex: "#7B848C")
     
-    func colorIcon(_ colorScheme: ColorScheme) -> Color {
-        colorScheme == .dark ? colorIconDark : colorIconLight
+    func icon(_ colorScheme: ColorScheme) -> Color {
+        colorScheme == .dark ? iconDark : iconLight
     }
-    func colorTitle(_ colorScheme: ColorScheme) -> Color {
-        colorScheme == .dark ? colorTitleDark : colorTitleLight
-    }
-    func tempColor(_ colorScheme: ColorScheme) -> Color {
-        colorScheme == .dark ? Color(hex: "#F2D225") : Color(hex: "F26A4B")
+    func title(_ colorScheme: ColorScheme) -> Color {
+        colorScheme == .dark ? titleDark : titleLight
     }
 }
 

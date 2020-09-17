@@ -7,11 +7,21 @@
 
 import SwiftUI
 
-/// ViewModifier which substitutes SwiftUI list section header
+/// Substitutes SwiftUI list section header
 struct SectionText: ViewModifier {
     func body(content: Content) -> some View {
-        content
-        .font(.system(size: CGFloat(20), weight: .semibold, design: .default))
-        .foregroundColor(.primary)
+         HStack {
+             content
+                 .titleText()
+                 .padding([.top, .bottom], 5)
+                 .padding(.leading, 12)
+             Spacer()
+         }
+    }
+}
+
+extension View {
+    func sectionText() -> some View {
+        return modifier(SectionText())
     }
 }

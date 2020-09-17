@@ -16,9 +16,15 @@ struct TitleText: ViewModifier {
 }
 
 
+extension View {
+    func titleText() -> some View {
+        return modifier(TitleText())
+    }
+}
+
 struct TitleText_Previews: PreviewProvider {
     static var previews: some View {
         Text("왜안대")
-        .modifier(TitleText())
+            .titleText()
     }
 }

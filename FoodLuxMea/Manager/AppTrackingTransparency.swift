@@ -10,7 +10,11 @@
 import AppTrackingTransparency
 import AdSupport
 
-//NEWLY ADDED PERMISSIONS FOR iOS 14
+
+
+/**
+ Newly added permissions for iOS 14 - related to google admob.
+ */
 func requestPermission() {
     if #available(iOS 14, *) {
         ATTrackingManager.requestTrackingAuthorization { status in

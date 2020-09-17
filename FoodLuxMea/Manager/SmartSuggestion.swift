@@ -23,9 +23,9 @@ class SmartSuggestion {
         let lunchEndTime: SimpleTime?
         let dinnerEndTime: SimpleTime?
         if let weeklyOperatingHour = cafeOperatingHour[cafeName] {
-            bkfEndTime = weeklyOperatingHour.dayOfTheWeek(date: date)?.endTime(at: .breakfast)
-            lunchEndTime = weeklyOperatingHour.dayOfTheWeek(date: date)?.endTime(at: .lunch)
-            dinnerEndTime = weeklyOperatingHour.dayOfTheWeek(date: date)?.endTime(at: .dinner)
+            bkfEndTime = weeklyOperatingHour.getDaily(at: date)?.endTime(at: .breakfast)
+            lunchEndTime = weeklyOperatingHour.getDaily(at: date)?.endTime(at: .lunch)
+            dinnerEndTime = weeklyOperatingHour.getDaily(at: date)?.endTime(at: .dinner)
         }
         else {
             bkfEndTime = nil

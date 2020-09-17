@@ -70,7 +70,7 @@ struct CafeListFiltered: View {
                                     .environmentObject(self.settingManager)
                                     .environmentObject(self.dataManager)
                                         .environmentObject(self.themeColor)
-                                        .modifier(ListRow())
+                                    .listRow()
                             }
                         }
                              
@@ -91,7 +91,7 @@ struct CafeListFiltered: View {
                         .environmentObject(self.listManager)
                         .environmentObject(self.settingManager)
                         .environmentObject(self.dataManager)
-                                 .modifier(ListRow())
+                        .listRow()
             )
         }
         else {

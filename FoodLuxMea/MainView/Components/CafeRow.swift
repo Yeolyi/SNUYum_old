@@ -33,8 +33,8 @@ struct CafeRow: View {
         Button(action: {isSheet = true}) {
             VStack(alignment: .leading){
                 Text(cafe.name)
-                    .modifier(TitleText())
-                    .foregroundColor(themeColor.colorTitle(colorScheme))
+                    .titleText()
+                    .foregroundColor(themeColor.title(colorScheme))
                     .padding(.bottom, 3)
                 Spacer()
                 ForEach(cafe.getMenuList(mealType: suggestedMeal)) { menu in

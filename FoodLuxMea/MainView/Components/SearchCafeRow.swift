@@ -31,8 +31,8 @@ struct SearchCafeRow: View {
     var body: some View {
             VStack(alignment: .leading){
                 Text(cafe.name)
-                    .modifier(TitleText())
-                    .foregroundColor(themeColor.colorTitle(colorScheme))
+                    .titleText()
+                    .foregroundColor(themeColor.title(colorScheme))
                     .padding(.bottom, 3)
                 ForEach(cafe.getMenuList(mealType: suggestedMeal).filter{$0.name.contains(searchText)}) { menu in
                     HStack {
@@ -66,7 +66,7 @@ struct SearchCafeRow: View {
             }
             tempView = tempView +
                 (Text(String(target[target.index(target.startIndex, offsetBy: cnt)]))
-                .foregroundColor(colorSet.contains(cnt) ? self.themeColor.colorTitle(self.colorScheme) : Color(.label)))
+                .foregroundColor(colorSet.contains(cnt) ? self.themeColor.title(self.colorScheme) : Color(.label)))
             return getView(cnt: cnt + 1)
         }
         

@@ -25,7 +25,7 @@ struct InfoView: View {
                     Button(action: {self.presentationMode.wrappedValue.dismiss()}){
                         Text("닫기")
                             .font(.system(size: CGFloat(20), weight: .semibold))
-                            .foregroundColor(themeColor.colorIcon(colorScheme))
+                            .foregroundColor(themeColor.icon(colorScheme))
                             .padding()
                             .offset(y: 10)
                     }
@@ -40,46 +40,46 @@ struct InfoView: View {
                 ScrollView{
                     //App version
                     Text("버전")
-                        .modifier(SectionTextModifier())
+                        .sectionText()
                     HStack {
                         Spacer()
                         Text(appVersion)
                         Spacer()
                     }
-                    .modifier(ListRow())
+                    .listRow()
                     // App build
                     Text("빌드")
-                        .modifier(SectionTextModifier())
+                        .sectionText()
                     HStack {
                         Spacer()
                         Text(build)
                         Spacer()
                     }
-                    .modifier(ListRow())
+                    .listRow()
                     // References
                     Text("자료 참조")
-                        .modifier(SectionTextModifier())
+                        .sectionText()
                     HStack {
                         Spacer()
                         Text("서울대학교생활협동조합 홈페이지\n(snuco.snu.ac.kr)")
                         Spacer()
                     }
-                    .modifier(ListRow())
+                    .listRow()
                     HStack {
                         Spacer()
                         Text("서울대학교 캠퍼스 맵\n(map.snu.ac.kr)")
                         Spacer()
                     }
-                    .modifier(ListRow())
+                    .listRow()
                     // Developer
                     Text("개발자")
-                        .modifier(SectionTextModifier())
+                        .sectionText()
                     HStack {
                         Spacer()
                         Text("이성열")
                         Spacer()
                     }
-                    .modifier(ListRow())
+                    .listRow()
                 }
         }
     }

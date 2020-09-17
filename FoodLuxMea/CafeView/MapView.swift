@@ -38,7 +38,7 @@ struct MapView: View {
             .navigationBarItems(trailing:
                                     Button(action: {self.presentationMode.wrappedValue.dismiss()}){
                                         Text("닫기")
-                                            .foregroundColor(themeColor.colorTitle(colorScheme))
+                                            .foregroundColor(themeColor.title(colorScheme))
                                     })
         }
     }

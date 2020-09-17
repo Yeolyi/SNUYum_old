@@ -37,6 +37,7 @@ struct SimpleTime {
     }
 }
 
+
 /**
  Cafeteria operating hour of one day three meals; nil if cafe does not open.
  
@@ -103,7 +104,7 @@ struct WeeklyOperatingHour {
     var sunday: DailyOperatingHour?
     
     /// Return daily operating hour of input date
-    func dayOfTheWeek(date: Date) -> DailyOperatingHour? {
+    func getDaily(at date: Date) -> DailyOperatingHour? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
         let str = dateFormatter.string(from: date)
@@ -115,20 +116,5 @@ struct WeeklyOperatingHour {
         default:
             return weekday
         }
-    }
-}
-
-/// Return day of the week string from input date
-func dayOfTheWeek(of date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEEE"
-    let str = dateFormatter.string(from: date)
-    switch (str) {
-    case "Saturday":
-        return "토요일"
-    case "Sunday":
-        return "일요일"
-    default:
-        return "평일"
     }
 }

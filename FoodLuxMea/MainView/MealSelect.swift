@@ -27,19 +27,19 @@ struct MealSelect: View {
                     ZStack {
                        RoundedRectangle(cornerRadius: 10)
                            .frame(width: 40, height: 40)
-                           .foregroundColor(settingManager.isAuto == true ? themeColor.colorTitle(colorScheme) : Color.clear)
+                           .foregroundColor(settingManager.isAuto == true ? themeColor.title(colorScheme) : Color.clear)
                            .opacity(0.2)
                         Button(action: {self.settingManager.isAuto = true; self.settingManager.save()}) {
                             Image(systemName: "arrow.clockwise.circle")
                                 .font(.system(size: 20, weight: .regular))
                                 .padding([.leading, .trailing], 2)
-                                .foregroundColor(settingManager.isAuto == true ? themeColor.colorIcon((colorScheme)) : Color(.systemFill))
+                                .foregroundColor(settingManager.isAuto == true ? themeColor.icon((colorScheme)) : Color(.systemFill))
                         }
                         .buttonStyle(BorderlessButtonStyle())
                     }
                 }
             }
-            .modifier(ListRow())
+            .listRow()
         }
 
     }
@@ -71,12 +71,12 @@ struct MealTypeButton: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width: 40, height: 40)
-                        .foregroundColor(settingManager.mealViewMode == buttonType && settingManager.isAuto == false ? themeColor.colorTitle(colorScheme) : Color.clear)
+                        .foregroundColor(settingManager.mealViewMode == buttonType && settingManager.isAuto == false ? themeColor.title(colorScheme) : Color.clear)
                         .opacity(0.2)
                     Image(systemName: imageName)
                         .font(.system(size: 20, weight: .regular))
                         .padding([.leading, .trailing], 2)
-                        .foregroundColor(settingManager.mealViewMode == buttonType && settingManager.isAuto == false ? themeColor.colorIcon((colorScheme)) : Color(.systemFill))
+                        .foregroundColor(settingManager.mealViewMode == buttonType && settingManager.isAuto == false ? themeColor.icon((colorScheme)) : Color(.systemFill))
                 }
             }
             .buttonStyle(BorderlessButtonStyle())

@@ -30,7 +30,7 @@ struct ListReorder: View {
                          self.presentationMode.wrappedValue.dismiss()}) {
                      Text("취소")
                         .font(.system(size: CGFloat(20), weight: .semibold))
-                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .foregroundColor(themeColor.icon(colorScheme))
                         .offset(y: 10)
                  }
                 Button(action: {
@@ -39,7 +39,7 @@ struct ListReorder: View {
                    self.presentationMode.wrappedValue.dismiss()}) {
                        Text("저장")
                          .font(.system(size: CGFloat(20), weight: .semibold))
-                         .foregroundColor(themeColor.colorIcon(colorScheme))
+                         .foregroundColor(themeColor.icon(colorScheme))
                          .padding()
                          .offset(y: 10)
                 }
@@ -47,7 +47,8 @@ struct ListReorder: View {
             // Edit mode list.
             List {
                 Section(header:
-                           Text("고정됨").modifier(SectionText())
+                           Text("고정됨")
+                            .sectionText()
                             .padding([.top], 40)
                 ) {
                     if (tempListManager.fixedList.isEmpty) {
@@ -55,16 +56,16 @@ struct ListReorder: View {
                     }
                     ForEach(tempListManager.cafeList.filter{$0.isFixed}) { cafe in
                         Text(cafe.name)
-                        .modifier(TitleText())
+                            .titleText()
                     }
                     .onMove(perform: moveFixed)
                 }
                 Section(header:
-                           Text("일반").modifier(SectionText())
+                           Text("일반").sectionText()
                 ) {
                     ForEach(tempListManager.cafeList.filter{$0.isFixed == false}) { cafe in
                         Text(cafe.name)
-                        .modifier(TitleText())
+                            .titleText()
                     }
                     .onMove(perform: moveUnfixed)
                 }

@@ -64,14 +64,14 @@ struct ContentView: View {
                         // Cafe timer section.
                         if (self.settingManager.alimiCafeName != nil) {
                             Text("안내")
-                                .modifier(SectionTextModifier())
+                                .sectionText()
                             Button(action: {isTimerSheet = true}) {
                                 HStack {
                                     Spacer()
                                     TimerText(cafeName: self.settingManager.alimiCafeName!)
                                     Spacer()
                                 }
-                                .modifier(ListRow())
+                                .listRow()
                             }
                             .sheet(isPresented: $isTimerSheet) {
                                 CafeView(cafeInfo: dataManager.getData(at: settingManager.date, name: settingManager.alimiCafeName!))
@@ -83,12 +83,12 @@ struct ContentView: View {
                         // Fixed cafe section.
                         if (self.listManager.fixedList.isEmpty == false) {
                             Text("고정됨")
-                                .modifier(SectionTextModifier())
+                                .sectionText()
                             CafeListFiltered(isFixed: true, searchedText: self.searchedText)
                         }
                         // Ordinary cafe section.
                         Text("식당목록")
-                            .modifier(SectionTextModifier())
+                            .sectionText()
                         CafeListFiltered(isFixed: false, searchedText: self.searchedText)
                     }
                     Divider()
@@ -103,7 +103,7 @@ struct ContentView: View {
                     }
         }
         // TODO: Make theme elements to delete this. 
-        .accentColor(themeColor.colorIcon(colorScheme))
+        .accentColor(themeColor.icon(colorScheme))
     }
 }
 

@@ -34,8 +34,8 @@ struct TimerText: View {
         let cafeData = dataManager.getData(at: settingManager.date, name: cafeName)
         
         // When cafe operating hour data exists
-        a: if let endDate = cafeOperatingHour[cafeName]?.dayOfTheWeek(date: settingManager.date)?.endTime(at: settingManager.suggestedMeal) {
-            let startTime = cafeOperatingHour[cafeName]!.dayOfTheWeek(date: settingManager.date)!.startTime(at: settingManager.suggestedMeal)!
+        a: if let endDate = cafeOperatingHour[cafeName]?.getDaily(at: settingManager.date)?.endTime(at: settingManager.suggestedMeal) {
+            let startTime = cafeOperatingHour[cafeName]!.getDaily(at: settingManager.date)!.startTime(at: settingManager.suggestedMeal)!
             
             if (cafeData.isEmpty(mealType: settingManager.suggestedMeal, keywords: settingManager.closedKeywords)) {
                 break a
@@ -72,6 +72,21 @@ struct TimerText: View {
         let hours = String(diffComponents.hour!)
         let minutes = String(diffComponents.minute! + 1)
         return (hours, minutes)
+    }
+    
+    /// Return day of the week string from input date
+    func dayOfTheWeek(of date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        let str = dateFormatter.string(from: date)
+        switch (str) {
+        case "Saturday":
+            return "토요일"
+        case "Sunday":
+            return "일요일"
+        default:
+            return "평일"
+        }
     }
 }
 

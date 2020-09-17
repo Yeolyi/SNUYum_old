@@ -27,7 +27,7 @@ struct TimerSelectView: View {
                         self.presentationMode.wrappedValue.dismiss()}) {
                     Text("취소")
                         .font(.system(size: CGFloat(20), weight: .semibold))
-                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .foregroundColor(themeColor.icon(colorScheme))
                         .offset(y: 10)
                 }
                 Button(action: {
@@ -35,7 +35,7 @@ struct TimerSelectView: View {
                         self.presentationMode.wrappedValue.dismiss()}) {
                     Text("저장")
                         .font(.system(size: CGFloat(20), weight: .semibold))
-                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .foregroundColor(themeColor.icon(colorScheme))
                         .padding()
                         .offset(y: 10)
                 }
@@ -51,16 +51,16 @@ struct TimerSelectView: View {
 3식당: 4층 기준
 301동 식당: 지하 기준
 """)
-                    .modifier(ListRow())
+                    .listRow()
                 // Toggle for timer on off
                 Text("설정")
-                    .modifier(SectionTextModifier())
-                iOS1314Toggle(isOn: $tempIsTimerCafe, label: "알리미 켜기")
-                    .modifier(ListRow())
+                    .sectionText()
+                SimpleToggle(isOn: $tempIsTimerCafe, label: "알리미 켜기")
+                    .listRow()
                 // Selectable cafe list
                 if (tempIsTimerCafe) {
                     Text("목록")
-                        .modifier(SectionTextModifier())
+                        .sectionText()
                         ForEach(listManager.cafeList) { listElement in
                             Button(action: {self.selectedCafeName = listElement.name}) {
                                 HStack {
@@ -68,7 +68,7 @@ struct TimerSelectView: View {
                                     Text(listElement.name)
                                     Spacer()
                                 }
-                                .modifier(ListRow())
+                                .listRow()
                                 .foregroundColor(self.getColor(cafeName: listElement.name))
                             }
                         }
@@ -84,7 +84,7 @@ struct TimerSelectView: View {
     // Highlight cafe color if selected
     func getColor(cafeName: String) -> Color{
         if (cafeName == settingManager.alimiCafeName) {
-            return themeColor.colorIcon(colorScheme)
+            return themeColor.icon(colorScheme)
         }
         else if (cafeName == self.selectedCafeName) {
             return Color(.systemGray)

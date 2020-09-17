@@ -43,13 +43,13 @@ struct CafeView: View {
                 }) {
                     Image(systemName: cafeList.isFixed(cafeName: self.cafeInfo.name) ? "pin" : "pin.slash")
                         .font(.system(size: 25, weight: .light))
-                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .foregroundColor(themeColor.icon(colorScheme))
                         .offset(y: 10)
                 }
                 Button(action: { self.presentationMode.wrappedValue.dismiss()}) {
                     Text("닫기")
                         .font(.system(size: CGFloat(20), weight: .light))
-                        .foregroundColor(themeColor.colorIcon(colorScheme))
+                        .foregroundColor(themeColor.icon(colorScheme))
                         .padding()
                         .offset(y: 10)
                 }
@@ -58,21 +58,21 @@ struct CafeView: View {
             // Various cafe information.
             ScrollView {
                 Text("안내")
-                    .modifier(SectionTextModifier())
+                    .sectionText()
                 // Cafe timer.
                 HStack {
                     Spacer()
                     TimerText(cafeName: cafeInfo.name)
                     Spacer()
                 }
-                .modifier(ListRow())
+                .listRow()
                 // Full meal view.
                 mealSection(mealType: .breakfast, mealMenus: cafeInfo.bkfMenuList)
                 mealSection(mealType: .lunch, mealMenus: cafeInfo.lunchMenuList)
                 mealSection(mealType: .dinner, mealMenus: cafeInfo.dinnerMenuList)
                 // Cafe information with phone call and map view.
                 Text("식당 정보")
-                .modifier(SectionTextModifier())
+                    .sectionText()
                 VStack {
                     Text(cafeDescription[cafeInfo.name] ?? "정보 없음")
                         .font(.system(size: 16))
@@ -85,10 +85,10 @@ struct CafeView: View {
                             Spacer()
                             Image(systemName: "phone")
                                 .font(.system(size: 20))
-                                .foregroundColor(themeColor.colorTitle(colorScheme))
+                                .foregroundColor(themeColor.title(colorScheme))
                             Text("전화 걸기")
                                 .font(.system(size: 16))
-                                .foregroundColor(themeColor.colorTitle(colorScheme))
+                                .foregroundColor(themeColor.title(colorScheme))
                             Spacer()
                         }
                         .contentShape(Rectangle())
@@ -104,10 +104,10 @@ struct CafeView: View {
                             Spacer()
                             Image(systemName: "map")
                                 .font(.system(size: 20, weight: .light))
-                                .foregroundColor(themeColor.colorTitle(colorScheme))
+                                .foregroundColor(themeColor.title(colorScheme))
                             Text("위치 보기")
                                 .font(.system(size: 16))
-                                .foregroundColor(themeColor.colorTitle(colorScheme))
+                                .foregroundColor(themeColor.title(colorScheme))
                             Spacer()
                         }
                         .contentShape(Rectangle())
@@ -116,7 +116,7 @@ struct CafeView: View {
                         }
                     }
                 }
-                .modifier(ListRow())
+                .listRow()
             }
             Divider()
             // Google admob. 
@@ -140,13 +140,13 @@ struct CafeView: View {
         if (mealMenus.isEmpty == false ) {
             return AnyView(
                 VStack {
-                    Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.dayOfTheWeek(date: settingManager.date)?.operatingHour(at: mealType) ?? "시간 정보 없음")  + ")")
-                            .modifier(SectionTextModifier())
+                    Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.getDaily(at: settingManager.date)?.operatingHour(at: mealType) ?? "시간 정보 없음")  + ")")
+                        .sectionText()
                 ForEach(mealMenus) { menu in
                     HStack{
                         Text(menu.name)
-                            .modifier(TitleText())
-                            .foregroundColor(self.themeColor.colorTitle(self.colorScheme))
+                            .titleText()
+                            .foregroundColor(self.themeColor.title(self.colorScheme))
                             .fixedSize(horizontal: false, vertical: true)
                             .onTapGesture {
                                 print(menu.name)
@@ -155,7 +155,7 @@ struct CafeView: View {
                         Text(self.costInterpret(menu.cost) ?? "")
                             .foregroundColor(Color(.gray))
                     }
-                .modifier(ListRow())
+                    .listRow()
                 }
             }
             )
