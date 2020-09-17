@@ -37,7 +37,7 @@ struct TimerText: View {
         a: if let endDate = cafeOperatingHour[cafeName]?.getDaily(at: settingManager.date)?.endTime(at: settingManager.suggestedMeal) {
             let startTime = cafeOperatingHour[cafeName]!.getDaily(at: settingManager.date)!.startTime(at: settingManager.suggestedMeal)!
             
-            if (cafeData.isEmpty(mealType: settingManager.suggestedMeal, keywords: settingManager.closedKeywords)) {
+            if (cafeData.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords)) {
                 break a
             }
             

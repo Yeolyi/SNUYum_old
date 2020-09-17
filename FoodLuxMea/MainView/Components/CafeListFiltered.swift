@@ -111,11 +111,11 @@ struct CafeListFiltered: View {
      */
     func listFilter(name: String) -> filterResult {
         let targetCafe = dataManager.getData(at: settingManager.date, name: name)
-        if targetCafe.bkfMenuList.isEmpty && targetCafe.lunchMenuList.isEmpty  && targetCafe.dinnerMenuList.isEmpty  {
+        if targetCafe.isEmpty(at: [.breakfast, .lunch, .dinner], emptyKeywords: settingManager.closedKeywords)  {
              return .noData
         }
-        if (searchedText.isEmpty || targetCafe.search(searchedText, at: settingManager.mealViewMode)) {
-                if (targetCafe.isEmpty(mealType: settingManager.meal, keywords: settingManager.closedKeywords) == false ) {
+        if (searchedText.isEmpty || targetCafe.includes(searchedText, at: [settingManager.mealViewMode])) {
+                if (targetCafe.isEmpty(at: [settingManager.meal], emptyKeywords: settingManager.closedKeywords) == false ) {
                     return .show
                 }
                 else {

@@ -67,9 +67,9 @@ struct CafeView: View {
                 }
                 .listRow()
                 // Full meal view.
-                mealSection(mealType: .breakfast, mealMenus: cafeInfo.bkfMenuList)
-                mealSection(mealType: .lunch, mealMenus: cafeInfo.lunchMenuList)
-                mealSection(mealType: .dinner, mealMenus: cafeInfo.dinnerMenuList)
+                mealSection(mealType: .breakfast, mealMenus: cafeInfo.menus(at: .breakfast))
+                mealSection(mealType: .lunch, mealMenus: cafeInfo.menus(at: .lunch))
+                mealSection(mealType: .dinner, mealMenus: cafeInfo.menus(at: .dinner))
                 // Cafe information with phone call and map view.
                 Text("식당 정보")
                     .sectionText()

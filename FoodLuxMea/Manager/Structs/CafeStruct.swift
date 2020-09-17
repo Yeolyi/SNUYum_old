@@ -70,12 +70,23 @@ struct Menu: Hashable, Codable, Identifiable {
  - ToDo: As phoneNum variable is available in another struct, delete it and let settingmanager manage it. Also change name of bkfMenuList to breakfastMenuList.
  */
 struct Cafe: Hashable, Codable, Identifiable {
-    var id = UUID()
+    internal var id = UUID()
     let name: String
-    let phoneNum: String
-    let bkfMenuList: [Menu]
-    let lunchMenuList: [Menu]
-    let dinnerMenuList: [Menu]
+    public let phoneNum: String
+    private let bkfMenuList: [Menu]
+    private let lunchMenuList: [Menu]
+    private let dinnerMenuList: [Menu]
+    
+    init(name: String, phoneNum: String, bkfMenuList: [Menu], lunchMenuList: [Menu], dinnerMenuList: [Menu]) {
+        if name.count < 3 {
+            assertionFailure("Invalid name")
+        }
+        self.name = name
+        self.phoneNum = phoneNum
+        self.bkfMenuList = bkfMenuList
+        self.lunchMenuList = lunchMenuList
+        self.dinnerMenuList = dinnerMenuList
+    }
     
     /**
      True if there is no menu in selected meal type.
@@ -84,18 +95,22 @@ struct Cafe: Hashable, Codable, Identifiable {
         - mealType: Select which meal type to search
         - keywords: Exceptional strings which means menu is empty.
      */
-    func isEmpty(mealType: MealType, keywords: [String]) -> Bool {
-        let targetMenuList = getMenuList(mealType: mealType)
-        if (targetMenuList.count == 0 ) { return true }
-        else if (targetMenuList.count > 1) { return false}
-        else {
-            for keyword in keywords {
-                if targetMenuList.contains(where: { $0.name == keyword }) {
-                    return true
+    func isEmpty(at mealTypes: [MealType], emptyKeywords: [String]) -> Bool {
+        for mealType in mealTypes {
+            let targetMenuList = menus(at: mealType)
+            if (targetMenuList.count == 0 ) { return true }
+            else if (targetMenuList.count > 1) { return false}
+            else {
+                for keyword in emptyKeywords {
+                    if targetMenuList.contains(where: { $0.name == keyword }) {
+                        return true
+                    }
                 }
+                return false
             }
-            return false
         }
+        assertionFailure("Unintended blah blah")
+        return false
     }
     
     /**
@@ -103,7 +118,7 @@ struct Cafe: Hashable, Codable, Identifiable {
      
      - Parameter mealType: Select which meal type to get
     */
-    func getMenuList(mealType: MealType) -> [Menu] {
+    func menus(at mealType: MealType) -> [Menu] {
         switch mealType {
         case .breakfast:
             return bkfMenuList
@@ -120,16 +135,20 @@ struct Cafe: Hashable, Codable, Identifiable {
      - Parameter keyword: Text to search.
      - Parameter mealType: Meal type array to search.
     */
-    func search(_ keyword: String, at mealType: MealType) -> Bool {
-        if (name.contains(keyword)) {
-            return true
-        }
-        let menuList = getMenuList(mealType: mealType)
-        for menu in menuList{
-            if (menu.name.contains(keyword)) {
+    func includes(_ keyword: String, at mealTypes: [MealType]) -> Bool {
+        for mealType in mealTypes {
+            if (name.contains(keyword)) {
                 return true
             }
+            let menuList = menus(at: mealType)
+            for menu in menuList{
+                if (menu.name.contains(keyword)) {
+                    return true
+                }
+            }
+            return false
         }
+        assertionFailure("Unintended Blah Blah")
         return false
     }
 }

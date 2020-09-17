@@ -34,7 +34,7 @@ struct SearchCafeRow: View {
                     .titleText()
                     .foregroundColor(themeColor.title(colorScheme))
                     .padding(.bottom, 3)
-                ForEach(cafe.getMenuList(mealType: suggestedMeal).filter{$0.name.contains(searchText)}) { menu in
+                ForEach(cafe.menus(at: suggestedMeal).filter{$0.name.contains(searchText)}) { menu in
                     HStack {
                         self.text(target: menu.name, search: self.searchText)
                             .font(.system(size: 15))

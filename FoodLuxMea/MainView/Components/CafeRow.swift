@@ -37,7 +37,7 @@ struct CafeRow: View {
                     .foregroundColor(themeColor.title(colorScheme))
                     .padding(.bottom, 3)
                 Spacer()
-                ForEach(cafe.getMenuList(mealType: suggestedMeal)) { menu in
+                ForEach(cafe.menus(at: suggestedMeal)) { menu in
                     HStack {
                         Text(menu.name)
                             .font(.system(size: 15))
