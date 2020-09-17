@@ -30,7 +30,7 @@ struct CafeListFiltered: View {
     @EnvironmentObject var dataManager: DataManager
     let themeColor = ThemeColor()
     let isFixed: Bool
-    let searchedText: String 
+    let searchWord: String 
     
     /**
      - Parameters:
@@ -39,9 +39,9 @@ struct CafeListFiltered: View {
         - isFixed: Show fixed cafe only or not
         - searchedText: If something is searched, filters the cafe list
      */
-    init(isFixed: Bool, searchedText: String) {
+    init(isFixed: Bool, searchWord: String) {
         self.isFixed = isFixed
-        self.searchedText = searchedText
+        self.searchWord = searchWord
     }
     
     var body: some View {
@@ -53,50 +53,43 @@ struct CafeListFiltered: View {
             VStack(spacing: 0) {
                 ForEach(list, id: \.self) { (listElement: ListElement) in
                         Group {
-                        if (self.listFilter(name: listElement.name) == .show) {
-                            self.nameToCafeRow(listElement)
-                        }
-                            
-                        else if (self.listFilter(name: listElement.name) == .closed) {
-                            if (self.settingManager.hideEmptyCafe == false) {
-                                self.nameToCafeRow(listElement)
-                                }
-                        }
-                               
-                        else if (self.listFilter(name: listElement.name) == .noData) {
-                            if (self.settingManager.hideEmptyCafe == false && self.dataManager.getData(at: self.settingManager.date, name: listElement.name) != nil) {
-                                CafeRow(cafe: self.dataManager.getData(at: self.settingManager.date, name: listElement.name)!, suggestedMeal: self.settingManager.meal)
-                                    .environmentObject(self.listManager)
-                                    .environmentObject(self.settingManager)
-                                    .environmentObject(self.dataManager)
-                                        .environmentObject(self.themeColor)
-                                    .listRow()
+                            if (self.listFilter(name: listElement.name) == .show) {
+                                getCafeRow(from: listElement.name)
                             }
-                        }
-                             
-                        else {
-                            EmptyView()
-                        }
+                                
+                            else if (self.listFilter(name: listElement.name) == .closed) {
+                                if (self.settingManager.hideEmptyCafe == false) {
+                                    getCafeRow(from: listElement.name)
+                                    }
+                            }
+                                   
+                            else if (self.listFilter(name: listElement.name) == .noData) {
+                                if (self.settingManager.hideEmptyCafe == false && self.dataManager.cafe(at: self.settingManager.date, name: listElement.name) != nil) {
+                                    CafeRow(cafe: self.dataManager.cafe(at: self.settingManager.date, name: listElement.name)!, suggestedMeal: self.settingManager.meal)
+                                        .environmentObject(self.listManager)
+                                        .environmentObject(self.settingManager)
+                                        .environmentObject(self.dataManager)
+                                }
+                            }
                     }
                 }
             }
         )
     }
     ///
-    func nameToCafeRow(_ listElement: ListElement) -> AnyView {
-        if let cafe = self.dataManager.getData(at: self.settingManager.date, name: listElement.name) {
-            if searchedText == "" {
+    func getCafeRow(from cafeName: String) -> AnyView {
+        if let cafe = self.dataManager.cafe(at: self.settingManager.date, name: cafeName) {
+            if searchWord == "" {
                  return AnyView(
                         CafeRow(cafe: cafe, suggestedMeal: settingManager.meal)
                             .environmentObject(self.listManager)
                             .environmentObject(self.settingManager)
                             .environmentObject(self.dataManager)
-                            .listRow()
                 )
             }
             else {
                  return AnyView(
-                        SearchCafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchedText)
+                        SearchCafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchWord)
                             .environmentObject(self.listManager)
                             .environmentObject(self.settingManager)
                             .environmentObject(self.dataManager)
@@ -113,11 +106,11 @@ struct CafeListFiltered: View {
      - ToDo: DataManager.getData is used twice in this function and nameToCafeRow. Optimization required.
      */
     func listFilter(name: String) -> filterResult {
-        if let targetCafe = dataManager.getData(at: settingManager.date, name: name) {
+        if let targetCafe = dataManager.cafe(at: settingManager.date, name: name) {
             if targetCafe.isEmpty(at: [.breakfast, .lunch, .dinner], emptyKeywords: settingManager.closedKeywords)  {
                  return .noData
             }
-            if (searchedText.isEmpty || targetCafe.includes(searchedText, at: [settingManager.mealViewMode])) {
+            if (searchWord.isEmpty || targetCafe.includes(searchWord, at: [settingManager.mealViewMode])) {
                     if (targetCafe.isEmpty(at: [settingManager.meal], emptyKeywords: settingManager.closedKeywords) == false ) {
                         return .show
                     }
@@ -147,7 +140,7 @@ struct CafeListFiltered: View {
            }
        }
        if (rowNum == 0) {
-           if (searchedText != "") {
+           if (searchWord != "") {
                return AnyView(Text("검색 결과가 없어요"))
            }
            else {

@@ -23,15 +23,15 @@ struct TimerText: View {
     }
     
     var body: some View {
-        Text(text())
+        Text(timerString())
     }
     
-    func text() -> String {
+    func timerString() -> String {
         // Get current setting time component.
         let currentHour = Calendar.current.component(.hour, from: settingManager.date)
         let currentMinute = Calendar.current.component(.minute, from: settingManager.date)
         
-        if let cafeData = dataManager.getData(at: settingManager.date, name: cafeName) {
+        if let cafeData = dataManager.cafe(at: settingManager.date, name: cafeName) {
         
             // When cafe operating hour data exists
             a: if let endDate = cafeOperatingHour[cafeName]?.getDaily(at: settingManager.date)?.getEndTime(at: settingManager.suggestedMeal) {

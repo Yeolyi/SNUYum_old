@@ -107,7 +107,6 @@ class SNUCOManager {
             temp = try! SwiftSoup.parse(temp).text()
             let list = temp.split(separator: "꿇").map(String.init)
             for i in list { //여기서 메뉴와 가격 분리
-                print(i)
                 let trimmedValue = whiteSpaceTrim(i)
                 
                 if trimmedValue.isEmpty {
@@ -128,7 +127,6 @@ class SNUCOManager {
                     if Int(String(trimmedValue[index])) != nil && (String(trimmedValue[trimmedValue.index(after: index)]) == "," || Int(String(trimmedValue[trimmedValue.index(after: index)])) != nil) {
                         let menu = whiteSpaceTrim(String(trimmedValue[..<index]))
                         let cost = decimalTrimInverted(whiteSpaceTrim(String(trimmedValue[index...])))
-                        print("\(menu) \(cost)")
                         returnValue.append(.init(name: menu, cost: cost))
                         isCost = true
                         break
@@ -141,7 +139,6 @@ class SNUCOManager {
             }
             
         }
-        print(returnValue)
         return returnValue
     }
     

@@ -35,7 +35,6 @@ struct ListReorder: View {
                  }
                 Button(action: {
                    self.listManager.cafeList = self.tempListManager.cafeList
-                   self.listManager.save()
                    self.presentationMode.wrappedValue.dismiss()}) {
                        Text("저장")
                          .font(.system(size: CGFloat(20), weight: .semibold))

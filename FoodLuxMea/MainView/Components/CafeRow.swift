@@ -59,6 +59,7 @@ struct CafeRow: View {
                 .environmentObject(self.settingManager)
                 .environmentObject(self.dataManager)
         }
+        .listRow()
     }
     
     /**

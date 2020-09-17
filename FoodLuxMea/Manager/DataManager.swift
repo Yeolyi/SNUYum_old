@@ -58,7 +58,7 @@ class DataManager: ObservableObject {
     }
     
     /// Get all data of certain date.
-    func getData(at date: Date) -> [Cafe]{
+    func loadAll(at date: Date) -> [Cafe]{
         let uRLString = SNUCOManager().makeURL(from: date)
         if let data = cafeData[uRLString] {
             return data
@@ -83,7 +83,7 @@ class DataManager: ObservableObject {
      
      - Remark: If there's no such cafe, returns empty cafe struct with same name.
      */
-    func getData(at date: Date, name: String) -> Cafe? {
+    func cafe(at date: Date, name: String) -> Cafe? {
         let uRLString = hTMLManager.makeURL(from: date)
         if let data = cafeData[uRLString] {
             return data.first{ $0.name == name }!
@@ -91,7 +91,7 @@ class DataManager: ObservableObject {
         else {
             if isInternetConnected {
                 print("CafeDataManager.getData(at: name: ): 다운로드 중, \(uRLString)")
-                let newData = self.getData(at: date)
+                let newData = self.loadAll(at: date)
                 cafeData[uRLString] = newData
                 for cafe in newData {
                     if (cafe.name == name) {

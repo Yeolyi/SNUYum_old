@@ -29,7 +29,7 @@ struct MealSelect: View {
                            .frame(width: 40, height: 40)
                            .foregroundColor(settingManager.isAuto == true ? themeColor.title(colorScheme) : Color.clear)
                            .opacity(0.2)
-                        Button(action: {self.settingManager.isAuto = true; self.settingManager.save()}) {
+                        Button(action: {self.settingManager.isAuto = true }) {
                             Image(systemName: "arrow.clockwise.circle")
                                 .font(.system(size: 20, weight: .regular))
                                 .padding([.leading, .trailing], 2)
@@ -67,7 +67,7 @@ struct MealTypeButton: View {
     }
     
     var body: some View {
-        Button(action: {self.settingManager.mealViewMode = self.buttonType; self.settingManager.isAuto = false; self.settingManager.save()}) {
+        Button(action: {self.settingManager.mealViewMode = self.buttonType; self.settingManager.isAuto = false }) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width: 40, height: 40)

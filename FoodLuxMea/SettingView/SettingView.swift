@@ -26,7 +26,7 @@ struct SettingView: View {
     
     @Binding var isPresented: Bool {
         willSet {
-            listManager.update(newCafeList: dataManager.getData(at: self.settingManager.date))
+            listManager.update(newCafeList: dataManager.loadAll(at: self.settingManager.date))
         }
     }
     @State var activeSheet: ActiveSheet?

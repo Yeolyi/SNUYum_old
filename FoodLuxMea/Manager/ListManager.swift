@@ -68,9 +68,9 @@ class ListManager: ObservableObject{
         for cafe in newCafeList {
             if (cafeList.contains(where: {$0.name == cafe.name}) == false ) {
                 cafeList.append(.init(name: cafe.name))
-                print("ListManager/update: \(cafe.name)이 추가되었습니다.")
             }
         }
+        print("ListManager Updated")
     }
     
     /**

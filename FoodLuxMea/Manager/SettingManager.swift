@@ -20,41 +20,19 @@ class SettingManager: ObservableObject {
      
      - Important: Overwritten when 'isAuto' is true!
      */
-    @Published var mealViewMode: MealType = .lunch {
-        didSet {
-            save()
-        }
-    }
+    @Published var mealViewMode: MealType = .lunch
     
     /// Turn on meal type suggestion.
-    @Published var isAuto: Bool = true {
-        didSet {
-            save()
-        }
-    }
+    @Published var isAuto: Bool = true
     
     /// Activate custom date which makes whole app uses fixed date.
-    @Published var isCustomDate: Bool = false {
-        didSet {
-            update()
-            save()
-        }
-    }
+    @Published var isCustomDate: Bool = false
     
     /// Date variable used when isCustomDate is true.
-    @Published var debugDate: Date = Date() {
-        didSet {
-            update()
-            save()
-        }
-    }
+    @Published var debugDate: Date = Date()
     
     /// If true, filter empty cafes in list.
-    @Published var hideEmptyCafe: Bool = true {
-        didSet {
-            save()
-        }
-    }
+    @Published var hideEmptyCafe: Bool = true
     
     /**
      Suggested meal type based on current setting time.
@@ -71,11 +49,7 @@ class SettingManager: ObservableObject {
     @Published var isSuggestedTomorrow: Bool = false
     
     /// Main view timer cafe name; nil if timer is set to be hidden.
-    @Published var alimiCafeName: String? = "학생회관식당" {
-        didSet {
-            save()
-        }
-    }
+    @Published var alimiCafeName: String? = "학생회관식당" 
     
     /// Array of string which means there is no menu.
     var closedKeywords = ["방학중휴점", "폐    점", "코로나19로 당분간 휴점", "방학중 휴무", "당분간 폐점", "폐  점"]
@@ -110,10 +84,9 @@ class SettingManager: ObservableObject {
             dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
             return dateFormatter.date(from: str)!
         }
-        (isSuggestedTomorrow, suggestedMeal) = SmartSuggestion.get(at: Date(), cafeName: "3식당")
         if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
             if userDefaults.bool(forKey: "firstRun") == false {
-                save()
+                print("첫실행입니다 초기 설정을 덮어씌웁니다. ")
                 return
             }
             mealViewMode = MealType(rawValue: userDefaults.string(forKey: "mealViewMode")!)!
@@ -145,8 +118,11 @@ class SettingManager: ObservableObject {
             if alimiCafeName != nil {
                 userDefault.set(alimiCafeName! as String, forKey: "timerCafeName")
             }
+            print("SettingManaver/save(): 세팅 저장됨")
         }
-        print("SettingManaver/save(): 세팅 저장됨")
+        else {
+            print("세팅 저장 안됨")
+        }
     }
     
     /// Update setting if timer cafe changes. 

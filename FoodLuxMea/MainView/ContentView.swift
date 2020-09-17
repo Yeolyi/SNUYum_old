@@ -17,7 +17,7 @@ struct ContentView: View {
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var settingManager: SettingManager
     let themeColor = ThemeColor()
-    @State var searchedText = ""
+    @State var searchWord = ""
     @State var isSettingView = false
     @State var isTimerSheet = false
 
@@ -74,7 +74,7 @@ struct ContentView: View {
                                 .listRow()
                             }
                             .sheet(isPresented: $isTimerSheet) {
-                                if let cafe = dataManager.getData(at: settingManager.date, name: settingManager.alimiCafeName!) {
+                                if let cafe = dataManager.cafe(at: settingManager.date, name: settingManager.alimiCafeName!) {
                                     CafeView(cafeInfo: cafe)
                                         .environmentObject(self.listManager)
                                         .environmentObject(self.settingManager)
@@ -86,12 +86,12 @@ struct ContentView: View {
                         if (self.listManager.fixedList.isEmpty == false) {
                             Text("고정됨")
                                 .sectionText()
-                            CafeListFiltered(isFixed: true, searchedText: self.searchedText)
+                            CafeListFiltered(isFixed: true, searchWord: self.searchWord)
                         }
                         // Ordinary cafe section.
                         Text("식당목록")
                             .sectionText()
-                        CafeListFiltered(isFixed: false, searchedText: self.searchedText)
+                        CafeListFiltered(isFixed: false, searchWord: self.searchWord)
                     }
                     Divider()
                     // Google Admob.
@@ -116,7 +116,7 @@ struct ContentView_Previews: PreviewProvider {
 
     static var previews: some View {
         ContentView_Previews.settingManager.update()
-        ContentView_Previews.self.listManager.update(newCafeList:ContentView_Previews.self.dataManager.getData(at: ContentView_Previews.self.settingManager.date))
+        ContentView_Previews.self.listManager.update(newCafeList:ContentView_Previews.self.dataManager.loadAll(at: ContentView_Previews.self.settingManager.date))
         return ContentView()
             .environmentObject(listManager)
             .environmentObject(dataManager)

@@ -78,8 +78,8 @@ struct Cafe: Hashable, Codable, Identifiable {
     private let dinnerMenuList: [Menu]
     
     init(name: String, phoneNum: String, bkfMenuList: [Menu], lunchMenuList: [Menu], dinnerMenuList: [Menu]) {
-        if name.count < 3 {
-            assertionFailure("Invalid name")
+        if name.isEmpty {
+            assertionFailure("Invalid name\(name)")
         }
         self.name = name
         self.phoneNum = phoneNum

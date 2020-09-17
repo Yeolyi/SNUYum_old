@@ -44,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let queue = DispatchQueue(label: "Monitor")
         monitor.start(queue: queue)
         
-        // As essential class is alreay initialized, mark it is no longer first run.
+        // As essential class is now initialized, mark that it is no longer first run.
         if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea"){
             userDefault.set(true as Bool, forKey: "firstRun")
             userDefault.set(true as Bool, forKey: "1.1firstRun")
@@ -52,7 +52,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Update classes to set date.
         settingManager.update()
-        self.listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
+        self.listManager.update(newCafeList: self.dataManager.loadAll(at: self.settingManager.date))
         
         //requestPermission()
         
@@ -73,6 +73,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+        
+        settingManager.save()
+        listManager.save()
+        dataManager.save()
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -91,17 +95,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Update class values preventing old view is shown.
         settingManager.update()
-        listManager.update(newCafeList: self.dataManager.getData(at: self.settingManager.date))
+        listManager.update(newCafeList: self.dataManager.loadAll(at: self.settingManager.date))
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-        
-        // Save class values when scene enters background. 
-        dataManager.save()
+        settingManager.save()
         listManager.save()
+        dataManager.save()
     }
 
 

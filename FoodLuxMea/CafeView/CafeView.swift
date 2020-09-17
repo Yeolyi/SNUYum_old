@@ -39,7 +39,6 @@ struct CafeView: View {
                 Spacer()
                 Button(action: {
                         let _ = self.cafeList.toggleFixed(cafeName: self.cafeInfo.name)
-                        self.cafeList.save()
                 }) {
                     Image(systemName: cafeList.isFixed(cafeName: self.cafeInfo.name) ? "pin" : "pin.slash")
                         .font(.system(size: 25, weight: .light))
@@ -192,7 +191,7 @@ struct CafeView_Previews: PreviewProvider {
     static var previews: some View {
         
         CafeView_Previews.settingManager.update()
-        CafeView_Previews.listManager.update(newCafeList: CafeView_Previews.dataManager.getData(at: Date()))
+        CafeView_Previews.listManager.update(newCafeList: CafeView_Previews.dataManager.loadAll(at: Date()))
         
         return CafeView(cafeInfo: previewCafe)
             .environmentObject(self.dataManager)
