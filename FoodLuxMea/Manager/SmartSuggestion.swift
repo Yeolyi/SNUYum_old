@@ -8,7 +8,7 @@
 import Foundation
 
 /**
- Manage adequate meal type based on set time.
+ Manage adequate meal type based on time.
  */
 class SmartSuggestion {
     

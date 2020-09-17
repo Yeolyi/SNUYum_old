@@ -15,8 +15,8 @@ struct TimerSelectView: View {
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var settingManager: SettingManager
     let themeColor = ThemeColor()
-    @State var selectedCafeName: String? = nil
-    @State var tempIsTimerCafe: Bool = false
+    @State var selectedCafeName: String?
+    @State var tempIsTimerCafe = false
     
     var body: some View {
         VStack {

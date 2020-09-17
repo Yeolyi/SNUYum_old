@@ -14,7 +14,7 @@
 		250BBBF024F3F92E00FC0C84 /* ListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBE924F3F92D00FC0C84 /* ListManager.swift */; };
 		250BBBF124F3F92E00FC0C84 /* SmartSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEA24F3F92D00FC0C84 /* SmartSuggestion.swift */; };
 		250BBBF224F3F92E00FC0C84 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEB24F3F92D00FC0C84 /* DataManager.swift */; };
-		250BBBF324F3F92E00FC0C84 /* BaseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEC24F3F92D00FC0C84 /* BaseStruct.swift */; };
+		250BBBF324F3F92E00FC0C84 /* OperatingTimeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEC24F3F92D00FC0C84 /* OperatingTimeStruct.swift */; };
 		250BBBF424F3F92E00FC0C84 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBED24F3F92D00FC0C84 /* Extensions.swift */; };
 		250BBBF524F3F92E00FC0C84 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEE24F3F92D00FC0C84 /* ThemeColor.swift */; };
 		250BBBF624F3F92E00FC0C84 /* HTMLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* HTMLManager.swift */; };
@@ -28,9 +28,10 @@
 		250BBC2824F3FAC800FC0C84 /* SectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1B24F3FAC700FC0C84 /* SectionText.swift */; };
 		250BBC2924F3FAC800FC0C84 /* CafeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1C24F3FAC800FC0C84 /* CafeView.swift */; };
 		250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */; };
+		25340D5F251395CC00E7FA7A /* CafeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25340D5E251395CC00E7FA7A /* CafeStruct.swift */; };
 		2549427224F505730049F32E /* iOS1314Toggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2549427124F505730049F32E /* iOS1314Toggle.swift */; };
 		255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */; };
-		25647B6F24F9FFC900E1C3F0 /* CafeDataList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25647B6E24F9FFC900E1C3F0 /* CafeDataList.swift */; };
+		25647B6F24F9FFC900E1C3F0 /* CafeDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25647B6E24F9FFC900E1C3F0 /* CafeDatas.swift */; };
 		2591C74025020F4E00704673 /* PrivateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2591C73F25020F4E00704673 /* PrivateData.swift */; };
 		2593232E24FAE76F0036C148 /* TimerText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593232D24FAE76F0036C148 /* TimerText.swift */; };
 		2593233024FAE8310036C148 /* CafeListFiltered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593232F24FAE8310036C148 /* CafeListFiltered.swift */; };
@@ -71,7 +72,7 @@
 		250BBBE924F3F92D00FC0C84 /* ListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListManager.swift; sourceTree = "<group>"; };
 		250BBBEA24F3F92D00FC0C84 /* SmartSuggestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartSuggestion.swift; sourceTree = "<group>"; };
 		250BBBEB24F3F92D00FC0C84 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		250BBBEC24F3F92D00FC0C84 /* BaseStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseStruct.swift; sourceTree = "<group>"; usesTabs = 0; };
+		250BBBEC24F3F92D00FC0C84 /* OperatingTimeStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatingTimeStruct.swift; sourceTree = "<group>"; usesTabs = 0; };
 		250BBBED24F3F92D00FC0C84 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		250BBBEE24F3F92D00FC0C84 /* ThemeColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		250BBBEF24F3F92E00FC0C84 /* HTMLManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLManager.swift; sourceTree = "<group>"; };
@@ -86,9 +87,10 @@
 		250BBC1B24F3FAC700FC0C84 /* SectionText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionText.swift; sourceTree = "<group>"; };
 		250BBC1C24F3FAC800FC0C84 /* CafeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeView.swift; sourceTree = "<group>"; };
 		250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealSelect.swift; sourceTree = "<group>"; };
+		25340D5E251395CC00E7FA7A /* CafeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeStruct.swift; sourceTree = "<group>"; };
 		2549427124F505730049F32E /* iOS1314Toggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS1314Toggle.swift; sourceTree = "<group>"; };
 		255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparency.swift; sourceTree = "<group>"; };
-		25647B6E24F9FFC900E1C3F0 /* CafeDataList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDataList.swift; sourceTree = "<group>"; };
+		25647B6E24F9FFC900E1C3F0 /* CafeDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDatas.swift; sourceTree = "<group>"; };
 		2591C73F25020F4E00704673 /* PrivateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateData.swift; sourceTree = "<group>"; };
 		2593232D24FAE76F0036C148 /* TimerText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerText.swift; sourceTree = "<group>"; };
 		2593232F24FAE8310036C148 /* CafeListFiltered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeListFiltered.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				25DD96D924FECC1800E5A4B3 /* SettingView */,
 				25BF46AE24F40CB700CC2355 /* SubView */,
 				2510CEDB24FF6386007ACE79 /* Data */,
+				25340D65251396F200E7FA7A /* Theme */,
 				25BF46B024F4128A00CC2355 /* Etc */,
 				25BF46AC24F40C8800CC2355 /* Manager */,
 				250BBBD924F3F8F900FC0C84 /* Assets.xcassets */,
@@ -179,19 +182,50 @@
 		2510CEDB24FF6386007ACE79 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				250BBBEC24F3F92D00FC0C84 /* BaseStruct.swift */,
-				25647B6E24F9FFC900E1C3F0 /* CafeDataList.swift */,
+				25647B6E24F9FFC900E1C3F0 /* CafeDatas.swift */,
+				2591C73F25020F4E00704673 /* PrivateData.swift */,
 				25C805062501144900B7E4CC /* NanumMyeongjo.ttf */,
 				25C805092501171B00B7E4CC /* NanumBarunpenR.ttf */,
-				2591C73F25020F4E00704673 /* PrivateData.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		25340D63251396B900E7FA7A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				250BBC1724F3FAC700FC0C84 /* CafeRow.swift */,
+				25BA9E9825064CA30056C6E4 /* SearchCafeRow.swift */,
+				2593232F24FAE8310036C148 /* CafeListFiltered.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		25340D64251396D000E7FA7A /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				25340D5E251395CC00E7FA7A /* CafeStruct.swift */,
+				250BBBEC24F3F92D00FC0C84 /* OperatingTimeStruct.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		25340D65251396F200E7FA7A /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				250BBBEE24F3F92D00FC0C84 /* ThemeColor.swift */,
+				2593233124FBB5F40036C148 /* TitleText.swift */,
+				250BBC1B24F3FAC700FC0C84 /* SectionText.swift */,
+				2549427124F505730049F32E /* iOS1314Toggle.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		25BF46AC24F40C8800CC2355 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				25340D64251396D000E7FA7A /* Structs */,
 				250BBBEF24F3F92E00FC0C84 /* HTMLManager.swift */,
+				25BA9E962504C03A0056C6E4 /* DateManager.swift */,
 				25FF78002503B306006372C7 /* Ourhome Manager.swift */,
 				250BBBEB24F3F92D00FC0C84 /* DataManager.swift */,
 				2500739524F54A37009A32FA /* SettingManager.swift */,
@@ -205,9 +239,6 @@
 		25BF46AE24F40CB700CC2355 /* SubView */ = {
 			isa = PBXGroup;
 			children = (
-				250BBC1B24F3FAC700FC0C84 /* SectionText.swift */,
-				2593233124FBB5F40036C148 /* TitleText.swift */,
-				2549427124F505730049F32E /* iOS1314Toggle.swift */,
 				259B889424F68B6F001C710C /* AdmobBanner.swift */,
 			);
 			path = SubView;
@@ -217,8 +248,6 @@
 			isa = PBXGroup;
 			children = (
 				250BBBED24F3F92D00FC0C84 /* Extensions.swift */,
-				250BBBEE24F3F92D00FC0C84 /* ThemeColor.swift */,
-				25BA9E962504C03A0056C6E4 /* DateManager.swift */,
 			);
 			path = Etc;
 			sourceTree = "<group>";
@@ -226,13 +255,11 @@
 		25DD96D724FECBC100E5A4B3 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
+				25340D63251396B900E7FA7A /* Components */,
 				25A0824924F3FDEC00593CB3 /* ContentView.swift */,
 				250BBC1824F3FAC700FC0C84 /* SearchBar.swift */,
 				2593232D24FAE76F0036C148 /* TimerText.swift */,
 				250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */,
-				250BBC1724F3FAC700FC0C84 /* CafeRow.swift */,
-				25BA9E9825064CA30056C6E4 /* SearchCafeRow.swift */,
-				2593232F24FAE8310036C148 /* CafeListFiltered.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -398,6 +425,7 @@
 				2549427224F505730049F32E /* iOS1314Toggle.swift in Sources */,
 				2593233424FBBDF60036C148 /* MapView.swift in Sources */,
 				25FF78012503B306006372C7 /* Ourhome Manager.swift in Sources */,
+				25340D5F251395CC00E7FA7A /* CafeStruct.swift in Sources */,
 				250BBC2024F3FAC800FC0C84 /* NaverMap.swift in Sources */,
 				250BBC2724F3FAC800FC0C84 /* SceneDelegate.swift in Sources */,
 				250BBBF624F3F92E00FC0C84 /* HTMLManager.swift in Sources */,
@@ -411,8 +439,8 @@
 				2593233224FBB5F40036C148 /* TitleText.swift in Sources */,
 				250BBBF024F3F92E00FC0C84 /* ListManager.swift in Sources */,
 				255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */,
-				250BBBF324F3F92E00FC0C84 /* BaseStruct.swift in Sources */,
-				25647B6F24F9FFC900E1C3F0 /* CafeDataList.swift in Sources */,
+				250BBBF324F3F92E00FC0C84 /* OperatingTimeStruct.swift in Sources */,
+				25647B6F24F9FFC900E1C3F0 /* CafeDatas.swift in Sources */,
 				250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */,
 				2593233024FAE8310036C148 /* CafeListFiltered.swift in Sources */,
 				259B889524F68B6F001C710C /* AdmobBanner.swift in Sources */,

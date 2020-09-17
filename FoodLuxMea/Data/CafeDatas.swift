@@ -1,5 +1,5 @@
 //
-//  CafeCoord.swift
+//  CafeDatas.swift
 //  FoodLuxMea
 //
 //  Created by Seong Yeol Yi on 2020/08/29.
@@ -11,7 +11,7 @@ import Foundation
 var previewCafe = Cafe(name: "아워홈", phoneNum: "3280-8642", bkfMenuList: [Menu(name: "bkfMenu1", cost: 1000)], lunchMenuList: [Menu(name: "lunchMenu1", cost: 3000), Menu(name: "lunchMenu2", cost: 2500)], dinnerMenuList: [Menu(name: "dinnerMenu1", cost: 1700), Menu(name: "dinnerMenu2", cost: 5000)])
 
 /// Cafeteria position coordinate for Naver map
-var coordList: [String:(lat: Double, lng: Double)] =
+var coordList: [String : (lat: Double, lng: Double)] =
     [
         "학생회관식당" : (37.459225, 126.950646),
         "자하연식당" : (37.460897, 126.952533),
