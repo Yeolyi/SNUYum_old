@@ -63,7 +63,7 @@ struct CafeRowsFiltered: View {
                         Text("검색 결과가 없어요")
                         Spacer()
                     }
-                        .listRow()
+                    .rowBackground()
                 )
             }
             else {
@@ -73,7 +73,7 @@ struct CafeRowsFiltered: View {
                         Text("운영중인 식당이 없어요")
                         Spacer()
                     }
-                        .listRow()
+                    .rowBackground()
                 )
             }
         }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Modifier for highlight-needing important text
-struct TitleText: ViewModifier {
+struct AccentedText: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.system(size: CGFloat(18), weight: .medium, design: .default))
@@ -17,14 +17,14 @@ struct TitleText: ViewModifier {
 
 
 extension View {
-    func titleText() -> some View {
-        return modifier(TitleText())
+    func accentedText() -> some View {
+        return modifier(AccentedText())
     }
 }
 
 struct TitleText_Previews: PreviewProvider {
     static var previews: some View {
         Text("왜안대")
-            .titleText()
+            .accentedText()
     }
 }

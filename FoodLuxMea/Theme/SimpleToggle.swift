@@ -38,22 +38,3 @@ struct SimpleToggle: View {
         }
     }
 }
-
-struct iOS1314Toggle_Previews: PreviewProvider {
-    static var previews: some View {
-        ScrollView{
-            SimpleToggle(isOn: .constant(true), label: "test")
-                .environmentObject(ThemeColor())
-                .listRow()
-            SimpleToggle(isOn: .constant(true), label: "test")
-                .environmentObject(ThemeColor())
-                .listRow()
-            HStack {
-                Text("Text")
-                Spacer()
-            }
-            .listRow()
-        }
-        
-    }
-}

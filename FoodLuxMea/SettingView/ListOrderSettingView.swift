@@ -8,12 +8,15 @@
 import SwiftUI
 
 /// Provides list edit mode to reorder cafe list in main view.
-struct ListReorder: View {
+struct ListOrderSettingView: View {
+    
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var settingManager: SettingManager
     let themeColor = ThemeColor()
+    
     @State var tempListManager = ListManager()
     
     /// - Parameter cafeListBackup: Backup [ListElement] to restore data when sheet is closed or dismissed
@@ -23,9 +26,9 @@ struct ListReorder: View {
 
     var body: some View {
         VStack {
-            // Custom navigation bar
+            // MARK: - Custom navigation bar
             HStack {
-                TitleView(title: "목록 수정", subTitle: "설정")
+                CustomNavigationBar(title: "목록 수정", subTitle: "설정")
                 Button(action: {
                          self.presentationMode.wrappedValue.dismiss()}) {
                      Text("취소")
@@ -43,7 +46,7 @@ struct ListReorder: View {
                          .offset(y: 10)
                 }
             }
-            // Edit mode list.
+            // MARK: - List(editMode true)
             List {
                 Section(header:
                            Text("고정됨")
@@ -55,7 +58,7 @@ struct ListReorder: View {
                     }
                     ForEach(tempListManager.cafeList.filter{$0.isFixed}) { cafe in
                         Text(cafe.name)
-                            .titleText()
+                            .accentedText()
                     }
                     .onMove(perform: moveFixed)
                 }
@@ -64,7 +67,7 @@ struct ListReorder: View {
                 ) {
                     ForEach(tempListManager.cafeList.filter{$0.isFixed == false}) { cafe in
                         Text(cafe.name)
-                            .titleText()
+                            .accentedText()
                     }
                     .onMove(perform: moveUnfixed)
                 }
@@ -73,6 +76,7 @@ struct ListReorder: View {
             .listStyle(GroupedListStyle())
         }
     }
+    
     /// Move ListElement which is fixed
     func moveFixed(from source: IndexSet, to destination: Int) {
         var intIndexSet: [Int] = []
@@ -87,6 +91,7 @@ struct ListReorder: View {
             tempListManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
         }
     }
+    
     /// Move ListElement which is not fixed
     func moveUnfixed(from source: IndexSet, to destination: Int) {
         var intIndexSet: [Int] = []
@@ -101,12 +106,11 @@ struct ListReorder: View {
             tempListManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
         }
     }
-
 }
 
 struct ListReorder_Previews: PreviewProvider {
     static var previews: some View {
-        ListReorder(cafeListBackup: [])
+        ListOrderSettingView(cafeListBackup: [])
             .environmentObject(ListManager())
             .environmentObject(DataManager())
             .environmentObject(SettingManager())

@@ -18,7 +18,9 @@ enum ActiveSheet: Identifiable {
 }
 
 struct SettingView: View {
+    
     @Environment(\.colorScheme) var colorScheme
+    
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var settingManager: SettingManager
@@ -86,7 +88,7 @@ struct SettingView: View {
                     .onTapGesture {
                         self.activeSheet = .reorder
                     }
-                    .listRow()
+                    .rowBackground()
                     // Basic setting - Cafe timer.
                     HStack {
                         Text("알리미 설정")
@@ -100,21 +102,21 @@ struct SettingView: View {
                     .onTapGesture {
                         self.activeSheet = .timer
                     }
-                    .listRow()
+                    .rowBackground()
                     // Basic setting - Hide empty cafe.
                     SimpleToggle(isOn: $settingManager.hideEmptyCafe, label: "정보가 없는 식당 숨기기")
                         .font(.system(size: 18))
-                        .listRow()
+                        .rowBackground()
                     // Advanced setting.
                     Text("고급")
                         .sectionText()
                     // Advanced setting - custom date.
                     SimpleToggle(isOn: $settingManager.isCustomDate, label: "사용자 설정 날짜")
                         .font(.system(size: 18))
-                        .listRow()
+                        .rowBackground()
                     if (settingManager.isCustomDate) {
                         DatePicker(selection: $settingManager.debugDate, label: { EmptyView() })
-                            .listRow()
+                            .rowBackground()
                     }
                     // Info
                     Text("정보")
@@ -128,21 +130,21 @@ struct SettingView: View {
                     .onTapGesture {
                         self.activeSheet = .info
                     }
-                    .listRow()
+                    .rowBackground()
                 }
                 // Caution: Sheet modifier position matters.
                 .sheet(item: self.$activeSheet) { item in
                     switch(item) {
                     case .reorder:
-                        ListReorder(cafeListBackup: self.listManager.cafeList)
+                        ListOrderSettingView(cafeListBackup: self.listManager.cafeList)
                             .environmentObject(self.listManager)
                             .environmentObject(self.settingManager)
                     case .timer:
-                        TimerSelectView()
+                        TimerCafeSettingView()
                             .environmentObject(self.listManager)
                             .environmentObject(self.settingManager)
                     case .info:
-                        InfoView()
+                        AboutAppView()
                     }
                 }
             }

@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-
-/// Theme colors for app changing at dark mode
+/// Provides title and icon color based on ColorScheme.
 class ThemeColor: ObservableObject {
+    
     private var titleDark = Color(hex: "#6F77A6")
     private var titleLight = Color(hex: "#3B568C")
 
@@ -19,13 +19,16 @@ class ThemeColor: ObservableObject {
     func icon(_ colorScheme: ColorScheme) -> Color {
         colorScheme == .dark ? iconDark : iconLight
     }
+    
     func title(_ colorScheme: ColorScheme) -> Color {
         colorScheme == .dark ? titleDark : titleLight
     }
+    
 }
 
 extension Color {
-    /// Changes hex string to color
+    
+    /// Changes hex string(e.g. "#6F77A6") to color
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
@@ -41,7 +44,6 @@ extension Color {
         default:
             (a, r, g, b) = (1, 1, 1, 0)
         }
-
         self.init(
             .sRGB,
             red: Double(r) / 255,

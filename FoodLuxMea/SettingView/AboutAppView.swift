@@ -7,20 +7,22 @@
 
 import SwiftUI
 
-// Show various app information.
-struct InfoView: View {
+/// Show various information about app.
+struct AboutAppView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
+    
     let themeColor = ThemeColor()
+    
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     let build = Bundle.main.infoDictionary!["CFBundleVersion"] as? String ?? ""
     
     var body: some View {
             VStack {
-                // Custom navigation view.
+                // MARK: - Custom navigationbar.
                 HStack {
-                    TitleView(title: "스누냠 정보", subTitle: "설정")
+                    CustomNavigationBar(title: "스누냠 정보", subTitle: "설정")
                     Spacer()
                     Button(action: {self.presentationMode.wrappedValue.dismiss()}){
                         Text("닫기")
@@ -31,14 +33,13 @@ struct InfoView: View {
                     }
                 }
                 Divider()
-                // Snuyum app icon
+                // MARK: - Snuyum app icon.
                 Image("Icon-1024")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 150.0,height:150)
-            
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 150.0,height:150)
+                // MARK: - ScrollView.
                 ScrollView{
-                    //App version
                     Text("버전")
                         .sectionText()
                     HStack {
@@ -46,8 +47,7 @@ struct InfoView: View {
                         Text(appVersion)
                         Spacer()
                     }
-                    .listRow()
-                    // App build
+                    .rowBackground()
                     Text("빌드")
                         .sectionText()
                     HStack {
@@ -55,23 +55,21 @@ struct InfoView: View {
                         Text(build)
                         Spacer()
                     }
-                    .listRow()
-                    // References
+                    .rowBackground()
                     Text("자료 참조")
                         .sectionText()
                     HStack {
                         Spacer()
-                        Text("서울대학교생활협동조합 홈페이지\n(snuco.snu.ac.kr)")
+                        Text("서울대학교생활협동조합")
                         Spacer()
                     }
-                    .listRow()
+                    .rowBackground()
                     HStack {
                         Spacer()
-                        Text("서울대학교 캠퍼스 맵\n(map.snu.ac.kr)")
+                        Text("서울대학교 캠퍼스 맵")
                         Spacer()
                     }
-                    .listRow()
-                    // Developer
+                    .rowBackground()
                     Text("개발자")
                         .sectionText()
                     HStack {
@@ -79,7 +77,7 @@ struct InfoView: View {
                         Text("이성열")
                         Spacer()
                     }
-                    .listRow()
+                    .rowBackground()
                 }
         }
     }
@@ -87,7 +85,7 @@ struct InfoView: View {
 
 struct InfoView_Previews: PreviewProvider {
     static var previews: some View {
-        InfoView()
+        AboutAppView()
             .environmentObject(ThemeColor())
     }
 }

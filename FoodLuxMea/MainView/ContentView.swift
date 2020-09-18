@@ -73,7 +73,7 @@ struct ContentView: View {
                                     TimerText(cafeName: self.settingManager.alimiCafeName!)
                                     Spacer()
                                 }
-                                .listRow()
+                                .rowBackground()
                             }
                             .sheet(isPresented: $isTimerSheet) {
                                 if let cafe = dataManager.cafe(at: settingManager.date, name: settingManager.alimiCafeName!) {

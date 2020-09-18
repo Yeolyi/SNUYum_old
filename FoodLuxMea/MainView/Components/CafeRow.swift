@@ -36,7 +36,7 @@ struct CafeRow: View {
             VStack(alignment: .leading){
                 HStack {
                     Text(cafe.name)
-                        .titleText()
+                        .accentedText()
                         .foregroundColor(themeColor.title(colorScheme))
                         .padding(.bottom, 1.5)
                     Spacer()
@@ -81,7 +81,7 @@ struct CafeRow: View {
                 .environmentObject(self.settingManager)
                 .environmentObject(self.dataManager)
         }
-        .listRow()
+        .rowBackground()
     }
     
     func searchResult(at mealType: MealType) -> AnyView {

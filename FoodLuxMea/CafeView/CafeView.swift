@@ -64,7 +64,7 @@ struct CafeView: View {
                     TimerText(cafeName: cafeInfo.name)
                     Spacer()
                 }
-                .listRow()
+                .rowBackground()
                 // Full meal view.
                 mealSection(mealType: .breakfast, mealMenus: cafeInfo.menus(at: .breakfast))
                 mealSection(mealType: .lunch, mealMenus: cafeInfo.menus(at: .lunch))
@@ -115,7 +115,7 @@ struct CafeView: View {
                         }
                     }
                 }
-                .listRow()
+                .rowBackground()
             }
             Divider()
             // Google admob. 
@@ -144,7 +144,7 @@ struct CafeView: View {
                 ForEach(mealMenus) { menu in
                     HStack{
                         Text(menu.name)
-                            .titleText()
+                            .accentedText()
                             .foregroundColor(self.themeColor.title(self.colorScheme))
                             .fixedSize(horizontal: false, vertical: true)
                             .onTapGesture {
@@ -154,7 +154,7 @@ struct CafeView: View {
                         Text(self.costInterpret(menu.cost) ?? "")
                             .foregroundColor(Color(.gray))
                     }
-                    .listRow()
+                    .rowBackground()
                 }
             }
             )

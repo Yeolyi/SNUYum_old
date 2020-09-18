@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Cornered list row background
-struct ListRow: ViewModifier {
+struct RowBackground: ViewModifier {
     @Environment(\.colorScheme) var colorScheme
     func body(content: Content) -> some View {
         Group {
@@ -23,7 +23,7 @@ struct ListRow: ViewModifier {
 }
 
 extension View {
-    func listRow() -> some View {
-        return modifier(ListRow())
+    func rowBackground() -> some View {
+        return modifier(RowBackground())
     }
 }

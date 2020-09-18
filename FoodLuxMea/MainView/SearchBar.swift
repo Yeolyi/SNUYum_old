@@ -39,7 +39,7 @@ struct SearchBar: View {
             }
             .foregroundColor(.secondary)
         }
-        .listRow()
+        .rowBackground()
     }
 }
 

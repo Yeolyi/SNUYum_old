@@ -39,7 +39,7 @@ struct MealSelect: View {
                     }
                 }
             }
-            .listRow()
+            .rowBackground()
         }
 
     }
