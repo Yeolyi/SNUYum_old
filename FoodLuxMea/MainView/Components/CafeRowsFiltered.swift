@@ -44,27 +44,57 @@ struct CafeRowsFiltered: View {
     
     var body: some View {
         let list = isFixed ? listManager.fixedList : listManager.unfixedList
-        if let noCafeText = ifEmptyReturnView(list: list) {
-            return noCafeText
+        var rowNum = 0
+        for cafeListElement in list {
+            switch (listFilter(name: cafeListElement.name)) {
+            case .show:
+                rowNum += 1
+            case .empty:
+                rowNum += settingManager.hideEmptyCafe ? 0 : 1
+            default:
+                break
+            }
         }
-        return AnyView(
-            VStack(spacing: 0) {
-                ForEach(list, id: \.self) { (listElement: ListElement) in
-                    if (self.listFilter(name: listElement.name) == .show ||
-                            (self.listFilter(name: listElement.name) == .empty && self.settingManager.hideEmptyCafe == false)) {
-                        CafeRow(cafe: self.dataManager.cafe(at: self.settingManager.date, name: listElement.name)!, suggestedMeal: settingManager.meal, searchText: self.searchWord)
-                                .environmentObject(self.listManager)
-                                .environmentObject(self.settingManager)
-                                .environmentObject(self.dataManager)
+        if (rowNum == 0) {
+            if (searchWord != "") {
+                return AnyView(
+                    HStack {
+                        Spacer()
+                        Text("검색 결과가 없어요")
+                        Spacer()
+                    }
+                        .listRow()
+                )
+            }
+            else {
+                return AnyView(
+                    HStack {
+                        Spacer()
+                        Text("운영중인 식당이 없어요")
+                        Spacer()
+                    }
+                        .listRow()
+                )
+            }
+        }
+        else {
+            return AnyView(
+                VStack(spacing: 0) {
+                    ForEach(list, id: \.self) { (listElement: ListElement) in
+                        if (self.listFilter(name: listElement.name) == .show ||
+                                (self.listFilter(name: listElement.name) == .empty && self.settingManager.hideEmptyCafe == false)) {
+                            CafeRow(cafe: self.dataManager.cafe(at: self.settingManager.date, name: listElement.name)!, suggestedMeal: settingManager.meal, searchText: self.searchWord)
+                                    .environmentObject(self.listManager)
+                                    .environmentObject(self.settingManager)
+                                    .environmentObject(self.dataManager)
+                        }
                     }
                 }
-            }
-        )
+            )
+        }
     }
     /**
      Evaluate ListElement and return appropriate filter result.
-     
-     - ToDo: DataManager.getData is used twice in this function and nameToCafeRow. Optimization required.
      */
     func listFilter(name: String) -> filterResult {
         if let targetCafe = dataManager.cafe(at: settingManager.date, name: name) {
@@ -87,28 +117,4 @@ struct CafeRowsFiltered: View {
         }
         return .hide
     }
-    /// If cafe data is completely empty, return text view.
-    func ifEmptyReturnView(list: [ListElement]) -> AnyView? {
-       var rowNum = 0
-       for cafeListElement in list {
-           switch (listFilter(name: cafeListElement.name)) {
-           case .show:
-               rowNum += 1
-           case .empty:
-               rowNum += settingManager.hideEmptyCafe ? 0 : 1
-           default:
-               break
-           }
-       }
-       if (rowNum == 0) {
-           if (searchWord != "") {
-               return AnyView(Text("검색 결과가 없어요"))
-           }
-           else {
-               return AnyView(Text("운영중인 식당이 없어요"))
-           }
-       }
-        return nil
-    }
-
 }
