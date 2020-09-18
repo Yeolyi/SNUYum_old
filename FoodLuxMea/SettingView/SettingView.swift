@@ -147,7 +147,7 @@ struct SettingView: View {
                 }
             }
         }
-        .background(Color.white)
+        .background(colorScheme == .dark ? Color.black : Color.white)
     }
 }
 
