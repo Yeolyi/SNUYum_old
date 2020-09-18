@@ -7,34 +7,32 @@
 
 import Foundation
 
-/**
- Indicates one of these three meals; breakfast, lunch and dinner.
- 
- Support raw string value in korean.
- 
- - Note: Codable protocol adopted to encoded/decoded while using Userdefault.
- */
+
+/// Indicates one of these three meals; breakfast, lunch and dinner.
+///
+/// Support raw string value in korean.
+///
+/// - Note: Codable protocol adopted to encoded/decoded while using Userdefault.
 enum MealType: String, Codable {
     case breakfast = "아침"
     case lunch = "점심"
     case dinner = "저녁"
 }
 
-/**
- Data of a single menu.
- 
- If there's no cost data in server, cost value is -1.
- 
- - Precondition: 'cost' variable cannot be negative other than -1.
- 
- - Note: Hashable protocol to make Menu array.
- 
- Codable protocol to encoded/decoded while using Userdefault.
- 
- Identifiable adopted to give id in list view.
- 
- - Todo: Change cost type to optional Int to stop using -1.
- */
+
+/// Data of a single menu.
+///
+/// If there's no cost data in server, cost value is -1.
+///
+/// - Precondition: 'cost' variable cannot be negative other than -1.
+///
+/// - Note: Hashable protocol to make Menu array.
+///
+/// Codable protocol to encoded/decoded while using Userdefault.
+///
+/// Identifiable adopted to give id in list view.
+///
+/// - Todo: Change cost type to optional Int to stop using -1.
 struct Menu: Hashable, Codable, Identifiable {
     var id = UUID()
     let name: String
@@ -70,9 +68,12 @@ struct Menu: Hashable, Codable, Identifiable {
  - ToDo: As phoneNum variable is available in another struct, delete it and let settingmanager manage it. Also change name of bkfMenuList to breakfastMenuList.
  */
 struct Cafe: Hashable, Codable, Identifiable {
+    
     internal var id = UUID()
+    
     let name: String
     public let phoneNum: String
+    
     private let bkfMenuList: [Menu]
     private let lunchMenuList: [Menu]
     private let dinnerMenuList: [Menu]

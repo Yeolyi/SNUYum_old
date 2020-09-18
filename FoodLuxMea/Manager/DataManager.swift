@@ -86,7 +86,7 @@ class DataManager: ObservableObject {
     func cafe(at date: Date, name: String) -> Cafe? {
         let uRLString = hTMLManager.makeURL(from: date)
         if let data = cafeData[uRLString] {
-            return data.first{ $0.name == name }!
+            return data.first{ $0.name == name }
         }
         else {
             if isInternetConnected {

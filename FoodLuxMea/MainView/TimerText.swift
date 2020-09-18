@@ -14,6 +14,8 @@ import SwiftUI
 struct TimerText: View {
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var settingManager: SettingManager
+    @Environment(\.colorScheme) var colorScheme
+    
     let themeColor = ThemeColor()
     let cafeName: String
     
@@ -24,6 +26,7 @@ struct TimerText: View {
     
     var body: some View {
         Text(timerString())
+            .foregroundColor(themeColor.title(colorScheme))
     }
     
     func timerString() -> String {
@@ -66,7 +69,7 @@ struct TimerText: View {
             }
         }
         else {
-            return cafeName + "은" + (settingManager.isSuggestedTomorrow ? "내일" : "오늘") + "운영하지 않아요."
+            return cafeName + "은 " + (settingManager.isSuggestedTomorrow ? "내일" : "오늘") + " 운영하지 않아요."
         }
     }
         

@@ -16,6 +16,7 @@ struct ContentView: View {
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var settingManager: SettingManager
+    
     let themeColor = ThemeColor()
     @State var searchWord = ""
     @State var isSettingView = false
@@ -24,7 +25,7 @@ struct ContentView: View {
     var body: some View {
         GeometryReader{ geo in
             ZStack {
-                // SettingView covers main view.
+                // MARK: - SettingView covers main view.
                 if (self.isSettingView) {
                     SettingView(isPresented: self.$isSettingView)
                     .zIndex(2)
@@ -45,7 +46,8 @@ struct ContentView: View {
                             Spacer()
                             Button(action: {self.isSettingView.toggle()}) {
                                Image(systemName: "gear")
-                                   .font(.system(size: 25, weight: .regular))
+                                    .font(.system(size: 25, weight: .regular))
+                                    .foregroundColor(themeColor.icon(colorScheme))
                             }
                             .padding()
                             .offset(y: 10)
@@ -104,8 +106,6 @@ struct ContentView: View {
                         Alert(title: Text("인터넷이 연결되지 않았어요"), message: Text("저장된 식단은 볼 수 있지만 \n 기능이 제한될 수 있어요"), dismissButton: .default(Text("확인")))
                     }
         }
-        // TODO: Make theme elements to delete this. 
-        .accentColor(themeColor.icon(colorScheme))
     }
 }
 

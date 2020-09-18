@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// Extensions and modifier to automatically hide keyboard when list scrolls
+// Extensions and modifier to automatically hide keyboard when list scrolls
 extension UIApplication {
     func endEditing(_ force: Bool) {
         self.windows
