@@ -12,95 +12,112 @@ import SwiftUI
  - Bug: Alimi crashed on some circumstances.
  */
 struct TimerText: View {
-    @EnvironmentObject var dataManager: DataManager
-    @EnvironmentObject var settingManager: SettingManager
-    @Environment(\.colorScheme) var colorScheme
-    
-    let themeColor = ThemeColor()
-    let cafeName: String
-    
-    /// - Parameter cafeName: Name of cafe to show timer.
-    init(cafeName: String) {
-        self.cafeName = cafeName
+  
+  let cafe: Cafe
+  @State var isTimerSheet = false
+  
+  @EnvironmentObject var listManager: ListManager
+  @EnvironmentObject var dataManager: DataManager
+  @EnvironmentObject var settingManager: SettingManager
+  let themeColor = ThemeColor()
+  
+  @Environment(\.colorScheme) var colorScheme
+  
+  /// - Parameter cafeName: Name of cafe to show timer.
+  init(cafe: Cafe) {
+    self.cafe = cafe
+  }
+  
+  var body: some View {
+    Button(action: {
+      if settingManager.alimiCafeName == cafe.name {
+        isTimerSheet = true
+      }
+    })
+    {
+      HStack {
+        Spacer()
+        Text(remainingTimeNotice())
+          .foregroundColor(themeColor.title(colorScheme))
+        Spacer()
+      }
+      .rowBackground()
     }
+    .sheet(isPresented: $isTimerSheet) {
+      CafeView(cafeInfo: cafe)
+        .environmentObject(self.listManager)
+        .environmentObject(self.settingManager)
+        .environmentObject(self.dataManager)
+    }
+  }
+  
+  func remainingTimeNotice() -> String {
+    // Get current setting time component.
+    let userCalendar = Calendar.current
+    let currentHour = userCalendar.component(.hour, from: settingManager.date)
+    let currentMinute = userCalendar.component(.minute, from: settingManager.date)
+    let currentSimpleTime = SimpleTimeBorder(currentHour, currentMinute)
     
-    var body: some View {
-        Text(timerString())
-            .foregroundColor(themeColor.title(colorScheme))
+    // When cafe operating hour data exists
+    a: if let endDate = cafeOperatingHour[cafe.name]?.getDaily(at: settingManager.date)?.getEndTime(at: settingManager.suggestedMeal) {
+      let startTime = cafeOperatingHour[cafe.name]!.getDaily(at: settingManager.date)!.getStartTime(at: settingManager.suggestedMeal)!
+      
+      if (cafe.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords)) {
+        break a
+      }
+      
+      if (currentHour < 5 || currentHour > endDate.hour) {
+        return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
+      }
+      
+      else if currentSimpleTime < startTime { //시작시간 전
+        return "\(cafe.name)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!"
+      }
     }
-    
-    func timerString() -> String {
-        // Get current setting time component.
-        let currentHour = Calendar.current.component(.hour, from: settingManager.date)
-        let currentMinute = Calendar.current.component(.minute, from: settingManager.date)
-        
-        if let cafeData = dataManager.cafe(at: settingManager.date, name: cafeName) {
-        
-            // When cafe operating hour data exists
-            a: if let endDate = cafeOperatingHour[cafeName]?.getDaily(at: settingManager.date)?.getEndTime(at: settingManager.suggestedMeal) {
-                let startTime = cafeOperatingHour[cafeName]!.getDaily(at: settingManager.date)!.getStartTime(at: settingManager.suggestedMeal)!
-                
-                if (cafeData.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords)) {
-                    break a
-                }
-                
-                if (currentHour < 5 || currentHour > endDate.hour) {
-                    return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
-                }
-                    
-                else if SimpleTimeBorder(currentHour, currentMinute) < startTime { //시작시간 전
-                    return "\(cafeName)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!"
-                }
-                
-                var newEndDate = Calendar.current.date(bySettingHour: endDate.hour, minute: endDate.minute, second: 0, of: settingManager.date)!
-                if (newEndDate < settingManager.date) {
-                    newEndDate = newEndDate.addingTimeInterval(60*60*24)
-                }
-                let (hour, minute) = remainTime(from: settingManager.date, to: newEndDate)
-                return "\(cafeName) \(settingManager.suggestedMeal.rawValue)마감까지 \(hour)시간 \(minute)분!"
-            }
-                
-            // When cafe operating hour data not exists
-            if (currentHour < 5 || currentHour > SmartSuggestion.dinnerDefaultTime.hour) {
-                return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
-            }
-            else {
-                return "\(dayOfTheWeek(of: settingManager.date)) \(settingManager.suggestedMeal.rawValue)에는 운영하지 않아요."
-            }
-        }
-        else {
-            return cafeName + "은 " + (settingManager.isSuggestedTomorrow ? "내일" : "오늘") + " 운영하지 않아요."
-        }
+    // When cafe operating hour data not exists
+    if (currentHour < 5 || currentHour > SmartSuggestion.dinnerDefaultTime.hour) {
+      return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
     }
-        
-    /// Calculate time difference.
-    func remainTime(from date1: Date, to date2: Date) -> (hour: String, minute: String) {
-        let diffComponents = Calendar.current.dateComponents([.hour, .minute], from: date1, to: date2)
-        let hours = String(diffComponents.hour!)
-        let minutes = String(diffComponents.minute! + 1)
-        return (hours, minutes)
+    else {
+      return "\(dayOfTheWeek()) \(settingManager.suggestedMeal.rawValue)에는 운영하지 않아요."
     }
-    
-    /// Return day of the week string from input date
-    func dayOfTheWeek(of date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        let str = dateFormatter.string(from: date)
-        switch (str) {
-        case "Saturday":
-            return "토요일"
-        case "Sunday":
-            return "일요일"
-        default:
-            return "평일"
-        }
+  }
+  
+  /// Calculate time difference.
+  func remainTime(from simpleDate1: SimpleTimeBorder, to simpleDate2: SimpleTimeBorder) -> SimpleTimeBorder {
+    var dateComponents = DateComponents()
+    let userCalendar = Calendar.current
+    dateComponents.hour = simpleDate1.hour
+    dateComponents.minute = simpleDate1.minute
+    let date1 = userCalendar.date(from: dateComponents) ?? Date()
+    dateComponents.hour = simpleDate2.hour
+    dateComponents.minute = simpleDate2.minute
+    let date2 = userCalendar.date(from: dateComponents) ?? Date()
+    let diffComponents = Calendar.current.dateComponents([.hour, .minute], from: date1, to: date2)
+    return SimpleTimeBorder(diffComponents.hour!, diffComponents.minute! + 1)
+  }
+  
+  /// Return day of the week string.
+  func dayOfTheWeek() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEEE"
+    let str = dateFormatter.string(from: settingManager.date)
+    switch (str) {
+    case "Saturday":
+      return "토요일"
+    case "Sunday":
+      return "일요일"
+    default:
+      return "평일"
     }
+  }
 }
 
 struct CafeTimerText_Previews: PreviewProvider {
-    static var previews: some View {
-        TimerText(cafeName: "3식당")
-            .environmentObject(DataManager())
-            .environmentObject(SettingManager())
-    }
+  static var previews: some View {
+    TimerText(cafe: previewCafe)
+      .environmentObject(DataManager())
+      .environmentObject(SettingManager())
+      .environmentObject(ListManager())
+  }
 }

@@ -10,195 +10,190 @@ import GoogleMobileAds
 
 /// Show single Cafe struct's information.
 struct CafeView: View {
-    
-    @State var cafeInfo: Cafe
-    @State var isMapView = false
-    @State var showActionSheet = false
-    
-    @Environment(\.colorScheme) var colorScheme
-    @Environment(\.presentationMode) var presentationMode
-    
-    @EnvironmentObject var cafeList: ListManager
-    @EnvironmentObject var settingManager: SettingManager
-    let themeColor = ThemeColor()
-    
-    /// - Parameter cafeInfo: Cafe data to show in this view.
-    init(cafeInfo: Cafe) {
-        self._cafeInfo = State(initialValue: cafeInfo)
-    }
-    
-    var body: some View {
+  
+  @State var cafeInfo: Cafe
+  @State var isMapView = false
+  @State var showActionSheet = false
+  
+  @Environment(\.colorScheme) var colorScheme
+  @Environment(\.presentationMode) var presentationMode
+  
+  @EnvironmentObject var cafeList: ListManager
+  @EnvironmentObject var settingManager: SettingManager
+  let themeColor = ThemeColor()
+  
+  /// - Parameter cafeInfo: Cafe data to show in this view.
+  init(cafeInfo: Cafe) {
+    self._cafeInfo = State(initialValue: cafeInfo)
+  }
+  
+  var body: some View {
+    VStack {
+      // Custom navigationbar view.
+      HStack {
+        VStack(alignment: .leading) {
+          Text("식단 자세히 보기")
+            .font(.system(size: CGFloat(18), weight: .bold))
+            .foregroundColor(.secondary)
+          Text(cafeInfo.name)
+            .font(.system(size: CGFloat(25), weight: .bold))
+        }
+        .padding([.leading, .top])
+        Spacer()
+        Button(action: {
+          let _ = self.cafeList.toggleFixed(cafeName: self.cafeInfo.name)
+        }) {
+          Image(systemName: cafeList.isFixed(cafeName: self.cafeInfo.name) ? "pin" : "pin.slash")
+            .font(.system(size: 25, weight: .light))
+            .foregroundColor(themeColor.icon(colorScheme))
+            .offset(y: 10)
+        }
+        Button(action: { self.presentationMode.wrappedValue.dismiss()}) {
+          Text("닫기")
+            .font(.system(size: CGFloat(20), weight: .light))
+            .foregroundColor(themeColor.icon(colorScheme))
+            .padding()
+            .offset(y: 10)
+        }
+      }
+      Divider()
+      // Various cafe information.
+      ScrollView {
+        Text("안내")
+          .sectionText()
+        // Cafe timer.
+        TimerText(cafe: cafeInfo)
+        // Full meal view.
+        mealSection(mealType: .breakfast, mealMenus: cafeInfo.menus(at: .breakfast))
+        mealSection(mealType: .lunch, mealMenus: cafeInfo.menus(at: .lunch))
+        mealSection(mealType: .dinner, mealMenus: cafeInfo.menus(at: .dinner))
+        // Cafe information with phone call and map view.
+        Text("식당 정보")
+          .sectionText()
         VStack {
-            // Custom navigationbar view.
+          Text(cafeDescription[cafeInfo.name] ?? "정보 없음")
+            .font(.system(size: 16))
+            .fixedSize(horizontal: false, vertical: true)
+            .padding()
+          // Phone call and map view.
+          HStack {
+            // Phone call
             HStack {
-                VStack(alignment: .leading) {
-                    Text("식단 자세히 보기")
-                        .font(.system(size: CGFloat(18), weight: .bold))
-                        .foregroundColor(.secondary)
-                    Text(cafeInfo.name)
-                        .font(.system(size: CGFloat(25), weight: .bold))
-                }
-                .padding([.leading, .top])
-                Spacer()
-                Button(action: {
-                        let _ = self.cafeList.toggleFixed(cafeName: self.cafeInfo.name)
-                }) {
-                    Image(systemName: cafeList.isFixed(cafeName: self.cafeInfo.name) ? "pin" : "pin.slash")
-                        .font(.system(size: 25, weight: .light))
-                        .foregroundColor(themeColor.icon(colorScheme))
-                        .offset(y: 10)
-                }
-                Button(action: { self.presentationMode.wrappedValue.dismiss()}) {
-                    Text("닫기")
-                        .font(.system(size: CGFloat(20), weight: .light))
-                        .foregroundColor(themeColor.icon(colorScheme))
-                        .padding()
-                        .offset(y: 10)
-                }
+              Spacer()
+              Image(systemName: "phone")
+                .font(.system(size: 20))
+                .foregroundColor(themeColor.title(colorScheme))
+              Text("전화 걸기")
+                .font(.system(size: 16))
+                .foregroundColor(themeColor.title(colorScheme))
+              Spacer()
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+              let telephone = "tel://02-"
+              let formattedString = telephone + self.cafeInfo.phoneNum
+              guard let url = URL(string: formattedString) else { return }
+              UIApplication.shared.open(url)
             }
             Divider()
-            // Various cafe information.
-            ScrollView {
-                Text("안내")
-                    .sectionText()
-                // Cafe timer.
-                HStack {
-                    Spacer()
-                    TimerText(cafeName: cafeInfo.name)
-                    Spacer()
-                }
-                .rowBackground()
-                // Full meal view.
-                mealSection(mealType: .breakfast, mealMenus: cafeInfo.menus(at: .breakfast))
-                mealSection(mealType: .lunch, mealMenus: cafeInfo.menus(at: .lunch))
-                mealSection(mealType: .dinner, mealMenus: cafeInfo.menus(at: .dinner))
-                // Cafe information with phone call and map view.
-                Text("식당 정보")
-                    .sectionText()
-                VStack {
-                    Text(cafeDescription[cafeInfo.name] ?? "정보 없음")
-                        .font(.system(size: 16))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding()
-                    // Phone call and map view.
-                    HStack {
-                        // Phone call
-                        HStack {
-                            Spacer()
-                            Image(systemName: "phone")
-                                .font(.system(size: 20))
-                                .foregroundColor(themeColor.title(colorScheme))
-                            Text("전화 걸기")
-                                .font(.system(size: 16))
-                                .foregroundColor(themeColor.title(colorScheme))
-                            Spacer()
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            let telephone = "tel://02-"
-                            let formattedString = telephone + self.cafeInfo.phoneNum
-                            guard let url = URL(string: formattedString) else { return }
-                            UIApplication.shared.open(url)
-                        }
-                        Divider()
-                        // Map view.
-                        HStack {
-                            Spacer()
-                            Image(systemName: "map")
-                                .font(.system(size: 20, weight: .light))
-                                .foregroundColor(themeColor.title(colorScheme))
-                            Text("위치 보기")
-                                .font(.system(size: 16))
-                                .foregroundColor(themeColor.title(colorScheme))
-                            Spacer()
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            self.isMapView = true
-                        }
-                    }
-                }
-                .rowBackground()
+            // Map view.
+            HStack {
+              Spacer()
+              Image(systemName: "map")
+                .font(.system(size: 20, weight: .light))
+                .foregroundColor(themeColor.title(colorScheme))
+              Text("위치 보기")
+                .font(.system(size: 16))
+                .foregroundColor(themeColor.title(colorScheme))
+              Spacer()
             }
-            Divider()
-            // Google admob. 
-            GADBannerViewController()
-            .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
-        }
-        .sheet(isPresented: $isMapView) {
-            MapView(cafeInfo: self.cafeInfo)
-                .environmentObject(self.themeColor)
-        }
-    }
-    
-    /**
-     Single meal information section.
-     
-     - Parameters:
-        - mealType: Determines which data to show.
-        - mealMenus: Data to show.
-     */
-    func mealSection(mealType: MealType, mealMenus: [Menu]) -> AnyView {
-        if (mealMenus.isEmpty == false ) {
-            return AnyView(
-                VStack {
-                    Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.getDaily(at: settingManager.date)?.operatingTimeStr(at: mealType) ?? "시간 정보 없음")  + ")")
-                        .sectionText()
-                ForEach(mealMenus) { menu in
-                    HStack{
-                        Text(menu.name)
-                            .accentedText()
-                            .foregroundColor(self.themeColor.title(self.colorScheme))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .onTapGesture {
-                                print(menu.name)
-                        }
-                        Spacer()
-                        Text(self.costInterpret(menu.cost) ?? "")
-                            .foregroundColor(Color(.gray))
-                    }
-                    .rowBackground()
-                }
+            .contentShape(Rectangle())
+            .onTapGesture {
+              self.isMapView = true
             }
-            )
+          }
         }
-        else {
-            return AnyView(EmptyView())
-        }
+        .rowBackground()
+      }
+      Divider()
+      // Google admob. 
+      GADBannerViewController()
+        .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
     }
-    
-    /**
-    Interpret cost value to adequate string.
-    
-    - ToDo: Search appropriate class to place this function.
-    */
-    func costInterpret(_ cost: Int) -> String?{
-        if (cost == -1) {
-            return nil
-        }
-        else if ((cost - 10) % 100 == 0) {
-            return String(cost - 10) + "원 부터"
-        }
-        else {
-            return String(cost) + "원"
-        }
+    .sheet(isPresented: $isMapView) {
+      MapView(cafeInfo: self.cafeInfo)
+        .environmentObject(self.themeColor)
     }
+  }
+  
+  /**
+   Single meal information section.
+   
+   - Parameters:
+   - mealType: Determines which data to show.
+   - mealMenus: Data to show.
+   */
+  func mealSection(mealType: MealType, mealMenus: [Menu]) -> AnyView {
+    if (mealMenus.isEmpty == false ) {
+      return AnyView(
+        VStack {
+          Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.getDaily(at: settingManager.date)?.operatingTimeStr(at: mealType) ?? "시간 정보 없음")  + ")")
+            .sectionText()
+          ForEach(mealMenus) { menu in
+            HStack{
+              Text(menu.name)
+                .accentedText()
+                .foregroundColor(self.themeColor.title(self.colorScheme))
+                .fixedSize(horizontal: false, vertical: true)
+                .onTapGesture {
+                  print(menu.name)
+                }
+              Spacer()
+              Text(self.costInterpret(menu.cost) ?? "")
+                .foregroundColor(Color(.gray))
+            }
+            .rowBackground()
+          }
+        }
+      )
+    }
+    else {
+      return AnyView(EmptyView())
+    }
+  }
+  
+  /**
+   Interpret cost value to adequate string.
+   
+   - ToDo: Search appropriate class to place this function.
+   */
+  func costInterpret(_ cost: Int) -> String?{
+    if (cost == -1) {
+      return nil
+    }
+    else if ((cost - 10) % 100 == 0) {
+      return String(cost - 10) + "원 부터"
+    }
+    else {
+      return String(cost) + "원"
+    }
+  }
 }
 
 struct CafeView_Previews: PreviewProvider {
-    static var dataManager = DataManager()
-    static var listManager = ListManager()
-    static var settingManager = SettingManager()
+  static var dataManager = DataManager()
+  static var listManager = ListManager()
+  static var settingManager = SettingManager()
+  
+  
+  static var previews: some View {
     
+    CafeView_Previews.settingManager.update()
+    CafeView_Previews.listManager.update(newCafeList: CafeView_Previews.dataManager.loadAll(at: Date()))
     
-    static var previews: some View {
-        
-        CafeView_Previews.settingManager.update()
-        CafeView_Previews.listManager.update(newCafeList: CafeView_Previews.dataManager.loadAll(at: Date()))
-        
-        return CafeView(cafeInfo: previewCafe)
-            .environmentObject(self.dataManager)
-            .environmentObject(self.listManager)
-            .environmentObject(self.settingManager)
-    }
+    return CafeView(cafeInfo: previewCafe)
+      .environmentObject(self.dataManager)
+      .environmentObject(self.listManager)
+      .environmentObject(self.settingManager)
+  }
 }

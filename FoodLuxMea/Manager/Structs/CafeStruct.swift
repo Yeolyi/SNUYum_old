@@ -14,9 +14,9 @@ import Foundation
 ///
 /// - Note: Codable protocol adopted to encoded/decoded while using Userdefault.
 enum MealType: String, Codable {
-    case breakfast = "아침"
-    case lunch = "점심"
-    case dinner = "저녁"
+  case breakfast = "아침"
+  case lunch = "점심"
+  case dinner = "저녁"
 }
 
 
@@ -34,24 +34,24 @@ enum MealType: String, Codable {
 ///
 /// - Todo: Change cost type to optional Int to stop using -1.
 struct Menu: Hashable, Codable, Identifiable {
-    var id = UUID()
-    let name: String
-    let cost: Int
-    
-    /**
-     Creates an menu struct.
-     
-     - Parameter cost: Defult value is -1.
-     */
-    init(name: String, cost: Int = -1) {
-        self.name = name
-        guard cost >= 0 || cost == -1 else {
-            assertionFailure("Menu/init: Inappropriate cost value - \(cost)")
-            self.cost = -1
-            return
-        }
-        self.cost = cost
+  var id = UUID()
+  let name: String
+  let cost: Int
+  
+  /**
+   Creates an menu struct.
+   
+   - Parameter cost: Defult value is -1.
+   */
+  init(name: String, cost: Int = -1) {
+    self.name = name
+    guard cost >= 0 || cost == -1 else {
+      assertionFailure("Menu/init: Inappropriate cost value - \(cost)")
+      self.cost = -1
+      return
     }
+    self.cost = cost
+  }
 }
 
 /**
@@ -68,83 +68,91 @@ struct Menu: Hashable, Codable, Identifiable {
  - ToDo: As phoneNum variable is available in another struct, delete it and let settingmanager manage it. Also change name of bkfMenuList to breakfastMenuList.
  */
 struct Cafe: Hashable, Codable, Identifiable {
-    
-    internal var id = UUID()
-    
-    let name: String
-    public let phoneNum: String
-    
-    private let bkfMenuList: [Menu]
-    private let lunchMenuList: [Menu]
-    private let dinnerMenuList: [Menu]
-    
-    init(name: String, phoneNum: String, bkfMenuList: [Menu], lunchMenuList: [Menu], dinnerMenuList: [Menu]) {
-        if name.isEmpty {
-            assertionFailure("Invalid name\(name)")
-        }
-        self.name = name
-        self.phoneNum = phoneNum
-        self.bkfMenuList = bkfMenuList
-        self.lunchMenuList = lunchMenuList
-        self.dinnerMenuList = dinnerMenuList
+  
+  internal var id = UUID()
+  
+  let name: String
+  public let phoneNum: String
+  
+  private let bkfMenuList: [Menu]
+  private let lunchMenuList: [Menu]
+  private let dinnerMenuList: [Menu]
+  
+  init(name: String) {
+    self.name = name
+    self.phoneNum = phoneNumList[name] ?? ""
+    self.bkfMenuList = [Menu(name: "메뉴가 없습니다", cost: -1)]
+    self.lunchMenuList = [Menu(name: "메뉴가 없습니다", cost: -1)]
+    self.dinnerMenuList = [Menu(name: "메뉴가 없습니다", cost: -1)]
+  }
+  
+  init(name: String, phoneNum: String, bkfMenuList: [Menu], lunchMenuList: [Menu], dinnerMenuList: [Menu]) {
+    if name.isEmpty {
+      assertionFailure("Invalid name\(name)")
     }
-    
-    /**
-     True if there is no menu in selected meal type.
-     
-     - Parameters:
-        - mealType: Select which meal type to search
-        - keywords: Exceptional strings which means menu is empty.
-     */
-    func isEmpty(at mealTypes: [MealType], emptyKeywords: [String]) -> Bool {
-        for mealType in mealTypes {
-            let targetMenuList = menus(at: mealType)
-            if (targetMenuList.count == 0 ) { return true }
-            else if (targetMenuList.count > 1) { return false}
-            else {
-                for keyword in emptyKeywords {
-                    if targetMenuList.contains(where: { $0.name == keyword }) {
-                        return true
-                    }
-                }
-                return false
-            }
-        }
-        assertionFailure("Unintended blah blah")
-        return false
-    }
-    
-    /**
-     Get menu list of selected meal type
-     
-     - Parameter mealType: Select which meal type to get
-    */
-    func menus(at mealType: MealType) -> [Menu] {
-        switch mealType {
-        case .breakfast:
-            return bkfMenuList
-        case .lunch:
-            return lunchMenuList
-        case .dinner:
-            return dinnerMenuList
-        }
-    }
-    
-    /**
-     True if cafe name or meal array contains searching text
-     
-     - Parameter keyword: Text to search.
-     - Parameter mealType: Meal type array to search.
-    */
-    func includes(_ keyword: String, at mealTypes: [MealType]) -> Bool {
-        for mealType in mealTypes {
-            let menuList = menus(at: mealType)
-            for menu in menuList{
-                if (menu.name.contains(keyword)) {
-                    return true
-                }
-            }
+    self.name = name
+    self.phoneNum = phoneNum
+    self.bkfMenuList = bkfMenuList
+    self.lunchMenuList = lunchMenuList
+    self.dinnerMenuList = dinnerMenuList
+  }
+  
+  /**
+   True if there is no menu in selected meal type.
+   
+   - Parameters:
+   - mealType: Select which meal type to search
+   - keywords: Exceptional strings which means menu is empty.
+   */
+  func isEmpty(at mealTypes: [MealType], emptyKeywords: [String]) -> Bool {
+    for mealType in mealTypes {
+      let targetMenuList = menus(at: mealType)
+      if (targetMenuList.count == 0 ) { return true }
+      else if (targetMenuList.count > 1) { return false}
+      else {
+        for keyword in emptyKeywords {
+          if targetMenuList.contains(where: { $0.name == keyword }) {
+            return true
+          }
         }
         return false
+      }
     }
+    assertionFailure("Unintended blah blah")
+    return false
+  }
+  
+  /**
+   Get menu list of selected meal type
+   
+   - Parameter mealType: Select which meal type to get
+   */
+  func menus(at mealType: MealType) -> [Menu] {
+    switch mealType {
+    case .breakfast:
+      return bkfMenuList
+    case .lunch:
+      return lunchMenuList
+    case .dinner:
+      return dinnerMenuList
+    }
+  }
+  
+  /**
+   True if cafe name or meal array contains searching text
+   
+   - Parameter keyword: Text to search.
+   - Parameter mealType: Meal type array to search.
+   */
+  func includes(_ keyword: String, at mealTypes: [MealType]) -> Bool {
+    for mealType in mealTypes {
+      let menuList = menus(at: mealType)
+      for menu in menuList{
+        if (menu.name.contains(keyword)) {
+          return true
+        }
+      }
+    }
+    return false
+  }
 }
