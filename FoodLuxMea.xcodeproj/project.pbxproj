@@ -232,14 +232,13 @@
 		25BF46AC24F40C8800CC2355 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				25340D64251396D000E7FA7A /* Structs */,
 				250BBBEF24F3F92E00FC0C84 /* SNUCOManager.swift */,
 				25FF78002503B306006372C7 /* Ourhome Manager.swift */,
 				250BBBEB24F3F92D00FC0C84 /* DataManager.swift */,
 				2500739524F54A37009A32FA /* SettingManager.swift */,
 				250BBBEA24F3F92D00FC0C84 /* SmartSuggestion.swift */,
 				250BBBE924F3F92D00FC0C84 /* ListManager.swift */,
-				255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */,
+				25340D64251396D000E7FA7A /* Structs */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -248,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				259B889424F68B6F001C710C /* GADBannerViewController.swift */,
+				255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */,
 			);
 			path = Admob;
 			sourceTree = "<group>";
@@ -263,11 +263,11 @@
 		25DD96D724FECBC100E5A4B3 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				25340D63251396B900E7FA7A /* Components */,
 				25A0824924F3FDEC00593CB3 /* ContentView.swift */,
 				250BBC1824F3FAC700FC0C84 /* SearchBar.swift */,
 				2593232D24FAE76F0036C148 /* TimerText.swift */,
 				250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */,
+				25340D63251396B900E7FA7A /* Components */,
 			);
 			path = MainView;
 			sourceTree = "<group>";

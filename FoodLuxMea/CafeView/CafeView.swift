@@ -10,14 +10,17 @@ import GoogleMobileAds
 
 /// Show single Cafe struct's information.
 struct CafeView: View {
+    
     @State var cafeInfo: Cafe
     @State var isMapView = false
     @State var showActionSheet = false
+    
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var cafeList: ListManager
     @EnvironmentObject var settingManager: SettingManager
     let themeColor = ThemeColor()
-    @Environment(\.colorScheme) var colorScheme
-    @Environment(\.presentationMode) var presentationMode
     
     /// - Parameter cafeInfo: Cafe data to show in this view.
     init(cafeInfo: Cafe) {

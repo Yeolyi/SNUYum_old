@@ -21,16 +21,13 @@ func parse(_ uRL: URL) -> Document {
     return .init("https://snuco.snu.ac.kr/ko/foodmenu")
 }
 
-
 /// Get data from snuco website and process into Cafe struct
 class SNUCOManager {
-    
     /// Get Cafe array from specific date; sum of below functions
     func getAll(at date: Date) -> [Cafe]{
         var cafeData: [Cafe] = []
         let targetURL = makeURL(from: date)
         let parsedDocument = parse(targetURL) //파싱
-        
         
         do {
             let rawCafeList: [Element] = try
@@ -47,12 +44,9 @@ class SNUCOManager {
             return cafeData
         }
             
-            
         catch {
             assertionFailure("SNUCOManager/getCafeData(from: ): Html 소스 분리에 실패하였습니다.")
         }
-        
-        
         return []
     }
     

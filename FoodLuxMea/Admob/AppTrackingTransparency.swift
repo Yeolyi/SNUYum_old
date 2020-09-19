@@ -5,16 +5,10 @@
 //  Created by Seong Yeol Yi on 2020/08/31.
 //
 
-
-
 import AppTrackingTransparency
 import AdSupport
 
-
-
-/**
- Newly added permissions for iOS 14 - related to google admob.
- */
+/// Newly added permissions for iOS 14 - related to google admob.
 func requestPermission() {
     if #available(iOS 14, *) {
         ATTrackingManager.requestTrackingAuthorization { status in
