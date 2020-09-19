@@ -7,51 +7,15 @@
 
 import Foundation
 
-/// Tuple with hour and minute.
-struct SimpleTimeBorder {
-  let hour: Int
-  let minute: Int
-  
-  init(_ hour: Int, _ minute: Int = 0) {
-    self.hour = hour
-    self.minute = minute
-  }
-  
-  init(date: Date) {
-    let hour = Calendar.current.component(.hour, from: date)
-    let minute = Calendar.current.component(.minute, from: date)
-    self.hour = hour
-    self.minute = minute
-  }
-  
-  static func <(left: SimpleTimeBorder, right: SimpleTimeBorder) -> Bool {
-    if (left.hour < right.hour) {
-      return true
-    }
-    else if (left.hour == right.hour) {
-      return left.minute < right.minute
-    }
-    else {
-      return false
-    }
-  }
-}
-
-
-/**
- Cafeteria operating hour of one day three meals; nil if cafe does not open.
- 
- */
+/// Cafeteria operating hour of one day three meals; nil if cafe does not open.
 struct DailyOperatingTime {
   var breakfast: String?
   var lunch: String?
   var dinner: String?
   
-  /**
-   Creates a cafe operating hour information.
-   
-   - Todo: Set default value to nil.
-   */
+  /// Creates a cafe operating hour information.
+  ///
+  /// - Todo: Set default value to nil.
   init(_ bkf: String?, _ lunch: String?, _ dinner: String?) {
     self.breakfast = bkf
     self.lunch = lunch

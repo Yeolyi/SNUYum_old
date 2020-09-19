@@ -7,19 +7,17 @@
 
 import SwiftUI
 
-/**
- Saves and loads overall user settings and mediates/applies them.
- 
- - Important: If variable name changes, userdefault crashes when accessing previous setting.
- 
- - ToDo: Make version compatible - solution to userdefault error
- */
+
+/// Saves and loads overall user settings and mediates/applies them.
+///
+/// Important: If variable name changes, userdefault crashes when accessing previous setting.
+///
+/// - ToDo: Make version compatible - solution to userdefault error
 class SettingManager: ObservableObject {
-  /**
-   Current meal view mode in main view; breakfast only, lunch only or dinner only.
-   
-   - Important: Overwritten when 'isAuto' is true!
-   */
+
+  /// Current meal view mode in main view; breakfast only, lunch only or dinner only.
+  ///
+  /// - Important: Overwritten when 'isAuto' is true!
   @Published var mealViewMode: MealType = .lunch
   
   /// Turn on meal type suggestion.
@@ -34,18 +32,15 @@ class SettingManager: ObservableObject {
   /// If true, filter empty cafes in list.
   @Published var hideEmptyCafe: Bool = true
   
-  /**
-   Suggested meal type based on current setting time.
-   
-   - Important: Should be updated when setting time or timer cafe changes.
-   */
+
+  /// Suggested meal type based on current setting time.
+  ///
+  /// - Important: Should be updated when setting time or timer cafe changes.
   @Published var suggestedMeal: MealType = .lunch
   
-  /**
-   Tell if next day of setting day should be suggested.
-   
-   - Important: Should be updated when setting time or timer cafe changes.
-   */
+   /// Tell if next day of setting day should be suggested.
+   ///
+   /// - Important: Should be updated when setting time or timer cafe changes.
   @Published var isSuggestedTomorrow: Bool = false
   
   /// Main view timer cafe name; nil if timer is set to be hidden.
@@ -73,11 +68,10 @@ class SettingManager: ObservableObject {
     isAuto ? suggestedMeal : mealViewMode
   }
   
-  /**
-   If setting data is stored, retrieve it
-   
-   - Note: If it's app's first run, save default value and return.
-   */
+
+  /// If setting data is stored, retrieve it
+  ///
+  /// - Note: If it's app's first run, save default value and return.
   init() {
     func strToDate(_ str: String) -> Date {
       let dateFormatter = DateFormatter()
@@ -89,7 +83,7 @@ class SettingManager: ObservableObject {
         print("첫실행입니다 초기 설정을 덮어씌웁니다. ")
         return
       }
-      mealViewMode = MealType(rawValue: userDefaults.string(forKey: "mealViewMode")!)!
+      mealViewMode = MealType(rawValue: userDefaults.string(forKey: "mealViewMode") ?? "점심")!
       debugDate = strToDate(userDefaults.string(forKey: "debugDate")!)
       alimiCafeName = userDefaults.string(forKey: "timerCafeName") ?? nil
       isAuto = userDefaults.bool(forKey: "isAuto")
@@ -127,7 +121,7 @@ class SettingManager: ObservableObject {
   
   /// Update setting if timer cafe changes. 
   func update() {
-    (isSuggestedTomorrow, suggestedMeal) = SmartSuggestion.get(at: date, cafeName: alimiCafeName ?? "3식당")
+    (isSuggestedTomorrow, suggestedMeal) = MenuSuggestion.get(at: date, cafeName: alimiCafeName ?? "3식당")
     print("SettingManager/update(date: ): 추천값 업데이트 완료")
   }
 }

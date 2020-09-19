@@ -13,7 +13,6 @@ struct CafeView: View {
   
   @State var cafeInfo: Cafe
   @State var isMapView = false
-  @State var showActionSheet = false
   
   @Environment(\.colorScheme) var colorScheme
   @Environment(\.presentationMode) var presentationMode
@@ -29,7 +28,7 @@ struct CafeView: View {
   
   var body: some View {
     VStack {
-      // Custom navigationbar view.
+      // MARK: - Custom navigationbar view.
       HStack {
         VStack(alignment: .leading) {
           Text("식단 자세히 보기")
@@ -57,17 +56,15 @@ struct CafeView: View {
         }
       }
       Divider()
-      // Various cafe information.
+      // MARK: - Various cafe information.
       ScrollView {
         Text("안내")
           .sectionText()
-        // Cafe timer.
         TimerText(cafe: cafeInfo)
-        // Full meal view.
         mealSection(mealType: .breakfast, mealMenus: cafeInfo.menus(at: .breakfast))
         mealSection(mealType: .lunch, mealMenus: cafeInfo.menus(at: .lunch))
         mealSection(mealType: .dinner, mealMenus: cafeInfo.menus(at: .dinner))
-        // Cafe information with phone call and map view.
+        // MARK: - Cafe information with phone call and map view.
         Text("식당 정보")
           .sectionText()
         VStack {
@@ -75,7 +72,6 @@ struct CafeView: View {
             .font(.system(size: 16))
             .fixedSize(horizontal: false, vertical: true)
             .padding()
-          // Phone call and map view.
           HStack {
             // Phone call
             HStack {
@@ -115,8 +111,8 @@ struct CafeView: View {
         }
         .rowBackground()
       }
+      // MARK: - Google admob.
       Divider()
-      // Google admob. 
       GADBannerViewController()
         .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
     }
@@ -137,8 +133,13 @@ struct CafeView: View {
     if (mealMenus.isEmpty == false ) {
       return AnyView(
         VStack {
-          Text(mealType.rawValue + " (" + (cafeOperatingHour[cafeInfo.name]?.getDaily(at: settingManager.date)?.operatingTimeStr(at: mealType) ?? "시간 정보 없음")  + ")")
-            .sectionText()
+          Text(
+            mealType.rawValue + " (" +
+              (cafeOperatingHour[cafeInfo.name]?.getDaily(at: settingManager.date)?
+                .operatingTimeStr(at: mealType) ?? "시간 정보 없음")
+              + ")"
+          )
+          .sectionText()
           ForEach(mealMenus) { menu in
             HStack{
               Text(menu.name)
@@ -149,7 +150,7 @@ struct CafeView: View {
                   print(menu.name)
                 }
               Spacer()
-              Text(self.costInterpret(menu.cost) ?? "")
+              Text(self.costInterpret(menu.cost))
                 .foregroundColor(Color(.gray))
             }
             .rowBackground()
@@ -158,7 +159,7 @@ struct CafeView: View {
       )
     }
     else {
-      return AnyView(EmptyView())
+      return AnyView(Text("메뉴가 없어요."))
     }
   }
   
@@ -167,9 +168,9 @@ struct CafeView: View {
    
    - ToDo: Search appropriate class to place this function.
    */
-  func costInterpret(_ cost: Int) -> String?{
+  func costInterpret(_ cost: Int) -> String{
     if (cost == -1) {
-      return nil
+      return ""
     }
     else if ((cost - 10) % 100 == 0) {
       return String(cost - 10) + "원 부터"

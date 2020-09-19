@@ -7,24 +7,9 @@
 
 import Foundation
 
-
-/// Indicates one of these three meals; breakfast, lunch and dinner.
+/// Data of a single cafeteria.
 ///
-/// Support raw string value in korean.
-///
-/// - Note: Codable protocol adopted to encoded/decoded while using Userdefault.
-enum MealType: String, Codable {
-  case breakfast = "아침"
-  case lunch = "점심"
-  case dinner = "저녁"
-}
-
-
-/// Data of a single menu.
-///
-/// If there's no cost data in server, cost value is -1.
-///
-/// - Precondition: 'cost' variable cannot be negative other than -1.
+/// Includes cafe name, cafe phone number, three meals' menus.
 ///
 /// - Note: Hashable protocol to make Menu array.
 ///
@@ -32,41 +17,8 @@ enum MealType: String, Codable {
 ///
 /// Identifiable adopted to give id in list view.
 ///
-/// - Todo: Change cost type to optional Int to stop using -1.
-struct Menu: Hashable, Codable, Identifiable {
-  var id = UUID()
-  let name: String
-  let cost: Int
-  
-  /**
-   Creates an menu struct.
-   
-   - Parameter cost: Defult value is -1.
-   */
-  init(name: String, cost: Int = -1) {
-    self.name = name
-    guard cost >= 0 || cost == -1 else {
-      assertionFailure("Menu/init: Inappropriate cost value - \(cost)")
-      self.cost = -1
-      return
-    }
-    self.cost = cost
-  }
-}
-
-/**
- Data of a single cafeteria.
- 
- Includes cafe name, cafe phone number, three meals' menus.
- 
- - Note: Hashable protocol to make Menu array.
- 
- Codable protocol to encoded/decoded while using Userdefault.
- 
- Identifiable adopted to give id in list view.
- 
- - ToDo: As phoneNum variable is available in another struct, delete it and let settingmanager manage it. Also change name of bkfMenuList to breakfastMenuList.
- */
+/// - ToDo: As phoneNum variable is available in another struct, delete it and let settingmanager
+/// manage it. Also change name of bkfMenuList to breakfastMenuList.
 struct Cafe: Hashable, Codable, Identifiable {
   
   internal var id = UUID()
@@ -97,13 +49,11 @@ struct Cafe: Hashable, Codable, Identifiable {
     self.dinnerMenuList = dinnerMenuList
   }
   
-  /**
-   True if there is no menu in selected meal type.
-   
-   - Parameters:
-   - mealType: Select which meal type to search
-   - keywords: Exceptional strings which means menu is empty.
-   */
+   /// True if there is no menu in selected meal type.
+   ///
+   /// - Parameters:
+   /// - mealType: Select which meal type to search
+   /// - keywords: Exceptional strings which means menu is empty.
   func isEmpty(at mealTypes: [MealType], emptyKeywords: [String]) -> Bool {
     for mealType in mealTypes {
       let targetMenuList = menus(at: mealType)
@@ -122,11 +72,10 @@ struct Cafe: Hashable, Codable, Identifiable {
     return false
   }
   
-  /**
-   Get menu list of selected meal type
-   
-   - Parameter mealType: Select which meal type to get
-   */
+  
+   /// Get menu list of selected meal type
+   ///
+   /// - Parameter mealType: Select which meal type to get
   func menus(at mealType: MealType) -> [Menu] {
     switch mealType {
     case .breakfast:
@@ -138,12 +87,10 @@ struct Cafe: Hashable, Codable, Identifiable {
     }
   }
   
-  /**
-   True if cafe name or meal array contains searching text
-   
-   - Parameter keyword: Text to search.
-   - Parameter mealType: Meal type array to search.
-   */
+   /// True if cafe name or meal array contains searching text
+   ///
+   /// - Parameter keyword: Text to search.
+   /// - Parameter mealType: Meal type array to search.
   func includes(_ keyword: String, at mealTypes: [MealType]) -> Bool {
     for mealType in mealTypes {
       let menuList = menus(at: mealType)

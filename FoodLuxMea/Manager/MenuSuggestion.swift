@@ -10,9 +10,9 @@ import Foundation
 /**
  Manage adequate meal type based on time.
  */
-class SmartSuggestion {
+class MenuSuggestion {
   
-  // Hour and minute tuples for when operating hour does not exists.
+  // Default SimpleTimeBorder structs in case operating hour does not exists.
   static let bkfDefaultTime = SimpleTimeBorder(10)
   static let lunchDefaultTime = SimpleTimeBorder(15)
   static let dinnerDefaultTime = SimpleTimeBorder(19)
@@ -32,15 +32,15 @@ class SmartSuggestion {
       lunchEndTime = nil
       dinnerEndTime = nil
     }
-    let isTomorrow = (dinnerEndTime ?? SmartSuggestion.dinnerDefaultTime) < currentSimpleDate
+    let isTomorrow = (dinnerEndTime ?? MenuSuggestion.dinnerDefaultTime) < currentSimpleDate
     let suggestedMeal: MealType
-    if currentSimpleDate < (bkfEndTime ?? SmartSuggestion.bkfDefaultTime) {
+    if currentSimpleDate < (bkfEndTime ?? MenuSuggestion.bkfDefaultTime) {
       suggestedMeal = .breakfast
     }
-    else if currentSimpleDate < (lunchEndTime ?? SmartSuggestion.lunchDefaultTime) {
+    else if currentSimpleDate < (lunchEndTime ?? MenuSuggestion.lunchDefaultTime) {
       suggestedMeal = .lunch
     }
-    else if currentSimpleDate < (dinnerEndTime ?? SmartSuggestion.dinnerDefaultTime) {
+    else if currentSimpleDate < (dinnerEndTime ?? MenuSuggestion.dinnerDefaultTime) {
       suggestedMeal = .dinner
     }
     else {

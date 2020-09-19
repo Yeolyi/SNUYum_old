@@ -12,7 +12,7 @@ import CoreLocation
 var locationManager = CLLocationManager()
 
 /// Map view element; shows cafe location using Naver map API.
-struct NaverMap: UIViewRepresentable {
+struct NaverMapProvider: UIViewRepresentable {
   ///Camera&marker position
   let coord: NMGLatLng
   ///Camera zoom
@@ -28,7 +28,7 @@ struct NaverMap: UIViewRepresentable {
     }
   }
   
-  func makeUIView(context: UIViewRepresentableContext<NaverMap>) -> NMFNaverMapView {
+  func makeUIView(context: UIViewRepresentableContext<NaverMapProvider>) -> NMFNaverMapView {
     let mapView: NMFNaverMapView = .init()
     locationManager.requestWhenInUseAuthorization()
     
@@ -48,7 +48,7 @@ struct NaverMap: UIViewRepresentable {
     return mapView
   }
   
-  func updateUIView(_ uiView: NMFNaverMapView, context: UIViewRepresentableContext<NaverMap>) {
+  func updateUIView(_ uiView: NMFNaverMapView, context: UIViewRepresentableContext<NaverMapProvider>) {
     
   }
 }

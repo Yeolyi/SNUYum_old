@@ -25,7 +25,7 @@ struct MapView: View {
     NavigationView {
       GeometryReader { geo in
         ZStack {
-          NaverMap(cafeName: self.cafeInfo.name)
+          NaverMapProvider(cafeName: self.cafeInfo.name)
             .edgesIgnoringSafeArea(.bottom)
           // Cafe location info in text.
           Text(cafePosition[self.cafeInfo.name] ?? "")

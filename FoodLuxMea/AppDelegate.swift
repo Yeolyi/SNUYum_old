@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     requestPermission()
     //Initialize Google Admob.
     GADMobileAds.sharedInstance().start(completionHandler: nil)
-    
     return true
   }
   

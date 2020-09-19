@@ -64,6 +64,7 @@ var phoneNumList: [String: String] = [
 
 /// Weekly cafeteria operating hour
 var cafeOperatingHour: [String : WeeklyOperatingHour] = [
+  
   "학생회관식당": .init(
     weekday: .init("08:00-10:00", "11:00-15:00", "17:00-19:00"),
     saturday: .init(nil, "11:30-14:00", "17:00-19:00"),

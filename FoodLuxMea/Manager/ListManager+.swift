@@ -8,35 +8,29 @@
 import Foundation
 import CoreData
 
-/**
- Determines how cafe data will be displayed.
- 
- Includes information about if cafe is fixed and shown.
- 
- - Important: There always should be corresponding ListElement for each cafe data.
- 
- - Note: Default value is unfixed.
- */
+/// Determines how single cafe data displayed.
+///
+/// Includes information about if cafe is fixed and shown.
+///
+/// - Important: There always should be corresponding ListElement for each cafe data in DataManager.
+///
+/// - Note: Default value is unfixed.
 struct ListElement: Hashable, Codable, Identifiable {
   var id = UUID()
   /// Cafe's name
   var name: String = ""
-  /// Always show cafe on the top of the /list
+  /// Always show cafe on the top of the list
   var isFixed: Bool = false
   /// Show cafe in list
   var isShown: Bool = true
 }
 
-/**
- Manages how whole cafe data will be displayed.
- */
+/// Manages how whole cafe data will be displayed.
 class ListManager: ObservableObject{
   
-  /**
-   ListElement storage.
-   
-   - Note: Published variable because scene should be updated every time it changes.
-   */
+  /// ListElement storage.
+  ///
+  /// - Note: Published variable because scene should be updated every time it changes.
   @Published var cafeList: [ListElement] = []
   
   /// Return fixed cafe ListElement array.
@@ -48,22 +42,18 @@ class ListManager: ObservableObject{
     cafeList.filter { $0.isFixed == false }
   }
   
-  /**
-   If stored value exists, restore it.
-   
-   - Important: Variable 'cafeList' remains empty if stored value does not exists.
-   */
+   /// If stored value exists, restore it.
+   ///
+   /// - Important: Variable 'cafeList' remains empty if stored value does not exists.
   init() {
     if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeList") as? Data {
       cafeList = try! PropertyListDecoder().decode([ListElement].self, from: loadedData)
     }
   }
-  
-  /**
-   Add new 'ListElement' in manager based on new cafe list.
-   
-   If cafe data is updated, list data should also be updated.
-   */
+
+   /// Add new 'ListElement' in manager based on new cafe list.
+   ///
+   /// If cafe data is updated, list data should also be updated.
   func update(newCafeList: [Cafe]) {
     for cafe in newCafeList {
       if (cafeList.contains(where: {$0.name == cafe.name}) == false ) {
@@ -73,9 +63,7 @@ class ListManager: ObservableObject{
     print("ListManager Updated")
   }
   
-  /**
-   Save 'ListElement'
-   */
+   /// Save 'ListElement'
   func save() {
     if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea"){
       if let encodedData = try? PropertyListEncoder().encode(cafeList) {
@@ -103,16 +91,6 @@ class ListManager: ObservableObject{
     }
     else {
       assertionFailure("ListMananer/toggleFixed: 존재하지 않는 카페값에 접근했습니다.")
-      return false
-    }
-  }
-  
-  func isFixed(cafeName: String) -> Bool {
-    if let index = index(of: cafeName) {
-      return cafeList[index].isFixed
-    }
-    else {
-      assertionFailure("ListManager/isFixed: 존재하지 않는 카페값에 접근했습니다.")
       return false
     }
   }

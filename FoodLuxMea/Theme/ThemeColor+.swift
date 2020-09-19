@@ -27,7 +27,6 @@ class ThemeColor: ObservableObject {
 }
 
 extension Color {
-  
   /// Changes hex string(e.g. "#6F77A6") to color
   init(hex: String) {
     let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
