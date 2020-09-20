@@ -33,9 +33,9 @@ struct Cafe: Hashable, Codable, Identifiable {
   init(name: String) {
     self.name = name
     self.phoneNum = phoneNumList[name] ?? ""
-    self.bkfMenuList = [Menu(name: "메뉴가 없습니다", cost: -1)]
-    self.lunchMenuList = [Menu(name: "메뉴가 없습니다", cost: -1)]
-    self.dinnerMenuList = [Menu(name: "메뉴가 없습니다", cost: -1)]
+    self.bkfMenuList = []
+    self.lunchMenuList = []
+    self.dinnerMenuList = []
   }
   
   init(name: String, phoneNum: String, bkfMenuList: [Menu], lunchMenuList: [Menu], dinnerMenuList: [Menu]) {
@@ -52,24 +52,23 @@ struct Cafe: Hashable, Codable, Identifiable {
    /// True if there is no menu in selected meal type.
    ///
    /// - Parameters:
-   /// - mealType: Select which meal type to search
-   /// - keywords: Exceptional strings which means menu is empty.
+   ///  - mealType: Select which meal type to search
+   ///  - emptyKeywords: Exceptional strings which means menu is empty.
   func isEmpty(at mealTypes: [MealType], emptyKeywords: [String]) -> Bool {
     for mealType in mealTypes {
-      let targetMenuList = menus(at: mealType)
-      if (targetMenuList.count == 0 ) { return true }
-      else if (targetMenuList.count > 1) { return false}
-      else {
+      let menuList = menus(at: mealType)
+      if menuList.isEmpty { continue }
+      for menu in menuList {
+        var tempEmpty = false
         for keyword in emptyKeywords {
-          if targetMenuList.contains(where: { $0.name == keyword }) {
-            return true
-          }
+          if menu.name.contains(keyword) { tempEmpty = true }
         }
-        return false
+        if tempEmpty == false {
+          return false
+        }
       }
     }
-    assertionFailure("Unintended blah blah")
-    return false
+    return true
   }
   
   

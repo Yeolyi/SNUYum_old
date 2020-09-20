@@ -15,7 +15,7 @@ struct MealSelect: View {
   
   var body: some View {
     HStack {
-      Text("\(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.meal.rawValue) 식단이에요")
+      Text("\(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.meal.rawValue) 식단")
         .foregroundColor(.secondary)
         .padding(.leading)
       Spacer()
@@ -39,9 +39,11 @@ struct MealSelect: View {
           }
         }
       }
-      .rowBackground()
     }
-    
+    .padding(5)
+    .background(colorScheme == .dark ? Color.white.opacity(0.1) : Color.gray.opacity(0.05))
+    .cornerRadius(10)
+    .padding(.top, 5)
   }
 }
 
@@ -75,7 +77,7 @@ struct MealTypeButton: View {
           .opacity(0.2)
         Image(systemName: imageName)
           .font(.system(size: 20, weight: .regular))
-          .padding([.leading, .trailing], 2)
+          .padding([.leading, .trailing], 1)
           .foregroundColor(settingManager.mealViewMode == buttonType && settingManager.isAuto == false ? themeColor.icon((colorScheme)) : Color(.systemFill))
       }
     }

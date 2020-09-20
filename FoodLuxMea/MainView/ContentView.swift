@@ -56,7 +56,7 @@ struct ContentView: View {
           SearchBar(searchWord: self.$searchWord)
           // Cafe timer row.
           if settingManager.alimiCafeName != nil {
-            Text("안내")
+            Text("안내(\(settingManager.alimiCafeName!))")
               .sectionText()
             if let cafe = dataManager.cafe(
               at: settingManager.date,
@@ -76,7 +76,7 @@ struct ContentView: View {
             CafeRowsFiltered(isFixed: true, searchWord: self.searchWord)
           }
           // Ordinary cafe section.
-          Text("식당목록")
+          Text("일반")
             .sectionText()
           CafeRowsFiltered(isFixed: false, searchWord: self.searchWord)
           // Scroll view ends here.

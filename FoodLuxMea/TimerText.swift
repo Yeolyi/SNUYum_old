@@ -23,7 +23,6 @@ struct TimerText: View {
   
   @Environment(\.colorScheme) var colorScheme
   
-  /// - Parameter cafeName: Name of cafe to show timer.
   init(cafe: Cafe) {
     self.cafe = cafe
   }
@@ -38,6 +37,7 @@ struct TimerText: View {
       HStack {
         Spacer()
         Text(remainingTimeNotice())
+          .accentedText()
           .foregroundColor(themeColor.title(colorScheme))
         Spacer()
       }
@@ -59,25 +59,28 @@ struct TimerText: View {
     let currentSimpleTime = SimpleTimeBorder(currentHour, currentMinute)
     
     // When cafe operating hour data exists
-    a: if let endDate = cafeOperatingHour[cafe.name]?.getDaily(at: settingManager.date)?.getEndTime(at: settingManager.suggestedMeal) {
-      let startTime = cafeOperatingHour[cafe.name]!.getDaily(at: settingManager.date)!.getStartTime(at: settingManager.suggestedMeal)!
-      
-      if (cafe.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords)) {
-        break a
+    if let endDate = cafeOperatingHour[cafe.name]?.getDaily(at: settingManager.date)?.getEndTime(at: settingManager.suggestedMeal) {
+      if cafe.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords) == false {
+        let startTime = cafeOperatingHour[cafe.name]!.getDaily(at: settingManager.date)!.getStartTime(at: settingManager.suggestedMeal)!
+        
+        if (currentHour < 5 || currentHour > endDate.hour) {
+          return "영업 종료🌙"
+        }
+        
+        else if currentSimpleTime < startTime { //시작시간 전
+          return "\(cafe.name)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!"
+        }
+        
+        else {
+          let time = remainTime(from: SimpleTimeBorder(date: Date()), to: endDate)
+          return "\(settingManager.suggestedMeal.rawValue) 마감까지 \(time.hour)시간 \(time.minute)분!"
+        }
       }
-      
-      if (currentHour < 5 || currentHour > endDate.hour) {
-        return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
-      }
-      
-      else if currentSimpleTime < startTime { //시작시간 전
-        return "\(cafe.name)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!"
+      else {
+        return "\(settingManager.suggestedMeal.rawValue) 메뉴가 없어요."
       }
     }
     // When cafe operating hour data not exists
-    if (currentHour < 5 || currentHour > MenuSuggestion.dinnerDefaultTime.hour) {
-      return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
-    }
     else {
       return "\(dayOfTheWeek()) \(settingManager.suggestedMeal.rawValue)에는 운영하지 않아요."
     }
@@ -101,15 +104,7 @@ struct TimerText: View {
   func dayOfTheWeek() -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "EEEE"
-    let str = dateFormatter.string(from: settingManager.date)
-    switch (str) {
-    case "Saturday":
-      return "토요일"
-    case "Sunday":
-      return "일요일"
-    default:
-      return "평일"
-    }
+    return dateFormatter.string(from: settingManager.date)
   }
 }
 

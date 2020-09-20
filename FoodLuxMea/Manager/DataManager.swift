@@ -37,7 +37,11 @@ class DataManager: ObservableObject {
       }
     }
     if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeData") as? Data {
-      cafeData = try! PropertyListDecoder().decode([URL:[Cafe]].self, from: loadedData)
+      do {
+        cafeData = try PropertyListDecoder().decode([URL:[Cafe]].self, from: loadedData)
+      } catch {
+        print("DataManager load failed.")
+      }
       print("CafeDataManager/init(): cafeData가 로드되었습니다")
     }
   }
@@ -59,14 +63,14 @@ class DataManager: ObservableObject {
   
   /// Get all data of certain date.
   func loadAll(at date: Date) -> [Cafe]{
-    let uRLString = SNUCOManager().makeURL(from: date)
+    let uRLString = SNUCOManager.makeURL(from: date)
     if let data = cafeData[uRLString] {
       return data
     }
     else {
       if (isInternetConnected) {
         print("CafeDataManager.getData(at: ): 다운로드 중, \(date)")
-        let newData = hTMLManager.getAll(at: date) + [ourhomeManager.getCafe(date: date)]
+        let newData = SNUCOManager.download(at: date) + (ourhomeManager.getCafe(date: date) != nil ? [ourhomeManager.getCafe(date: date)!] : [])
         cafeData[uRLString] = newData
         save()
         return newData
@@ -84,7 +88,7 @@ class DataManager: ObservableObject {
    - Remark: If there's no such cafe, returns empty cafe struct with same name.
    */
   func cafe(at date: Date, name: String) -> Cafe? {
-    let uRLString = hTMLManager.makeURL(from: date)
+    let uRLString = SNUCOManager.makeURL(from: date)
     if let data = cafeData[uRLString] {
       return data.first{ $0.name == name }
     }

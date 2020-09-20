@@ -18,6 +18,8 @@ class SettingManager: ObservableObject {
   /// Current meal view mode in main view; breakfast only, lunch only or dinner only.
   ///
   /// - Important: Overwritten when 'isAuto' is true!
+  ///
+  /// - Memo: 아 private으로 맞춰놓을걸;; meal 써야되는데 이거 써버림
   @Published var mealViewMode: MealType = .lunch
   
   /// Turn on meal type suggestion.
@@ -32,7 +34,6 @@ class SettingManager: ObservableObject {
   /// If true, filter empty cafes in list.
   @Published var hideEmptyCafe: Bool = true
   
-
   /// Suggested meal type based on current setting time.
   ///
   /// - Important: Should be updated when setting time or timer cafe changes.
@@ -47,7 +48,7 @@ class SettingManager: ObservableObject {
   @Published var alimiCafeName: String? = "학생회관식당" 
   
   /// Array of string which means there is no menu.
-  var closedKeywords = ["방학중휴점", "폐    점", "코로나19로 당분간 휴점", "방학중 휴무", "당분간 폐점", "폐  점"]
+  var closedKeywords = ["방학중휴점", "폐    점", "코로나19", "방학중 휴무", "당분간 폐점", "폐  점", "폐   점"]
   
   /// Final cafe date considering custom date and date suggestion.
   var date: Date {
@@ -76,15 +77,19 @@ class SettingManager: ObservableObject {
     func strToDate(_ str: String) -> Date {
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-      return dateFormatter.date(from: str)!
+      return dateFormatter.date(from: str) ?? Date()
     }
     if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
       if userDefaults.bool(forKey: "firstRun") == false {
         print("첫실행입니다 초기 설정을 덮어씌웁니다. ")
         return
       }
-      mealViewMode = MealType(rawValue: userDefaults.string(forKey: "mealViewMode") ?? "점심")!
-      debugDate = strToDate(userDefaults.string(forKey: "debugDate")!)
+      if let storedMealViewMode = MealType(rawValue: userDefaults.string(forKey: "mealViewMode") ?? "점심") {
+        mealViewMode = storedMealViewMode
+      }
+      if let storedStrToDate = userDefaults.string(forKey: "debugDate") {
+        debugDate = strToDate(storedStrToDate)
+      }
       alimiCafeName = userDefaults.string(forKey: "timerCafeName") ?? nil
       isAuto = userDefaults.bool(forKey: "isAuto")
       isCustomDate = userDefaults.bool(forKey: "isDebug")

@@ -94,7 +94,7 @@ struct SettingView: View {
             Text("알리미 설정")
               .font(.system(size: 18))
             Spacer()
-            Text(settingManager.alimiCafeName == nil ? "꺼짐" : settingManager.alimiCafeName!)
+            Text(settingManager.alimiCafeName ?? "꺼짐")
               .font(.system(size: 16))
               .foregroundColor(.secondary)
           }

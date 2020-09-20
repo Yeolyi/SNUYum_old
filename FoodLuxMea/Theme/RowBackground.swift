@@ -14,7 +14,7 @@ struct RowBackground: ViewModifier {
     Group {
       content
         .padding(10)
-        .background(colorScheme == .dark ? Color.white.opacity(0.05) : Color.gray.opacity(0.05))
+        .background(colorScheme == .dark ? Color.white.opacity(0.1) : Color.gray.opacity(0.05))
         .cornerRadius(10)
     }
     .padding([.top, .bottom], 2)

@@ -47,7 +47,33 @@ class ListManager: ObservableObject{
    /// - Important: Variable 'cafeList' remains empty if stored value does not exists.
   init() {
     if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeList") as? Data {
-      cafeList = try! PropertyListDecoder().decode([ListElement].self, from: loadedData)
+      do {
+        cafeList = try PropertyListDecoder().decode([ListElement].self, from: loadedData)
+      } catch {
+        assertionFailure("ListManager load error.")
+      }
+    }
+    else {
+      let cafeNameList = [
+        "학생회관식당",
+        "자하연식당",
+        "예술계식당",
+        "두레미담",
+        "동원관식당",
+        "기숙사식당",
+        "공대간이식당",
+        "3식당",
+        "302동식당",
+        "301동식당",
+        "220동식당",
+        "소담마루",
+        "라운지오",
+        "샤반",
+        "아워홈",
+      ]
+      for cafeName in cafeNameList {
+        cafeList.append(.init(name: cafeName, isFixed: false, isShown: true))
+      }
     }
   }
 

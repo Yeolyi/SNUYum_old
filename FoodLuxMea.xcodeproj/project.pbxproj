@@ -17,7 +17,7 @@
 		250BBBF324F3F92E00FC0C84 /* OperatingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEC24F3F92D00FC0C84 /* OperatingTime.swift */; };
 		250BBBF424F3F92E00FC0C84 /* ResignKeyboardOnDragGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBED24F3F92D00FC0C84 /* ResignKeyboardOnDragGesture.swift */; };
 		250BBBF524F3F92E00FC0C84 /* ThemeColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEE24F3F92D00FC0C84 /* ThemeColor+.swift */; };
-		250BBBF624F3F92E00FC0C84 /* SNUCOManager+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* SNUCOManager+.swift */; };
+		250BBBF624F3F92E00FC0C84 /* SNUCOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* SNUCOManager.swift */; };
 		250BBC1E24F3FAC800FC0C84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1124F3FAC700FC0C84 /* AppDelegate.swift */; };
 		250BBC1F24F3FAC800FC0C84 /* ListOrderSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1224F3FAC700FC0C84 /* ListOrderSettingView.swift */; };
 		250BBC2024F3FAC800FC0C84 /* NaverMapProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1324F3FAC700FC0C84 /* NaverMapProvider.swift */; };
@@ -26,7 +26,7 @@
 		250BBC2524F3FAC800FC0C84 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1824F3FAC700FC0C84 /* SearchBar.swift */; };
 		250BBC2724F3FAC800FC0C84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1A24F3FAC700FC0C84 /* SceneDelegate.swift */; };
 		250BBC2824F3FAC800FC0C84 /* SectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1B24F3FAC700FC0C84 /* SectionText.swift */; };
-		250BBC2924F3FAC800FC0C84 /* CafeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1C24F3FAC800FC0C84 /* CafeView.swift */; };
+		250BBC2924F3FAC800FC0C84 /* CafeView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1C24F3FAC800FC0C84 /* CafeView+.swift */; };
 		250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */; };
 		25340D5F251395CC00E7FA7A /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25340D5E251395CC00E7FA7A /* Cafe.swift */; };
 		2549427224F505730049F32E /* SimpleToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2549427124F505730049F32E /* SimpleToggle.swift */; };
@@ -77,7 +77,7 @@
 		250BBBEC24F3F92D00FC0C84 /* OperatingTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatingTime.swift; sourceTree = "<group>"; usesTabs = 0; };
 		250BBBED24F3F92D00FC0C84 /* ResignKeyboardOnDragGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResignKeyboardOnDragGesture.swift; sourceTree = "<group>"; };
 		250BBBEE24F3F92D00FC0C84 /* ThemeColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ThemeColor+.swift"; sourceTree = "<group>"; };
-		250BBBEF24F3F92E00FC0C84 /* SNUCOManager+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SNUCOManager+.swift"; sourceTree = "<group>"; };
+		250BBBEF24F3F92E00FC0C84 /* SNUCOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNUCOManager.swift; sourceTree = "<group>"; };
 		250BBBFF24F3F9CD00FC0C84 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		250BBC1124F3FAC700FC0C84 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		250BBC1224F3FAC700FC0C84 /* ListOrderSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListOrderSettingView.swift; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 		250BBC1824F3FAC700FC0C84 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		250BBC1A24F3FAC700FC0C84 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		250BBC1B24F3FAC700FC0C84 /* SectionText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionText.swift; sourceTree = "<group>"; };
-		250BBC1C24F3FAC800FC0C84 /* CafeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeView.swift; sourceTree = "<group>"; };
+		250BBC1C24F3FAC800FC0C84 /* CafeView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CafeView+.swift"; sourceTree = "<group>"; };
 		250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealSelect.swift; sourceTree = "<group>"; };
 		25340D5E251395CC00E7FA7A /* Cafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cafe.swift; sourceTree = "<group>"; };
 		2549427124F505730049F32E /* SimpleToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleToggle.swift; sourceTree = "<group>"; };
@@ -152,8 +152,8 @@
 				250BBC1A24F3FAC700FC0C84 /* SceneDelegate.swift */,
 				25BF46AC24F40C8800CC2355 /* Manager */,
 				2510CEDB24FF6386007ACE79 /* Data */,
-				259C58C92516507700310FA8 /* SubView */,
 				25DD96D724FECBC100E5A4B3 /* MainView */,
+				259C58C92516507700310FA8 /* SubView */,
 				25DD96D824FECBF100E5A4B3 /* CafeView */,
 				25DD96D924FECC1800E5A4B3 /* SettingView */,
 				25BF46AE24F40CB700CC2355 /* Admob */,
@@ -197,7 +197,6 @@
 			isa = PBXGroup;
 			children = (
 				250BBC1724F3FAC700FC0C84 /* CafeRow.swift */,
-				2593232F24FAE8310036C148 /* CafeRowsFiltered.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -247,7 +246,7 @@
 		25BF46AC24F40C8800CC2355 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				250BBBEF24F3F92E00FC0C84 /* SNUCOManager+.swift */,
+				250BBBEF24F3F92E00FC0C84 /* SNUCOManager.swift */,
 				25FF78002503B306006372C7 /* OurhomeManager.swift */,
 				250BBBEB24F3F92D00FC0C84 /* DataManager.swift */,
 				2500739524F54A37009A32FA /* SettingManager.swift */,
@@ -281,6 +280,7 @@
 				25A0824924F3FDEC00593CB3 /* ContentView.swift */,
 				250BBC1824F3FAC700FC0C84 /* SearchBar.swift */,
 				250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */,
+				2593232F24FAE8310036C148 /* CafeRowsFiltered.swift */,
 				25340D63251396B900E7FA7A /* Components */,
 			);
 			path = MainView;
@@ -289,7 +289,7 @@
 		25DD96D824FECBF100E5A4B3 /* CafeView */ = {
 			isa = PBXGroup;
 			children = (
-				250BBC1C24F3FAC800FC0C84 /* CafeView.swift */,
+				250BBC1C24F3FAC800FC0C84 /* CafeView+.swift */,
 				2593233324FBBDF60036C148 /* MapView.swift */,
 				250BBC1324F3FAC700FC0C84 /* NaverMapProvider.swift */,
 			);
@@ -450,7 +450,7 @@
 				250BBC2024F3FAC800FC0C84 /* NaverMapProvider.swift in Sources */,
 				259C58CB25165D0200310FA8 /* Menu+.swift in Sources */,
 				250BBC2724F3FAC800FC0C84 /* SceneDelegate.swift in Sources */,
-				250BBBF624F3F92E00FC0C84 /* SNUCOManager+.swift in Sources */,
+				250BBBF624F3F92E00FC0C84 /* SNUCOManager.swift in Sources */,
 				2593232E24FAE76F0036C148 /* TimerText.swift in Sources */,
 				2593233624FBCE7C0036C148 /* AboutAppView.swift in Sources */,
 				2591C74025020F4E00704673 /* PrivateData.swift in Sources */,
@@ -468,7 +468,7 @@
 				250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */,
 				2593233024FAE8310036C148 /* CafeRowsFiltered.swift in Sources */,
 				259B889524F68B6F001C710C /* GADBannerViewController.swift in Sources */,
-				250BBC2924F3FAC800FC0C84 /* CafeView.swift in Sources */,
+				250BBC2924F3FAC800FC0C84 /* CafeView+.swift in Sources */,
 				250BBC1F24F3FAC800FC0C84 /* ListOrderSettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

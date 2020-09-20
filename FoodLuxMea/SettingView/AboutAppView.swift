@@ -16,7 +16,7 @@ struct AboutAppView: View {
   let themeColor = ThemeColor()
   
   let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-  let build = Bundle.main.infoDictionary!["CFBundleVersion"] as? String ?? ""
+  let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
   
   var body: some View {
     VStack {

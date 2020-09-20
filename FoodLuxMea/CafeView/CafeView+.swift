@@ -61,9 +61,9 @@ struct CafeView: View {
         Text("안내")
           .sectionText()
         TimerText(cafe: cafeInfo)
-        mealSection(mealType: .breakfast, mealMenus: cafeInfo.menus(at: .breakfast))
-        mealSection(mealType: .lunch, mealMenus: cafeInfo.menus(at: .lunch))
-        mealSection(mealType: .dinner, mealMenus: cafeInfo.menus(at: .dinner))
+        mealSection(mealType: .breakfast, menus: cafeInfo.menus(at: .breakfast))
+        mealSection(mealType: .lunch, menus: cafeInfo.menus(at: .lunch))
+        mealSection(mealType: .dinner, menus: cafeInfo.menus(at: .dinner))
         // MARK: - Cafe information with phone call and map view.
         Text("식당 정보")
           .sectionText()
@@ -129,8 +129,8 @@ struct CafeView: View {
    - mealType: Determines which data to show.
    - mealMenus: Data to show.
    */
-  func mealSection(mealType: MealType, mealMenus: [Menu]) -> AnyView {
-    if (mealMenus.isEmpty == false ) {
+  func mealSection(mealType: MealType, menus: [Menu]) -> AnyView {
+    if menus.isEmpty == false {
       return AnyView(
         VStack {
           Text(
@@ -140,7 +140,7 @@ struct CafeView: View {
               + ")"
           )
           .sectionText()
-          ForEach(mealMenus) { menu in
+          ForEach(menus) { menu in
             HStack{
               Text(menu.name)
                 .accentedText()
@@ -153,14 +153,15 @@ struct CafeView: View {
               Text(self.costInterpret(menu.cost))
                 .foregroundColor(Color(.gray))
             }
+            .onTapGesture {
+              print(menu.name)
+            }
             .rowBackground()
           }
         }
       )
     }
-    else {
-      return AnyView(Text("메뉴가 없어요."))
-    }
+    else { return AnyView(EmptyView()) }
   }
   
   /**
