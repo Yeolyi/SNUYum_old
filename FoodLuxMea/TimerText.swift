@@ -75,7 +75,7 @@ struct TimerText: View {
       }
     }
     // When cafe operating hour data not exists
-    if (currentHour < 5 || currentHour > SmartSuggestion.dinnerDefaultTime.hour) {
+    if (currentHour < 5 || currentHour > MenuSuggestion.dinnerDefaultTime.hour) {
       return "영업 종료, \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") 식단이에요🌙"
     }
     else {

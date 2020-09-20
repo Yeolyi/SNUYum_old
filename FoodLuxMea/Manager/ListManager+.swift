@@ -63,7 +63,7 @@ class ListManager: ObservableObject{
     print("ListManager Updated")
   }
   
-   /// Save 'ListElement'
+  /// Save 'ListElement'
   func save() {
     if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea"){
       if let encodedData = try? PropertyListEncoder().encode(cafeList) {
@@ -94,4 +94,14 @@ class ListManager: ObservableObject{
       return false
     }
   }
+  
+  func isFixed(cafeName: String) -> Bool {
+    for cafe in cafeList {
+      if cafe.name == cafeName {
+        return cafe.isFixed
+      }
+    }
+    return false
+  }
+  
 }
