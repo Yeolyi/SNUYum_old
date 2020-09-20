@@ -8,8 +8,8 @@
 import SwiftUI
 
 /// Simple custom navigaion bar
-func CustomNavigationBar(title: String, subTitle: String) -> AnyView{
-  return AnyView (
+func customNavigationBar(title: String, subTitle: String) -> AnyView {
+  return AnyView(
     HStack {
       VStack(alignment: .leading) {
         Text(subTitle)

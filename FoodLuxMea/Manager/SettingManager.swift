@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 /// Saves and loads overall user settings and mediates/applies them.
 ///
 /// Important: If variable name changes, userdefault crashes when accessing previous setting.
@@ -53,13 +52,12 @@ class SettingManager: ObservableObject {
   /// Final cafe date considering custom date and date suggestion.
   var date: Date {
     let date = isCustomDate ? debugDate : Date()
-    if (isSuggestedTomorrow) {
+    if isSuggestedTomorrow {
       var dayComponent    = DateComponents()
       dayComponent.day    = 1
       let theCalendar     = Calendar.current
       return theCalendar.date(byAdding: dayComponent, to: date)!
-    }
-    else {
+    } else {
       return date
     }
   }
@@ -69,7 +67,6 @@ class SettingManager: ObservableObject {
     isAuto ? suggestedMeal : mealViewMode
   }
   
-
   /// If setting data is stored, retrieve it
   ///
   /// - Note: If it's app's first run, save default value and return.
@@ -95,8 +92,7 @@ class SettingManager: ObservableObject {
       isCustomDate = userDefaults.bool(forKey: "isDebug")
       hideEmptyCafe = userDefaults.bool(forKey: "isHide")
       print("SettingManager/init(): 설정값을 불러왔습니다.")
-    }
-    else {
+    } else {
       assertionFailure("SettingManager/init(): UserDefault를 불러오지 못했습니다.")
     }
   }
@@ -107,7 +103,7 @@ class SettingManager: ObservableObject {
       df.dateFormat = "dd/MM/yyyy HH:mm"
       return df.string(from: date)
     }
-    if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea"){
+    if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
       userDefault.set(mealViewMode.rawValue as String, forKey: "mealViewMode")
       userDefault.set(isAuto as Bool, forKey: "isAuto")
       userDefault.set(true as Bool, forKey: "firstRun")
@@ -118,8 +114,7 @@ class SettingManager: ObservableObject {
         userDefault.set(alimiCafeName! as String, forKey: "timerCafeName")
       }
       print("SettingManaver/save(): 세팅 저장됨")
-    }
-    else {
+    } else {
       print("세팅 저장 안됨")
     }
   }

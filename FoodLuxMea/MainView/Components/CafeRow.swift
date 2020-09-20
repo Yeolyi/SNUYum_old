@@ -33,7 +33,7 @@ struct CafeRow: View {
   
   var body: some View {
     Button(action: {isSheet = true}) {
-      VStack(alignment: .leading){
+      VStack(alignment: .leading) {
         HStack {
           Text(cafe.name)
             .accentedText()
@@ -43,7 +43,7 @@ struct CafeRow: View {
         }
         Spacer()
         Group {
-          if (searchText == "") {
+          if searchText == "" {
             ForEach(cafe.menus(at: suggestedMeal)) { menu in
               HStack {
                 Text(menu.name)
@@ -58,8 +58,7 @@ struct CafeRow: View {
                   .foregroundColor(Color(.secondaryLabel))
               }
             }
-          }
-          else {
+          } else {
             VStack {
               if cafe.includes(searchText, at: [.breakfast]) {
                 searchResult(at: .breakfast)
@@ -85,7 +84,7 @@ struct CafeRow: View {
   }
   
   func searchResult(at mealType: MealType) -> AnyView {
-    AnyView (
+    AnyView(
       VStack {
         HStack {
           Text(mealType.rawValue)
@@ -94,7 +93,7 @@ struct CafeRow: View {
             .font(.system(size: 14, weight: .semibold))
           Spacer()
         }
-        ForEach(cafe.menus(at: mealType).filter{ $0.name.contains(searchText) }) { menu in
+        ForEach(cafe.menus(at: mealType).filter { $0.name.contains(searchText) }) { menu in
           HStack {
             self.highlight(text: menu.name, target: self.searchText)
               .font(.system(size: 15))
@@ -121,7 +120,7 @@ struct CafeRow: View {
       
       var tempView: Text = .init("")
       
-      func getView(cnt: Int) -> Text{
+      func getView(cnt: Int) -> Text {
         if cnt == text.count {
           return tempView
         }
@@ -132,8 +131,7 @@ struct CafeRow: View {
       }
       
       return getView(cnt: 0)
-    }
-    else { return Text(text) }
+    } else { return Text(text) }
   }
   
   /**
@@ -141,14 +139,12 @@ struct CafeRow: View {
    
    - ToDo: Search appropriate class to place this function.
    */
-  func costInterpret(_ cost: Int) -> String{
-    if (cost == -1) {
+  func costInterpret(_ cost: Int) -> String {
+    if cost == -1 {
       return ""
-    }
-    else if ((cost - 10) % 100 == 0) {
+    } else if (cost - 10) % 100 == 0 {
       return String(cost - 10) + "원 부터"
-    }
-    else {
+    } else {
       return String(cost) + "원"
     }
   }

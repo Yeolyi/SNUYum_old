@@ -40,7 +40,7 @@ struct CafeView: View {
         .padding([.leading, .top])
         Spacer()
         Button(action: {
-          let _ = self.cafeList.toggleFixed(cafeName: self.cafeInfo.name)
+          _ = self.cafeList.toggleFixed(cafeName: self.cafeInfo.name)
         }) {
           Image(systemName: cafeList.isFixed(cafeName: self.cafeInfo.name) ? "pin" : "pin.slash")
             .font(.system(size: 25, weight: .light))
@@ -141,7 +141,7 @@ struct CafeView: View {
           )
           .sectionText()
           ForEach(menus) { menu in
-            HStack{
+            HStack {
               Text(menu.name)
                 .accentedText()
                 .foregroundColor(self.themeColor.title(self.colorScheme))
@@ -160,8 +160,7 @@ struct CafeView: View {
           }
         }
       )
-    }
-    else { return AnyView(EmptyView()) }
+    } else { return AnyView(EmptyView()) }
   }
   
   /**
@@ -169,14 +168,12 @@ struct CafeView: View {
    
    - ToDo: Search appropriate class to place this function.
    */
-  func costInterpret(_ cost: Int) -> String{
-    if (cost == -1) {
+  func costInterpret(_ cost: Int) -> String {
+    if cost == -1 {
       return ""
-    }
-    else if ((cost - 10) % 100 == 0) {
+    } else if (cost - 10) % 100 == 0 {
       return String(cost - 10) + "원 부터"
-    }
-    else {
+    } else {
       return String(cost) + "원"
     }
   }
@@ -186,7 +183,6 @@ struct CafeView_Previews: PreviewProvider {
   static var dataManager = DataManager()
   static var listManager = ListManager()
   static var settingManager = SettingManager()
-  
   
   static var previews: some View {
     

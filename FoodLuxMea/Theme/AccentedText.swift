@@ -15,7 +15,6 @@ struct AccentedText: ViewModifier {
   }
 }
 
-
 extension View {
   func accentedText() -> some View {
     return modifier(AccentedText())

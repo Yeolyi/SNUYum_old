@@ -9,22 +9,19 @@ import SwiftUI
 
 /// Show various information about app.
 struct AboutAppView: View {
-  
   @Environment(\.colorScheme) var colorScheme
   @Environment(\.presentationMode) var presentationMode
-  
   let themeColor = ThemeColor()
-  
   let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
   let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
-  
   var body: some View {
     VStack {
       // MARK: - Custom navigationbar.
       HStack {
-        CustomNavigationBar(title: "스누냠 정보", subTitle: "설정")
+        customNavigationBar(title: "스누냠 정보", subTitle: "설정")
         Spacer()
-        Button(action: {self.presentationMode.wrappedValue.dismiss()}){
+        Button(
+          action: { self.presentationMode.wrappedValue.dismiss()}) {
           Text("닫기")
             .font(.system(size: CGFloat(20), weight: .semibold))
             .foregroundColor(themeColor.icon(colorScheme))
@@ -37,9 +34,9 @@ struct AboutAppView: View {
       Image("Icon-1024")
         .resizable()
         .scaledToFit()
-        .frame(width: 150.0,height:150)
+        .frame(width: 150.0, height: 150)
       // MARK: - ScrollView.
-      ScrollView{
+      ScrollView {
         Text("버전")
           .sectionText()
         HStack {

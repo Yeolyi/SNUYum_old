@@ -35,4 +35,3 @@ func requestPermission() {
     }
   }
 }
-

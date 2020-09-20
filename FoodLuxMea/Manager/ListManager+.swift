@@ -26,7 +26,7 @@ struct ListElement: Hashable, Codable, Identifiable {
 }
 
 /// Manages how whole cafe data will be displayed.
-class ListManager: ObservableObject{
+class ListManager: ObservableObject {
   
   /// ListElement storage.
   ///
@@ -52,8 +52,7 @@ class ListManager: ObservableObject{
       } catch {
         assertionFailure("ListManager load error.")
       }
-    }
-    else {
+    } else {
       let cafeNameList = [
         "학생회관식당",
         "자하연식당",
@@ -91,16 +90,14 @@ class ListManager: ObservableObject{
   
   /// Save 'ListElement'
   func save() {
-    if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea"){
+    if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
       if let encodedData = try? PropertyListEncoder().encode(cafeList) {
         userDefault.set(encodedData, forKey: "cafeList")
         print("ListManager/save: cafeList가 저장되었습니다")
-      }
-      else {
+      } else {
         assertionFailure("ListManager/save: 데이터 인코딩에 실패했습니다.")
       }
-    }
-    else {
+    } else {
       assertionFailure("CafeListManager/save: UserDefaults 로딩에 실패했습니다.")
     }
   }
@@ -114,18 +111,15 @@ class ListManager: ObservableObject{
     if let index = index(of: cafeName) {
       cafeList[index].isFixed.toggle()
       return true
-    }
-    else {
+    } else {
       assertionFailure("ListMananer/toggleFixed: 존재하지 않는 카페값에 접근했습니다.")
       return false
     }
   }
   
   func isFixed(cafeName: String) -> Bool {
-    for cafe in cafeList {
-      if cafe.name == cafeName {
+    for cafe in cafeList where cafe.name == cafeName {
         return cafe.isFixed
-      }
     }
     return false
   }

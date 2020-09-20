@@ -73,12 +73,11 @@ struct SettingView: View {
             Text("식당 순서 변경")
               .font(.system(size: 18))
             Spacer()
-            if (listManager.fixedList.count != 0) {
+            if listManager.fixedList.count != 0 {
               Text("\(listManager.fixedList.count)개 식당이 고정되었어요")
                 .font(.system(size: 16))
                 .foregroundColor(Color(.gray))
-            }
-            else {
+            } else {
               Text("고정된 식당이 없어요")
                 .font(.system(size: 15))
                 .foregroundColor(.secondary)
@@ -114,9 +113,10 @@ struct SettingView: View {
           SimpleToggle(isOn: $settingManager.isCustomDate, label: "사용자 설정 날짜")
             .font(.system(size: 18))
             .rowBackground()
-          if (settingManager.isCustomDate) {
+          if settingManager.isCustomDate {
             DatePicker(selection: $settingManager.debugDate, label: { EmptyView() })
               .rowBackground()
+              .accentColor(themeColor.title(colorScheme))
           }
           // Info
           Text("정보")
@@ -134,7 +134,7 @@ struct SettingView: View {
         }
         // Caution: Sheet modifier position matters.
         .sheet(item: self.$activeSheet) { item in
-          switch(item) {
+          switch item {
           case .reorder:
             ListOrderSettingView(cafeListBackup: self.listManager.cafeList)
               .environmentObject(self.listManager)

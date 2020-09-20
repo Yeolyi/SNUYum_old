@@ -28,6 +28,7 @@
 		250BBC2824F3FAC800FC0C84 /* SectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1B24F3FAC700FC0C84 /* SectionText.swift */; };
 		250BBC2924F3FAC800FC0C84 /* CafeView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1C24F3FAC800FC0C84 /* CafeView+.swift */; };
 		250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */; };
+		252B96AC2517ADBC000475C6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 252B96AB2517ADBC000475C6 /* .swiftlint.yml */; };
 		25340D5F251395CC00E7FA7A /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25340D5E251395CC00E7FA7A /* Cafe.swift */; };
 		2549427224F505730049F32E /* SimpleToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2549427124F505730049F32E /* SimpleToggle.swift */; };
 		255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */; };
@@ -89,6 +90,7 @@
 		250BBC1B24F3FAC700FC0C84 /* SectionText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionText.swift; sourceTree = "<group>"; };
 		250BBC1C24F3FAC800FC0C84 /* CafeView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CafeView+.swift"; sourceTree = "<group>"; };
 		250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealSelect.swift; sourceTree = "<group>"; };
+		252B96AB2517ADBC000475C6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		25340D5E251395CC00E7FA7A /* Cafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cafe.swift; sourceTree = "<group>"; };
 		2549427124F505730049F32E /* SimpleToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleToggle.swift; sourceTree = "<group>"; };
 		255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparency.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		250BBBC724F3F8F700FC0C84 = {
 			isa = PBXGroup;
 			children = (
+				252B96AB2517ADBC000475C6 /* .swiftlint.yml */,
 				250BBBD224F3F8F700FC0C84 /* FoodLuxMea */,
 				250BBBFC24F3F9CD00FC0C84 /* Frameworks */,
 				250BBBD124F3F8F700FC0C84 /* Products */,
@@ -329,6 +332,7 @@
 				250BBBCE24F3F8F700FC0C84 /* Resources */,
 				250BBC0D24F3F9CF00FC0C84 /* Embed App Extensions */,
 				86B2EC07D8DEC5D3C4415B49 /* [CP] Embed Pods Frameworks */,
+				252B96A92517AD02000475C6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -377,6 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				252B96AC2517ADBC000475C6 /* .swiftlint.yml in Resources */,
 				25C805072501144A00B7E4CC /* NanumMyeongjo.ttf in Resources */,
 				250BBBE024F3F8F900FC0C84 /* LaunchScreen.storyboard in Resources */,
 				250BBBDD24F3F8F900FC0C84 /* Preview Assets.xcassets in Resources */,
@@ -388,6 +393,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		252B96A92517AD02000475C6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 		86B2EC07D8DEC5D3C4415B49 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

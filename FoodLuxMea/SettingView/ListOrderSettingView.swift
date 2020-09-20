@@ -28,7 +28,7 @@ struct ListOrderSettingView: View {
     VStack {
       // MARK: - Custom navigation bar
       HStack {
-        CustomNavigationBar(title: "목록 수정", subTitle: "설정")
+        customNavigationBar(title: "목록 수정", subTitle: "설정")
         Button(action: {
                 self.presentationMode.wrappedValue.dismiss()}) {
           Text("취소")
@@ -53,10 +53,10 @@ struct ListOrderSettingView: View {
                   .sectionText()
                   .padding([.top], 40)
         ) {
-          if (tempListManager.fixedList.isEmpty) {
+          if tempListManager.fixedList.isEmpty {
             Text("고정된 식당이 없어요")
           }
-          ForEach(tempListManager.cafeList.filter{$0.isFixed}) { cafe in
+          ForEach(tempListManager.cafeList.filter { $0.isFixed }) { cafe in
             Text(cafe.name)
               .accentedText()
           }
@@ -65,7 +65,7 @@ struct ListOrderSettingView: View {
         Section(header:
                   Text("일반").sectionText()
         ) {
-          ForEach(tempListManager.cafeList.filter{$0.isFixed == false}) { cafe in
+          ForEach(tempListManager.cafeList.filter { $0.isFixed == false }) { cafe in
             Text(cafe.name)
               .accentedText()
           }
@@ -86,7 +86,8 @@ struct ListOrderSettingView: View {
       }
     }
     if let destinationIndex = tempListManager.index(of: tempListManager.fixedList[destination].name) {
-      let newDestination = destination == tempListManager.fixedList.count ? tempListManager.cafeList.count : destinationIndex
+      let newDestination =
+        destination == tempListManager.fixedList.count ? tempListManager.cafeList.count : destinationIndex
       let newSource = IndexSet(intIndexSet)
       tempListManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
     }
@@ -101,7 +102,8 @@ struct ListOrderSettingView: View {
       }
     }
     if let destinationIndex = tempListManager.index(of: tempListManager.unfixedList[destination].name) {
-      let newDestination = destination == tempListManager.unfixedList.count ? tempListManager.cafeList.count : destinationIndex
+      let newDestination =
+        destination == tempListManager.unfixedList.count ? tempListManager.cafeList.count : destinationIndex
       let newSource = IndexSet(intIndexSet)
       tempListManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
     }

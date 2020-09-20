@@ -24,13 +24,10 @@ struct DailyOperatingTime {
   
   /// Get operating time info of specific meal time
   func operatingTimeStr(at mealType: MealType) -> String? {
-    switch (mealType) {
-    case .breakfast:
-      return breakfast
-    case .lunch:
-      return lunch
-    case .dinner:
-      return dinner
+    switch mealType {
+    case .breakfast: return breakfast
+    case .lunch: return lunch
+    case .dinner: return dinner
     }
   }
   
@@ -72,7 +69,7 @@ struct WeeklyOperatingHour {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "EEEE"
     let str = dateFormatter.string(from: date)
-    switch (str) {
+    switch str {
     case "Saturday":
       return saturday
     case "Sunday":

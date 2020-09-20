@@ -33,7 +33,7 @@ struct SimpleToggle: View {
         .foregroundColor(themeColor.icon(colorScheme))
     }
     .contentShape(Rectangle())
-    .onTapGesture{
+    .onTapGesture {
       self.isOn.toggle()
     }
   }

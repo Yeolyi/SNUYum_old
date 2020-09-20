@@ -26,8 +26,7 @@ class MenuSuggestion {
       bkfEndTime = weeklyOperatingHour.getDaily(at: date)?.getEndTime(at: .breakfast)
       lunchEndTime = weeklyOperatingHour.getDaily(at: date)?.getEndTime(at: .lunch)
       dinnerEndTime = weeklyOperatingHour.getDaily(at: date)?.getEndTime(at: .dinner)
-    }
-    else {
+    } else {
       bkfEndTime = nil
       lunchEndTime = nil
       dinnerEndTime = nil
@@ -36,14 +35,11 @@ class MenuSuggestion {
     let suggestedMeal: MealType
     if currentSimpleDate < (bkfEndTime ?? MenuSuggestion.bkfDefaultTime) {
       suggestedMeal = .breakfast
-    }
-    else if currentSimpleDate < (lunchEndTime ?? MenuSuggestion.lunchDefaultTime) {
+    } else if currentSimpleDate < (lunchEndTime ?? MenuSuggestion.lunchDefaultTime) {
       suggestedMeal = .lunch
-    }
-    else if currentSimpleDate < (dinnerEndTime ?? MenuSuggestion.dinnerDefaultTime) {
+    } else if currentSimpleDate < (dinnerEndTime ?? MenuSuggestion.dinnerDefaultTime) {
       suggestedMeal = .dinner
-    }
-    else {
+    } else {
       suggestedMeal = .breakfast
     }
     return (isTomorrow, suggestedMeal)

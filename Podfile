@@ -7,6 +7,7 @@ target 'FoodLuxMea' do
   pod 'SwiftSoup'
   pod 'NMapsMap'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'SwiftLint'
   # Pods for FoodLuxMea
 
 end

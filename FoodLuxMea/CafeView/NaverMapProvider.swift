@@ -21,8 +21,7 @@ struct NaverMapProvider: UIViewRepresentable {
   init(cafeName: String) {
     if let cafeCoord = coordList[cafeName] {
       self.coord = .init(lat: cafeCoord.lat, lng: cafeCoord.lng)
-    }
-    else{
+    } else {
       assertionFailure("NaverMap/init: \(cafeName)의 좌표값이 없습니다")
       self.coord = .init(lat: 37, lng: 132)
     }

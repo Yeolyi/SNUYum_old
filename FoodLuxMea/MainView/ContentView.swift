@@ -9,7 +9,6 @@ import SwiftUI
 import GoogleMobileAds
 import Network
 
-
 struct ContentView: View {
   
   @Environment(\.colorScheme) var colorScheme
@@ -61,16 +60,14 @@ struct ContentView: View {
             if let cafe = dataManager.cafe(
               at: settingManager.date,
               name: settingManager.alimiCafeName!
-            )
-            {
+            ) {
               TimerText(cafe: cafe)
-            }
-            else {
+            } else {
               TimerText(cafe: Cafe(name: settingManager.alimiCafeName!))
             }
           }
           // Fixed cafe section.
-          if (self.listManager.fixedList.isEmpty == false) {
+          if self.listManager.fixedList.isEmpty == false {
             Text("고정됨")
               .sectionText()
             CafeRowsFiltered(isFixed: true, searchWord: self.searchWord)
@@ -87,7 +84,7 @@ struct ContentView: View {
           .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
       }
       // MARK: - SettingView covers main view.
-      if (self.isSettingView) {
+      if self.isSettingView {
         SettingView(isPresented: self.$isSettingView)
           .zIndex(2) // Priorize setting view to main view
       }

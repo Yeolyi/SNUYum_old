@@ -32,8 +32,7 @@ struct TimerText: View {
       if settingManager.alimiCafeName == cafe.name {
         isTimerSheet = true
       }
-    })
-    {
+    }) {
       HStack {
         Spacer()
         Text(remainingTimeNotice())
@@ -59,24 +58,27 @@ struct TimerText: View {
     let currentSimpleTime = SimpleTimeBorder(currentHour, currentMinute)
     
     // When cafe operating hour data exists
-    if let endDate = cafeOperatingHour[cafe.name]?.getDaily(at: settingManager.date)?.getEndTime(at: settingManager.suggestedMeal) {
-      if cafe.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords) == false {
-        let startTime = cafeOperatingHour[cafe.name]!.getDaily(at: settingManager.date)!.getStartTime(at: settingManager.suggestedMeal)!
+    if let endDate =
+        cafeOperatingHour[cafe.name]?.getDaily(
+          at: settingManager.date)?.getEndTime(at: settingManager.suggestedMeal) {
+      if cafe.isEmpty(
+          at: [settingManager.suggestedMeal],
+          emptyKeywords: settingManager.closedKeywords
+      ) == false {
+        let startTime = cafeOperatingHour[cafe.name]!.getDaily(
+          at: settingManager.date)!.getStartTime(at: settingManager.suggestedMeal)!
         
-        if (currentHour < 5 || currentHour > endDate.hour) {
+        if currentHour < 5 || currentHour > endDate.hour {
           return "영업 종료🌙"
-        }
-        
-        else if currentSimpleTime < startTime { //시작시간 전
-          return "\(cafe.name)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!"
-        }
-        
-        else {
+        } else if currentSimpleTime < startTime { //시작시간 전
+          return """
+\(cafe.name)에서 \(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.suggestedMeal.rawValue)밥 준비중!
+"""
+        } else {
           let time = remainTime(from: SimpleTimeBorder(date: Date()), to: endDate)
           return "\(settingManager.suggestedMeal.rawValue) 마감까지 \(time.hour)시간 \(time.minute)분!"
         }
-      }
-      else {
+      } else {
         return "\(settingManager.suggestedMeal.rawValue) 메뉴가 없어요."
       }
     }

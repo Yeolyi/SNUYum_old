@@ -8,15 +8,23 @@
 import SwiftUI
 import SwiftSoup
 
-enum TestError : Error {
+enum TestError: Error {
   case error
 }
 
 /// Get data from snuco website and process it into Cafe array.
 struct SNUCOManager {
   
+  struct TempCafeData {
+    let name: String
+    let callNum: String
+    let rawBreakfasts: Element?
+    let rawLunches: Element?
+    let rawDinners: Element?
+  }
+  
   /// Get Cafe array from specific date
-  static func download(at date: Date) -> [Cafe]{
+  static func download(at date: Date) -> [Cafe] {
     /// Returning cafe array.
     var cafeData: [Cafe] = []
     /// URL to access.
@@ -48,22 +56,14 @@ struct SNUCOManager {
         )
       }
       return cafeData
-    }
-    catch {
+    } catch {
       assertionFailure("Html 소스 분리에 실패하였습니다.")
       return []
     }
   }
   
   /// Simply divide whole URL Element to cafe struct elements
-  static private func splitCafeData(_ rawCafe: Element) throws
-  -> (
-    name: String,
-    callNum: String,
-    rawBreakfasts: Element?,
-    rawLunches: Element?,
-    rawDinners: Element?
-  ) {
+  static private func splitCafeData(_ rawCafe: Element) throws -> TempCafeData {
     /// Array of Cafe components - [Name&PhoneNum, bkfMenuList, lunchMenuList, dinnerMenuList]
     ///
     /// First select
@@ -82,20 +82,20 @@ struct SNUCOManager {
     let rawLunches = try rawCafeArray[2].select("p").array()
     let rawDinners = try rawCafeArray[3].select("p").array()
     
-    return (
-      cafeName,
-      cafeCallNum,
-      !rawBreakfasts.isEmpty ? rawBreakfasts[0] : nil,
-      !rawLunches.isEmpty ? rawLunches[0] : nil,
-      !rawDinners.isEmpty ? rawDinners[0] : nil
+    return TempCafeData(
+      name: cafeName,
+      callNum: cafeCallNum,
+      rawBreakfasts: !rawBreakfasts.isEmpty ? rawBreakfasts[0] : nil,
+      rawLunches: !rawLunches.isEmpty ? rawLunches[0] : nil,
+      rawDinners: !rawDinners.isEmpty ? rawDinners[0] : nil
     )
   }
   
-  static private func separateNameNum(_ str: String) -> (name: String, callNum: String){
+  static private func separateNameNum(_ str: String) -> (name: String, callNum: String) {
     let tempArr = str.components(separatedBy: ["("])
     guard tempArr.count == 2 else {
       assertionFailure("Array count is not 2.")
-      return ("","")
+      return ("", "")
     }
     let name = String(tempArr[0])
     let callNum = String(tempArr[1].dropLast())
@@ -134,11 +134,9 @@ struct SNUCOManager {
         // Exceptions.
         if trimmedMenuNCost.isEmpty {
           continue
-        }
-        else if trimmedMenuNCost[trimmedMenuNCost.startIndex] == "※" {
+        } else if trimmedMenuNCost[trimmedMenuNCost.startIndex] == "※" {
           continue
-        }
-        else if trimmedMenuNCost.contains("코로나") {
+        } else if trimmedMenuNCost.contains("코로나") {
           returnValue.append(.init(name: trimmedMenuNCost, cost: -1))
           continue
         }
@@ -171,12 +169,15 @@ struct SNUCOManager {
   /// - Note: Public because DataManager uses URL to distinguish data.
   static public func makeURL(from date: Date) -> URL { //DataManager에서 [String:[Cafe]]에 사용
     let targetDate = Calendar.current.dateComponents([.day, .year, .month], from: date)
-    let targetURLString = "https://snuco.snu.ac.kr/ko/foodmenu?field_menu_date_value_1%5Bvalue%5D%5Bdate%5D=&field_menu_date_value%5Bvalue%5D%5Bdate%5D=" + String(targetDate.month!) + "%2F" + String(targetDate.day!) + "%2F" + String(targetDate.year!)
+    let targetURLString = """
+https://snuco.snu.ac.kr/ko/\
+foodmenu?field_menu_date_value_1%5Bvalue%5D%5Bdate%5D=&field_menu_date_value%5Bvalue%5D%5Bdate%5D=
+"""
+      + String(targetDate.month!) + "%2F" + String(targetDate.day!) + "%2F" + String(targetDate.year!)
     if let targetURL = URL(string: targetURLString) {
       return targetURL
-    }
-    else{
-      assertionFailure("SNUCOManager/makeURL(from: ): 문자열을 URL로 변환하는데 실패하였습니다.")
+    } else {
+      assertionFailure("문자열을 URL로 변환하는데 실패하였습니다\(targetURLString).")
       return URL(string: "https://snuco.snu.ac.kr/ko/foodmenu")!
     }
   }
@@ -191,5 +192,3 @@ struct SNUCOManager {
   }
   
 }
-
-

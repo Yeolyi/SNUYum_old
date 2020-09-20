@@ -31,7 +31,8 @@ struct TimerCafeSettingView: View {
     VStack {
       // MARK: - Custom Navigation bar.
       HStack {
-        CustomNavigationBar(title: "알리미 설정", subTitle: "설정")
+        customNavigationBar(title: "알리미 설정", subTitle: "설정")
+        
         Button(action: {
                 self.presentationMode.wrappedValue.dismiss()}) {
           Text("취소")
@@ -59,7 +60,7 @@ struct TimerCafeSettingView: View {
           SimpleToggle(isOn: $tempIsTimerCafe, label: "알리미 켜기")
             .rowBackground()
           // MARK: - Selectable cafe list.
-          if (tempIsTimerCafe) {
+          if tempIsTimerCafe {
             Text("목록")
               .sectionText()
             ForEach(listManager.cafeList) { listElement in
@@ -83,10 +84,14 @@ struct TimerCafeSettingView: View {
     }
   }
   /// Highlight cafe color if cafe is selected.
-  func getColor(cafeName: String) -> Color{
-    if cafeName == settingManager.alimiCafeName { return themeColor.icon(colorScheme) }
-    else if cafeName == self.selectedCafeName { return Color(.systemGray) }
-    else { return Color(.systemFill) }
+  func getColor(cafeName: String) -> Color {
+    if cafeName == settingManager.alimiCafeName {
+      return themeColor.icon(colorScheme)
+    } else if cafeName == self.selectedCafeName {
+      return Color(.systemGray)
+    } else {
+      return Color(.systemFill)
+    }
   }
 }
 

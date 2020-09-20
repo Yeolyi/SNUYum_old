@@ -71,7 +71,6 @@ struct Cafe: Hashable, Codable, Identifiable {
     return true
   }
   
-  
    /// Get menu list of selected meal type
    ///
    /// - Parameter mealType: Select which meal type to get
@@ -93,10 +92,8 @@ struct Cafe: Hashable, Codable, Identifiable {
   func includes(_ keyword: String, at mealTypes: [MealType]) -> Bool {
     for mealType in mealTypes {
       let menuList = menus(at: mealType)
-      for menu in menuList{
-        if (menu.name.contains(keyword)) {
+      for menu in menuList where menu.name.contains(keyword) {
           return true
-        }
       }
     }
     return false

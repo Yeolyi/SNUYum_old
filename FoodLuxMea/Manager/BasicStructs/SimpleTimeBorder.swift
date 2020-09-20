@@ -24,14 +24,12 @@ struct SimpleTimeBorder {
     self.minute = minute
   }
   
-  static func <(left: SimpleTimeBorder, right: SimpleTimeBorder) -> Bool {
-    if (left.hour < right.hour) {
+  static func < (left: SimpleTimeBorder, right: SimpleTimeBorder) -> Bool {
+    if left.hour < right.hour {
       return true
-    }
-    else if (left.hour == right.hour) {
+    } else if left.hour == right.hour {
       return left.minute < right.minute
-    }
-    else {
+    } else {
       return false
     }
   }

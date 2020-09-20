@@ -26,7 +26,6 @@ struct CafeRowsFiltered: View {
   let isFixed: Bool
   let searchWord: String
 
-  
   @EnvironmentObject var listManager: ListManager
   @EnvironmentObject var settingManager: SettingManager
   @EnvironmentObject var dataManager: DataManager
@@ -48,7 +47,7 @@ struct CafeRowsFiltered: View {
     let list = isFixed ? listManager.fixedList : listManager.unfixedList
     var rowNum = 0
     for cafeListElement in list {
-      switch (listFilter(name: cafeListElement.name)) {
+      switch listFilter(name: cafeListElement.name) {
       case .show:
         rowNum += 1
       case .empty:
@@ -57,8 +56,8 @@ struct CafeRowsFiltered: View {
         break
       }
     }
-    if (rowNum == 0) {
-      if (searchWord != "") {
+    if rowNum == 0 {
+      if searchWord != "" {
         return AnyView(
           HStack {
             Spacer()
@@ -67,8 +66,7 @@ struct CafeRowsFiltered: View {
           }
           .rowBackground()
         )
-      }
-      else {
+      } else {
         return AnyView(
           HStack {
             Spacer()
@@ -78,8 +76,7 @@ struct CafeRowsFiltered: View {
           .rowBackground()
         )
       }
-    }
-    else {
+    } else {
       return AnyView(
         VStack(spacing: 0) {
           ForEach(list, id: \.self) { (listElement: ListElement) in
@@ -92,13 +89,15 @@ struct CafeRowsFiltered: View {
                 if let cafe = dataManager.cafe(at: settingManager.date, name: listElement.name) {
                   // Use data if exists.
                   CafeRow(cafe: cafe, suggestedMeal: settingManager.meal, searchText: searchWord)
-                }
-                else {
+                } else {
                   //Use empty Cafe if no data exists.
-                  CafeRow(cafe: Cafe(name: listElement.name), suggestedMeal: settingManager.meal, searchText: searchWord)
+                  CafeRow(
+                    cafe: Cafe(name: listElement.name),
+                    suggestedMeal: settingManager.meal,
+                    searchText: searchWord
+                  )
                 }
-              }
-              else {
+              } else {
                 EmptyView()
               }
             default:
@@ -118,16 +117,13 @@ struct CafeRowsFiltered: View {
       if searchWord == "" {
         if targetCafe.isEmpty(at: [settingManager.meal], emptyKeywords: settingManager.closedKeywords) {
           return .empty
-        }
-        else {
+        } else {
           return .show
         }
-      }
-      else {
+      } else {
         if targetCafe.includes(searchWord, at: [.breakfast, .lunch, .dinner]) {
           return .show
-        }
-        else {
+        } else {
           return .hide
         }
       }

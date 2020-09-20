@@ -9,7 +9,6 @@ import GoogleMobileAds
 import SwiftUI
 import UIKit
 
-
 /// Controller for google admob
 struct GADBannerViewController: UIViewControllerRepresentable {
   func makeUIViewController(context: Context) -> UIViewController {
