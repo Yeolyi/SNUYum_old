@@ -49,7 +49,7 @@
 		25C805072501144A00B7E4CC /* NanumMyeongjo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25C805062501144900B7E4CC /* NanumMyeongjo.ttf */; };
 		25C8050A2501171B00B7E4CC /* NanumBarunpenR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25C805092501171B00B7E4CC /* NanumBarunpenR.ttf */; };
 		25FF78012503B306006372C7 /* OurhomeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF78002503B306006372C7 /* OurhomeManager.swift */; };
-		6B7F4E646B2AF327054835BC /* Pods_FoodLuxMea.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DFF9DF7D114A80947D46D66 /* Pods_FoodLuxMea.framework */; };
+		CE7419262CB62C828DB53118 /* Pods_FoodLuxMea.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CEE4853E61F49F24F262680 /* Pods_FoodLuxMea.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -112,9 +112,9 @@
 		25C80508250114BA00B7E4CC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		25C805092501171B00B7E4CC /* NanumBarunpenR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumBarunpenR.ttf; sourceTree = "<group>"; };
 		25FF78002503B306006372C7 /* OurhomeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurhomeManager.swift; sourceTree = "<group>"; };
-		7DFF9DF7D114A80947D46D66 /* Pods_FoodLuxMea.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLuxMea.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AC2171A9E714CC7C66ED7266 /* Pods-FoodLuxMea.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.debug.xcconfig"; sourceTree = "<group>"; };
-		C20290CD2D8E40F261227E32 /* Pods-FoodLuxMea.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.release.xcconfig"; sourceTree = "<group>"; };
+		7CEE4853E61F49F24F262680 /* Pods_FoodLuxMea.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLuxMea.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA33607112141906284D0C06 /* Pods-FoodLuxMea.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.debug.xcconfig"; sourceTree = "<group>"; };
+		C7B16E3481F6AA087BD30B1A /* Pods-FoodLuxMea.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B7F4E646B2AF327054835BC /* Pods_FoodLuxMea.framework in Frameworks */,
+				CE7419262CB62C828DB53118 /* Pods_FoodLuxMea.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				250BBBFF24F3F9CD00FC0C84 /* SwiftUI.framework */,
-				7DFF9DF7D114A80947D46D66 /* Pods_FoodLuxMea.framework */,
+				7CEE4853E61F49F24F262680 /* Pods_FoodLuxMea.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -313,8 +313,8 @@
 		8AA4CDD938B269F0A7BB912D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AC2171A9E714CC7C66ED7266 /* Pods-FoodLuxMea.debug.xcconfig */,
-				C20290CD2D8E40F261227E32 /* Pods-FoodLuxMea.release.xcconfig */,
+				AA33607112141906284D0C06 /* Pods-FoodLuxMea.debug.xcconfig */,
+				C7B16E3481F6AA087BD30B1A /* Pods-FoodLuxMea.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -326,13 +326,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 250BBBE424F3F8F900FC0C84 /* Build configuration list for PBXNativeTarget "FoodLuxMea" */;
 			buildPhases = (
-				9DD0E2AA9E42EA07DDC50CC8 /* [CP] Check Pods Manifest.lock */,
+				2619267088F814F1DDFCE141 /* [CP] Check Pods Manifest.lock */,
 				250BBBCC24F3F8F700FC0C84 /* Sources */,
 				250BBBCD24F3F8F700FC0C84 /* Frameworks */,
 				250BBBCE24F3F8F700FC0C84 /* Resources */,
 				250BBC0D24F3F9CF00FC0C84 /* Embed App Extensions */,
-				86B2EC07D8DEC5D3C4415B49 /* [CP] Embed Pods Frameworks */,
 				252B96A92517AD02000475C6 /* ShellScript */,
+				029B59E986167AF34ABE666B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -393,6 +393,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		029B59E986167AF34ABE666B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		252B96A92517AD02000475C6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -410,24 +427,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
-		86B2EC07D8DEC5D3C4415B49 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9DD0E2AA9E42EA07DDC50CC8 /* [CP] Check Pods Manifest.lock */ = {
+		2619267088F814F1DDFCE141 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -537,7 +537,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -600,7 +600,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -632,12 +632,12 @@
 		};
 		250BBBE524F3F8F900FC0C84 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC2171A9E714CC7C66ED7266 /* Pods-FoodLuxMea.debug.xcconfig */;
+			baseConfigurationReference = AA33607112141906284D0C06 /* Pods-FoodLuxMea.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -666,12 +666,12 @@
 		};
 		250BBBE624F3F8F900FC0C84 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C20290CD2D8E40F261227E32 /* Pods-FoodLuxMea.release.xcconfig */;
+			baseConfigurationReference = C7B16E3481F6AA087BD30B1A /* Pods-FoodLuxMea.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;

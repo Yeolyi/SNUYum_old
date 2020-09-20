@@ -13,7 +13,7 @@ import SwiftUI
 ///
 /// - ToDo: Make version compatible - solution to userdefault error
 class SettingManager: ObservableObject {
-
+  
   /// Current meal view mode in main view; breakfast only, lunch only or dinner only.
   ///
   /// - Important: Overwritten when 'isAuto' is true!
@@ -38,9 +38,9 @@ class SettingManager: ObservableObject {
   /// - Important: Should be updated when setting time or timer cafe changes.
   @Published var suggestedMeal: MealType = .lunch
   
-   /// Tell if next day of setting day should be suggested.
-   ///
-   /// - Important: Should be updated when setting time or timer cafe changes.
+  /// Tell if next day of setting day should be suggested.
+  ///
+  /// - Important: Should be updated when setting time or timer cafe changes.
   @Published var isSuggestedTomorrow: Bool = false
   
   /// Main view timer cafe name; nil if timer is set to be hidden.

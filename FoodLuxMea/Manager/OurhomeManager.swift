@@ -19,24 +19,6 @@ class OurhomeManager {
   /// In [Int: Cafe], Int value is converted from day of the week; sunday is 0, saturday is 6.
   var cafeData = [URL: [Int: Cafe]]()
   
-  /// Unnessessary data position in ourhome HTML.
-  private let isIgnore: [[Bool]] = [
-    [true, true, true, false, false, false, false, false, false, false],
-    [true, false, false, false, false, false, false, false],
-    [true, true, false, false, false, false, false, false, false],
-    [true, false, false, false, false, false, false, false],
-    [true, false, false, false, false, false, false, false],
-    [true, true, false, false, false, false, false, false, false],
-    [true, false, false, false, false, false, false, false],
-    [true, false, false, false, false, false, false, false]]
-  
-  /// Cafe order in ourhome HTML.
-  private let cafeNameOrder = ["가마", "인터쉐프", "가마", "인터쉐프", "해피존", "가마", "인터쉐프", "해피존"]
-  // Meal type index in ourhome HTML.
-  private let bkfIndex = [0, 1]
-  private let lunchIndex = [2, 3, 4]
-  private let dinnerIndex = [5, 6, 7]
-  
   /// Get saved data.
   init() {
     if let loadedData = UserDefaults(
@@ -93,9 +75,19 @@ class OurhomeManager {
   
   func loadCafe(date: Date) -> [Int: Cafe]? {
     
-    var cafeList = [Int: Cafe]()
+    /// Unnessessary data num in array.
+    let wasteDataNum = [3, 1, 2, 1, 1, 2, 1, 1]
+    /// Cafe order in ourhome HTML.
+    let cafeNameOrder = ["가마", "인터쉐프", "가마", "인터쉐프", "해피존", "가마", "인터쉐프", "해피존"]
+    // Meal type index in ourhome HTML.
+    let bkfIndex = [0, 1]
+    let lunchIndex = [2, 3, 4]
+    let dinnerIndex = [5, 6, 7]
     
-    var cafeDayofWeek = [Int: [Menu]]()
+    /// Return value
+    var cafeList = [Int: Cafe]()
+    /// Temp menu list storage
+    var cafeDayofWeek = [Int: [Menu?]]()
     
     for i in 0..<8 {
       cafeDayofWeek[i] = []
@@ -105,47 +97,34 @@ class OurhomeManager {
       let uRLContents = makeURL(from: date)
       let parsed = try SNUCOManager.parse(uRLContents)
       
-      //가로줄 구분
+      // Divide rows - each row has 8 columns.
       let rawCafeList = try parsed.select("div#container").select("tbody").select("tr").array()
-      var dayCount = 0
-      //가로즐 순회
+      // Iterate rows.
       for rowNum in 0..<8 {
-        dayCount = 0
-        let horizontal = rawCafeList[rowNum]
-        let mealArray = try horizontal.select("td").array()
-        for columnNum in 0..<isIgnore[rowNum].count where isIgnore[rowNum][columnNum] == false {
-            let menu = try mealArray[columnNum].select("li").text()
-            let cost = getCost(menuName: try mealArray[columnNum].select("li").attr("class"))
-            if menu != "" {
-              cafeDayofWeek[dayCount]!.append(Menu(name: "(\(cafeNameOrder[rowNum]))\(menu)", cost: cost))
-            } else {
-              cafeDayofWeek[dayCount]!.append(Menu(name: "", cost: -1))
-            }
-            dayCount += 1
+        // Single row information.
+        let mealArray = try rawCafeList[rowNum].select("td").array()
+        // Only get useful information using proper range.
+        for columnNum in wasteDataNum[rowNum]..<wasteDataNum[rowNum] + 7 {
+          let menuName = try mealArray[columnNum].select("li").text()
+          let dayOfWeek = columnNum - wasteDataNum[rowNum]
+          let cost = getCost(menuName: try mealArray[columnNum].select("li").attr("class"))
+          let menu = menuName == "" ? nil : Menu(name: "\(cafeNameOrder[rowNum]) - \(menuName)", cost: cost)
+          cafeDayofWeek[dayOfWeek]!.append(menu)
         }
       }
+      
+      func divideMealType(index: [Int], dayOfTheWeek: Int) -> [Menu] {
+        var menuList = [Menu]()
+        for i in index {
+          if let tempMenu = cafeDayofWeek[dayOfTheWeek]![i] { menuList.append(tempMenu) }
+        }
+        return menuList
+      }
+      
       for day in 0..<7 {
-        var tempBkfMenuList: [Menu] = []
-        var tempLunchMenuList: [Menu] = []
-        var tempDinnerMenuList: [Menu] = []
-        for i in bkfIndex {
-          let tempMenu = cafeDayofWeek[day]![i]
-          if tempMenu.cost != -1 {
-            tempBkfMenuList.append(tempMenu)
-          }
-        }
-        for i in lunchIndex {
-          let tempMenu = cafeDayofWeek[day]![i]
-          if tempMenu.cost != -1 {
-            tempLunchMenuList.append(tempMenu)
-          }
-        }
-        for i in dinnerIndex {
-          let tempMenu = cafeDayofWeek[day]![i]
-          if tempMenu.cost != -1 {
-            tempDinnerMenuList.append(tempMenu)
-          }
-        }
+        let tempBkfMenuList: [Menu] = divideMealType(index: bkfIndex, dayOfTheWeek: day)
+        let tempLunchMenuList: [Menu] = divideMealType(index: lunchIndex, dayOfTheWeek: day)
+        let tempDinnerMenuList: [Menu] = divideMealType(index: dinnerIndex, dayOfTheWeek: day)
         cafeList[day] =
           Cafe(
             name: "아워홈",
@@ -191,7 +170,7 @@ class OurhomeManager {
     formatter.dateFormat = "yyyy/MM/dd HH:mm"
     let date = formatter.date(from: string) ?? Date()
     guard let trimmedDate = Calendar.current.date(
-            from: Calendar.current.dateComponents([.year, .month, .day], from: date)
+      from: Calendar.current.dateComponents([.year, .month, .day], from: date)
     ) else {
       assertionFailure("")
       return Date()

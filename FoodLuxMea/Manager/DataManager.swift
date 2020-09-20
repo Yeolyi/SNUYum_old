@@ -27,13 +27,6 @@ class DataManager: ObservableObject {
    - Important: If data managing algorithm changes, existing data should be deleted and reloaded
    */
   init() {
-    if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
-      if userDefaults.bool(forKey: "1.1firstRun") == false {
-        print("DataManager/init: 1.1버전 설치가 처음입니다. 데이터를 삭제합니다. ")
-        userDefaults.removeObject(forKey: "cafeData")
-        return
-      }
-    }
     if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeData") as? Data {
       do {
         cafeData = try PropertyListDecoder().decode([URL: [Cafe]].self, from: loadedData)
@@ -93,7 +86,7 @@ class DataManager: ObservableObject {
         let newData = self.loadAll(at: date)
         cafeData[uRLString] = newData
         for cafe in newData where cafe.name == name {
-            return cafe
+          return cafe
         }
       } else {
         print("CafeDataManager.getData(at: , name: ): 인터넷 연결 안됨 \(date)")

@@ -49,11 +49,11 @@ struct Cafe: Hashable, Codable, Identifiable {
     self.dinnerMenuList = dinnerMenuList
   }
   
-   /// True if there is no menu in selected meal type.
-   ///
-   /// - Parameters:
-   ///  - mealType: Select which meal type to search
-   ///  - emptyKeywords: Exceptional strings which means menu is empty.
+  /// True if there is no menu in selected meal type.
+  ///
+  /// - Parameters:
+  ///  - mealType: Select which meal type to search
+  ///  - emptyKeywords: Exceptional strings which means menu is empty.
   func isEmpty(at mealTypes: [MealType], emptyKeywords: [String]) -> Bool {
     for mealType in mealTypes {
       let menuList = menus(at: mealType)
@@ -71,9 +71,9 @@ struct Cafe: Hashable, Codable, Identifiable {
     return true
   }
   
-   /// Get menu list of selected meal type
-   ///
-   /// - Parameter mealType: Select which meal type to get
+  /// Get menu list of selected meal type
+  ///
+  /// - Parameter mealType: Select which meal type to get
   func menus(at mealType: MealType) -> [Menu] {
     switch mealType {
     case .breakfast:
@@ -85,15 +85,15 @@ struct Cafe: Hashable, Codable, Identifiable {
     }
   }
   
-   /// True if cafe name or meal array contains searching text
-   ///
-   /// - Parameter keyword: Text to search.
-   /// - Parameter mealType: Meal type array to search.
+  /// True if cafe name or meal array contains searching text
+  ///
+  /// - Parameter keyword: Text to search.
+  /// - Parameter mealType: Meal type array to search.
   func includes(_ keyword: String, at mealTypes: [MealType]) -> Bool {
     for mealType in mealTypes {
       let menuList = menus(at: mealType)
       for menu in menuList where menu.name.contains(keyword) {
-          return true
+        return true
       }
     }
     return false

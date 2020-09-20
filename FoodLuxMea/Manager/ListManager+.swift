@@ -42,9 +42,9 @@ class ListManager: ObservableObject {
     cafeList.filter { $0.isFixed == false }
   }
   
-   /// If stored value exists, restore it.
-   ///
-   /// - Important: Variable 'cafeList' remains empty if stored value does not exists.
+  /// If stored value exists, restore it.
+  ///
+  /// - Important: Variable 'cafeList' remains empty if stored value does not exists.
   init() {
     if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeList") as? Data {
       do {
@@ -75,10 +75,10 @@ class ListManager: ObservableObject {
       }
     }
   }
-
-   /// Add new 'ListElement' in manager based on new cafe list.
-   ///
-   /// If cafe data is updated, list data should also be updated.
+  
+  /// Add new 'ListElement' in manager based on new cafe list.
+  ///
+  /// If cafe data is updated, list data should also be updated.
   func update(newCafeList: [Cafe]) {
     for cafe in newCafeList {
       if (cafeList.contains(where: {$0.name == cafe.name}) == false ) {
@@ -119,7 +119,7 @@ class ListManager: ObservableObject {
   
   func isFixed(cafeName: String) -> Bool {
     for cafe in cafeList where cafe.name == cafeName {
-        return cafe.isFixed
+      return cafe.isFixed
     }
     return false
   }

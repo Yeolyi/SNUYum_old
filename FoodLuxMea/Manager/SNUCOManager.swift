@@ -144,10 +144,10 @@ struct SNUCOManager {
         // Find cost string.
         for index in trimmedMenuNCost.indices {
           if Int(String(trimmedMenuNCost[index])) != nil &&
-             (
-              String(trimmedMenuNCost[trimmedMenuNCost.index(after: index)]) == "," ||
-              Int(String(trimmedMenuNCost[trimmedMenuNCost.index(after: index)])) != nil
-             ) {
+              (
+                String(trimmedMenuNCost[trimmedMenuNCost.index(after: index)]) == "," ||
+                  Int(String(trimmedMenuNCost[trimmedMenuNCost.index(after: index)])) != nil
+              ) {
             // Found.
             let menu = whiteSpaceTrim(String(trimmedMenuNCost[..<index]))
             let cost = decimalTrimInverted(String(trimmedMenuNCost[index...]))

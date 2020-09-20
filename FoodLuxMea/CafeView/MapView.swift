@@ -36,9 +36,9 @@ struct MapView: View {
       .navigationBarTitle(Text(cafeInfo.name + " 위치 정보"), displayMode: .inline)
       .navigationBarItems(
         trailing: Button(action: {self.presentationMode.wrappedValue.dismiss()}) {
-                              Text("닫기")
-                                .foregroundColor(themeColor.title(colorScheme))
-                            })
+          Text("닫기")
+            .foregroundColor(themeColor.title(colorScheme))
+        })
     }
   }
 }

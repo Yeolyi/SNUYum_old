@@ -25,7 +25,7 @@ struct CafeRowsFiltered: View {
   
   let isFixed: Bool
   let searchWord: String
-
+  
   @EnvironmentObject var listManager: ListManager
   @EnvironmentObject var settingManager: SettingManager
   @EnvironmentObject var dataManager: DataManager
