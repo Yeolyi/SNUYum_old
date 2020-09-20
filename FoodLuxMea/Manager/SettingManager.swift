@@ -77,8 +77,10 @@ class SettingManager: ObservableObject {
       return dateFormatter.date(from: str) ?? Date()
     }
     if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
-      if userDefaults.bool(forKey: "firstRun") == false {
-        print("첫실행입니다 초기 설정을 덮어씌웁니다. ")
+      let settingInitialized = userDefaults.bool(forKey: "settingFirstRun")
+      if settingInitialized == false {
+        print("Setting first initializing, quitting init now.")
+        userDefaults.set(true, forKey: "settingFirstRun")
         return
       }
       if let storedMealViewMode = MealType(rawValue: userDefaults.string(forKey: "mealViewMode") ?? "점심") {
@@ -87,7 +89,7 @@ class SettingManager: ObservableObject {
       if let storedStrToDate = userDefaults.string(forKey: "debugDate") {
         debugDate = strToDate(storedStrToDate)
       }
-      alimiCafeName = userDefaults.string(forKey: "timerCafeName") ?? nil
+      alimiCafeName = userDefaults.string(forKey: "timerCafeName")
       isAuto = userDefaults.bool(forKey: "isAuto")
       isCustomDate = userDefaults.bool(forKey: "isDebug")
       hideEmptyCafe = userDefaults.bool(forKey: "isHide")
@@ -106,13 +108,10 @@ class SettingManager: ObservableObject {
     if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
       userDefault.set(mealViewMode.rawValue as String, forKey: "mealViewMode")
       userDefault.set(isAuto as Bool, forKey: "isAuto")
-      userDefault.set(true as Bool, forKey: "firstRun")
       userDefault.set(isCustomDate as Bool, forKey: "isDebug")
       userDefault.set(hideEmptyCafe as Bool, forKey: "isHide")
       userDefault.set(dateToStr(debugDate) as String, forKey: "debugDate")
-      if alimiCafeName != nil {
-        userDefault.set(alimiCafeName! as String, forKey: "timerCafeName")
-      }
+      userDefault.set(alimiCafeName as String?, forKey: "timerCafeName")
       print("SettingManaver/save(): 세팅 저장됨")
     } else {
       print("세팅 저장 안됨")

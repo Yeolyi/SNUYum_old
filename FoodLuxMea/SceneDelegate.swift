@@ -10,11 +10,13 @@ import SwiftUI
 import Network
 
 var isInternetConnected = false
+var isFirstVersionRun = false
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   var window: UIWindow?
   
+  let versionChecker = VersionChecker()
   //Initialize essential manager class.
   let listManager = ListManager()
   let dataManager = DataManager()

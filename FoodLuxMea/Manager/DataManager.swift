@@ -27,13 +27,19 @@ class DataManager: ObservableObject {
    - Important: If data managing algorithm changes, existing data should be deleted and reloaded
    */
   init() {
+    if isFirstVersionRun {
+      if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
+        userDefault.removeObject(forKey: "cafeData")
+        print("Cafe data cleared.")
+      }
+    }
     if let loadedData = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeData") as? Data {
       do {
         cafeData = try PropertyListDecoder().decode([URL: [Cafe]].self, from: loadedData)
+        print("DataManager loaded.")
       } catch {
         print("DataManager load failed.")
       }
-      print("CafeDataManager/init(): cafeData가 로드되었습니다")
     }
   }
   
@@ -57,7 +63,7 @@ class DataManager: ObservableObject {
       return data
     } else {
       if isInternetConnected {
-        print("CafeDataManager.getData(at: ): 다운로드 중, \(date)")
+        print("Downloading cafe data at \(date)")
         let newData =
           SNUCOManager.download(at: date) +
           (ourhomeManager.getCafe(date: date) != nil ? [ourhomeManager.getCafe(date: date)!] : [])
