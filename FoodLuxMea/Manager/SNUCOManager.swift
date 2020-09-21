@@ -18,9 +18,9 @@ struct SNUCOManager {
   struct TempCafeData {
     let name: String
     let callNum: String
-    let rawBreakfasts: Element?
-    let rawLunches: Element?
-    let rawDinners: Element?
+    let rawBreakfasts: [Element]
+    let rawLunches: [Element]
+    let rawDinners: [Element]
   }
   
   /// Get Cafe array from specific date
@@ -85,9 +85,9 @@ struct SNUCOManager {
     return TempCafeData(
       name: cafeName,
       callNum: cafeCallNum,
-      rawBreakfasts: !rawBreakfasts.isEmpty ? rawBreakfasts[0] : nil,
-      rawLunches: !rawLunches.isEmpty ? rawLunches[0] : nil,
-      rawDinners: !rawDinners.isEmpty ? rawDinners[0] : nil
+      rawBreakfasts: rawBreakfasts,
+      rawLunches: rawLunches,
+      rawDinners: rawDinners
     )
   }
   
@@ -105,7 +105,7 @@ struct SNUCOManager {
   /// Get cost and menu name from elements
   ///
   /// - Note: Has great importance in SNUCO data processing.
-  static private func splitMenuList(_ rawMenu: Element?) throws -> [Menu] {
+  static private func splitMenuList(_ rawMenus: [Element]) throws -> [Menu] {
     
     /// Delete edge white space in string.
     func whiteSpaceTrim(_ str: String) -> String {
@@ -119,7 +119,7 @@ struct SNUCOManager {
     /// Returned menu array.
     var returnValue: [Menu] = []
     // Menu list is not empty.
-    if let rawMenu = rawMenu {
+    for rawMenu in rawMenus {
       
       // Divide each menus.
       var temp = try rawMenu.html()
@@ -142,26 +142,22 @@ struct SNUCOManager {
         }
         
         // Find cost string.
-        for index in trimmedMenuNCost.indices {
-          if Int(String(trimmedMenuNCost[index])) != nil &&
-              (
-                String(trimmedMenuNCost[trimmedMenuNCost.index(after: index)]) == "," ||
-                  Int(String(trimmedMenuNCost[trimmedMenuNCost.index(after: index)])) != nil
-              ) {
+        for index in trimmedMenuNCost.indices
+        where Int(String(trimmedMenuNCost[index])) != nil &&
+              ( String(trimmedMenuNCost[trimmedMenuNCost.index(after: index)]) == "," ||
+                  Int(String(trimmedMenuNCost[trimmedMenuNCost.index(after: index)])) != nil ) {
             // Found.
             let menu = whiteSpaceTrim(String(trimmedMenuNCost[..<index]))
             let cost = decimalTrimInverted(String(trimmedMenuNCost[index...]))
             returnValue.append(.init(name: menu, cost: cost))
             continue characterIterate
           }
-        }
         // Not found. Set all string to menu name.
         returnValue.append(.init(name: trimmedMenuNCost, cost: -1))
       }
-      return returnValue
+
     }
-    // Menu list is empty.
-    else { return [] }
+    return returnValue
   }
   
   /// Make URL which has access to input date's data

@@ -68,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		2500739524F54A37009A32FA /* SettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManager.swift; sourceTree = "<group>"; };
+		250AFAC125193B4300B35F52 /* FoodLuxMea.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FoodLuxMea.entitlements; sourceTree = "<group>"; };
 		250BBBD024F3F8F700FC0C84 /* FoodLuxMea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodLuxMea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		250BBBD924F3F8F900FC0C84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		250BBBDC24F3F8F900FC0C84 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 		250BBBD224F3F8F700FC0C84 /* FoodLuxMea */ = {
 			isa = PBXGroup;
 			children = (
+				250AFAC125193B4300B35F52 /* FoodLuxMea.entitlements */,
 				250BBC1124F3FAC700FC0C84 /* AppDelegate.swift */,
 				250BBC1A24F3FAC700FC0C84 /* SceneDelegate.swift */,
 				25BF46AC24F40C8800CC2355 /* Manager */,
@@ -642,6 +644,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				CODE_SIGN_ENTITLEMENTS = FoodLuxMea/FoodLuxMea.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -657,7 +660,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -676,6 +679,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				CODE_SIGN_ENTITLEMENTS = FoodLuxMea/FoodLuxMea.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -690,7 +694,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea;
 				PRODUCT_NAME = "$(TARGET_NAME)";

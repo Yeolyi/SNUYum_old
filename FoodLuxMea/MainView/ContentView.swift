@@ -45,8 +45,10 @@ struct ContentView: View {
             .padding()
             .offset(y: 10)
           }
-          MealSelect()
-            .padding([.trailing, .leading], 10)
+          if searchWord == "" {
+            MealSelect()
+              .padding([.trailing, .leading], 10)
+          }
         }
         Divider()
         // MARK: - ScrollView starts here.
@@ -54,7 +56,7 @@ struct ContentView: View {
           // Searchbar
           SearchBar(searchWord: self.$searchWord)
           // Cafe timer row.
-          if settingManager.alimiCafeName != nil {
+          if settingManager.alimiCafeName != nil && searchWord == "" {
             Text("안내(\(settingManager.alimiCafeName!))")
               .sectionText()
             if let cafe = dataManager.cafe(
@@ -68,13 +70,9 @@ struct ContentView: View {
           }
           // Fixed cafe section.
           if self.listManager.fixedList.isEmpty == false {
-            Text("고정됨")
-              .sectionText()
             CafeRowsFiltered(isFixed: true, searchWord: self.searchWord)
           }
           // Ordinary cafe section.
-          Text("일반")
-            .sectionText()
           CafeRowsFiltered(isFixed: false, searchWord: self.searchWord)
           // Scroll view ends here.
         }

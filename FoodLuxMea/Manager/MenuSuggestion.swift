@@ -17,7 +17,7 @@ class MenuSuggestion {
   static let lunchDefaultTime = SimpleTimeBorder(15)
   static let dinnerDefaultTime = SimpleTimeBorder(19)
   
-  static func get(at date: Date, cafeName: String) -> (isTomorrow: Bool, meal: MealType) {
+  static func properMenu(at date: Date, cafeName: String) -> (isTomorrow: Bool, meal: MealType) {
     let currentSimpleDate = SimpleTimeBorder(date: date)
     let bkfEndTime: SimpleTimeBorder?
     let lunchEndTime: SimpleTimeBorder?

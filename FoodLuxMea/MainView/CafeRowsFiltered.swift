@@ -57,28 +57,40 @@ struct CafeRowsFiltered: View {
       }
     }
     if rowNum == 0 {
-      if searchWord != "" {
+      if isFixed {
+        return AnyView(EmptyView())
+      } else if searchWord != "" {
         return AnyView(
-          HStack {
-            Spacer()
-            Text("검색 결과가 없어요")
-            Spacer()
+          VStack {
+            Text(isFixed ? "고정됨" : "일반")
+              .sectionText()
+            HStack {
+              Spacer()
+              Text("검색 결과가 없어요")
+              Spacer()
+            }
+            .rowBackground()
           }
-          .rowBackground()
         )
       } else {
         return AnyView(
-          HStack {
-            Spacer()
-            Text("운영중인 식당이 없어요")
-            Spacer()
+          VStack {
+            Text(isFixed ? "고정됨" : "일반")
+              .sectionText()
+            HStack {
+              Spacer()
+              Text("운영중인 식당이 없어요")
+              Spacer()
+            }
+            .rowBackground()
           }
-          .rowBackground()
         )
       }
     } else {
       return AnyView(
         VStack(spacing: 0) {
+          Text(isFixed ? "고정됨" : "일반")
+            .sectionText()
           ForEach(list, id: \.self) { (listElement: ListElement) in
             switch listFilter(name: listElement.name) {
             case .show:

@@ -14,7 +14,6 @@ struct VersionChecker {
   
   init() {
     if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
-      userDefault.removeObject(forKey: "firstRun")
       userDefault.removeObject(forKey: "1.1firstRun")
       let storedAppVersion = userDefault.string(forKey: "appVersion") ?? ""
       let storedBuild = userDefault.string(forKey: "build") ?? ""

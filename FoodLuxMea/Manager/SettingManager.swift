@@ -77,10 +77,10 @@ class SettingManager: ObservableObject {
       return dateFormatter.date(from: str) ?? Date()
     }
     if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
-      let settingInitialized = userDefaults.bool(forKey: "settingFirstRun")
+      let settingInitialized = userDefaults.bool(forKey: "firstRun")
       if settingInitialized == false {
         print("Setting first initializing, quitting init now.")
-        userDefaults.set(true, forKey: "settingFirstRun")
+        userDefaults.set(true, forKey: "firstRun")
         return
       }
       if let storedMealViewMode = MealType(rawValue: userDefaults.string(forKey: "mealViewMode") ?? "점심") {
@@ -120,7 +120,7 @@ class SettingManager: ObservableObject {
   
   /// Update setting if timer cafe changes. 
   func update() {
-    (isSuggestedTomorrow, suggestedMeal) = MenuSuggestion.get(at: date, cafeName: alimiCafeName ?? "3식당")
+    (isSuggestedTomorrow, suggestedMeal) = MenuSuggestion.properMenu(at: date, cafeName: alimiCafeName ?? "3식당")
     print("SettingManager/update(date: ): 추천값 업데이트 완료")
   }
 }
