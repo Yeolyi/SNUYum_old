@@ -76,6 +76,7 @@ struct ContentView: View {
           CafeRowsFiltered(isFixed: false, searchWord: self.searchWord)
           // Scroll view ends here.
         }
+        .resignKeyboardOnDragGesture()
         Divider()
         // Google Admob.
         GADBannerViewController()
@@ -87,7 +88,6 @@ struct ContentView: View {
           .zIndex(2) // Priorize setting view to main view
       }
     }
-    .resignKeyboardOnDragGesture()
     .alert(isPresented: .constant(!isInternetConnected)) {
       Alert(
         title: Text("인터넷이 연결되지 않았어요"),
