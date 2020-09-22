@@ -36,7 +36,7 @@ class SettingManager: ObservableObject {
     /// Suggested meal type based on current setting time.
     ///
     /// - Important: Should be updated when setting time or timer cafe changes.
-    @Pubrlished var suggestedMeal: MealType = .lunch
+    @Published var suggestedMeal: MealType = .lunch
     
     /// Tell if next day of setting day should be suggested.
     ///
@@ -73,7 +73,7 @@ class SettingManager: ObservableObject {
         if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
             let settingInitialized = userDefaults.bool(forKey: "firstRun")
             if settingInitialized == false {
-                print("Setting first initializing, quitting init now.")
+                print("First setting initializing, quitting init now.")
                 userDefaults.set(true, forKey: "firstRun")
                 return
             }
@@ -83,7 +83,7 @@ class SettingManager: ObservableObject {
             alimiCafeName = userDefaults.string(forKey: "timerCafeName")
             isAuto = userDefaults.bool(forKey: "isAuto")
             hideEmptyCafe = userDefaults.bool(forKey: "isHide")
-            print("SettingManager/init(): 설정값을 불러왔습니다.")
+            print("Setting loaded.")
         } else {
             assertionFailure("SettingManager/init(): UserDefault를 불러오지 못했습니다.")
         }
@@ -95,7 +95,7 @@ class SettingManager: ObservableObject {
             userDefault.set(isAuto as Bool, forKey: "isAuto")
             userDefault.set(hideEmptyCafe as Bool, forKey: "isHide")
             userDefault.set(alimiCafeName as String?, forKey: "timerCafeName")
-            print("SettingManaver/save(): 세팅 저장됨")
+            print("Setting Saved.")
         } else {
             print("세팅 저장 안됨")
         }
@@ -104,6 +104,6 @@ class SettingManager: ObservableObject {
     /// Update setting if timer cafe changes. 
     func update() {
         (isSuggestedTomorrow, suggestedMeal) = MenuSuggestion.properMenu(at: date, cafeName: alimiCafeName ?? "3식당")
-        print("SettingManager/update(date: ): 추천값 업데이트 완료")
+        print("SettingManager updated.")
     }
 }

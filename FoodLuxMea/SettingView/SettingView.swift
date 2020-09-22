@@ -54,7 +54,7 @@ struct SettingView: View {
                 Spacer()
                 Button(action: { self.isPresented = false }) {
                     Text("닫기")
-                        .font(.system(size: CGFloat(20), weight: .light))
+                        .font(.system(size: CGFloat(20), weight: .semibold))
                         .foregroundColor(themeColor.icon(colorScheme))
                         .padding()
                         .offset(y: 10)
@@ -114,6 +114,10 @@ struct SettingView: View {
                         .font(.system(size: 18))
                         .rowBackground()
                     if settingManager.isCustomDate {
+                        Text("참고: 이 설정은 저장되지 않습니다.")
+                            .foregroundColor(.secondary)
+                            .centered()
+                            .rowBackground()
                         DatePicker(selection: $settingManager.debugDate, label: { EmptyView() })
                             .rowBackground()
                             .accentColor(themeColor.title(colorScheme))

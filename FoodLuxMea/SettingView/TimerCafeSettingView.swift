@@ -32,7 +32,7 @@ struct TimerCafeSettingView: View {
             // MARK: - Custom Navigation bar.
             HStack {
                 customNavigationBar(title: "알리미 설정", subTitle: "설정")
-                
+                Spacer()
                 Button(action: {
                         self.presentationMode.wrappedValue.dismiss()}) {
                     Text("취소")

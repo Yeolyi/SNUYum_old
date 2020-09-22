@@ -29,6 +29,7 @@ struct ListOrderSettingView: View {
             // MARK: - Custom navigation bar
             HStack {
                 customNavigationBar(title: "목록 수정", subTitle: "설정")
+                Spacer()
                 Button(action: {
                         self.presentationMode.wrappedValue.dismiss()}) {
                     Text("취소")

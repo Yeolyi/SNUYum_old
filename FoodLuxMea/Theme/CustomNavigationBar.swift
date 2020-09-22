@@ -19,7 +19,6 @@ func customNavigationBar(title: String, subTitle: String) -> AnyView {
                     .font(.system(size: CGFloat(25), weight: .bold))
             }
             .padding([.leading, .top])
-            Spacer()
         }
     )
 }

@@ -21,8 +21,19 @@ struct MapView: View {
     }
     
     var body: some View {
-        NavigationView {
-            GeometryReader { geo in
+        GeometryReader { geo in
+            VStack {
+                HStack {
+                    customNavigationBar(title: cafeInfo.name, subTitle: "위치 정보")
+                    Spacer()
+                    Button(action: { self.presentationMode.wrappedValue.dismiss()}) {
+                        Text("닫기")
+                            .font(.system(size: CGFloat(20), weight: .semibold))
+                            .foregroundColor(themeColor.icon(colorScheme))
+                            .padding()
+                            .offset(y: 10)
+                    }
+                }
                 ZStack {
                     NaverMapProvider(cafeName: self.cafeInfo.name)
                         .edgesIgnoringSafeArea(.bottom)
@@ -33,12 +44,6 @@ struct MapView: View {
                         .position(x: geo.size.width/2, y: geo.size.height/10)
                 }
             }
-            .navigationBarTitle(Text(cafeInfo.name + " 위치 정보"), displayMode: .inline)
-            .navigationBarItems(
-                trailing: Button(action: {self.presentationMode.wrappedValue.dismiss()}) {
-                    Text("닫기")
-                        .foregroundColor(themeColor.title(colorScheme))
-                })
         }
     }
 }

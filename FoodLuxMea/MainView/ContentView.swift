@@ -11,14 +11,14 @@ import Network
 
 struct ContentView: View {
     
+    let themeColor = ThemeColor()
+    @State var searchWord = ""
+    @State var isSettingSheet = false
+    
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var settingManager: SettingManager
-    
-    let themeColor = ThemeColor()
-    @State var searchWord = ""
-    @State var isSettingView = false
     
     var body: some View {
         // Stacks setting view over main view.
@@ -37,7 +37,7 @@ struct ContentView: View {
                         }
                         .padding([.leading, .top])
                         Spacer()
-                        Button(action: {self.isSettingView.toggle()}) {
+                        Button(action: {self.isSettingSheet.toggle()}) {
                             Image(systemName: "gear")
                                 .font(.system(size: 25, weight: .regular))
                                 .foregroundColor(themeColor.icon(colorScheme))
@@ -83,8 +83,8 @@ struct ContentView: View {
                     .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
             }
             // MARK: - SettingView covers main view.
-            if self.isSettingView {
-                SettingView(isPresented: self.$isSettingView)
+            if self.isSettingSheet {
+                SettingView(isPresented: self.$isSettingSheet)
                     .zIndex(2) // Priorize setting view to main view
             }
         }

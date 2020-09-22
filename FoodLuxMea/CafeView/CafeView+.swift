@@ -49,7 +49,7 @@ struct CafeView: View {
                 }
                 Button(action: { self.presentationMode.wrappedValue.dismiss()}) {
                     Text("닫기")
-                        .font(.system(size: CGFloat(20), weight: .light))
+                        .font(.system(size: CGFloat(20), weight: .semibold))
                         .foregroundColor(themeColor.icon(colorScheme))
                         .padding()
                         .offset(y: 10)

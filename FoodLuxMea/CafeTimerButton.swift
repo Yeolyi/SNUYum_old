@@ -103,7 +103,8 @@ struct CafeTimerButton: View {
         let date1 = getDate(from: simpleDate1)
         let date2 = getDate(from: simpleDate2)
         let diffComponents = Calendar.current.dateComponents([.hour, .minute], from: date1, to: date2)
-        return SimpleTime(date: diffComponents)
+        // diffComponents variable is clearly valible. 
+        return SimpleTime(hour: diffComponents.hour!, minute: diffComponents.minute!)
     }
 }
 
