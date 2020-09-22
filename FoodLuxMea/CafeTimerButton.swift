@@ -58,13 +58,13 @@ struct CafeTimerButton: View {
         
         // When cafe operating hour data exists
         if let endDate =
-            cafeOperatingHour[cafe.name]?.getDaily(
-                at: settingManager.date)?.getEndTime(at: settingManager.suggestedMeal) {
+            cafeOperatingHour[cafe.name]?.daily(
+                at: settingManager.date)?.endTime(at: settingManager.suggestedMeal) {
             if !cafe.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords) {
                 let startTime =
                     cafeOperatingHour[cafe.name]!
-                    .getDaily(at: settingManager.date)!
-                    .getStartTime(at: settingManager.suggestedMeal)!
+                    .daily(at: settingManager.date)!
+                    .startTime(at: settingManager.suggestedMeal)!
                 
                 if currentSimpleTime.hour < 5 || currentSimpleTime.hour > endDate.hour {
                     return "영업 종료🌙"

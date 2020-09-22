@@ -135,8 +135,8 @@ struct CafeView: View {
                 VStack {
                     Text(
                         mealType.rawValue + " (" +
-                            (cafeOperatingHour[cafeInfo.name]?.getDaily(at: settingManager.date)?
-                                .operatingTimeStr(at: mealType) ?? "시간 정보 없음")
+                            (cafeOperatingHour[cafeInfo.name]?.daily(at: settingManager.date)?
+                                .rawValue(at: mealType) ?? "시간 정보 없음")
                             + ")"
                     )
                     .sectionText()

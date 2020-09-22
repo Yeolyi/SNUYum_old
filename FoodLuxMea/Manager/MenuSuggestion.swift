@@ -23,9 +23,9 @@ class MenuSuggestion {
         let lunchEndTime: SimpleTime?
         let dinnerEndTime: SimpleTime?
         if let weeklyOperatingHour = cafeOperatingHour[cafeName] {
-            bkfEndTime = weeklyOperatingHour.getDaily(at: date)?.getEndTime(at: .breakfast)
-            lunchEndTime = weeklyOperatingHour.getDaily(at: date)?.getEndTime(at: .lunch)
-            dinnerEndTime = weeklyOperatingHour.getDaily(at: date)?.getEndTime(at: .dinner)
+            bkfEndTime = weeklyOperatingHour.daily(at: date)?.endTime(at: .breakfast)
+            lunchEndTime = weeklyOperatingHour.daily(at: date)?.endTime(at: .lunch)
+            dinnerEndTime = weeklyOperatingHour.daily(at: date)?.endTime(at: .dinner)
         } else {
             bkfEndTime = nil
             lunchEndTime = nil

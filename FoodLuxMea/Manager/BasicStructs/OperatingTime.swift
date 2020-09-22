@@ -23,7 +23,7 @@ struct DailyOperatingTime {
     }
     
     /// Get operating time info of specific meal time
-    func operatingTimeStr(at mealType: MealType) -> String? {
+    func rawValue(at mealType: MealType) -> String? {
         switch mealType {
         case .breakfast: return breakfast
         case .lunch: return lunch
@@ -32,23 +32,24 @@ struct DailyOperatingTime {
     }
     
     /// Convert operation start time string to hour and minute tuple
-    func getStartTime(at mealType: MealType) -> SimpleTime? {
-        if let str = operatingTimeStr(at: mealType) {
-            let splited = str.components(separatedBy: "-")
-            let endTimeStr = splited[0]
-            let hourNMinute = endTimeStr.components(separatedBy: ":")
-            if let hour = Int(hourNMinute[0]), let minute = Int(hourNMinute[1]) {
-                return SimpleTime(hour: hour, minute: minute)
-            }
-        }
-        return nil
+    func startTime(at mealType: MealType) -> SimpleTime? {
+        divideString(return: .startTime, at: mealType)
     }
     
     /// Convert operation end time string to hour and minute tuple
-    func getEndTime(at mealType: MealType) -> SimpleTime? {
-        if let str = operatingTimeStr(at: mealType) {
+    func endTime(at mealType: MealType) -> SimpleTime? {
+        divideString(return: .endTime, at: mealType)
+    }
+    
+    private enum StartOrEndTime: Int {
+        case startTime = 0
+        case endTime = 1
+    }
+    
+    private func divideString(return index: StartOrEndTime, at mealType: MealType) -> SimpleTime? {
+        if let str = rawValue(at: mealType) {
             let splited = str.components(separatedBy: "-")
-            let endTimeStr = splited[1]
+            let endTimeStr = splited[index.rawValue]
             let hourNMinute = endTimeStr.components(separatedBy: ":")
             if let hour = Int(hourNMinute[0]), let minute = Int(hourNMinute[1]) {
                 return SimpleTime(hour: hour, minute: minute)
@@ -65,9 +66,10 @@ struct WeeklyOperatingHour {
     var sunday: DailyOperatingTime?
     
     /// Return daily operating hour of input date
-    func getDaily(at date: Date) -> DailyOperatingTime? {
+    func daily(at date: Date) -> DailyOperatingTime? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
+        dateFormatter.locale = Locale(identifier: "en_US")
         let str = dateFormatter.string(from: date)
         switch str {
         case "Saturday":
