@@ -6,15 +6,15 @@
 //
 
 import SwiftUI
-/**
- Simple text view showing remaining cafe operating hours.
- 
- - Bug: Alimi crashed on some circumstances.
- */
-struct TimerText: View {
+
+
+/// Shows remaining cafe operating hours.
+struct CafeTimerButton: View {
     
     let cafe: Cafe
-    @State var isTimerSheet = false
+    /// Determines to show sheet on tap or not.
+    let isInMainView: Bool
+    @State var isCafeViewSheet = false
     
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var dataManager: DataManager
@@ -23,26 +23,21 @@ struct TimerText: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    init(cafe: Cafe) {
+    init(of cafe: Cafe, isInMainView: Bool) {
         self.cafe = cafe
+        self.isInMainView = isInMainView
     }
     
     var body: some View {
-        Button(action: {
-            if settingManager.alimiCafeName == cafe.name {
-                isTimerSheet = true
-            }
-        }) {
-            HStack {
-                Spacer()
-                Text(remainingTimeNotice())
-                    .accentedText()
-                    .foregroundColor(themeColor.title(colorScheme))
-                Spacer()
-            }
-            .rowBackground()
+        // If view is in mainview, show sheet.
+        Button(action: { isCafeViewSheet = isInMainView } ) {
+            Text(remainingTimeNotice())
+                .accentedText()
+                .foregroundColor(themeColor.title(colorScheme))
+                .centered()
+                .rowBackground()
         }
-        .sheet(isPresented: $isTimerSheet) {
+        .sheet(isPresented: $isCafeViewSheet) {
             CafeView(cafeInfo: cafe)
                 .environmentObject(self.listManager)
                 .environmentObject(self.settingManager)
@@ -51,6 +46,7 @@ struct TimerText: View {
     }
     
     func remainingTimeNotice() -> String {
+        
         // Get current setting time component.
         let userCalendar = Calendar.current
         let currentHour = userCalendar.component(.hour, from: settingManager.date)
@@ -72,9 +68,9 @@ struct TimerText: View {
                 } else if currentSimpleTime < startTime { //시작시간 전
                     return
                         "\(settingManager.isSuggestedTomorrow ? "내일" : "오늘")" +
-                    "\(settingManager.suggestedMeal.rawValue)밥 준비중!"
+                    " \(settingManager.suggestedMeal.rawValue)밥 준비중!"
                 } else {
-                    let time = remainTime(from: SimpleTimeBorder(date: Date()), to: endDate)
+                    let time = remainTime(from: SimpleTimeBorder(date: settingManager.date), to: endDate)
                     return "\(settingManager.suggestedMeal.rawValue) 마감까지 \(time.hour)시간 \(time.minute)분!"
                 }
             } else {
@@ -87,18 +83,21 @@ struct TimerText: View {
         }
     }
     
-    /// Calculate time difference.
+    /// Calculate time difference of two arguments.
     func remainTime(from simpleDate1: SimpleTimeBorder, to simpleDate2: SimpleTimeBorder) -> SimpleTimeBorder {
-        var dateComponents = DateComponents()
-        let userCalendar = Calendar.current
-        dateComponents.hour = simpleDate1.hour
-        dateComponents.minute = simpleDate1.minute
-        let date1 = userCalendar.date(from: dateComponents) ?? Date()
-        dateComponents.hour = simpleDate2.hour
-        dateComponents.minute = simpleDate2.minute
-        let date2 = userCalendar.date(from: dateComponents) ?? Date()
+        
+        func getDate(from simpleDate: SimpleTimeBorder) -> Date {
+            let userCalendar = Calendar.current
+            var dateComponents = DateComponents()
+            dateComponents.hour = simpleDate.hour
+            dateComponents.minute = simpleDate.minute
+            return userCalendar.date(from: dateComponents) ?? settingManager.date
+        }
+        
+        let date1 = getDate(from: simpleDate1)
+        let date2 = getDate(from: simpleDate2)
         let diffComponents = Calendar.current.dateComponents([.hour, .minute], from: date1, to: date2)
-        return SimpleTimeBorder(diffComponents.hour!, diffComponents.minute! + 1)
+        return SimpleTimeBorder(diffComponents.hour!, diffComponents.minute!)
     }
     
     /// Return day of the week string.
@@ -111,7 +110,7 @@ struct TimerText: View {
 
 struct CafeTimerText_Previews: PreviewProvider {
     static var previews: some View {
-        TimerText(cafe: previewCafe)
+        CafeTimerButton(of: previewCafe, isInMainView: true)
             .environmentObject(DataManager())
             .environmentObject(SettingManager())
             .environmentObject(ListManager())

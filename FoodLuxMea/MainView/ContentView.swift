@@ -63,9 +63,9 @@ struct ContentView: View {
                             at: settingManager.date,
                             name: settingManager.alimiCafeName!
                         ) {
-                            TimerText(cafe: cafe)
+                            CafeTimerButton(of: cafe, isInMainView: true)
                         } else {
-                            TimerText(cafe: Cafe(name: settingManager.alimiCafeName!))
+                            CafeTimerButton(of: Cafe(name: settingManager.alimiCafeName!), isInMainView: true)
                         }
                     }
                     // Fixed cafe section.

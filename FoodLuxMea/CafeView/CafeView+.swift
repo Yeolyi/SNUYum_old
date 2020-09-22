@@ -60,7 +60,7 @@ struct CafeView: View {
             ScrollView {
                 Text("안내")
                     .sectionText()
-                TimerText(cafe: cafeInfo)
+                CafeTimerButton(of: cafeInfo, isInMainView: false)
                 mealSection(mealType: .breakfast, menus: cafeInfo.menus(at: .breakfast))
                 mealSection(mealType: .lunch, menus: cafeInfo.menus(at: .lunch))
                 mealSection(mealType: .dinner, menus: cafeInfo.menus(at: .dinner))
