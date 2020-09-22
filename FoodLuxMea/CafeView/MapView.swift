@@ -21,29 +21,24 @@ struct MapView: View {
     }
     
     var body: some View {
-        GeometryReader { geo in
-            VStack {
-                HStack {
-                    customNavigationBar(title: cafeInfo.name, subTitle: "위치 정보")
-                    Spacer()
-                    Button(action: { self.presentationMode.wrappedValue.dismiss()}) {
-                        Text("닫기")
-                            .font(.system(size: CGFloat(20), weight: .semibold))
-                            .foregroundColor(themeColor.icon(colorScheme))
-                            .padding()
-                            .offset(y: 10)
-                    }
-                }
-                ZStack {
-                    NaverMapProvider(cafeName: self.cafeInfo.name)
-                        .edgesIgnoringSafeArea(.bottom)
-                    // Cafe location info in text.
-                    Text(cafePosition[self.cafeInfo.name] ?? "")
-                        .font(.system(size: CGFloat(20), weight: .bold, design: .default))
-                        .background(Color.white.opacity(0.8))
-                        .position(x: geo.size.width/2, y: geo.size.height/10)
+        VStack {
+            HStack {
+                customNavigationBar(title: cafeInfo.name, subTitle: "위치 정보")
+                Spacer()
+                Button(action: { self.presentationMode.wrappedValue.dismiss()}) {
+                    Text("닫기")
+                        .font(.system(size: CGFloat(20), weight: .semibold))
+                        .foregroundColor(themeColor.icon(colorScheme))
+                        .padding()
+                        .offset(y: 10)
                 }
             }
+            // Cafe location info in text.
+            Text(cafePosition[self.cafeInfo.name] ?? "")
+                .font(.system(size: CGFloat(20), weight: .semibold, design: .default))
+                .rowBackground()
+            NaverMapProvider(cafeName: self.cafeInfo.name)
+                .edgesIgnoringSafeArea(.bottom)
         }
     }
 }
