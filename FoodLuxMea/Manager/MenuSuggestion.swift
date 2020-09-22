@@ -13,15 +13,15 @@ import Foundation
 class MenuSuggestion {
     
     // Default SimpleTimeBorder structs in case operating hour does not exists.
-    static let bkfDefaultTime = SimpleTimeBorder(10)
-    static let lunchDefaultTime = SimpleTimeBorder(15)
-    static let dinnerDefaultTime = SimpleTimeBorder(19)
+    static let bkfDefaultTime = SimpleTime(hour: 10)
+    static let lunchDefaultTime = SimpleTime(hour: 15)
+    static let dinnerDefaultTime = SimpleTime(hour: 19)
     
     static func properMenu(at date: Date, cafeName: String) -> (isTomorrow: Bool, meal: MealType) {
-        let currentSimpleDate = SimpleTimeBorder(date: date)
-        let bkfEndTime: SimpleTimeBorder?
-        let lunchEndTime: SimpleTimeBorder?
-        let dinnerEndTime: SimpleTimeBorder?
+        let currentSimpleDate = SimpleTime(date: date)
+        let bkfEndTime: SimpleTime?
+        let lunchEndTime: SimpleTime?
+        let dinnerEndTime: SimpleTime?
         if let weeklyOperatingHour = cafeOperatingHour[cafeName] {
             bkfEndTime = weeklyOperatingHour.getDaily(at: date)?.getEndTime(at: .breakfast)
             lunchEndTime = weeklyOperatingHour.getDaily(at: date)?.getEndTime(at: .lunch)

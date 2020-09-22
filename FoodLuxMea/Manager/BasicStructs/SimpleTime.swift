@@ -8,11 +8,11 @@
 import Foundation
 
 /// Tuple with hour and minute.
-struct SimpleTimeBorder {
+struct SimpleTime {
     let hour: Int
     let minute: Int
     
-    init(_ hour: Int, _ minute: Int = 0) {
+    init(hour: Int, minute: Int = 0) {
         self.hour = hour
         self.minute = minute
     }
@@ -24,7 +24,7 @@ struct SimpleTimeBorder {
         self.minute = minute
     }
     
-    static func < (left: SimpleTimeBorder, right: SimpleTimeBorder) -> Bool {
+    static func < (left: SimpleTime, right: SimpleTime) -> Bool {
         if left.hour < right.hour {
             return true
         } else if left.hour == right.hour {

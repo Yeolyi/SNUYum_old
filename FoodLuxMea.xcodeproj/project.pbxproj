@@ -42,7 +42,7 @@
 		2593233624FBCE7C0036C148 /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593233524FBCE7C0036C148 /* AboutAppView.swift */; };
 		259B889524F68B6F001C710C /* GADBannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259B889424F68B6F001C710C /* GADBannerViewController.swift */; };
 		259C58CB25165D0200310FA8 /* Menu+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C58CA25165D0200310FA8 /* Menu+.swift */; };
-		259C58CD25165DD200310FA8 /* SimpleTimeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C58CC25165DD200310FA8 /* SimpleTimeBorder.swift */; };
+		259C58CD25165DD200310FA8 /* SimpleTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C58CC25165DD200310FA8 /* SimpleTime.swift */; };
 		259F8D5824FA9088000F9A92 /* TimerCafeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259F8D5724FA9088000F9A92 /* TimerCafeSettingView.swift */; };
 		25A0824A24F3FDEC00593CB3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A0824924F3FDEC00593CB3 /* ContentView.swift */; };
 		25A627942513B92600313CD3 /* RowBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A627932513B92600313CD3 /* RowBackground.swift */; };
@@ -106,7 +106,7 @@
 		2593233524FBCE7C0036C148 /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		259B889424F68B6F001C710C /* GADBannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADBannerViewController.swift; sourceTree = "<group>"; };
 		259C58CA25165D0200310FA8 /* Menu+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Menu+.swift"; sourceTree = "<group>"; };
-		259C58CC25165DD200310FA8 /* SimpleTimeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTimeBorder.swift; sourceTree = "<group>"; };
+		259C58CC25165DD200310FA8 /* SimpleTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTime.swift; sourceTree = "<group>"; };
 		259F8D5724FA9088000F9A92 /* TimerCafeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCafeSettingView.swift; sourceTree = "<group>"; };
 		25A0824924F3FDEC00593CB3 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		25A627932513B92600313CD3 /* RowBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowBackground.swift; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 			children = (
 				259C58CA25165D0200310FA8 /* Menu+.swift */,
 				25340D5E251395CC00E7FA7A /* Cafe.swift */,
-				259C58CC25165DD200310FA8 /* SimpleTimeBorder.swift */,
+				259C58CC25165DD200310FA8 /* SimpleTime.swift */,
 				250BBBEC24F3F92D00FC0C84 /* OperatingTime.swift */,
 			);
 			path = BasicStructs;
@@ -466,7 +466,7 @@
 				250BBBF224F3F92E00FC0C84 /* DataManager.swift in Sources */,
 				250BBBF124F3F92E00FC0C84 /* MenuSuggestion.swift in Sources */,
 				250BBC2524F3FAC800FC0C84 /* SearchBar.swift in Sources */,
-				259C58CD25165DD200310FA8 /* SimpleTimeBorder.swift in Sources */,
+				259C58CD25165DD200310FA8 /* SimpleTime.swift in Sources */,
 				250BBBF524F3F92E00FC0C84 /* ThemeColor+.swift in Sources */,
 				25A0824A24F3FDEC00593CB3 /* ContentView.swift in Sources */,
 				250BBC1E24F3FAC800FC0C84 /* AppDelegate.swift in Sources */,

@@ -32,26 +32,26 @@ struct DailyOperatingTime {
     }
     
     /// Convert operation start time string to hour and minute tuple
-    func getStartTime(at mealType: MealType) -> SimpleTimeBorder? {
+    func getStartTime(at mealType: MealType) -> SimpleTime? {
         if let str = operatingTimeStr(at: mealType) {
             let splited = str.components(separatedBy: "-")
             let endTimeStr = splited[0]
             let hourNMinute = endTimeStr.components(separatedBy: ":")
             if let hour = Int(hourNMinute[0]), let minute = Int(hourNMinute[1]) {
-                return SimpleTimeBorder(hour, minute)
+                return SimpleTime(hour: hour, minute: minute)
             }
         }
         return nil
     }
     
     /// Convert operation end time string to hour and minute tuple
-    func getEndTime(at mealType: MealType) -> SimpleTimeBorder? {
+    func getEndTime(at mealType: MealType) -> SimpleTime? {
         if let str = operatingTimeStr(at: mealType) {
             let splited = str.components(separatedBy: "-")
             let endTimeStr = splited[1]
             let hourNMinute = endTimeStr.components(separatedBy: ":")
             if let hour = Int(hourNMinute[0]), let minute = Int(hourNMinute[1]) {
-                return SimpleTimeBorder(hour, minute)
+                return SimpleTime(hour: hour, minute: minute)
             }
         }
         return nil
