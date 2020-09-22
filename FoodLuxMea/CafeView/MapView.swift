@@ -23,7 +23,7 @@ struct MapView: View {
     var body: some View {
         VStack {
             HStack {
-                customNavigationBar(title: cafeInfo.name, subTitle: "위치 정보")
+                customNavigationBar(title: "위치 정보", subTitle: cafeInfo.name)
                 Spacer()
                 Button(action: { self.presentationMode.wrappedValue.dismiss()}) {
                     Text("닫기")
@@ -36,6 +36,7 @@ struct MapView: View {
             // Cafe location info in text.
             Text(cafePosition[self.cafeInfo.name] ?? "")
                 .font(.system(size: CGFloat(20), weight: .semibold, design: .default))
+                .centered()
                 .rowBackground()
             NaverMapProvider(cafeName: self.cafeInfo.name)
                 .edgesIgnoringSafeArea(.bottom)
@@ -47,12 +48,7 @@ struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         Text("Hello")
             .sheet(isPresented: .constant(true)) {
-                MapView(cafeInfo: Cafe(name: "3식당", phoneNum: "",
-                                       bkfMenuList: [],
-                                       lunchMenuList: [],
-                                       dinnerMenuList: []
-                                  )
-                )
+                MapView(cafeInfo: Cafe(name: "학생회관식당"))
             }
     }
 }

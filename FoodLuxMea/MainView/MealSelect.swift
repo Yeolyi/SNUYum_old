@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+enum MealButtonOptions {
+    case auto, breakfast, lunch, dinner
+}
+
 /// View with buttons to select meal type.
 struct MealSelect: View {
     @Environment(\.colorScheme) var colorScheme
@@ -20,28 +24,10 @@ struct MealSelect: View {
                 .padding(.leading)
             Spacer()
             HStack {
-                Group {
-                    MealTypeButton(buttonType: .breakfast)
-                    MealTypeButton(buttonType: .lunch)
-                    MealTypeButton(buttonType: .dinner)
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(
-                                settingManager.isAuto == true ? themeColor.title(colorScheme) : Color.clear
-                            )
-                            .opacity(0.2)
-                        Button(action: {self.settingManager.isAuto = true }) {
-                            Image(systemName: "arrow.clockwise.circle")
-                                .font(.system(size: 20, weight: .regular))
-                                .padding([.leading, .trailing], 2)
-                                .foregroundColor(
-                                    settingManager.isAuto == true ? themeColor.icon((colorScheme)) : Color(.systemFill)
-                                )
-                        }
-                        .buttonStyle(BorderlessButtonStyle())
-                    }
-                }
+                MealTypeButton(buttonType: .breakfast)
+                MealTypeButton(buttonType: .lunch)
+                MealTypeButton(buttonType: .dinner)
+                MealTypeButton(buttonType: .auto)
             }
         }
         .padding(5)
@@ -53,15 +39,18 @@ struct MealSelect: View {
 
 /// Single meal type button.
 struct MealTypeButton: View {
+    
+    let buttonType: MealButtonOptions
+    
+    let imageName: String
+    
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var settingManager: SettingManager
     var themeColor = ThemeColor()
-    var imageName: String = ""
-    @State var buttonType: MealType
     
     /// - Parameter buttonType: Select which meal type this button represents
-    init(buttonType: MealType) {
-        self._buttonType = State(initialValue: buttonType)
+    init(buttonType: MealButtonOptions) {
+        self.buttonType = buttonType
         switch buttonType {
         case .breakfast:
             imageName = "sunrise"
@@ -69,29 +58,56 @@ struct MealTypeButton: View {
             imageName = "sun.max"
         case .dinner:
             imageName = "sunset"
+        case.auto:
+            imageName = "arrow.clockwise.circle"
         }
     }
     
     var body: some View {
-        Button(action: {self.settingManager.mealViewMode = self.buttonType; self.settingManager.isAuto = false }) {
+        Button(action: { updateSetting() }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 40, height: 40)
                     .foregroundColor(
-                        settingManager.mealViewMode == buttonType && settingManager.isAuto == false ?
-                            themeColor.title(colorScheme) : Color.clear
+                        isSelected() ? themeColor.title(colorScheme) : Color.clear
                     )
                     .opacity(0.2)
                 Image(systemName: imageName)
                     .font(.system(size: 20, weight: .regular))
                     .padding([.leading, .trailing], 1)
                     .foregroundColor(
-                        settingManager.mealViewMode == buttonType && settingManager.isAuto == false ?
-                            themeColor.icon((colorScheme)) : Color(.systemFill)
+                        isSelected() ? themeColor.icon((colorScheme)) : Color(.systemFill)
                     )
             }
         }
         .buttonStyle(BorderlessButtonStyle())
+    }
+    
+    func updateSetting() {
+        switch buttonType {
+        case .auto:
+            settingManager.isAuto = true
+        case .breakfast:
+            settingManager.isAuto = false
+            settingManager.mealViewMode = .breakfast
+        case .lunch:
+            settingManager.isAuto = false
+            settingManager.mealViewMode = .lunch
+        case .dinner:
+            settingManager.isAuto = false
+            settingManager.mealViewMode = .dinner
+        }
+    }
+    
+    func isSelected() -> Bool {
+        if settingManager.isAuto && buttonType == .auto {
+            return true
+        } else if settingManager.isAuto == false && (
+            settingManager.mealViewMode == .breakfast && buttonType == .breakfast ||
+            settingManager.mealViewMode == .lunch && buttonType == .lunch ||
+            settingManager.mealViewMode == .dinner && buttonType == .dinner ) {
+            return true
+        } else { return false }
     }
 }
 
