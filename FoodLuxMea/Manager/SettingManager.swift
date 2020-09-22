@@ -13,114 +13,114 @@ import SwiftUI
 ///
 /// - ToDo: Make version compatible - solution to userdefault error
 class SettingManager: ObservableObject {
-  
-  /// Current meal view mode in main view; breakfast only, lunch only or dinner only.
-  ///
-  /// - Important: Overwritten when 'isAuto' is true!
-  ///
-  /// - Memo: 아 private으로 맞춰놓을걸;; meal 써야되는데 이거 써버림
-  @Published var mealViewMode: MealType = .lunch
-  
-  /// Turn on meal type suggestion.
-  @Published var isAuto: Bool = true
-  
-  /// Activate custom date which makes whole app uses fixed date.
-  @Published var isCustomDate: Bool = false
-  
-  /// Date variable used when isCustomDate is true.
-  @Published var debugDate: Date = Date()
-  
-  /// If true, filter empty cafes in list.
-  @Published var hideEmptyCafe: Bool = true
-  
-  /// Suggested meal type based on current setting time.
-  ///
-  /// - Important: Should be updated when setting time or timer cafe changes.
-  @Published var suggestedMeal: MealType = .lunch
-  
-  /// Tell if next day of setting day should be suggested.
-  ///
-  /// - Important: Should be updated when setting time or timer cafe changes.
-  @Published var isSuggestedTomorrow: Bool = false
-  
-  /// Main view timer cafe name; nil if timer is set to be hidden.
-  @Published var alimiCafeName: String? = "학생회관식당" 
-  
-  /// Array of string which means there is no menu.
-  var closedKeywords = ["방학중휴점", "폐    점", "코로나19", "방학중 휴무", "당분간 폐점", "폐  점", "폐   점"]
-  
-  /// Final cafe date considering custom date and date suggestion.
-  var date: Date {
-    let date = isCustomDate ? debugDate : Date()
-    if isSuggestedTomorrow {
-      var dayComponent    = DateComponents()
-      dayComponent.day    = 1
-      let theCalendar     = Calendar.current
-      return theCalendar.date(byAdding: dayComponent, to: date)!
-    } else {
-      return date
+    
+    /// Current meal view mode in main view; breakfast only, lunch only or dinner only.
+    ///
+    /// - Important: Overwritten when 'isAuto' is true!
+    ///
+    /// - Memo: 아 private으로 맞춰놓을걸;; meal 써야되는데 이거 써버림
+    @Published var mealViewMode: MealType = .lunch
+    
+    /// Turn on meal type suggestion.
+    @Published var isAuto: Bool = true
+    
+    /// Activate custom date which makes whole app uses fixed date.
+    @Published var isCustomDate: Bool = false
+    
+    /// Date variable used when isCustomDate is true.
+    @Published var debugDate: Date = Date()
+    
+    /// If true, filter empty cafes in list.
+    @Published var hideEmptyCafe: Bool = true
+    
+    /// Suggested meal type based on current setting time.
+    ///
+    /// - Important: Should be updated when setting time or timer cafe changes.
+    @Published var suggestedMeal: MealType = .lunch
+    
+    /// Tell if next day of setting day should be suggested.
+    ///
+    /// - Important: Should be updated when setting time or timer cafe changes.
+    @Published var isSuggestedTomorrow: Bool = false
+    
+    /// Main view timer cafe name; nil if timer is set to be hidden.
+    @Published var alimiCafeName: String? = "학생회관식당" 
+    
+    /// Array of string which means there is no menu.
+    var closedKeywords = ["방학중휴점", "폐    점", "코로나19", "방학중 휴무", "당분간 폐점", "폐  점", "폐   점"]
+    
+    /// Final cafe date considering custom date and date suggestion.
+    var date: Date {
+        let date = isCustomDate ? debugDate : Date()
+        if isSuggestedTomorrow {
+            var dayComponent    = DateComponents()
+            dayComponent.day    = 1
+            let theCalendar     = Calendar.current
+            return theCalendar.date(byAdding: dayComponent, to: date)!
+        } else {
+            return date
+        }
     }
-  }
-  
-  /// Final meal type considering isAuto.
-  var meal: MealType {
-    isAuto ? suggestedMeal : mealViewMode
-  }
-  
-  /// If setting data is stored, retrieve it
-  ///
-  /// - Note: If it's app's first run, save default value and return.
-  init() {
-    func strToDate(_ str: String) -> Date {
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-      return dateFormatter.date(from: str) ?? Date()
+    
+    /// Final meal type considering isAuto.
+    var meal: MealType {
+        isAuto ? suggestedMeal : mealViewMode
     }
-    if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
-      let settingInitialized = userDefaults.bool(forKey: "firstRun")
-      if settingInitialized == false {
-        print("Setting first initializing, quitting init now.")
-        userDefaults.set(true, forKey: "firstRun")
-        return
-      }
-      if let storedMealViewMode = MealType(rawValue: userDefaults.string(forKey: "mealViewMode") ?? "점심") {
-        mealViewMode = storedMealViewMode
-      }
-      if let storedStrToDate = userDefaults.string(forKey: "debugDate") {
-        debugDate = strToDate(storedStrToDate)
-      }
-      alimiCafeName = userDefaults.string(forKey: "timerCafeName")
-      isAuto = userDefaults.bool(forKey: "isAuto")
-      isCustomDate = userDefaults.bool(forKey: "isDebug")
-      hideEmptyCafe = userDefaults.bool(forKey: "isHide")
-      print("SettingManager/init(): 설정값을 불러왔습니다.")
-    } else {
-      assertionFailure("SettingManager/init(): UserDefault를 불러오지 못했습니다.")
+    
+    /// If setting data is stored, retrieve it
+    ///
+    /// - Note: If it's app's first run, save default value and return.
+    init() {
+        func strToDate(_ str: String) -> Date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+            return dateFormatter.date(from: str) ?? Date()
+        }
+        if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
+            let settingInitialized = userDefaults.bool(forKey: "firstRun")
+            if settingInitialized == false {
+                print("Setting first initializing, quitting init now.")
+                userDefaults.set(true, forKey: "firstRun")
+                return
+            }
+            if let storedMealViewMode = MealType(rawValue: userDefaults.string(forKey: "mealViewMode") ?? "점심") {
+                mealViewMode = storedMealViewMode
+            }
+            if let storedStrToDate = userDefaults.string(forKey: "debugDate") {
+                debugDate = strToDate(storedStrToDate)
+            }
+            alimiCafeName = userDefaults.string(forKey: "timerCafeName")
+            isAuto = userDefaults.bool(forKey: "isAuto")
+            isCustomDate = userDefaults.bool(forKey: "isDebug")
+            hideEmptyCafe = userDefaults.bool(forKey: "isHide")
+            print("SettingManager/init(): 설정값을 불러왔습니다.")
+        } else {
+            assertionFailure("SettingManager/init(): UserDefault를 불러오지 못했습니다.")
+        }
     }
-  }
-  
-  func save() {
-    func dateToStr(_ date: Date) -> String {
-      let df = DateFormatter()
-      df.dateFormat = "dd/MM/yyyy HH:mm"
-      return df.string(from: date)
+    
+    func save() {
+        func dateToStr(_ date: Date) -> String {
+            let df = DateFormatter()
+            df.dateFormat = "dd/MM/yyyy HH:mm"
+            return df.string(from: date)
+        }
+        if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
+            userDefault.set(mealViewMode.rawValue as String, forKey: "mealViewMode")
+            userDefault.set(isAuto as Bool, forKey: "isAuto")
+            userDefault.set(isCustomDate as Bool, forKey: "isDebug")
+            userDefault.set(hideEmptyCafe as Bool, forKey: "isHide")
+            userDefault.set(dateToStr(debugDate) as String, forKey: "debugDate")
+            userDefault.set(alimiCafeName as String?, forKey: "timerCafeName")
+            print("SettingManaver/save(): 세팅 저장됨")
+        } else {
+            print("세팅 저장 안됨")
+        }
     }
-    if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
-      userDefault.set(mealViewMode.rawValue as String, forKey: "mealViewMode")
-      userDefault.set(isAuto as Bool, forKey: "isAuto")
-      userDefault.set(isCustomDate as Bool, forKey: "isDebug")
-      userDefault.set(hideEmptyCafe as Bool, forKey: "isHide")
-      userDefault.set(dateToStr(debugDate) as String, forKey: "debugDate")
-      userDefault.set(alimiCafeName as String?, forKey: "timerCafeName")
-      print("SettingManaver/save(): 세팅 저장됨")
-    } else {
-      print("세팅 저장 안됨")
+    
+    /// Update setting if timer cafe changes. 
+    func update() {
+        (isSuggestedTomorrow, suggestedMeal) = MenuSuggestion.properMenu(at: date, cafeName: alimiCafeName ?? "3식당")
+        print("SettingManager/update(date: ): 추천값 업데이트 완료")
     }
-  }
-  
-  /// Update setting if timer cafe changes. 
-  func update() {
-    (isSuggestedTomorrow, suggestedMeal) = MenuSuggestion.properMenu(at: date, cafeName: alimiCafeName ?? "3식당")
-    print("SettingManager/update(date: ): 추천값 업데이트 완료")
-  }
 }
