@@ -88,7 +88,7 @@ struct ContentView: View {
                     .zIndex(2) // Priorize setting view to main view
             }
         }
-        .alert(isPresented: .constant(!isInternetConnected)) {
+        .alert(isPresented: .constant(!RuntimeManager.isInternetConnected)) {
             Alert(
                 title: Text("인터넷이 연결되지 않았어요"),
                 message: Text("저장된 식단은 볼 수 있지만 \n 기능이 제한될 수 있어요"),

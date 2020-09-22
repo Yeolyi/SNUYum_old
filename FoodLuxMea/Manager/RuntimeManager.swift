@@ -1,0 +1,52 @@
+//
+//  RuntimeManager.swift
+//  FoodLuxMea
+//
+//  Created by Seong Yeol Yi on 2020/09/23.
+//
+
+import SwiftUI
+import Network
+
+class RuntimeManager {
+    
+    private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+    private let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+    
+    static var isInternetConnected = false
+    
+    static var isFirstVersionRun = false
+    
+    let monitor = NWPathMonitor()
+    
+    init() {
+        
+        if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
+            userDefault.removeObject(forKey: "1.1firstRun")
+            let storedAppVersion = userDefault.string(forKey: "appVersion") ?? ""
+            let storedBuild = userDefault.string(forKey: "build") ?? ""
+            if storedAppVersion != appVersion || storedBuild != build {
+                print("Version first run TRUE.")
+                RuntimeManager.isFirstVersionRun = true
+                userDefault.set(appVersion as String, forKey: "appVersion")
+                userDefault.set(build as String, forKey: "build")
+            } else {
+                RuntimeManager.isFirstVersionRun = false
+                print("Version first run FALSE.")
+            }
+        }
+        
+        // Update variable isInternetConnected using Network framework
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                RuntimeManager.isInternetConnected = true
+                print("인터넷 연결됨")
+            } else {
+                RuntimeManager.isInternetConnected = false
+                print("인터넷 연결되지 않음")
+            }
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
+}

@@ -27,7 +27,7 @@ class DataManager: ObservableObject {
      - Important: If data managing algorithm changes, existing data should be deleted and reloaded
      */
     init() {
-        if isFirstVersionRun {
+        if RuntimeManager.isFirstVersionRun {
             if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
                 userDefault.removeObject(forKey: "cafeData")
                 print("Cafe data cleared.")
@@ -73,7 +73,7 @@ class DataManager: ObservableObject {
         if let data = cafeData[uRLString] {
             return data
         } else {
-            if isInternetConnected {
+            if RuntimeManager.isInternetConnected {
                 print("Downloading cafe data at \(date)")
                 let newData =
                     SNUCOManager.download(at: date) +
@@ -98,7 +98,7 @@ class DataManager: ObservableObject {
         if let data = cafeData[uRLString] {
             return data.first { $0.name == name }
         } else {
-            if isInternetConnected {
+            if RuntimeManager.isInternetConnected {
                 print("CafeDataManager.getData(at: name: ): 다운로드 중, \(uRLString)")
                 let newData = self.loadAll(at: date)
                 cafeData[uRLString] = newData

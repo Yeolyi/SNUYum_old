@@ -7,22 +7,17 @@
 
 import UIKit
 import SwiftUI
-import Network
-
-var isInternetConnected = false
-var isFirstVersionRun = false
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    let versionChecker = VersionChecker()
+    let runtimeManager = RuntimeManager()
     //Initialize essential manager class.
     let listManager = ListManager()
     let dataManager = DataManager()
     let contentView = ContentView()
     let settingManager = SettingManager()
-    let monitor = NWPathMonitor()
     
     func scene(
         _ scene: UIScene,
@@ -36,19 +31,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // (see `application:configurationForConnectingSceneSession` instead).
         
         // Create the SwiftUI view that provides the window contents.
-        
-        // Update variable isInternetConnected using Network framework
-        monitor.pathUpdateHandler = { path in
-            if path.status == .satisfied {
-                isInternetConnected = true
-                print("인터넷 연결됨")
-            } else {
-                isInternetConnected = false
-                print("인터넷 연결되지 않음")
-            }
-        }
-        let queue = DispatchQueue(label: "Monitor")
-        monitor.start(queue: queue)
         
         // As essential class is now initialized, mark that it is no longer first run.
         if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {

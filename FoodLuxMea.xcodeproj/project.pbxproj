@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2500739624F54A37009A32FA /* SettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2500739524F54A37009A32FA /* SettingManager.swift */; };
 		250ADF5B251A719F008D83B8 /* NavigationBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250ADF5A251A719F008D83B8 /* NavigationBackground.swift */; };
+		250ADF5E251A8701008D83B8 /* RuntimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250ADF5D251A8701008D83B8 /* RuntimeManager.swift */; };
 		250BBBDA24F3F8F900FC0C84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 250BBBD924F3F8F900FC0C84 /* Assets.xcassets */; };
 		250BBBDD24F3F8F900FC0C84 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 250BBBDC24F3F8F900FC0C84 /* Preview Assets.xcassets */; };
 		250BBBE024F3F8F900FC0C84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250BBBDE24F3F8F900FC0C84 /* LaunchScreen.storyboard */; };
@@ -31,7 +32,6 @@
 		250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */; };
 		252B96AC2517ADBC000475C6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 252B96AB2517ADBC000475C6 /* .swiftlint.yml */; };
 		25340D5F251395CC00E7FA7A /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25340D5E251395CC00E7FA7A /* Cafe.swift */; };
-		254441D72517EFE6003EA606 /* VersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254441D62517EFE6003EA606 /* VersionManager.swift */; };
 		2549427224F505730049F32E /* SimpleToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2549427124F505730049F32E /* SimpleToggle.swift */; };
 		255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */; };
 		25647B6F24F9FFC900E1C3F0 /* FixedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25647B6E24F9FFC900E1C3F0 /* FixedData.swift */; };
@@ -71,6 +71,7 @@
 /* Begin PBXFileReference section */
 		2500739524F54A37009A32FA /* SettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManager.swift; sourceTree = "<group>"; };
 		250ADF5A251A719F008D83B8 /* NavigationBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackground.swift; sourceTree = "<group>"; };
+		250ADF5D251A8701008D83B8 /* RuntimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeManager.swift; sourceTree = "<group>"; };
 		250BBBD024F3F8F700FC0C84 /* FoodLuxMea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodLuxMea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		250BBBD924F3F8F900FC0C84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		250BBBDC24F3F8F900FC0C84 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -96,7 +97,6 @@
 		250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealSelect.swift; sourceTree = "<group>"; };
 		252B96AB2517ADBC000475C6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		25340D5E251395CC00E7FA7A /* Cafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cafe.swift; sourceTree = "<group>"; };
-		254441D62517EFE6003EA606 /* VersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionManager.swift; sourceTree = "<group>"; };
 		2549427124F505730049F32E /* SimpleToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleToggle.swift; sourceTree = "<group>"; };
 		255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparency.swift; sourceTree = "<group>"; };
 		25647B6E24F9FFC900E1C3F0 /* FixedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedData.swift; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 				2500739524F54A37009A32FA /* SettingManager.swift */,
 				250BBBEA24F3F92D00FC0C84 /* MenuSuggestion.swift */,
 				250BBBE924F3F92D00FC0C84 /* ListManager+.swift */,
-				254441D62517EFE6003EA606 /* VersionManager.swift */,
+				250ADF5D251A8701008D83B8 /* RuntimeManager.swift */,
 				25340D64251396D000E7FA7A /* BasicStructs */,
 				2510CEDB24FF6386007ACE79 /* Data */,
 			);
@@ -501,8 +501,8 @@
 				2593233024FAE8310036C148 /* CafeRowsFiltered.swift in Sources */,
 				259B889524F68B6F001C710C /* GADBannerViewController.swift in Sources */,
 				250ADF5B251A719F008D83B8 /* NavigationBackground.swift in Sources */,
-				254441D72517EFE6003EA606 /* VersionManager.swift in Sources */,
 				250BBC2924F3FAC800FC0C84 /* CafeView+.swift in Sources */,
+				250ADF5E251A8701008D83B8 /* RuntimeManager.swift in Sources */,
 				250BBC1F24F3FAC800FC0C84 /* ListOrderSettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -653,7 +653,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodLuxMea/Preview Content\"";
 				DEVELOPMENT_TEAM = 4954Z45396;
 				ENABLE_ONLY_ACTIVE_RESOURCES = YES;
@@ -666,7 +666,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -689,7 +689,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodLuxMea/Preview Content\"";
 				DEVELOPMENT_TEAM = 4954Z45396;
 				ENABLE_ONLY_ACTIVE_RESOURCES = YES;
@@ -701,7 +701,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea;
 				PRODUCT_NAME = "$(TARGET_NAME)";
