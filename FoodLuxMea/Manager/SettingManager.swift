@@ -36,7 +36,7 @@ class SettingManager: ObservableObject {
     /// Suggested meal type based on current setting time.
     ///
     /// - Important: Should be updated when setting time or timer cafe changes.
-    @Published var suggestedMeal: MealType = .lunch
+    @Pubrlished var suggestedMeal: MealType = .lunch
     
     /// Tell if next day of setting day should be suggested.
     ///
@@ -51,15 +51,14 @@ class SettingManager: ObservableObject {
     
     /// Final cafe date considering custom date and date suggestion.
     var date: Date {
-        let date = isCustomDate ? debugDate : Date()
+        var date = isCustomDate ? debugDate : Date()
         if isSuggestedTomorrow {
             var dayComponent    = DateComponents()
             dayComponent.day    = 1
             let theCalendar     = Calendar.current
-            return theCalendar.date(byAdding: dayComponent, to: date)!
-        } else {
-            return date
+            date = theCalendar.date(byAdding: dayComponent, to: date)!
         }
+        return date
     }
     
     /// Final meal type considering isAuto.
@@ -71,11 +70,6 @@ class SettingManager: ObservableObject {
     ///
     /// - Note: If it's app's first run, save default value and return.
     init() {
-        func strToDate(_ str: String) -> Date {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-            return dateFormatter.date(from: str) ?? Date()
-        }
         if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
             let settingInitialized = userDefaults.bool(forKey: "firstRun")
             if settingInitialized == false {
@@ -86,12 +80,8 @@ class SettingManager: ObservableObject {
             if let storedMealViewMode = MealType(rawValue: userDefaults.string(forKey: "mealViewMode") ?? "점심") {
                 mealViewMode = storedMealViewMode
             }
-            if let storedStrToDate = userDefaults.string(forKey: "debugDate") {
-                debugDate = strToDate(storedStrToDate)
-            }
             alimiCafeName = userDefaults.string(forKey: "timerCafeName")
             isAuto = userDefaults.bool(forKey: "isAuto")
-            isCustomDate = userDefaults.bool(forKey: "isDebug")
             hideEmptyCafe = userDefaults.bool(forKey: "isHide")
             print("SettingManager/init(): 설정값을 불러왔습니다.")
         } else {
@@ -100,17 +90,10 @@ class SettingManager: ObservableObject {
     }
     
     func save() {
-        func dateToStr(_ date: Date) -> String {
-            let df = DateFormatter()
-            df.dateFormat = "dd/MM/yyyy HH:mm"
-            return df.string(from: date)
-        }
         if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
             userDefault.set(mealViewMode.rawValue as String, forKey: "mealViewMode")
             userDefault.set(isAuto as Bool, forKey: "isAuto")
-            userDefault.set(isCustomDate as Bool, forKey: "isDebug")
             userDefault.set(hideEmptyCafe as Bool, forKey: "isHide")
-            userDefault.set(dateToStr(debugDate) as String, forKey: "debugDate")
             userDefault.set(alimiCafeName as String?, forKey: "timerCafeName")
             print("SettingManaver/save(): 세팅 저장됨")
         } else {

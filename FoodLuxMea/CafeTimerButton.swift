@@ -8,6 +8,9 @@
 import SwiftUI
 
 /// Shows remaining cafe operating hours.
+///
+/// - Note: Must use suggestedDate and suggestedMeal propery of SettingManager, because Timer always based on suggested
+/// time and meal.
 struct CafeTimerButton: View {
     
     let cafe: Cafe
@@ -60,15 +63,14 @@ struct CafeTimerButton: View {
         if let endDate =
             cafeOperatingHour[cafe.name]?.daily(
                 at: settingManager.date)?.endTime(at: settingManager.suggestedMeal) {
+            // If menu exists in next meal.
             if !cafe.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords) {
-                let startTime =
-                    cafeOperatingHour[cafe.name]!
-                    .daily(at: settingManager.date)!
+                // Force unwrap is available becaufe startDate and endDate are always together.
+                let startTime = cafeOperatingHour[cafe.name]!.daily(at: settingManager.date)!
                     .startTime(at: settingManager.suggestedMeal)!
-                
                 if currentSimpleTime.hour < 5 || currentSimpleTime.hour > endDate.hour {
                     return "영업 종료🌙"
-                } else if currentSimpleTime < startTime { //시작시간 전
+                } else if currentSimpleTime < startTime {
                     return
                         "\(settingManager.isSuggestedTomorrow ? "내일" : "오늘")" +
                     " \(settingManager.suggestedMeal.rawValue)밥 준비중!"
@@ -76,6 +78,7 @@ struct CafeTimerButton: View {
                     let time = remainTime(from: SimpleTime(date: settingManager.date), to: endDate)
                     return "\(settingManager.suggestedMeal.rawValue) 마감까지 \(time.hour)시간 \(time.minute)분!"
                 }
+            // If menu not exists in next meal.
             } else {
                 return "\(settingManager.suggestedMeal.rawValue) 메뉴가 없어요."
             }
@@ -100,9 +103,8 @@ struct CafeTimerButton: View {
         let date1 = getDate(from: simpleDate1)
         let date2 = getDate(from: simpleDate2)
         let diffComponents = Calendar.current.dateComponents([.hour, .minute], from: date1, to: date2)
-        return SimpleTime(hour: diffComponents.hour!, minute: diffComponents.minute!)
+        return SimpleTime(date: diffComponents)
     }
-
 }
 
 struct CafeTimerText_Previews: PreviewProvider {
