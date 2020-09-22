@@ -34,20 +34,32 @@ enum MealType: String, Codable {
 struct Menu: Hashable, Codable, Identifiable {
     var id = UUID()
     let name: String
-    let cost: Int
+    let cost: Int?
     
     /**
      Creates an menu struct.
      
      - Parameter cost: Defult value is -1.
      */
-    init(name: String, cost: Int = -1) {
+    init(name: String, cost: Int? = nil) {
         self.name = name
-        guard cost >= 0 || cost == -1 else {
-            assertionFailure("Menu/init: Inappropriate cost value - \(cost)")
-            self.cost = -1
-            return
-        }
         self.cost = cost
+    }
+    
+    /**
+     Interpret cost value to adequate string.
+     
+     - ToDo: Search appropriate class to place this function.
+     */
+    func costInterpret() -> String {
+        if let cost = cost {
+            if (cost - 10) % 100 == 0 {
+                return String(cost - 10) + "원부터"
+            } else {
+                return String(cost) + "원"
+            }
+        } else {
+            return ""
+        }
     }
 }

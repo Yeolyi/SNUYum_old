@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2500739624F54A37009A32FA /* SettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2500739524F54A37009A32FA /* SettingManager.swift */; };
+		250ADF5B251A719F008D83B8 /* NavigationBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250ADF5A251A719F008D83B8 /* NavigationBackground.swift */; };
 		250BBBDA24F3F8F900FC0C84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 250BBBD924F3F8F900FC0C84 /* Assets.xcassets */; };
 		250BBBDD24F3F8F900FC0C84 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 250BBBDC24F3F8F900FC0C84 /* Preview Assets.xcassets */; };
 		250BBBE024F3F8F900FC0C84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250BBBDE24F3F8F900FC0C84 /* LaunchScreen.storyboard */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		2500739524F54A37009A32FA /* SettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManager.swift; sourceTree = "<group>"; };
+		250ADF5A251A719F008D83B8 /* NavigationBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackground.swift; sourceTree = "<group>"; };
 		250BBBD024F3F8F700FC0C84 /* FoodLuxMea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodLuxMea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		250BBBD924F3F8F900FC0C84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		250BBBDC24F3F8F900FC0C84 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				25A627952513BB5000313CD3 /* CustomNavigationBar.swift */,
 				2549427124F505730049F32E /* SimpleToggle.swift */,
 				25AE49E0251A12C600D4CB55 /* CenterModifier.swift */,
+				250ADF5A251A719F008D83B8 /* NavigationBackground.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */,
 				2593233024FAE8310036C148 /* CafeRowsFiltered.swift in Sources */,
 				259B889524F68B6F001C710C /* GADBannerViewController.swift in Sources */,
+				250ADF5B251A719F008D83B8 /* NavigationBackground.swift in Sources */,
 				254441D72517EFE6003EA606 /* VersionManager.swift in Sources */,
 				250BBC2924F3FAC800FC0C84 /* CafeView+.swift in Sources */,
 				250BBC1F24F3FAC800FC0C84 /* ListOrderSettingView.swift in Sources */,

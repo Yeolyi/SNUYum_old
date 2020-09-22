@@ -52,7 +52,7 @@ struct CafeRow: View {
                                     .lineLimit(1)
                                     .foregroundColor(Color(.label))
                                 Spacer()
-                                Text(self.costInterpret(menu.cost))
+                                Text(menu.costInterpret())
                                     .font(.system(size: 15))
                                     .padding(.trailing, 10)
                                     .foregroundColor(Color(.secondaryLabel))
@@ -84,7 +84,32 @@ struct CafeRow: View {
     }
     
     func searchResult(at mealType: MealType) -> AnyView {
-        AnyView(
+        
+        func highlight(text: String, target: String) -> Text {
+            var colorSet: Set<Int> = []
+            if let range = text.range(of: target) {
+                let index: Int = text.distance(from: text.startIndex, to: range.lowerBound)
+                for i in 0..<searchText.count {
+                    colorSet.insert(index + i)
+                }
+                
+                var tempView: Text = .init("")
+                
+                func getView(cnt: Int) -> Text {
+                    if cnt == text.count {
+                        return tempView
+                    }
+                    tempView = tempView +
+                        (Text(String(text[text.index(text.startIndex, offsetBy: cnt)]))
+                            .foregroundColor(colorSet.contains(cnt) ? .primary : .secondary))
+                    return getView(cnt: cnt + 1)
+                }
+                
+                return getView(cnt: 0)
+            } else { return Text(text) }
+        }
+        
+        return AnyView(
             VStack {
                 HStack {
                     Text(mealType.rawValue)
@@ -95,12 +120,12 @@ struct CafeRow: View {
                 }
                 ForEach(cafe.menus(at: mealType).filter { $0.name.contains(searchText) }) { menu in
                     HStack {
-                        self.highlight(text: menu.name, target: self.searchText)
+                        highlight(text: menu.name, target: self.searchText)
                             .font(.system(size: 15))
                             .fixedSize(horizontal: false, vertical: true)
                             .lineLimit(nil)
                         Spacer()
-                        Text(self.costInterpret(menu.cost))
+                        Text(menu.costInterpret())
                             .font(.system(size: 15))
                             .padding(.trailing, 10)
                             .foregroundColor(Color(.secondaryLabel))
@@ -108,45 +133,6 @@ struct CafeRow: View {
                 }
             }
         )
-    }
-    
-    func highlight(text: String, target: String) -> Text {
-        var colorSet: Set<Int> = []
-        if let range = text.range(of: target) {
-            let index: Int = text.distance(from: text.startIndex, to: range.lowerBound)
-            for i in 0..<searchText.count {
-                colorSet.insert(index + i)
-            }
-            
-            var tempView: Text = .init("")
-            
-            func getView(cnt: Int) -> Text {
-                if cnt == text.count {
-                    return tempView
-                }
-                tempView = tempView +
-                    (Text(String(text[text.index(text.startIndex, offsetBy: cnt)]))
-                        .foregroundColor(colorSet.contains(cnt) ? .primary : .secondary))
-                return getView(cnt: cnt + 1)
-            }
-            
-            return getView(cnt: 0)
-        } else { return Text(text) }
-    }
-    
-    /**
-     Interpret cost value to adequate string.
-     
-     - ToDo: Search appropriate class to place this function.
-     */
-    func costInterpret(_ cost: Int) -> String {
-        if cost == -1 {
-            return ""
-        } else if (cost - 10) % 100 == 0 {
-            return String(cost - 10) + "원 부터"
-        } else {
-            return String(cost) + "원"
-        }
     }
 }
 

@@ -31,6 +31,7 @@ class DataManager: ObservableObject {
             if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
                 userDefault.removeObject(forKey: "cafeData")
                 print("Cafe data cleared.")
+                return
             }
         }
         if let loadedData =
@@ -41,6 +42,15 @@ class DataManager: ObservableObject {
             } catch {
                 print("DataManager load failed.")
             }
+        }
+    }
+    
+    func clear() {
+        cafeData = [:]
+        if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
+            userDefault.removeObject(forKey: "cafeData")
+            print("Cafe data cleared.")
+            return
         }
     }
     

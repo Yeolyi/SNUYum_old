@@ -41,7 +41,6 @@ struct MealSelect: View {
 struct MealTypeButton: View {
     
     let buttonType: MealButtonOptions
-    
     let imageName: String
     
     @Environment(\.colorScheme) var colorScheme
@@ -64,14 +63,22 @@ struct MealTypeButton: View {
     }
     
     var body: some View {
-        Button(action: { updateSetting() }) {
+        Button(action: {
+            withAnimation {
+                updateSetting()
+            }
+        }) {
             ZStack {
+                if isSelected() {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 40, height: 40)
-                    .foregroundColor(
-                        isSelected() ? themeColor.title(colorScheme) : Color.clear
-                    )
+                    .foregroundColor(themeColor.title(colorScheme))
                     .opacity(0.2)
+                    .transition(.scale)
+                }
+                RoundedRectangle(cornerRadius: 10)
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.clear)
                 Image(systemName: imageName)
                     .font(.system(size: 20, weight: .regular))
                     .padding([.leading, .trailing], 1)

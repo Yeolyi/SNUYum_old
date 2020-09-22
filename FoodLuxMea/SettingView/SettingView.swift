@@ -19,13 +19,6 @@ enum ActiveSheet: Identifiable {
 
 struct SettingView: View {
     
-    @Environment(\.colorScheme) var colorScheme
-    
-    @EnvironmentObject var listManager: ListManager
-    @EnvironmentObject var dataManager: DataManager
-    @EnvironmentObject var settingManager: SettingManager
-    let themeColor = ThemeColor()
-    
     @Binding var isPresented: Bool {
         willSet {
             listManager.update(newCafeList: dataManager.loadAll(at: self.settingManager.date))
@@ -33,6 +26,14 @@ struct SettingView: View {
         }
     }
     @State var activeSheet: ActiveSheet?
+    @State var isClearedAlert: Bool = false
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    @EnvironmentObject var listManager: ListManager
+    @EnvironmentObject var dataManager: DataManager
+    @EnvironmentObject var settingManager: SettingManager
+    let themeColor = ThemeColor()
     
     /// - Parameter isPresented: Pass main view to show current view or not.
     init(isPresented: Binding<Bool>) {
@@ -121,6 +122,15 @@ struct SettingView: View {
                         DatePicker(selection: $settingManager.debugDate, label: { EmptyView() })
                             .rowBackground()
                             .accentColor(themeColor.title(colorScheme))
+                    }
+                    HStack {
+                        Text("저장된 식단들 삭제")
+                        Spacer()
+                    }
+                    .rowBackground()
+                    .onTapGesture {
+                        dataManager.clear()
+                        isClearedAlert.toggle()
                     }
                     // Info
                     Text("정보")

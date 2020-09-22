@@ -32,7 +32,7 @@ struct ContentView: View {
                             Text("스누냠")
                                 .font(.system(size: CGFloat(18), weight: .bold))
                                 .foregroundColor(.secondary)
-                            Text("식단 바로보기")
+                            Text(searchWord == "" ? "식단 바로보기" : "식단 검색")
                                 .font(.system(size: CGFloat(25), weight: .bold))
                         }
                         .padding([.leading, .top])
@@ -115,5 +115,6 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(listManager)
             .environmentObject(dataManager)
             .environmentObject(settingManager)
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
     }
 }

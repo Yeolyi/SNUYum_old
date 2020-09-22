@@ -11,8 +11,8 @@ import GoogleMobileAds
 /// Show single Cafe struct's information.
 struct CafeView: View {
     
-    @State var cafeInfo: Cafe
-    @State var isMapView = false
+    @State var cafe: Cafe
+    @State var isMapSheet = false
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
@@ -23,7 +23,7 @@ struct CafeView: View {
     
     /// - Parameter cafeInfo: Cafe data to show in this view.
     init(cafeInfo: Cafe) {
-        self._cafeInfo = State(initialValue: cafeInfo)
+        self._cafe = State(initialValue: cafeInfo)
     }
     
     var body: some View {
@@ -34,16 +34,16 @@ struct CafeView: View {
                     Text("식단 자세히 보기")
                         .font(.system(size: CGFloat(18), weight: .bold))
                         .foregroundColor(.secondary)
-                    Text(cafeInfo.name)
+                    Text(cafe.name)
                         .font(.system(size: CGFloat(25), weight: .bold))
                 }
                 .padding([.leading, .top])
                 Spacer()
                 Button(action: {
-                    _ = self.cafeList.toggleFixed(cafeName: self.cafeInfo.name)
+                    _ = self.cafeList.toggleFixed(cafeName: self.cafe.name)
                 }) {
-                    Image(systemName: cafeList.isFixed(cafeName: self.cafeInfo.name) ? "pin" : "pin.slash")
-                        .font(.system(size: 25, weight: .light))
+                    Image(systemName: cafeList.isFixed(cafeName: self.cafe.name) ? "pin" : "pin.slash")
+                        .font(.system(size: 25, weight: .semibold))
                         .foregroundColor(themeColor.icon(colorScheme))
                         .offset(y: 10)
                 }
@@ -60,15 +60,15 @@ struct CafeView: View {
             ScrollView {
                 Text("안내")
                     .sectionText()
-                CafeTimerButton(of: cafeInfo, isInMainView: false)
-                mealSection(mealType: .breakfast, menus: cafeInfo.menus(at: .breakfast))
-                mealSection(mealType: .lunch, menus: cafeInfo.menus(at: .lunch))
-                mealSection(mealType: .dinner, menus: cafeInfo.menus(at: .dinner))
+                CafeTimerButton(of: cafe, isInMainView: false)
+                MealSection(cafe: cafe, mealType: .breakfast)
+                MealSection(cafe: cafe, mealType: .lunch)
+                MealSection(cafe: cafe, mealType: .dinner)
                 // MARK: - Cafe information with phone call and map view.
                 Text("식당 정보")
                     .sectionText()
                 VStack {
-                    Text(cafeDescription[cafeInfo.name] ?? "정보 없음")
+                    Text(cafeDescription[cafe.name] ?? "정보 없음")
                         .font(.system(size: 16))
                         .fixedSize(horizontal: false, vertical: true)
                         .padding()
@@ -87,7 +87,7 @@ struct CafeView: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                             let telephone = "tel://02-"
-                            let formattedString = telephone + self.cafeInfo.phoneNum
+                            let formattedString = telephone + self.cafe.phoneNum
                             guard let url = URL(string: formattedString) else { return }
                             UIApplication.shared.open(url)
                         }
@@ -105,7 +105,7 @@ struct CafeView: View {
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            self.isMapView = true
+                            self.isMapSheet = true
                         }
                     }
                 }
@@ -116,31 +116,41 @@ struct CafeView: View {
             GADBannerViewController()
                 .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
         }
-        .sheet(isPresented: $isMapView) {
-            MapView(cafeInfo: self.cafeInfo)
+        .sheet(isPresented: $isMapSheet) {
+            MapView(cafeInfo: self.cafe)
                 .environmentObject(self.themeColor)
         }
     }
+}
+
+/**
+ Single meal information section.
+ 
+ - Parameters:
+ - mealType: Determines which data to show.
+ - mealMenus: Data to show.
+ */
+struct MealSection: View {
     
-    /**
-     Single meal information section.
-     
-     - Parameters:
-     - mealType: Determines which data to show.
-     - mealMenus: Data to show.
-     */
-    func mealSection(mealType: MealType, menus: [Menu]) -> AnyView {
-        if menus.isEmpty == false {
-            return AnyView(
+    let cafe: Cafe
+    let mealType: MealType
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    @EnvironmentObject var settingManager: SettingManager
+    let themeColor = ThemeColor()
+    
+    var body: some View {
+        if cafe.menus(at: mealType).isEmpty == false {
                 VStack {
                     Text(
                         mealType.rawValue + " (" +
-                            (cafeOperatingHour[cafeInfo.name]?.daily(at: settingManager.date)?
+                            (cafeOperatingHour[cafe.name]?.daily(at: settingManager.date)?
                                 .rawValue(at: mealType) ?? "시간 정보 없음")
                             + ")"
                     )
                     .sectionText()
-                    ForEach(menus) { menu in
+                    ForEach(cafe.menus(at: mealType)) { menu in
                         HStack {
                             Text(menu.name)
                                 .accentedText()
@@ -150,7 +160,7 @@ struct CafeView: View {
                                     print(menu.name)
                                 }
                             Spacer()
-                            Text(self.costInterpret(menu.cost))
+                            Text(menu.costInterpret())
                                 .foregroundColor(Color(.gray))
                         }
                         .onTapGesture {
@@ -159,22 +169,6 @@ struct CafeView: View {
                         .rowBackground()
                     }
                 }
-            )
-        } else { return AnyView(EmptyView()) }
-    }
-    
-    /**
-     Interpret cost value to adequate string.
-     
-     - ToDo: Search appropriate class to place this function.
-     */
-    func costInterpret(_ cost: Int) -> String {
-        if cost == -1 {
-            return ""
-        } else if (cost - 10) % 100 == 0 {
-            return String(cost - 10) + "원 부터"
-        } else {
-            return String(cost) + "원"
         }
     }
 }

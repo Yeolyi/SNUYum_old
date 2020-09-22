@@ -112,8 +112,8 @@ struct SNUCOManager {
             return str.trimmingCharacters(in: .whitespacesAndNewlines)
         }
         /// Delete all characters in string except decimal.
-        func decimalTrimInverted(_ str: String) -> Int {
-            return Int(str.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()) ?? -1
+        func decimalTrimInverted(_ str: String) -> Int? {
+            return Int(str.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
         }
         
         /// Returned menu array.
@@ -136,8 +136,11 @@ struct SNUCOManager {
                     continue
                 } else if trimmedMenuNCost[trimmedMenuNCost.startIndex] == "※" {
                     continue
+                } else if trimmedMenuNCost[trimmedMenuNCost.startIndex] == "<" {
+                    returnValue.append(.init(name: trimmedMenuNCost))
+                    continue
                 } else if trimmedMenuNCost.contains("코로나") {
-                    returnValue.append(.init(name: trimmedMenuNCost, cost: -1))
+                    returnValue.append(.init(name: trimmedMenuNCost))
                     continue
                 }
                 
@@ -148,12 +151,15 @@ struct SNUCOManager {
                         Int(String(trimmedMenuNCost[trimmedMenuNCost.index(after: index)])) != nil ) {
                     // Found.
                     let menu = whiteSpaceTrim(String(trimmedMenuNCost[..<index]))
-                    let cost = decimalTrimInverted(String(trimmedMenuNCost[index...]))
+                    var cost = decimalTrimInverted(String(trimmedMenuNCost[index...]))
+                    if cost != nil && String(trimmedMenuNCost[index...]).contains("~") {
+                        cost! += 10
+                    }
                     returnValue.append(.init(name: menu, cost: cost))
                     continue characterIterate
                 }
                 // Not found. Set all string to menu name.
-                returnValue.append(.init(name: trimmedMenuNCost, cost: -1))
+                returnValue.append(.init(name: trimmedMenuNCost, cost: nil))
             }
             
         }

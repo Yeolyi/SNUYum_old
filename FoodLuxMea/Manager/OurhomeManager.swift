@@ -152,7 +152,7 @@ class OurhomeManager {
     }
     
     /// Convert HTML class attrubution to cost value
-    func getCost(menuName: String) -> Int {
+    func getCost(menuName: String) -> Int? {
         switch menuName {
         case "menu_a": return 2000
         case "menu_b": return 2500
@@ -160,7 +160,7 @@ class OurhomeManager {
         case "menu_d": return 3500
         case "menu_e": return 4000
         case "menu_f": return 5000
-        default: return -1
+        default: return nil
         }
     }
     
