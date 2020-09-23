@@ -72,8 +72,7 @@ struct MealTypeButton: View {
                 if isSelected() {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 40, height: 40)
-                    .foregroundColor(themeColor.title(colorScheme))
-                    .opacity(0.2)
+                    .foregroundColor(themeColor.title(colorScheme).opacity(0.2))
                     .transition(.scale)
                 }
                 RoundedRectangle(cornerRadius: 10)

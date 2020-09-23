@@ -27,14 +27,27 @@ struct SimpleToggle: View {
     var body: some View {
         HStack {
             Text(label)
+                .foregroundColor(themeColor.title(colorScheme))
+                .font(.system(size: 18))
             Spacer()
-            Image(systemName: isOn ? "checkmark" : "xmark")
-                .offset(x: -5)
-                .foregroundColor(themeColor.icon(colorScheme))
+            if isOn {
+                Image(systemName: "checkmark")
+                    .offset(x: -5)
+                    .foregroundColor(themeColor.icon(colorScheme))
+                    .transition(.asymmetric(insertion: .slide, removal: .opacity))
+            } else {
+                Image(systemName: "xmark")
+                    .offset(x: -5)
+                    .foregroundColor(themeColor.icon(colorScheme))
+                    .transition(.asymmetric(insertion: .slide, removal: .opacity))
+            }
         }
         .contentShape(Rectangle())
         .onTapGesture {
-            self.isOn.toggle()
+            withAnimation {
+                isOn.toggle()
+            }
         }
+    
     }
 }

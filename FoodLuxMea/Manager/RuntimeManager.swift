@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Network
+import StoreKit
 
 class RuntimeManager {
     
@@ -19,10 +20,14 @@ class RuntimeManager {
     
     let monitor = NWPathMonitor()
     
+    var executionTimeCount: Int = 0
+    
     init() {
         
         if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
+            // To delete garbage data from previous versions.
             userDefault.removeObject(forKey: "1.1firstRun")
+            
             let storedAppVersion = userDefault.string(forKey: "appVersion") ?? ""
             let storedBuild = userDefault.string(forKey: "build") ?? ""
             if storedAppVersion != appVersion || storedBuild != build {
@@ -34,6 +39,13 @@ class RuntimeManager {
                 RuntimeManager.isFirstVersionRun = false
                 print("Version first run FALSE.")
             }
+            
+            executionTimeCount = userDefault.integer(forKey: "executionTimeCount")
+            print("\(executionTimeCount) times executed.")
+            executionTimeCount += 1
+            userDefault.set(executionTimeCount as Int, forKey: "executionTimeCount")
+        } else {
+            assertionFailure("Userdefault failed in RuntimeManager")
         }
         
         // Update variable isInternetConnected using Network framework
