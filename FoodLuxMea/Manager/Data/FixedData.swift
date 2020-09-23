@@ -66,7 +66,7 @@ var phoneNumList: [String: String] = [
 var cafeOperatingHour: [String: WeeklyOperatingHour] = [
     
     "학생회관식당": .init(
-        weekday: .init("08:00-10:00", "11:00-15:00", "17:00-19:00"),
+        weekday: .init("08:00-09:30", "11:00-15:00", "17:00-19:00"),
         saturday: .init(nil, "11:30-14:00", "17:00-19:00"),
         sunday: .init(nil, "11:30-14:00", "17:00-19:00")
     ),
@@ -85,7 +85,7 @@ var cafeOperatingHour: [String: WeeklyOperatingHour] = [
     
     "두레미담": .init(
         weekday: .init(nil, "11:00-14:00", "17:00-19:00"),
-        saturday: .init(nil, "11:00-19:00", "11:00-19:00"),
+        saturday: .init(nil, "11:00-14:00", "17:00-19:00"),
         sunday: nil
     ),
     
@@ -114,7 +114,7 @@ var cafeOperatingHour: [String: WeeklyOperatingHour] = [
     ), //일단은 4층 기준
     
     "302동식당": .init(
-        weekday: .init(nil, "11:30-13:30", "17:00-19:00"),
+        weekday: .init(nil, "11:30-13:30", "17:00-18:30"),
         saturday: nil,
         sunday: nil
     ),
@@ -138,9 +138,9 @@ var cafeOperatingHour: [String: WeeklyOperatingHour] = [
     ),
     
     "라운지오": .init(
-        weekday: .init("11:00-21:00", "11:00-21:00", "11:00-21:00"),
+        weekday: .init("11:00-19:00", "11:00-19:00", "11:00-19:00"),
         saturday: .init(nil, "11:00-19:00", "11:00-19:00"),
-        sunday: .init(nil, "11:00-21:00", "11:00-21:00")
+        sunday: .init(nil, "11:00-19:00", "11:00-19:00")
     ),
     
     "샤반": .init(

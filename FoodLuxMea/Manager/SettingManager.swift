@@ -89,6 +89,16 @@ class SettingManager: ObservableObject {
         }
     }
     
+    func clear() {
+        mealViewMode = .lunch
+        isAuto = true
+        isCustomDate = false
+        debugDate = Date()
+        hideEmptyCafe = true
+        alimiCafeName = "학생회관식당"
+        update()
+    }
+    
     func save() {
         if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
             userDefault.set(mealViewMode.rawValue as String, forKey: "mealViewMode")

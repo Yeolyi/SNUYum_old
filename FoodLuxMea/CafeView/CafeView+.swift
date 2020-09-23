@@ -144,6 +144,7 @@ struct MealSection: View {
         if cafe.menus(at: mealType).isEmpty == false {
                 VStack {
                     Text(
+                        
                         mealType.rawValue + " (" +
                             (cafeOperatingHour[cafe.name]?.daily(at: settingManager.date)?
                                 .rawValue(at: mealType) ?? "시간 정보 없음")

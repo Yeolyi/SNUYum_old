@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let dataManager = DataManager()
     let contentView = ContentView()
     let settingManager = SettingManager()
+    let erasableRowManager = ErasableRowManager()
     
     func scene(
         _ scene: UIScene,
@@ -50,7 +51,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = UIHostingController(rootView: contentView
                                                                 .environmentObject(listManager)
                                                                 .environmentObject(dataManager)
-                                                                .environmentObject(settingManager))
+                                                                .environmentObject(settingManager)
+                                                                .environmentObject(erasableRowManager))
             self.window = window
             window.makeKeyAndVisible()
         }

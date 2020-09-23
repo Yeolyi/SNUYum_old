@@ -53,7 +53,7 @@ struct CafeRowsFiltered: View {
             }
         } else {
             return AnyView(
-                VStack(spacing: 0) {
+                Group {
                     Text(isFixed ? "고정됨" : "일반")
                         .sectionText()
                     ForEach(list.filter(listFilter)) { listElement in

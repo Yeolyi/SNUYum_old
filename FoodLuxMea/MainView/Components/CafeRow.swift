@@ -10,16 +10,17 @@ import SwiftUI
 /// Single row in main view which shows one meal info
 struct CafeRow: View {
     
+    var cafe: Cafe
+    var suggestedMeal: MealType
+    let searchText: String
+    @State var isSheet = false
+    
+    let themeColor = ThemeColor()
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var settingManager: SettingManager
-    @State var isSheet = false
-    let themeColor = ThemeColor()
-    var cafe: Cafe
-    var suggestedMeal: MealType
-    let searchText: String
-    
+
     /**
      - Parameters:
      - cafe: Cafe struct which this view shows.
@@ -44,7 +45,7 @@ struct CafeRow: View {
                 Spacer()
                 Group {
                     if searchText == "" {
-                        ForEach(cafe.menus(at: suggestedMeal)) { menu in
+                        ForEach(cafe.menus(at: suggestedMeal).filter { !$0.name.contains("※")}) { menu in
                             HStack {
                                 Text(menu.name)
                                     .font(.system(size: 15))

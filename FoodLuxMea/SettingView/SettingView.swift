@@ -26,7 +26,7 @@ struct SettingView: View {
         }
     }
     @State var activeSheet: ActiveSheet?
-    @State var isClearedAlert: Bool = false
+    @Binding var activeAlert: ActiveAlert?
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -36,8 +36,9 @@ struct SettingView: View {
     let themeColor = ThemeColor()
     
     /// - Parameter isPresented: Pass main view to show current view or not.
-    init(isPresented: Binding<Bool>) {
+    init(isPresented: Binding<Bool>, activeAlert: Binding<ActiveAlert?>) {
         self._isPresented = isPresented
+        self._activeAlert = activeAlert
     }
     
     var body: some View {
@@ -66,41 +67,42 @@ struct SettingView: View {
             // List rows
             ScrollView {
                 VStack(spacing: 0) {
-                    
-                    Text("기본 설정")
-                        .sectionText()
-                    // Basic setting - Cafe reorder.
-                    Button(action: { self.activeSheet = .reorder }) {
-                        HStack {
-                            Text("식당 순서 변경")
-                                .font(.system(size: 18))
-                            Spacer()
-                            if listManager.fixedList.count != 0 {
-                                Text("\(listManager.fixedList.count)개 식당이 고정되었어요")
+                    Group {
+                        Text("기본 설정")
+                            .sectionText()
+                        // Basic setting - Cafe reorder.
+                        Button(action: { self.activeSheet = .reorder }) {
+                            HStack {
+                                Text("식당 순서 변경")
+                                    .font(.system(size: 18))
+                                Spacer()
+                                if listManager.fixedList.count != 0 {
+                                    Text("\(listManager.fixedList.count)개 식당이 고정되었어요")
+                                        .font(.system(size: 16))
+                                        .foregroundColor(Color(.gray))
+                                } else {
+                                    Text("고정된 식당이 없어요")
+                                        .font(.system(size: 15))
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .rowBackground()
+                        }
+                        .accentColor(themeColor.title(colorScheme))
+                        // Basic setting - Cafe timer.
+                        Button(action: { self.activeSheet = .timer }) {
+                            HStack {
+                                Text("알리미 설정")
+                                    .font(.system(size: 18))
+                                Spacer()
+                                Text(settingManager.alimiCafeName ?? "꺼짐")
                                     .font(.system(size: 16))
-                                    .foregroundColor(Color(.gray))
-                            } else {
-                                Text("고정된 식당이 없어요")
-                                    .font(.system(size: 15))
                                     .foregroundColor(.secondary)
                             }
+                            .rowBackground()
                         }
-                        .rowBackground()
+                        .accentColor(themeColor.title(colorScheme))
                     }
-                    .accentColor(themeColor.title(colorScheme))
-                    // Basic setting - Cafe timer.
-                    Button(action: { self.activeSheet = .timer }) {
-                        HStack {
-                            Text("알리미 설정")
-                                .font(.system(size: 18))
-                            Spacer()
-                            Text(settingManager.alimiCafeName ?? "꺼짐")
-                                .font(.system(size: 16))
-                                .foregroundColor(.secondary)
-                        }
-                        .rowBackground()
-                    }
-                    .accentColor(themeColor.title(colorScheme))
                     // Basic setting - Hide empty cafe.
                     SimpleToggle(isOn: $settingManager.hideEmptyCafe, label: "정보가 없는 식당 숨기기")
                         .rowBackground()
@@ -119,54 +121,61 @@ struct SettingView: View {
                             .rowBackground()
                             .accentColor(themeColor.title(colorScheme))
                     }
-                    Button(action: {
-                        dataManager.clear()
-                        isClearedAlert.toggle()
-                    }) {
+                    Button(action: { activeAlert = ActiveAlert.clearCafe }) {
                         HStack {
-                            Text("저장된 식단들 삭제")
+                            Text("저장된 식단 삭제")
                                 .font(.system(size: 18))
+                                .foregroundColor(.secondary)
                             Spacer()
                         }
+                        .rowBackground()
                     }
-                    .rowBackground()
+                    Button(action: { activeAlert = ActiveAlert.clearAll }) {
+                        HStack {
+                            Text("전체 초기화")
+                                .font(.system(size: 18))
+                                .foregroundColor(.secondary)
+                            Spacer()
+                        }
+                        .rowBackground()
+                    }
                     // Info
                     Text("정보")
                         .sectionText()
-                    Button(action: { self.activeSheet = .info }) {
+                    Button(action: { activeSheet = ActiveSheet.info }) {
                         HStack {
                             Text("스누냠 정보")
+                                .foregroundColor(themeColor.title(colorScheme))
                                 .font(.system(size: 18))
                             Spacer()
                         }
-                    .contentShape(Rectangle())
                     }
                     .rowBackground()
-                }
-                // Caution: Sheet modifier position matters.
-                .sheet(item: self.$activeSheet) { item in
-                    switch item {
-                    case .reorder:
-                        ListOrderSettingView(cafeListBackup: self.listManager.cafeList)
-                            .environmentObject(self.listManager)
-                            .environmentObject(self.settingManager)
-                    case .timer:
-                        TimerCafeSettingView()
-                            .environmentObject(self.listManager)
-                            .environmentObject(self.settingManager)
-                    case .info:
-                        AboutAppView()
-                    }
                 }
             }
         }
         .background(colorScheme == .dark ? Color.black : Color.white)
+        // Caution: Sheet modifier position matters.
+        .sheet(item: self.$activeSheet) { item in
+            switch item {
+            case .reorder:
+                ListOrderSettingView(cafeListBackup: self.listManager.cafeList)
+                    .environmentObject(self.listManager)
+                    .environmentObject(self.settingManager)
+            case .timer:
+                TimerCafeSettingView()
+                    .environmentObject(self.listManager)
+                    .environmentObject(self.settingManager)
+            case .info:
+                AboutAppView()
+            }
+        }
     }
 }
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(isPresented: .constant(true))
+        SettingView(isPresented: .constant(true), activeAlert: .constant(.none))
             .environmentObject(ListManager())
             .environmentObject(DataManager())
             .environmentObject(SettingManager())

@@ -9,16 +9,25 @@ import SwiftUI
 import GoogleMobileAds
 import Network
 
+enum ActiveAlert: Identifiable {
+    var id: Int {
+        self.hashValue
+    }
+    case clearCafe, clearAll, noNetwork
+}
+
 struct ContentView: View {
     
     let themeColor = ThemeColor()
     @State var searchWord = ""
     @State var isSettingSheet = false
+    @State var activeAlert: ActiveAlert?
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var listManager: ListManager
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var settingManager: SettingManager
+    @EnvironmentObject var erasableRowManager: ErasableRowManager
     
     var body: some View {
         // Stacks setting view over main view.
@@ -55,6 +64,7 @@ struct ContentView: View {
                 ScrollView {
                     // Searchbar
                     SearchBar(searchWord: self.$searchWord)
+                    ErasableRow()
                     // Cafe timer row.
                     if settingManager.alimiCafeName != nil && searchWord == "" {
                         Text("안내(\(settingManager.alimiCafeName!))")
@@ -76,7 +86,6 @@ struct ContentView: View {
                     CafeRowsFiltered(isFixed: false, searchWord: self.searchWord)
                     // Scroll view ends here.
                 }
-                .resignKeyboardOnDragGesture()
                 Divider()
                 // Google Admob.
                 GADBannerViewController()
@@ -84,16 +93,38 @@ struct ContentView: View {
             }
             // MARK: - SettingView covers main view.
             if self.isSettingSheet {
-                SettingView(isPresented: self.$isSettingSheet)
+                SettingView(isPresented: self.$isSettingSheet, activeAlert: $activeAlert)
                     .zIndex(2) // Priorize setting view to main view
             }
         }
-        .alert(isPresented: .constant(!RuntimeManager.isInternetConnected)) {
-            Alert(
-                title: Text("인터넷이 연결되지 않았어요"),
-                message: Text("저장된 식단은 볼 수 있지만 \n 기능이 제한될 수 있어요"),
-                dismissButton: .default(Text("확인"))
-            )
+        .alert(item: $activeAlert) { item in
+            switch item {
+            case .clearCafe:
+                return Alert(
+                    title: Text("다운로드된 데이터를 삭제합니다"),
+                    message: Text("사용자 설정은 영향받지 않습니다."),
+                    primaryButton: .destructive(Text("삭제"), action: { dataManager.clear()}),
+                    secondaryButton: .cancel()
+                )
+            case .clearAll:
+                return Alert(
+                    title: Text("앱을 초기 상태로 되돌립니다."),
+                    primaryButton: .destructive(Text("삭제"), action: {
+                        dataManager.clear()
+                        settingManager.clear()
+                        listManager.clear()
+                        erasableRowManager.clear()
+                    }
+                    ),
+                    secondaryButton: .cancel()
+                )
+            case .noNetwork:
+                return Alert(
+                    title: Text("인터넷이 연결되지 않았어요"),
+                    message: Text("저장된 식단은 볼 수 있지만 \n 기능이 제한될 수 있어요"),
+                    dismissButton: .default(Text("확인"))
+                )
+            }
         }
     }
 }

@@ -47,11 +47,6 @@ class DataManager: ObservableObject {
     
     func clear() {
         cafeData = [:]
-        if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
-            userDefault.removeObject(forKey: "cafeData")
-            print("Cafe data cleared.")
-            return
-        }
     }
     
     func save() {
