@@ -37,16 +37,13 @@ struct ContentView: View {
                 // MARK: - Custom navigation bar title and item.
                 VStack {
                     HStack {
-                        VStack(alignment: .leading) {
-                            Text("스누냠")
-                                .font(.system(size: CGFloat(18), weight: .bold))
-                                .foregroundColor(.secondary)
-                            Text(searchWord == "" ? "식단 바로보기" : "식단 검색")
-                                .font(.system(size: CGFloat(25), weight: .bold))
-                        }
-                        .padding([.leading, .top])
+                        customNavigationBar(title: searchWord == "" ? "식단 바로보기" : "식단 검색", subTitle: "스누냠")
                         Spacer()
-                        Button(action: {self.isSettingSheet.toggle()}) {
+                        Button(action: {
+                            withAnimation {
+                                self.isSettingSheet.toggle()
+                            }
+                        }) {
                             Image(systemName: "gear")
                                 .font(.system(size: 25, weight: .regular))
                                 .foregroundColor(themeColor.icon(colorScheme))
@@ -146,6 +143,6 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(listManager)
             .environmentObject(dataManager)
             .environmentObject(settingManager)
-            .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+            .environmentObject(ErasableRowManager())
     }
 }

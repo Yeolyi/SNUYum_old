@@ -68,9 +68,12 @@ struct ErasableRow: View {
                         .font(.system(size: 15, weight: .light))
                         .foregroundColor(themeColor.icon(colorScheme))
                         .onTapGesture {
-                            erasableRowManager.remove(erasableMessage)
+                            withAnimation {
+                                erasableRowManager.remove(erasableMessage)
+                            }
                         }
                 }
+                .transition(.opacity)
                 .rowBackground()
             }
         }

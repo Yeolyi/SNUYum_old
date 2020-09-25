@@ -54,7 +54,11 @@ struct SettingView: View {
                 }
                 .padding([.leading, .top])
                 Spacer()
-                Button(action: { self.isPresented = false }) {
+                Button(action: {
+                    withAnimation {
+                        self.isPresented = false
+                    }
+                }) {
                     Text("닫기")
                         .font(.system(size: CGFloat(20), weight: .semibold))
                         .foregroundColor(themeColor.icon(colorScheme))
@@ -154,6 +158,7 @@ struct SettingView: View {
                 }
             }
         }
+        .transition(.opacity)
         .background(colorScheme == .dark ? Color.black : Color.white)
         // Caution: Sheet modifier position matters.
         .sheet(item: self.$activeSheet) { item in
