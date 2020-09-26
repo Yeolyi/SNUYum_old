@@ -18,6 +18,7 @@ struct RowBackground: ViewModifier {
                 .cornerRadius(10)
         }
         .padding([.leading, .trailing], 10)
+        .padding([.top, .bottom], 3)
     }
 }
 

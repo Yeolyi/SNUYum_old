@@ -42,12 +42,17 @@ struct SimpleToggle: View {
                     .transition(.asymmetric(insertion: .slide, removal: .opacity))
             }
         }
-        .contentShape(Rectangle())
         .onTapGesture {
             withAnimation {
                 isOn.toggle()
             }
         }
     
+    }
+}
+
+struct SimpleToggle_Previews: PreviewProvider {
+    static var previews: some View {
+        SimpleToggle(isOn: .constant(true), label: "테스트")
     }
 }

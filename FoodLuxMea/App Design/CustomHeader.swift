@@ -19,6 +19,8 @@ struct CustomHeader: View {
                     .foregroundColor(.secondary)
                 Text(title)
                     .font(.system(size: CGFloat(25), weight: .bold))
+                    .animation(nil)
+                    
             }
             .padding([.leading, .top])
         }

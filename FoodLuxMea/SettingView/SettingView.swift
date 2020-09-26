@@ -44,7 +44,7 @@ struct SettingView: View {
     var body: some View {
             // List rows
             Text("")
-                .padding(40)
+                .padding(45)
             Group {
                 Text("기본 설정")
                     .sectionText()
@@ -150,9 +150,11 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(isPresented: .constant(true), activeAlert: .constant(.none))
-            .environmentObject(CafeList())
-            .environmentObject(Cafeteria())
-            .environmentObject(UserSetting())
+        VStack(spacing: 0) {
+            SettingView(isPresented: .constant(true), activeAlert: .constant(.none))
+                .environmentObject(CafeList())
+                .environmentObject(Cafeteria())
+                .environmentObject(UserSetting())
+        }
     }
 }

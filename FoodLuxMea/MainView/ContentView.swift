@@ -36,7 +36,7 @@ struct ContentView: View {
                 headerBottomHeading: isSettingView ? 20 : 5,
                 headerView:
                     AnyView(
-                        VStack {
+                        VStack(spacing: 0) {
                             HStack {
                                 CustomHeader(title: isSettingView ? "설정" : (searchWord == "" ? "식단 바로보기" : "식단 검색"), subTitle: "스누냠")
                                 Spacer()
@@ -55,7 +55,7 @@ struct ContentView: View {
                                             .foregroundColor(themeColor.icon(colorScheme))
                                     } else {
                                         Image(systemName: "gear")
-                                            .font(.system(size: 25, weight: .regular))
+                                            .font(.system(size: 30, weight: .regular))
                                             .foregroundColor(themeColor.icon(colorScheme))
                                     }
                                 }
@@ -69,51 +69,53 @@ struct ContentView: View {
                         }
                     )
             ) {
-                VStack {
-                // MARK: - ScrollView starts here.
+                VStack(spacing: 0) {
+                // MARK: - ScrollView starts here
                     ScrollView(showsIndicators: false) {
-                    if isSettingView {
-                        SettingView(isPresented: $isSettingView, activeAlert: $activeAlert)
-                    } else {
-                    Text("")
-                        .padding(75)
-                    // Searchbar
-                    SearchBar(searchWord: self.$searchWord)
-                    // Cafe timer row.
-                    if searchWord == "" {
-                        Text("안내")
-                            .sectionText()
-                        if !appStatus.isInternetConnected {
-                            HStack {
-                                Text("인터넷 연결 안됨")
-                                    .foregroundColor(.secondary)
-                                Spacer()
-                            }
-                                .rowBackground()
-                        }
-                        if !erasableRowManager.erasableMessages.isEmpty {
-                            ErasableRow()
-                        }
-                        if settingManager.alimiCafeName != nil {
-                            if let cafe = dataManager.cafe(
-                                at: settingManager.date,
-                                name: settingManager.alimiCafeName!
-                            ) {
-                                CafeTimer(of: cafe, isInMainView: true)
+                        VStack(spacing: 0) {
+                            if isSettingView {
+                                SettingView(isPresented: $isSettingView, activeAlert: $activeAlert)
                             } else {
-                                CafeTimer(of: Cafe(name: settingManager.alimiCafeName!), isInMainView: true)
+                                Text("")
+                                    .padding(75)
+                                // Searchbar
+                                SearchBar(searchWord: self.$searchWord)
+                                // Cafe timer row.
+                                if searchWord == "" && (!erasableRowManager.erasableMessages.isEmpty || settingManager.alimiCafeName != nil || !appStatus.isInternetConnected) {
+                                    Text("안내")
+                                        .sectionText()
+                                    if !appStatus.isInternetConnected {
+                                        HStack {
+                                            Text("인터넷 연결 안됨")
+                                                .foregroundColor(.secondary)
+                                            Spacer()
+                                        }
+                                            .rowBackground()
+                                    }
+                                    if !erasableRowManager.erasableMessages.isEmpty {
+                                        ErasableRow()
+                                    }
+                                    if settingManager.alimiCafeName != nil {
+                                        if let cafe = dataManager.cafe(
+                                            at: settingManager.date,
+                                            name: settingManager.alimiCafeName!
+                                        ) {
+                                            CafeTimer(of: cafe, isInMainView: true)
+                                        } else {
+                                            CafeTimer(of: Cafe(name: settingManager.alimiCafeName!), isInMainView: true)
+                                        }
+                                    }
+                                }
+                                // Fixed cafe section.
+                                if self.listManager.fixedList.isEmpty == false {
+                                    CafeRowsFiltered(isFixed: true, searchWord: self.searchWord)
+                                }
+                                // Ordinary cafe section.
+                                CafeRowsFiltered(isFixed: false, searchWord: self.searchWord)
+                                // Scroll view ends here.
                             }
                         }
                     }
-                    // Fixed cafe section.
-                    if self.listManager.fixedList.isEmpty == false {
-                        CafeRowsFiltered(isFixed: true, searchWord: self.searchWord)
-                    }
-                    // Ordinary cafe section.
-                    CafeRowsFiltered(isFixed: false, searchWord: self.searchWord)
-                    // Scroll view ends here.
-                }
-                }
                     Divider()
                     // Google Admob.
                     GADBannerViewController()
@@ -160,11 +162,19 @@ struct ContentView_Previews: PreviewProvider {
                     at: ContentView_Previews.self.settingManager.date
                 )
         )
-        return ContentView()
+        let contentView = ContentView()
             .environmentObject(listManager)
             .environmentObject(dataManager)
             .environmentObject(settingManager)
             .environmentObject(ErasableRowManager())
             .environmentObject(AppStatus())
+        return Group {
+            contentView
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+            contentView
+                .previewDevice(PreviewDevice(rawValue: "iPhone 8 Plus"))
+            contentView
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
+        }
     }
 }

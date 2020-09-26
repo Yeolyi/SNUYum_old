@@ -58,7 +58,6 @@ struct ErasableRow: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        VStack {
             ForEach(erasableRowManager.erasableMessages, id: \.self) { erasableMessage in
                 HStack {
                     Text(erasableMessage)
@@ -78,7 +77,6 @@ struct ErasableRow: View {
                 .transition(.opacity)
                 .rowBackground()
             }
-        }
     }
 }
 
