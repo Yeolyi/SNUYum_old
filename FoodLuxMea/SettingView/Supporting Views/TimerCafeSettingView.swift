@@ -56,9 +56,9 @@ struct TimerCafeSettingView: View {
                     HStack {
                         Spacer()
                         Text(timerGuide)
-                            .rowBackground()
                         Spacer()
                     }
+                    .rowBackground()
                     Text("설정")
                         .sectionText()
                     SimpleToggle(isOn: $tempIsTimerCafe, label: "알리미 켜기")

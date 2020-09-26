@@ -70,6 +70,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         settingManager.save()
         listManager.save()
         dataManager.save()
+        erasableRowManager.save()
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -98,6 +99,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         settingManager.save()
         listManager.save()
         dataManager.save()
+        erasableRowManager.save()
     }
     
 }

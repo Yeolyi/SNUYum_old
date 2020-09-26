@@ -14,7 +14,7 @@ class ErasableRowManager: ObservableObject {
     let messagesDefault = [String]()
     let newMessages = [
         "생협 공지: 코로나19 수도권 사회적 거리두기 강화에 따라 점심식사 이용 시 식당 혼잡시간을 피하여 이용을 부탁드립니다.",
-        "1.4 업데이트: 안내 섹션 UX 수정, 헤더 UI 및 전환 애니메이션의 개선이 이루어졌어요."
+        "1.4 업데이트: 카페 혼잡시간 정보를 추가했어요. 안내 섹션의 UX, 헤더의 UI, 화면 전환 애니메이션을 개선했어요."
     ]
     
     init() {
@@ -29,6 +29,12 @@ class ErasableRowManager: ObservableObject {
         }
         if appStatus.isFirstVersionRun {
             erasableMessages += newMessages
+        }
+    }
+    
+    func save() {
+        if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
+            userDefaults.setValue(erasableMessages, forKey: "erasableMessages")
         }
     }
     
