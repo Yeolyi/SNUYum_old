@@ -27,7 +27,7 @@ class Cafeteria: ObservableObject {
      - Important: If data managing algorithm changes, existing data should be deleted and reloaded
      */
     init() {
-        if AppStatus.isFirstVersionRun {
+        if appStatus.isFirstVersionRun {
             if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
                 userDefault.removeObject(forKey: "cafeData")
                 print("Cafe data cleared.")
@@ -68,7 +68,7 @@ class Cafeteria: ObservableObject {
         if let data = cafeData[uRLString] {
             return data
         } else {
-            if AppStatus.isInternetConnected {
+            if appStatus.isInternetConnected {
                 print("Downloading cafe data at \(date)")
                 let newData =
                     SNUCODownloader.download(at: date) +
@@ -93,7 +93,7 @@ class Cafeteria: ObservableObject {
         if let data = cafeData[uRLString] {
             return data.first { $0.name == name }
         } else {
-            if AppStatus.isInternetConnected {
+            if appStatus.isInternetConnected {
                 print("CafeDataManager.getData(at: name: ): 다운로드 중, \(uRLString)")
                 let newData = self.loadAll(at: date)
                 cafeData[uRLString] = newData

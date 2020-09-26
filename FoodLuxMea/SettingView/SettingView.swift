@@ -44,7 +44,7 @@ struct SettingView: View {
     var body: some View {
             // List rows
             Text("")
-                .padding(35)
+                .padding(40)
             Group {
                 Text("기본 설정")
                     .sectionText()

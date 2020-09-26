@@ -8,11 +8,12 @@
 import UIKit
 import SwiftUI
 
+let appStatus = AppStatus()
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    
-    let runtimeManager = AppStatus()
+
     //Initialize essential manager class.
     let listManager = CafeList()
     let dataManager = Cafeteria()
@@ -52,6 +53,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                                                 .environmentObject(listManager)
                                                                 .environmentObject(dataManager)
                                                                 .environmentObject(settingManager)
+                                                                .environmentObject(appStatus)
                                                                 .environmentObject(erasableRowManager))
             self.window = window
             window.makeKeyAndVisible()

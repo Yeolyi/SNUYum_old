@@ -10,21 +10,31 @@ import StoreKit
 
 class ClippedCafeManager: ObservableObject {
     
-    @Published var cafeData: [Cafe]
-    @Published var date = Date()
+    var date: Date {
+        var date = Date()
+        if suggested.isTomorrow {
+            var dayComponent    = DateComponents()
+            dayComponent.day    = 1
+            let theCalendar     = Calendar.current
+            date = theCalendar.date(byAdding: dayComponent, to: date)!
+        }
+        return date
+    }
+    
+    @Published var cafeData = [Cafe]()
     @Published var suggested = DailyProposer.menu(at: Date(), cafeName: "학생회관식당")
     
     init() {
         let ourHomeManager = OurhomeStorage()
-        cafeData = SNUCODownloader.download(at: Date())
-        if let ourhomeCafe = ourHomeManager.getCafe(date: Date()) {
+        cafeData = SNUCODownloader.download(at: date)
+        if let ourhomeCafe = ourHomeManager.getCafe(date: date) {
             cafeData.append(ourhomeCafe)
         }
+        suggested = DailyProposer.menu(at: date, cafeName: "학생회관식당")
     }
     
     func update() {
-        date = Date()
-        suggested = DailyProposer.menu(at: Date(), cafeName: "학생회관식당")
+        suggested = DailyProposer.menu(at: date, cafeName: "학생회관식당")
     }
     
 }
@@ -40,58 +50,57 @@ struct ContentView: View {
         BlurHeader(
             headerBottomHeading: 10,
             headerView: AnyView(
-                            HStack {
-                                CustomHeader(title: "식단 바로보기", subTitle: "스누냠 App Clip")
-                                Spacer()
-                            }
-                        )
+                HStack {
+                    CustomHeader(title: "식단 바로보기", subTitle: "스누냠 App Clip")
+                    Spacer()
+                }
+            )
         ) {
-                ScrollView {
-                    Text("")
-                        .padding(35)
-                    Text("모든 기능들을 사용해보시겠어요?")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .onTapGesture {
-                            showApp.toggle()
-                        }
-                        .centered()
-                        .rowBackground()
-                    Text("\(cafeManager.suggested.isTomorrow ? "내일" : "오늘") \(cafeManager.suggested.meal.rawValue) 식단입니다")
-                        .foregroundColor(themeColor.title(colorScheme))
-                        .font(.headline)
-                        .centered()
-                        .rowBackground()
-                    ForEach(cafeManager.cafeData.filter { isMenuEmpty(of: $0) == false }) { cafe in
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text(cafe.name)
-                                    .accentedText()
-                                    .foregroundColor(themeColor.title(colorScheme))
-                                    .padding(.bottom, 1.5)
-                                Spacer()
-                            }
+            ScrollView {
+                Text("")
+                    .padding(35)
+                Button(action: {showApp.toggle()}) {
+                Text("모든 기능들을 사용해보시겠어요?")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .centered()
+                    .rowBackground()
+                }
+                Text("\(cafeManager.suggested.isTomorrow ? "내일" : "오늘") \(cafeManager.suggested.meal.rawValue) 식단입니다")
+                    .foregroundColor(themeColor.title(colorScheme))
+                    .font(.headline)
+                    .centered()
+                    .rowBackground()
+                ForEach(cafeManager.cafeData.filter { isMenuEmpty(of: $0) == false }) { cafe in
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(cafe.name)
+                                .accentedText()
+                                .foregroundColor(themeColor.title(colorScheme))
+                                .padding(.bottom, 1.5)
                             Spacer()
-                            ForEach(cafe.menus(at: cafeManager.suggested.meal).filter { !$0.name.contains("※")}) { menu in
-                                HStack {
-                                    Text(menu.name)
-                                        .font(.system(size: 15))
-                                        .fixedSize(horizontal: false, vertical: true)
-                                        .lineLimit(1)
-                                        .foregroundColor(Color(.label))
-                                    Spacer()
-                                    Text(menu.costInterpret())
-                                        .font(.system(size: 15))
-                                        .padding(.trailing, 10)
-                                        .foregroundColor(Color(.secondaryLabel))
-                                }
+                        }
+                        Spacer()
+                        ForEach(cafe.menus(at: cafeManager.suggested.meal).filter { !$0.name.contains("※")}) { menu in
+                            HStack {
+                                Text(menu.name)
+                                    .font(.system(size: 15))
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .lineLimit(1)
+                                    .foregroundColor(Color(.label))
+                                Spacer()
+                                Text(menu.costInterpret())
+                                    .font(.system(size: 15))
+                                    .padding(.trailing, 10)
+                                    .foregroundColor(Color(.secondaryLabel))
                             }
                         }
-                        .rowBackground()
                     }
+                    .rowBackground()
                 }
             }
-            .appStoreOverlay(isPresented: $showApp, configuration: {SKOverlay.AppClipConfiguration(position: .bottom)})
+        }
+        .appStoreOverlay(isPresented: $showApp, configuration: {SKOverlay.AppClipConfiguration(position: .bottom)})
     }
     
     func isMenuEmpty(of cafe: Cafe) -> Bool {

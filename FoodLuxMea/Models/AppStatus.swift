@@ -9,14 +9,14 @@ import SwiftUI
 import Network
 import StoreKit
 
-class AppStatus {
+class AppStatus: ObservableObject {
     
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     private let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
     
-    static var isInternetConnected = false
+    @Published var isInternetConnected = false
     
-    static var isFirstVersionRun = false
+    var isFirstVersionRun = false
     
     let monitor = NWPathMonitor()
     
@@ -32,11 +32,11 @@ class AppStatus {
             let storedBuild = userDefault.string(forKey: "build") ?? ""
             if storedAppVersion != appVersion || storedBuild != build {
                 print("Version first run TRUE.")
-                AppStatus.isFirstVersionRun = true
+                isFirstVersionRun = true
                 userDefault.set(appVersion as String, forKey: "appVersion")
                 userDefault.set(build as String, forKey: "build")
             } else {
-                AppStatus.isFirstVersionRun = false
+                isFirstVersionRun = false
                 print("Version first run FALSE.")
             }
             
@@ -50,12 +50,14 @@ class AppStatus {
         
         // Update variable isInternetConnected using Network framework
         monitor.pathUpdateHandler = { path in
-            if path.status == .satisfied {
-                AppStatus.isInternetConnected = true
-                print("인터넷 연결됨")
-            } else {
-                AppStatus.isInternetConnected = false
-                print("인터넷 연결되지 않음")
+            DispatchQueue.main.async {
+                if path.status == .satisfied {
+                    self.isInternetConnected = true
+                    print("인터넷 연결됨")
+                } else {
+                    self.isInternetConnected = false
+                    print("인터넷 연결되지 않음")
+                }
             }
         }
         let queue = DispatchQueue(label: "Monitor")

@@ -13,7 +13,7 @@ enum ActiveAlert: Identifiable {
     var id: Int {
         self.hashValue
     }
-    case clearCafe, clearAll, noNetwork
+    case clearCafe, clearAll
 }
 
 struct ContentView: View {
@@ -28,10 +28,9 @@ struct ContentView: View {
     @EnvironmentObject var dataManager: Cafeteria
     @EnvironmentObject var settingManager: UserSetting
     @EnvironmentObject var erasableRowManager: ErasableRowManager
+    @EnvironmentObject var appStatus: AppStatus
     
     var body: some View {
-            // Stacks navigation bar, scrollview and admob.
-        VStack {
             // MARK: - Custom navigation bar title and item.
             BlurHeader(
                 headerBottomHeading: isSettingView ? 20 : 5,
@@ -70,8 +69,9 @@ struct ContentView: View {
                         }
                     )
             ) {
+                VStack {
                 // MARK: - ScrollView starts here.
-                ScrollView(showsIndicators: false) {
+                    ScrollView(showsIndicators: false) {
                     if isSettingView {
                         SettingView(isPresented: $isSettingView, activeAlert: $activeAlert)
                     } else {
@@ -83,6 +83,14 @@ struct ContentView: View {
                     if searchWord == "" {
                         Text("안내")
                             .sectionText()
+                        if !appStatus.isInternetConnected {
+                            HStack {
+                                Text("인터넷 연결 안됨")
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                            }
+                                .rowBackground()
+                        }
                         if !erasableRowManager.erasableMessages.isEmpty {
                             ErasableRow()
                         }
@@ -106,43 +114,37 @@ struct ContentView: View {
                     // Scroll view ends here.
                 }
                 }
-            }
-        Divider()
-        // Google Admob.
-        GADBannerViewController()
-            .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
-
-    }
-    .alert(item: $activeAlert) { item in
-        switch item {
-        case .clearCafe:
-            return Alert(
-            title: Text("다운로드된 데이터를 삭제합니다"),
-            message: Text("사용자 설정은 영향받지 않습니다."),
-            primaryButton: .destructive(Text("삭제"), action: { dataManager.clear()}),
-            secondaryButton: .cancel()
-            )
-        case .clearAll:
-            return Alert(
-                title: Text("앱을 초기 상태로 되돌립니다."),
-                primaryButton: .destructive(Text("삭제"), action: {
-                    dataManager.clear()
-                    settingManager.clear()
-                    listManager.clear()
-                    erasableRowManager.clear()
+                    Divider()
+                    // Google Admob.
+                    GADBannerViewController()
+                        .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
                 }
-                ),
+            }
+
+        .alert(item: $activeAlert) { item in
+            switch item {
+            case .clearCafe:
+                return Alert(
+                title: Text("다운로드된 데이터를 삭제합니다"),
+                message: Text("사용자 설정은 영향받지 않습니다."),
+                primaryButton: .destructive(Text("삭제"), action: { dataManager.clear()}),
                 secondaryButton: .cancel()
-            )
-        case .noNetwork:
-            return Alert(
-                title: Text("인터넷이 연결되지 않았어요"),
-                message: Text("저장된 식단은 볼 수 있지만 \n 기능이 제한될 수 있어요"),
-                dismissButton: .default(Text("확인"))
-            )
+                )
+            case .clearAll:
+                return Alert(
+                    title: Text("앱을 초기 상태로 되돌립니다."),
+                    primaryButton: .destructive(Text("삭제"), action: {
+                        dataManager.clear()
+                        settingManager.clear()
+                        listManager.clear()
+                        erasableRowManager.clear()
+                    }
+                    ),
+                    secondaryButton: .cancel()
+                )
+            }
         }
     }
-}
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -163,5 +165,6 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(dataManager)
             .environmentObject(settingManager)
             .environmentObject(ErasableRowManager())
+            .environmentObject(AppStatus())
     }
 }
