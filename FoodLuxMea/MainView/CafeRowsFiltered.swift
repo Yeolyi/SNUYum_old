@@ -58,12 +58,14 @@ struct CafeRowsFiltered: View {
                             suggestedMeal: settingManager.meal,
                             searchText: searchWord
                         )
+                        
                     } else {
                         CafeRow(
                             cafe: Cafe(name: listElement.name),
                             suggestedMeal: settingManager.meal,
                             searchText: searchWord
                         )
+                        
                     }
                 }
             }

@@ -20,7 +20,7 @@ struct ContentView: View {
     
     let themeColor = ThemeColor()
     @State var searchWord = ""
-    @State var isSettingSheet = false
+    @State var isSettingView = false
     @State var activeAlert: ActiveAlert?
     
     @Environment(\.colorScheme) var colorScheme
@@ -30,79 +30,88 @@ struct ContentView: View {
     @EnvironmentObject var erasableRowManager: ErasableRowManager
     
     var body: some View {
-        // Stacks setting view over main view.
-        ZStack {
             // Stacks navigation bar, scrollview and admob.
-            VStack {
-                // MARK: - Custom navigation bar title and item.
-                BlurHeader(
-                    headerBottomHeading: 5,
-                    headerView:
-                        AnyView(
-                            VStack {
-                                HStack {
-                                    CustomHeader(title: searchWord == "" ? "식단 바로보기" : "식단 검색", subTitle: "스누냠")
-                                    Spacer()
-                                    Button(action: {
-                                        withAnimation {
-                                            self.isSettingSheet.toggle()
-                                        }
-                                    }) {
+        VStack {
+            // MARK: - Custom navigation bar title and item.
+            BlurHeader(
+                headerBottomHeading: isSettingView ? 20 : 5,
+                headerView:
+                    AnyView(
+                        VStack {
+                            HStack {
+                                CustomHeader(title: isSettingView ? "설정" : (searchWord == "" ? "식단 바로보기" : "식단 검색"), subTitle: "스누냠")
+                                Spacer()
+                                Button(action: {
+                                    if isSettingView {
+                                        listManager.update(newCafeList: dataManager.loadAll(at: self.settingManager.date))
+                                        settingManager.update()
+                                    }
+                                    withAnimation {
+                                        self.isSettingView.toggle()
+                                    }
+                                }) {
+                                    if isSettingView {
+                                        Text("닫기")
+                                            .font(.system(size: CGFloat(20), weight: .semibold))
+                                            .foregroundColor(themeColor.icon(colorScheme))
+                                    } else {
                                         Image(systemName: "gear")
                                             .font(.system(size: 25, weight: .regular))
                                             .foregroundColor(themeColor.icon(colorScheme))
                                     }
-                                    .padding()
-                                    .offset(y: 10)
                                 }
+                                .padding()
+                                .offset(y: 10)
+                            }
+                            if !isSettingView {
                                 MealSelect()
                                     .padding()
                             }
-                        )
-                ) {
-                    // MARK: - ScrollView starts here.
-                    ScrollView(showsIndicators: false) {
-                        Text("")
-                            .padding(70)
-                        // Searchbar
-                        SearchBar(searchWord: self.$searchWord)
-                        // Cafe timer row.
-                        if searchWord == "" {
-                            Text("안내")
-                                .sectionText()
-                            if !erasableRowManager.erasableMessages.isEmpty {
-                                ErasableRow()
-                            }
-                            if settingManager.alimiCafeName != nil {
-                                if let cafe = dataManager.cafe(
-                                    at: settingManager.date,
-                                    name: settingManager.alimiCafeName!
-                                ) {
-                                    CafeTimer(of: cafe, isInMainView: true)
-                                } else {
-                                    CafeTimer(of: Cafe(name: settingManager.alimiCafeName!), isInMainView: true)
-                                }
+                        }
+                    )
+            ) {
+                // MARK: - ScrollView starts here.
+                ScrollView(showsIndicators: false) {
+                    if isSettingView {
+                        SettingView(isPresented: $isSettingView, activeAlert: $activeAlert)
+                    } else {
+                    Text("")
+                        .padding(75)
+                    // Searchbar
+                    SearchBar(searchWord: self.$searchWord)
+                    // Cafe timer row.
+                    if searchWord == "" {
+                        Text("안내")
+                            .sectionText()
+                        if !erasableRowManager.erasableMessages.isEmpty {
+                            ErasableRow()
+                        }
+                        if settingManager.alimiCafeName != nil {
+                            if let cafe = dataManager.cafe(
+                                at: settingManager.date,
+                                name: settingManager.alimiCafeName!
+                            ) {
+                                CafeTimer(of: cafe, isInMainView: true)
+                            } else {
+                                CafeTimer(of: Cafe(name: settingManager.alimiCafeName!), isInMainView: true)
                             }
                         }
-                        // Fixed cafe section.
-                        if self.listManager.fixedList.isEmpty == false {
-                            CafeRowsFiltered(isFixed: true, searchWord: self.searchWord)
-                        }
-                        // Ordinary cafe section.
-                        CafeRowsFiltered(isFixed: false, searchWord: self.searchWord)
-                        // Scroll view ends here.
                     }
+                    // Fixed cafe section.
+                    if self.listManager.fixedList.isEmpty == false {
+                        CafeRowsFiltered(isFixed: true, searchWord: self.searchWord)
+                    }
+                    // Ordinary cafe section.
+                    CafeRowsFiltered(isFixed: false, searchWord: self.searchWord)
+                    // Scroll view ends here.
                 }
-            Divider()
-            // Google Admob.
-            GADBannerViewController()
-                .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
-        }
-        // MARK: - SettingView covers main view.
-        if self.isSettingSheet {
-            SettingView(isPresented: self.$isSettingSheet, activeAlert: $activeAlert)
-                .zIndex(2) // Priorize setting view to main view
-        }
+                }
+            }
+        Divider()
+        // Google Admob.
+        GADBannerViewController()
+            .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+
     }
     .alert(item: $activeAlert) { item in
         switch item {

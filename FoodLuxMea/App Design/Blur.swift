@@ -37,6 +37,7 @@ struct BlurHeader<Content: View>: View {
                             RoundedCorner(radius: 30, corners: [.bottomLeft, .bottomRight])
                         )
                         .edgesIgnoringSafeArea(.top)
+                        .shadow(radius: 5)
                     )
                 Spacer()
             }

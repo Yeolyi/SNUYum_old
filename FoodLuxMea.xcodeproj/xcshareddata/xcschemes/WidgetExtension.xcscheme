@@ -43,6 +43,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "25988C91251F4E10006E24A3"
+               BuildableName = "FoodLuxMeaUITests.xctest"
+               BlueprintName = "FoodLuxMeaUITests"
+               ReferencedContainer = "container:FoodLuxMea.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "25988CA5251F5005006E24A3"
+               BuildableName = "FoodLuxMeaTests.xctest"
+               BlueprintName = "FoodLuxMeaTests"
+               ReferencedContainer = "container:FoodLuxMea.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
