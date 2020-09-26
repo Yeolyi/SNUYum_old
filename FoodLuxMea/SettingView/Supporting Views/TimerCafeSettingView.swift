@@ -31,7 +31,7 @@ struct TimerCafeSettingView: View {
         VStack {
             // MARK: - Custom Navigation bar.
             HStack {
-                CustomHeader(title: "알리미 설정", subTitle: "설정")
+                CustomHeader(title: "운영정보 바로보기", subTitle: "설정")
                 Spacer()
                 Button(action: {
                         self.presentationMode.wrappedValue.dismiss()}) {
@@ -53,8 +53,12 @@ struct TimerCafeSettingView: View {
             Divider()
             ScrollView {
                 VStack(spacing: 0) {
-                    Text(timerGuide)
-                        .rowBackground()
+                    HStack {
+                        Spacer()
+                        Text(timerGuide)
+                            .rowBackground()
+                        Spacer()
+                    }
                     Text("설정")
                         .sectionText()
                     SimpleToggle(isOn: $tempIsTimerCafe, label: "알리미 켜기")

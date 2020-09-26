@@ -70,7 +70,7 @@ struct SettingView: View {
                 // Basic setting - Cafe timer.
                 Button(action: { self.activeSheet = .timer }) {
                     HStack {
-                        Text("알리미 설정")
+                        Text("운영정보 바로보기")
                             .font(.system(size: 18))
                         Spacer()
                         Text(settingManager.alimiCafeName ?? "꺼짐")
