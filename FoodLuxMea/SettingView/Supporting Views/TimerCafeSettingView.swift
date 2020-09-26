@@ -13,8 +13,8 @@ struct TimerCafeSettingView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
     
-    @EnvironmentObject var listManager: ListManager
-    @EnvironmentObject var settingManager: SettingManager
+    @EnvironmentObject var listManager: CafeList
+    @EnvironmentObject var settingManager: UserSetting
     let themeColor = ThemeColor()
     
     @State var selectedCafeName: String?
@@ -31,7 +31,7 @@ struct TimerCafeSettingView: View {
         VStack {
             // MARK: - Custom Navigation bar.
             HStack {
-                customNavigationBar(title: "알리미 설정", subTitle: "설정")
+                CustomHeader(title: "알리미 설정", subTitle: "설정")
                 Spacer()
                 Button(action: {
                         self.presentationMode.wrappedValue.dismiss()}) {
@@ -98,7 +98,7 @@ struct TimerCafeSettingView: View {
 struct TimerSelectView_Previews: PreviewProvider {
     static var previews: some View {
         TimerCafeSettingView()
-            .environmentObject(ListManager())
-            .environmentObject(SettingManager())
+            .environmentObject(CafeList())
+            .environmentObject(UserSetting())
     }
 }

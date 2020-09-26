@@ -12,12 +12,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    let runtimeManager = RuntimeManager()
+    let runtimeManager = AppStatus()
     //Initialize essential manager class.
-    let listManager = ListManager()
-    let dataManager = DataManager()
+    let listManager = CafeList()
+    let dataManager = Cafeteria()
     let contentView = ContentView()
-    let settingManager = SettingManager()
+    let settingManager = UserSetting()
     let erasableRowManager = ErasableRowManager()
     
     func scene(

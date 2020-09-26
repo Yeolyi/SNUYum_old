@@ -10,14 +10,14 @@ import Foundation
 /**
  Manage adequate meal type based on time.
  */
-class MenuSuggestion {
+class DailyProposer {
     
     // Default SimpleTimeBorder structs in case operating hour does not exists.
     static let bkfDefaultTime = SimpleTime(hour: 10)
     static let lunchDefaultTime = SimpleTime(hour: 15)
     static let dinnerDefaultTime = SimpleTime(hour: 19)
     
-    static func properMenu(at date: Date, cafeName: String) -> (isTomorrow: Bool, meal: MealType) {
+    static func menu(at date: Date, cafeName: String) -> (isTomorrow: Bool, meal: MealType) {
         let currentSimpleDate = SimpleTime(date: date)
         let bkfEndTime: SimpleTime?
         let lunchEndTime: SimpleTime?
@@ -31,13 +31,13 @@ class MenuSuggestion {
             lunchEndTime = nil
             dinnerEndTime = nil
         }
-        let isTomorrow = (dinnerEndTime ?? MenuSuggestion.dinnerDefaultTime) < currentSimpleDate
+        let isTomorrow = (dinnerEndTime ?? DailyProposer.dinnerDefaultTime) < currentSimpleDate
         let suggestedMeal: MealType
-        if currentSimpleDate < (bkfEndTime ?? MenuSuggestion.bkfDefaultTime) {
+        if currentSimpleDate < (bkfEndTime ?? DailyProposer.bkfDefaultTime) {
             suggestedMeal = .breakfast
-        } else if currentSimpleDate < (lunchEndTime ?? MenuSuggestion.lunchDefaultTime) {
+        } else if currentSimpleDate < (lunchEndTime ?? DailyProposer.lunchDefaultTime) {
             suggestedMeal = .lunch
-        } else if currentSimpleDate < (dinnerEndTime ?? MenuSuggestion.dinnerDefaultTime) {
+        } else if currentSimpleDate < (dinnerEndTime ?? DailyProposer.dinnerDefaultTime) {
             suggestedMeal = .dinner
         } else {
             suggestedMeal = .breakfast

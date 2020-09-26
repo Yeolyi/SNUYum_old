@@ -12,7 +12,7 @@ import SwiftUI
 /// Important: If variable name changes, userdefault crashes when accessing previous setting.
 ///
 /// - ToDo: Make version compatible - solution to userdefault error
-class SettingManager: ObservableObject {
+class UserSetting: ObservableObject {
     
     /// Current meal view mode in main view; breakfast only, lunch only or dinner only.
     ///
@@ -113,7 +113,7 @@ class SettingManager: ObservableObject {
     
     /// Update setting if timer cafe changes. 
     func update() {
-        (isSuggestedTomorrow, suggestedMeal) = MenuSuggestion.properMenu(at: date, cafeName: alimiCafeName ?? "3식당")
+        (isSuggestedTomorrow, suggestedMeal) = DailyProposer.menu(at: date, cafeName: alimiCafeName ?? "3식당")
         print("SettingManager updated.")
     }
 }

@@ -25,7 +25,7 @@ class ErasableRowManager: ObservableObject {
                 print(erasableMessages)
             }
         }
-        if RuntimeManager.isFirstVersionRun {
+        if AppStatus.isFirstVersionRun {
             erasableMessages += newMessages
         }
     }

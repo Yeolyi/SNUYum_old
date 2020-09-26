@@ -12,11 +12,11 @@ class ClippedCafeManager: ObservableObject {
     
     @Published var cafeData: [Cafe]
     @Published var date = Date()
-    @Published var suggested = MenuSuggestion.properMenu(at: Date(), cafeName: "학생회관식당")
+    @Published var suggested = DailyProposer.menu(at: Date(), cafeName: "학생회관식당")
     
     init() {
-        let ourHomeManager = OurhomeManager()
-        cafeData = SNUCOManager.download(at: Date())
+        let ourHomeManager = OurhomeStorage()
+        cafeData = SNUCODownloader.download(at: Date())
         if let ourhomeCafe = ourHomeManager.getCafe(date: Date()) {
             cafeData.append(ourhomeCafe)
         }
@@ -24,7 +24,7 @@ class ClippedCafeManager: ObservableObject {
     
     func update() {
         date = Date()
-        suggested = MenuSuggestion.properMenu(at: Date(), cafeName: "학생회관식당")
+        suggested = DailyProposer.menu(at: Date(), cafeName: "학생회관식당")
     }
     
 }
@@ -39,7 +39,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HStack {
-                customNavigationBar(title: "식단 바로보기", subTitle: "스누냠 App Clip")
+                CustomHeader(title: "식단 바로보기", subTitle: "스누냠 App Clip")
                 Spacer()
             }
             Divider()
@@ -90,7 +90,7 @@ struct ContentView: View {
     }
     
     func isMenuEmpty(of cafe: Cafe) -> Bool {
-        cafe.menus(at: MenuSuggestion.properMenu(at: Date(), cafeName: cafe.name).meal).isEmpty
+        cafe.menus(at: DailyProposer.menu(at: Date(), cafeName: cafe.name).meal).isEmpty
     }
 }
 

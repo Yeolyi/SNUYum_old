@@ -13,14 +13,14 @@ struct ListOrderSettingView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
     
-    @EnvironmentObject var listManager: ListManager
-    @EnvironmentObject var settingManager: SettingManager
+    @EnvironmentObject var listManager: CafeList
+    @EnvironmentObject var settingManager: UserSetting
     let themeColor = ThemeColor()
     
-    @State var tempListManager = ListManager()
+    @State var tempListManager = CafeList()
     
     /// - Parameter cafeListBackup: Backup [ListElement] to restore data when sheet is closed or dismissed
-    init(cafeListBackup: [ListElement]) {
+    init(cafeListBackup: [CafeMaterial]) {
         tempListManager.cafeList = cafeListBackup
     }
     
@@ -28,7 +28,7 @@ struct ListOrderSettingView: View {
         VStack {
             // MARK: - Custom navigation bar
             HStack {
-                customNavigationBar(title: "목록 수정", subTitle: "설정")
+                CustomHeader(title: "목록 수정", subTitle: "설정")
                 Spacer()
                 Button(action: {
                         self.presentationMode.wrappedValue.dismiss()}) {
@@ -114,8 +114,8 @@ struct ListOrderSettingView: View {
 struct ListReorder_Previews: PreviewProvider {
     static var previews: some View {
         ListOrderSettingView(cafeListBackup: [])
-            .environmentObject(ListManager())
-            .environmentObject(DataManager())
-            .environmentObject(SettingManager())
+            .environmentObject(CafeList())
+            .environmentObject(Cafeteria())
+            .environmentObject(UserSetting())
     }
 }

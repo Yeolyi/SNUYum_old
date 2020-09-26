@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// - Note: Ourhome data uses one cafe struct. As this class downloads one week amount of cafe data,
 /// this has independent data storage and userdefaults.
-class OurhomeManager {
+class OurhomeStorage {
     
     /// Independent cafeData storage.
     ///
@@ -95,7 +95,7 @@ class OurhomeManager {
         
         do {
             let uRLContents = makeURL(from: date)
-            let parsed = try SNUCOManager.parse(uRLContents)
+            let parsed = try SNUCODownloader.parse(uRLContents)
             
             // Divide rows - each row has 8 columns.
             let rawCafeList = try parsed.select("div#container").select("tbody").select("tr").array()

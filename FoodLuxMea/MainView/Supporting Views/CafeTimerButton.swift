@@ -11,16 +11,16 @@ import SwiftUI
 ///
 /// - Note: Must use suggestedDate and suggestedMeal propery of SettingManager, because Timer always based on suggested
 /// time and meal.
-struct CafeTimerButton: View {
+struct CafeTimer: View {
     
     let cafe: Cafe
     /// Determines to show sheet on tap or not.
     let isInMainView: Bool
     @State var isCafeViewSheet = false
     
-    @EnvironmentObject var listManager: ListManager
-    @EnvironmentObject var dataManager: DataManager
-    @EnvironmentObject var settingManager: SettingManager
+    @EnvironmentObject var listManager: CafeList
+    @EnvironmentObject var dataManager: Cafeteria
+    @EnvironmentObject var settingManager: UserSetting
     let themeColor = ThemeColor()
     
     @Environment(\.colorScheme) var colorScheme
@@ -33,11 +33,22 @@ struct CafeTimerButton: View {
     var body: some View {
         // If view is in mainview, show sheet.
         Button(action: { isCafeViewSheet = isInMainView }) {
-            Text(remainingTimeNotice())
-                .accentedText()
-                .foregroundColor(themeColor.title(colorScheme))
-                .centered()
-                .rowBackground()
+            VStack {
+                HStack {
+                    Text(isInMainView ? "\(cafe.name) 운영정보" : "운영정보")
+                        .accentedText()
+                        .foregroundColor(themeColor.title(colorScheme))
+                        .padding(.bottom, 1.5)
+                    Spacer()
+                }
+                HStack {
+                    Text(remainingTimeNotice())
+                        .font(.system(size: 15))
+                        .foregroundColor(.primary)
+                    Spacer()
+                }
+            }
+            .rowBackground()
         }
         .sheet(isPresented: $isCafeViewSheet) {
             CafeView(cafeInfo: cafe)
@@ -94,7 +105,7 @@ struct CafeTimerButton: View {
         
         func getDate(from simpleDate: SimpleTime) -> Date {
             let userCalendar = Calendar.current
-            var dateComponents = DateComponents()
+            var dateComponents = DateComponents() 
             dateComponents.hour = simpleDate.hour
             dateComponents.minute = simpleDate.minute
             return userCalendar.date(from: dateComponents) ?? settingManager.date
@@ -110,9 +121,9 @@ struct CafeTimerButton: View {
 
 struct CafeTimerText_Previews: PreviewProvider {
     static var previews: some View {
-        CafeTimerButton(of: previewCafe, isInMainView: true)
-            .environmentObject(DataManager())
-            .environmentObject(SettingManager())
-            .environmentObject(ListManager())
+        CafeTimer(of: previewCafe, isInMainView: true)
+            .environmentObject(Cafeteria())
+            .environmentObject(UserSetting())
+            .environmentObject(CafeList())
     }
 }

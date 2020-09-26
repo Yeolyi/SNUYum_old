@@ -14,7 +14,7 @@ enum MealButtonOptions {
 /// View with buttons to select meal type.
 struct MealSelect: View {
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var settingManager: SettingManager
+    @EnvironmentObject var settingManager: UserSetting
     let themeColor = ThemeColor()
     
     var body: some View {
@@ -30,10 +30,6 @@ struct MealSelect: View {
                 MealTypeButton(buttonType: .auto)
             }
         }
-        .padding(5)
-        .background(colorScheme == .dark ? Color.white.opacity(0.1) : Color.gray.opacity(0.05))
-        .cornerRadius(10)
-        .padding(.top, 5)
     }
 }
 
@@ -44,7 +40,7 @@ struct MealTypeButton: View {
     let imageName: String
     
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var settingManager: SettingManager
+    @EnvironmentObject var settingManager: UserSetting
     var themeColor = ThemeColor()
     
     /// - Parameter buttonType: Select which meal type this button represents
@@ -118,7 +114,7 @@ struct MealTypeButton: View {
 }
 
 struct MealTypeSelectView_Previews: PreviewProvider {
-    static var settingManager = SettingManager()
+    static var settingManager = UserSetting()
     
     static var previews: some View {
         settingManager.mealViewMode = .lunch

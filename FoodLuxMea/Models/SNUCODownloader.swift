@@ -13,7 +13,7 @@ enum TestError: Error {
 }
 
 /// Get data from snuco website and process it into Cafe array.
-struct SNUCOManager {
+struct SNUCODownloader {
     
     struct TempCafeData {
         let name: String

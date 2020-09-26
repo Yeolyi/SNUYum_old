@@ -8,37 +8,20 @@
 import Foundation
 import CoreData
 
-/// Determines how single cafe data displayed.
-///
-/// Includes information about if cafe is fixed and shown.
-///
-/// - Important: There always should be corresponding ListElement for each cafe data in DataManager.
-///
-/// - Note: Default value is unfixed.
-struct ListElement: Hashable, Codable, Identifiable {
-    var id = UUID()
-    /// Cafe's name
-    var name: String = ""
-    /// Always show cafe on the top of the list
-    var isFixed: Bool = false
-    /// Show cafe in list
-    var isShown: Bool = true
-}
-
 /// Manages how whole cafe data will be displayed.
-class ListManager: ObservableObject {
+class CafeList: ObservableObject {
     
     /// ListElement storage.
     ///
     /// - Note: Published variable because scene should be updated every time it changes.
-    @Published var cafeList: [ListElement] = []
+    @Published var cafeList: [CafeMaterial] = []
     
     /// Return fixed cafe ListElement array.
-    var fixedList: [ListElement] {
+    var fixedList: [CafeMaterial] {
         cafeList.filter { $0.isFixed == true }
     }
     /// Return unfixed cafe ListElement array.
-    var unfixedList: [ListElement] {
+    var unfixedList: [CafeMaterial] {
         cafeList.filter { $0.isFixed == false }
     }
     
@@ -49,7 +32,7 @@ class ListManager: ObservableObject {
         if let loadedData =
             UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeList") as? Data {
             do {
-                cafeList = try PropertyListDecoder().decode([ListElement].self, from: loadedData)
+                cafeList = try PropertyListDecoder().decode([CafeMaterial].self, from: loadedData)
             } catch {
                 assertionFailure("ListManager load error.")
             }

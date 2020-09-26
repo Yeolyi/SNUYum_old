@@ -18,7 +18,7 @@ struct AboutAppView: View {
         VStack {
             // MARK: - Custom navigationbar.
             HStack {
-                customNavigationBar(title: "스누냠 정보", subTitle: "설정")
+                CustomHeader(title: "스누냠 정보", subTitle: "설정")
                 Spacer()
                 Button(
                     action: { self.presentationMode.wrappedValue.dismiss()}) {

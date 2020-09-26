@@ -17,8 +17,8 @@ struct CafeView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
     
-    @EnvironmentObject var cafeList: ListManager
-    @EnvironmentObject var settingManager: SettingManager
+    @EnvironmentObject var cafeList: CafeList
+    @EnvironmentObject var settingManager: UserSetting
     let themeColor = ThemeColor()
     
     /// - Parameter cafeInfo: Cafe data to show in this view.
@@ -60,7 +60,7 @@ struct CafeView: View {
             ScrollView {
                 Text("안내")
                     .sectionText()
-                CafeTimerButton(of: cafe, isInMainView: false)
+                CafeTimer(of: cafe, isInMainView: false)
                 MealSection(cafe: cafe, mealType: .breakfast)
                 MealSection(cafe: cafe, mealType: .lunch)
                 MealSection(cafe: cafe, mealType: .dinner)
@@ -123,61 +123,10 @@ struct CafeView: View {
     }
 }
 
-/**
- Single meal information section.
- 
- - Parameters:
- - mealType: Determines which data to show.
- - mealMenus: Data to show.
- */
-struct MealSection: View {
-    
-    let cafe: Cafe
-    let mealType: MealType
-    
-    @Environment(\.colorScheme) var colorScheme
-    
-    @EnvironmentObject var settingManager: SettingManager
-    let themeColor = ThemeColor()
-    
-    var body: some View {
-        if cafe.menus(at: mealType).isEmpty == false {
-                VStack {
-                    Text(
-                        
-                        mealType.rawValue + " (" +
-                            (cafeOperatingHour[cafe.name]?.daily(at: settingManager.date)?
-                                .rawValue(at: mealType) ?? "시간 정보 없음")
-                            + ")"
-                    )
-                    .sectionText()
-                    ForEach(cafe.menus(at: mealType)) { menu in
-                        HStack {
-                            Text(menu.name)
-                                .accentedText()
-                                .foregroundColor(self.themeColor.title(self.colorScheme))
-                                .fixedSize(horizontal: false, vertical: true)
-                                .onTapGesture {
-                                    print(menu.name)
-                                }
-                            Spacer()
-                            Text(menu.costInterpret())
-                                .foregroundColor(Color(.gray))
-                        }
-                        .onTapGesture {
-                            print(menu.name)
-                        }
-                        .rowBackground()
-                    }
-                }
-        }
-    }
-}
-
 struct CafeView_Previews: PreviewProvider {
-    static var dataManager = DataManager()
-    static var listManager = ListManager()
-    static var settingManager = SettingManager()
+    static var dataManager = Cafeteria()
+    static var listManager = CafeList()
+    static var settingManager = UserSetting()
     
     static var previews: some View {
         

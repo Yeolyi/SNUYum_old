@@ -23,7 +23,7 @@ struct MapView: View {
     var body: some View {
         VStack {
             HStack {
-                customNavigationBar(title: "위치 정보", subTitle: cafeInfo.name)
+                CustomHeader(title: "위치 정보", subTitle: cafeInfo.name)
                 Spacer()
                 Button(action: { self.presentationMode.wrappedValue.dismiss()}) {
                     Text("닫기")

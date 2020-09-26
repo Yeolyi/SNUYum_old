@@ -17,9 +17,9 @@ struct CafeRow: View {
     
     let themeColor = ThemeColor()
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var listManager: ListManager
-    @EnvironmentObject var dataManager: DataManager
-    @EnvironmentObject var settingManager: SettingManager
+    @EnvironmentObject var listManager: CafeList
+    @EnvironmentObject var dataManager: Cafeteria
+    @EnvironmentObject var settingManager: UserSetting
 
     /**
      - Parameters:
@@ -42,7 +42,6 @@ struct CafeRow: View {
                         .padding(.bottom, 1.5)
                     Spacer()
                 }
-                Spacer()
                 Group {
                     if searchText == "" {
                         ForEach(cafe.menus(at: suggestedMeal).filter { !$0.name.contains("※")}) { menu in
@@ -140,8 +139,8 @@ struct CafeRow: View {
 struct CafeListRow_Previews: PreviewProvider {
     static var previews: some View {
         CafeRow(cafe: previewCafe, suggestedMeal: .lunch, searchText: "")
-            .environmentObject(ListManager())
-            .environmentObject(DataManager())
-            .environmentObject(SettingManager())
+            .environmentObject(CafeList())
+            .environmentObject(Cafeteria())
+            .environmentObject(UserSetting())
     }
 }

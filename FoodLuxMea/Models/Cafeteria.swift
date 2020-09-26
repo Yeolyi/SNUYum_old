@@ -8,16 +8,16 @@
 import SwiftUI
 
 /// Retrieves, saves and updates all cafe datas.
-class DataManager: ObservableObject {
+class Cafeteria: ObservableObject {
     
     /// Cafe struct storage.
     ///
     /// - Note: Using dictionary with URL key to find stored data efficient.
     private var cafeData: [URL: [Cafe]] = [:]
     /// Downloads snuco cafe datas.
-    private var hTMLManager = SNUCOManager()
+    private var hTMLManager = SNUCODownloader()
     /// Downloads ourhome cafe data.
-    private var ourhomeManager = OurhomeManager()
+    private var ourhomeManager = OurhomeStorage()
     
     /**
      Loads existing datas or initializes them into default values.
@@ -27,7 +27,7 @@ class DataManager: ObservableObject {
      - Important: If data managing algorithm changes, existing data should be deleted and reloaded
      */
     init() {
-        if RuntimeManager.isFirstVersionRun {
+        if AppStatus.isFirstVersionRun {
             if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
                 userDefault.removeObject(forKey: "cafeData")
                 print("Cafe data cleared.")
@@ -64,14 +64,14 @@ class DataManager: ObservableObject {
     
     /// Get all data of certain date.
     func loadAll(at date: Date) -> [Cafe] {
-        let uRLString = SNUCOManager.makeURL(from: date)
+        let uRLString = SNUCODownloader.makeURL(from: date)
         if let data = cafeData[uRLString] {
             return data
         } else {
-            if RuntimeManager.isInternetConnected {
+            if AppStatus.isInternetConnected {
                 print("Downloading cafe data at \(date)")
                 let newData =
-                    SNUCOManager.download(at: date) +
+                    SNUCODownloader.download(at: date) +
                     (ourhomeManager.getCafe(date: date) != nil ? [ourhomeManager.getCafe(date: date)!] : [])
                 cafeData[uRLString] = newData
                 save()
@@ -89,11 +89,11 @@ class DataManager: ObservableObject {
      - Remark: If there's no such cafe, returns empty cafe struct with same name.
      */
     func cafe(at date: Date, name: String) -> Cafe? {
-        let uRLString = SNUCOManager.makeURL(from: date)
+        let uRLString = SNUCODownloader.makeURL(from: date)
         if let data = cafeData[uRLString] {
             return data.first { $0.name == name }
         } else {
-            if RuntimeManager.isInternetConnected {
+            if AppStatus.isInternetConnected {
                 print("CafeDataManager.getData(at: name: ): 다운로드 중, \(uRLString)")
                 let newData = self.loadAll(at: date)
                 cafeData[uRLString] = newData
