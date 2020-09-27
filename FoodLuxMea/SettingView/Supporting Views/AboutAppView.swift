@@ -34,25 +34,37 @@ struct AboutAppView: View {
             Image("Icon-1024")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 150.0, height: 150)
+                .frame(width: 100, height: 100)
             // MARK: - ScrollView.
             ScrollView {
                 Text("버전")
                     .sectionText()
                 HStack {
                     Spacer()
-                    Text(appVersion)
+                    Text("\(appVersion)(\(build))")
                     Spacer()
                 }
                 .rowBackground()
-                Text("빌드")
-                    .sectionText()
-                HStack {
-                    Spacer()
-                    Text(build)
-                    Spacer()
+                if #available(iOS 14, *) {
+                    Text("관련 링크")
+                        .sectionText()
+                    HStack {
+                        Spacer()
+                        Link("소스코드(github)",
+                              destination: URL(string: "https://github.com/Yeolyi/SNUYum")!)
+                            .foregroundColor(.primary)
+                        Spacer()
+                    }
+                    .rowBackground()
+                    HStack {
+                        Spacer()
+                        Link("어플리케이션 지원",
+                              destination: URL(string: "https://yeolyi.github.io/SnuYumSupport/")!)
+                            .foregroundColor(.primary)
+                        Spacer()
+                    }
+                    .rowBackground()
                 }
-                .rowBackground()
                 Text("자료 참조")
                     .sectionText()
                 HStack {

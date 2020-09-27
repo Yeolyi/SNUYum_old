@@ -55,7 +55,7 @@ struct ContentView: View {
                                             .foregroundColor(themeColor.icon(colorScheme))
                                     } else {
                                         Image(systemName: "gear")
-                                            .font(.system(size: 30, weight: .regular))
+                                            .font(.system(size: 25, weight: .regular))
                                             .foregroundColor(themeColor.icon(colorScheme))
                                     }
                                 }

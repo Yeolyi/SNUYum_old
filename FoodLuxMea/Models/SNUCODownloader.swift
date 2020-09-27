@@ -57,7 +57,7 @@ struct SNUCODownloader {
             }
             return cafeData
         } catch {
-            assertionFailure("Html 소스 분리에 실패하였습니다.")
+            //assertionFailure("Html 소스 분리에 실패하였습니다.")
             return []
         }
     }
