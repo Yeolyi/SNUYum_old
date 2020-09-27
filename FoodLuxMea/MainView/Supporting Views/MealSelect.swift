@@ -20,7 +20,8 @@ struct MealSelect: View {
     var body: some View {
         HStack {
             Text("\(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.meal.rawValue) 식단")
-                .foregroundColor(.secondary)
+                .font(.headline)
+                .foregroundColor(themeColor.title(colorScheme))
                 .padding(.leading)
             Spacer()
             HStack {
