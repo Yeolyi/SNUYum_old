@@ -12,7 +12,6 @@
 		250BBBDA24F3F8F900FC0C84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 250BBBD924F3F8F900FC0C84 /* Assets.xcassets */; };
 		250BBBDD24F3F8F900FC0C84 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 250BBBDC24F3F8F900FC0C84 /* Preview Assets.xcassets */; };
 		250BBBE024F3F8F900FC0C84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250BBBDE24F3F8F900FC0C84 /* LaunchScreen.storyboard */; };
-		250BBBF024F3F92E00FC0C84 /* CafeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBE924F3F92D00FC0C84 /* CafeList.swift */; };
 		250BBBF124F3F92E00FC0C84 /* DailyProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEA24F3F92D00FC0C84 /* DailyProposer.swift */; };
 		250BBBF324F3F92E00FC0C84 /* OperatingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEC24F3F92D00FC0C84 /* OperatingTime.swift */; };
 		250BBBF524F3F92E00FC0C84 /* ThemeColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEE24F3F92D00FC0C84 /* ThemeColor+.swift */; };
@@ -27,8 +26,21 @@
 		250BBC2824F3FAC800FC0C84 /* SectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1B24F3FAC700FC0C84 /* SectionText.swift */; };
 		250BBC2924F3FAC800FC0C84 /* CafeView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1C24F3FAC800FC0C84 /* CafeView+.swift */; };
 		250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */; };
+		25137FC425260A6D00A1326C /* DailyProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEA24F3F92D00FC0C84 /* DailyProposer.swift */; };
+		25152DCA25250C5700BE63BF /* CafeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBE924F3F92D00FC0C84 /* CafeList.swift */; };
+		25152E19252510F400BE63BF /* CafeNameExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25152E01252510F400BE63BF /* CafeNameExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		25152E6B2525136100BE63BF /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25152E03252510F400BE63BF /* IntentHandler.swift */; };
+		25152E822525141C00BE63BF /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25152E03252510F400BE63BF /* IntentHandler.swift */; };
+		25152EA6252515C400BE63BF /* SnuYumWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 25E0051B2524F3E0001C5783 /* SnuYumWidget.intentdefinition */; };
 		251E3527251E9B03003F017D /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251E3526251E9B03003F017D /* Blur.swift */; };
 		251E352B251E9B47003F017D /* CustomizedCorneredRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251E352A251E9B47003F017D /* CustomizedCorneredRadius.swift */; };
+		2525283F2525002700FD2069 /* SNUCODownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* SNUCODownloader.swift */; };
+		252528452525002800FD2069 /* OurhomeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF78002503B306006372C7 /* OurhomeStorage.swift */; };
+		2525284B2525015D00FD2069 /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25340D5E251395CC00E7FA7A /* Cafe.swift */; };
+		252528512525016200FD2069 /* Menu+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C58CA25165D0200310FA8 /* Menu+.swift */; };
+		252528572525016400FD2069 /* OperatingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEC24F3F92D00FC0C84 /* OperatingTime.swift */; };
+		2525285D2525016600FD2069 /* SimpleTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C58CC25165DD200310FA8 /* SimpleTime.swift */; };
+		252528632525028D00FD2069 /* CafeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25647B6E24F9FFC900E1C3F0 /* CafeInformation.swift */; };
 		252B96AC2517ADBC000475C6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 252B96AB2517ADBC000475C6 /* .swiftlint.yml */; };
 		25340D5F251395CC00E7FA7A /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25340D5E251395CC00E7FA7A /* Cafe.swift */; };
 		253637DD251D112C001038FD /* CustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A627952513BB5000313CD3 /* CustomHeader.swift */; };
@@ -78,12 +90,29 @@
 		25CDB5EA251BCA260041D0BD /* ThemeColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEE24F3F92D00FC0C84 /* ThemeColor+.swift */; };
 		25CDB5ED251BCA870041D0BD /* AccentedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593233124FBB5F40036C148 /* AccentedText.swift */; };
 		25CDB5F0251BCB2F0041D0BD /* RowBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A627932513B92600313CD3 /* RowBackground.swift */; };
+		25E005162524F3E0001C5783 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E005152524F3E0001C5783 /* WidgetKit.framework */; };
+		25E005172524F3E0001C5783 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250BBBFF24F3F9CD00FC0C84 /* SwiftUI.framework */; };
+		25E0051A2524F3E0001C5783 /* SnuYumWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E005192524F3E0001C5783 /* SnuYumWidget.swift */; };
+		25E0051D2524F3E3001C5783 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25E0051C2524F3E3001C5783 /* Assets.xcassets */; };
+		25E0051F2524F3E3001C5783 /* SnuYumWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 25E0051B2524F3E0001C5783 /* SnuYumWidget.intentdefinition */; };
+		25E005202524F3E3001C5783 /* SnuYumWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 25E0051B2524F3E0001C5783 /* SnuYumWidget.intentdefinition */; };
+		25E005232524F3E3001C5783 /* SnuYumWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25E005142524F3E0001C5783 /* SnuYumWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		25FF78012503B306006372C7 /* OurhomeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF78002503B306006372C7 /* OurhomeStorage.swift */; };
-		2B2054A4F9DBF9BAC28C5D68 /* Pods_FoodLuxMea.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB9D69D5A536412BB020A26 /* Pods_FoodLuxMea.framework */; };
-		ED017B71EFDBEEC65A1AF44B /* libPods-SnuYumAppClip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEC83BC8026AB4011E61CC78 /* libPods-SnuYumAppClip.a */; };
+		71458EE058F37C07CA14E43C /* Pods_SnuYumAppClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA60914004BF667D881667EE /* Pods_SnuYumAppClip.framework */; };
+		724261C998D8C73A5B7B3CAE /* Pods_FoodLuxMea_FoodLuxMeaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16A72A726383B0BE2E1E54F3 /* Pods_FoodLuxMea_FoodLuxMeaUITests.framework */; };
+		86AF7276CB1291CB6D143D16 /* Pods_FoodLuxMeaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C9CFFC06DA2651AB46EE850 /* Pods_FoodLuxMeaTests.framework */; };
+		95B47521AA2C7F8E84B66E77 /* Pods_SnuYumWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036AB374AF699B5023115B98 /* Pods_SnuYumWidgetExtension.framework */; };
+		AD1812652897B2E3EFB1B0C6 /* Pods_FoodLuxMea.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10168B11198225A742C445F7 /* Pods_FoodLuxMea.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		25152E17252510F400BE63BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250BBBC824F3F8F700FC0C84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25152E00252510F400BE63BF;
+			remoteInfo = CafeNameExtension;
+		};
 		25988CAB251F5005006E24A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 250BBBC824F3F8F700FC0C84 /* Project object */;
@@ -105,6 +134,13 @@
 			remoteGlobalIDString = 25B52B47251BBDEC00D7A94E;
 			remoteInfo = SnuYumAppClip;
 		};
+		25E005212524F3E3001C5783 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 250BBBC824F3F8F700FC0C84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 25E005132524F3E0001C5783;
+			remoteInfo = SnuYumWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -114,6 +150,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				25152E19252510F400BE63BF /* CafeNameExtension.appex in Embed App Extensions */,
+				25E005232524F3E3001C5783 /* SnuYumWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,7 +170,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0EE2AF767B2705D69DFCF00B /* Pods-SnuYumAppClip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.release.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.release.xcconfig"; sourceTree = "<group>"; };
+		036AB374AF699B5023115B98 /* Pods_SnuYumWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnuYumWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		10168B11198225A742C445F7 /* Pods_FoodLuxMea.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLuxMea.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1315845988EF02B55A98FA99 /* Pods-SnuYumAppClip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.release.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.release.xcconfig"; sourceTree = "<group>"; };
+		16A72A726383B0BE2E1E54F3 /* Pods_FoodLuxMea_FoodLuxMeaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLuxMea_FoodLuxMeaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		18270B4A5321495CE7541736 /* Pods-FoodLuxMea.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.debug.xcconfig"; sourceTree = "<group>"; };
 		2500739524F54A37009A32FA /* UserSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
 		250ADF5D251A8701008D83B8 /* AppStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatus.swift; sourceTree = "<group>"; };
 		250BBBD024F3F8F700FC0C84 /* FoodLuxMea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodLuxMea.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +199,10 @@
 		250BBC1B24F3FAC700FC0C84 /* SectionText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionText.swift; sourceTree = "<group>"; };
 		250BBC1C24F3FAC800FC0C84 /* CafeView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CafeView+.swift"; sourceTree = "<group>"; };
 		250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealSelect.swift; sourceTree = "<group>"; };
+		25152E01252510F400BE63BF /* CafeNameExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CafeNameExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		25152E03252510F400BE63BF /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		25152E05252510F400BE63BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25152E0B252510F400BE63BF /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
 		251E3526251E9B03003F017D /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		251E352A251E9B47003F017D /* CustomizedCorneredRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizedCorneredRadius.swift; sourceTree = "<group>"; };
 		252B96AB2517ADBC000475C6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -201,12 +247,23 @@
 		25C805062501144900B7E4CC /* NanumMyeongjo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumMyeongjo.ttf; sourceTree = "<group>"; };
 		25C80508250114BA00B7E4CC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		25C805092501171B00B7E4CC /* NanumBarunpenR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumBarunpenR.ttf; sourceTree = "<group>"; };
+		25E005142524F3E0001C5783 /* SnuYumWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SnuYumWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		25E005152524F3E0001C5783 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		25E005192524F3E0001C5783 /* SnuYumWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnuYumWidget.swift; sourceTree = "<group>"; };
+		25E0051B2524F3E0001C5783 /* SnuYumWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = SnuYumWidget.intentdefinition; sourceTree = "<group>"; };
+		25E0051C2524F3E3001C5783 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		25E0051E2524F3E3001C5783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25FF78002503B306006372C7 /* OurhomeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurhomeStorage.swift; sourceTree = "<group>"; };
-		82B2DC576B3E996455CB35A5 /* Pods-FoodLuxMea.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.release.xcconfig"; sourceTree = "<group>"; };
-		8A4E52AF76FB79DBCE25EE1C /* Pods-FoodLuxMea.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.debug.xcconfig"; sourceTree = "<group>"; };
-		A751E6CB3AFC7AC3CEF96689 /* Pods-SnuYumAppClip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.debug.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.debug.xcconfig"; sourceTree = "<group>"; };
-		AFB9D69D5A536412BB020A26 /* Pods_FoodLuxMea.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLuxMea.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EEC83BC8026AB4011E61CC78 /* libPods-SnuYumAppClip.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnuYumAppClip.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C9CFFC06DA2651AB46EE850 /* Pods_FoodLuxMeaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLuxMeaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		355847C25783CC79EC1C31FA /* Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3B93678AC489B46A176BEF1F /* Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		9B95DA39F2FE62C301FBEAF5 /* Pods-FoodLuxMeaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMeaTests.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMeaTests/Pods-FoodLuxMeaTests.release.xcconfig"; sourceTree = "<group>"; };
+		A75BA360685537A426E6B8D2 /* Pods-SnuYumAppClip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.debug.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.debug.xcconfig"; sourceTree = "<group>"; };
+		C6E45AC807A0A392296A2C52 /* Pods-FoodLuxMeaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMeaTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMeaTests/Pods-FoodLuxMeaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C986CEDFE724DD68C1B7446C /* Pods-SnuYumWidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumWidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-SnuYumWidgetExtension/Pods-SnuYumWidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		D02A90BAAA9F2295A16EECA3 /* Pods-SnuYumWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-SnuYumWidgetExtension/Pods-SnuYumWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
+		DA60914004BF667D881667EE /* Pods_SnuYumAppClip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnuYumAppClip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E845E7793229617ACDF816C8 /* Pods-FoodLuxMea.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,7 +271,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B2054A4F9DBF9BAC28C5D68 /* Pods_FoodLuxMea.framework in Frameworks */,
+				AD1812652897B2E3EFB1B0C6 /* Pods_FoodLuxMea.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25152DFE252510F400BE63BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86AF7276CB1291CB6D143D16 /* Pods_FoodLuxMeaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +294,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				724261C998D8C73A5B7B3CAE /* Pods_FoodLuxMea_FoodLuxMeaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,7 +302,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED017B71EFDBEEC65A1AF44B /* libPods-SnuYumAppClip.a in Frameworks */,
+				71458EE058F37C07CA14E43C /* Pods_SnuYumAppClip.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25E005112524F3E0001C5783 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25E005172524F3E0001C5783 /* SwiftUI.framework in Frameworks */,
+				25E005162524F3E0001C5783 /* WidgetKit.framework in Frameworks */,
+				95B47521AA2C7F8E84B66E77 /* Pods_SnuYumWidgetExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +327,8 @@
 				25B52B49251BBDEC00D7A94E /* SnuYumAppClip */,
 				25988CA7251F5005006E24A3 /* FoodLuxMeaTests */,
 				25988CBF251F542E006E24A3 /* FoodLuxMeaUITests */,
+				25E005182524F3E0001C5783 /* SnuYumWidget */,
+				25152E02252510F400BE63BF /* CafeNameExtension */,
 				250BBBFC24F3F9CD00FC0C84 /* Frameworks */,
 				8AA4CDD938B269F0A7BB912D /* Pods */,
 				250BBBD124F3F8F700FC0C84 /* Products */,
@@ -264,6 +342,8 @@
 				25B52B48251BBDEC00D7A94E /* SnuYumAppClip.app */,
 				25988CA6251F5005006E24A3 /* FoodLuxMeaTests.xctest */,
 				25988CBE251F542E006E24A3 /* FoodLuxMeaUITests.xctest */,
+				25E005142524F3E0001C5783 /* SnuYumWidgetExtension.appex */,
+				25152E01252510F400BE63BF /* CafeNameExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -300,8 +380,13 @@
 			children = (
 				25B52BB6251BC63F00D7A94E /* SwiftSoup.framework */,
 				250BBBFF24F3F9CD00FC0C84 /* SwiftUI.framework */,
-				AFB9D69D5A536412BB020A26 /* Pods_FoodLuxMea.framework */,
-				EEC83BC8026AB4011E61CC78 /* libPods-SnuYumAppClip.a */,
+				25E005152524F3E0001C5783 /* WidgetKit.framework */,
+				10168B11198225A742C445F7 /* Pods_FoodLuxMea.framework */,
+				16A72A726383B0BE2E1E54F3 /* Pods_FoodLuxMea_FoodLuxMeaUITests.framework */,
+				2C9CFFC06DA2651AB46EE850 /* Pods_FoodLuxMeaTests.framework */,
+				DA60914004BF667D881667EE /* Pods_SnuYumAppClip.framework */,
+				036AB374AF699B5023115B98 /* Pods_SnuYumWidgetExtension.framework */,
+				25152E0B252510F400BE63BF /* IntentsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -313,6 +398,15 @@
 				2591C73F25020F4E00704673 /* PrivateData.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		25152E02252510F400BE63BF /* CafeNameExtension */ = {
+			isa = PBXGroup;
+			children = (
+				25152E03252510F400BE63BF /* IntentHandler.swift */,
+				25152E05252510F400BE63BF /* Info.plist */,
+			);
+			path = CafeNameExtension;
 			sourceTree = "<group>";
 		};
 		25340D63251396B900E7FA7A /* Supporting Views */ = {
@@ -480,13 +574,30 @@
 			path = SettingView;
 			sourceTree = "<group>";
 		};
+		25E005182524F3E0001C5783 /* SnuYumWidget */ = {
+			isa = PBXGroup;
+			children = (
+				25E005192524F3E0001C5783 /* SnuYumWidget.swift */,
+				25E0051B2524F3E0001C5783 /* SnuYumWidget.intentdefinition */,
+				25E0051C2524F3E3001C5783 /* Assets.xcassets */,
+				25E0051E2524F3E3001C5783 /* Info.plist */,
+			);
+			path = SnuYumWidget;
+			sourceTree = "<group>";
+		};
 		8AA4CDD938B269F0A7BB912D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8A4E52AF76FB79DBCE25EE1C /* Pods-FoodLuxMea.debug.xcconfig */,
-				82B2DC576B3E996455CB35A5 /* Pods-FoodLuxMea.release.xcconfig */,
-				A751E6CB3AFC7AC3CEF96689 /* Pods-SnuYumAppClip.debug.xcconfig */,
-				0EE2AF767B2705D69DFCF00B /* Pods-SnuYumAppClip.release.xcconfig */,
+				18270B4A5321495CE7541736 /* Pods-FoodLuxMea.debug.xcconfig */,
+				E845E7793229617ACDF816C8 /* Pods-FoodLuxMea.release.xcconfig */,
+				3B93678AC489B46A176BEF1F /* Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig */,
+				355847C25783CC79EC1C31FA /* Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig */,
+				C6E45AC807A0A392296A2C52 /* Pods-FoodLuxMeaTests.debug.xcconfig */,
+				9B95DA39F2FE62C301FBEAF5 /* Pods-FoodLuxMeaTests.release.xcconfig */,
+				A75BA360685537A426E6B8D2 /* Pods-SnuYumAppClip.debug.xcconfig */,
+				1315845988EF02B55A98FA99 /* Pods-SnuYumAppClip.release.xcconfig */,
+				C986CEDFE724DD68C1B7446C /* Pods-SnuYumWidgetExtension.debug.xcconfig */,
+				D02A90BAAA9F2295A16EECA3 /* Pods-SnuYumWidgetExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -498,29 +609,49 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 250BBBE424F3F8F900FC0C84 /* Build configuration list for PBXNativeTarget "FoodLuxMea" */;
 			buildPhases = (
-				B1A8392E441BF37EAA8D2D36 /* [CP] Check Pods Manifest.lock */,
+				B349259A0F42798BDD429890 /* [CP] Check Pods Manifest.lock */,
 				250BBBCC24F3F8F700FC0C84 /* Sources */,
 				250BBBCD24F3F8F700FC0C84 /* Frameworks */,
 				250BBBCE24F3F8F700FC0C84 /* Resources */,
 				250BBC0D24F3F9CF00FC0C84 /* Embed App Extensions */,
 				252B96A92517AD02000475C6 /* ShellScript */,
 				25B52B5D251BBDF000D7A94E /* Embed App Clips */,
-				E39D5EB1C972FFC938F8BD53 /* [CP] Embed Pods Frameworks */,
+				8B73D9575112122F12E04A15 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				25B52B5B251BBDF000D7A94E /* PBXTargetDependency */,
+				25E005222524F3E3001C5783 /* PBXTargetDependency */,
+				25152E18252510F400BE63BF /* PBXTargetDependency */,
 			);
 			name = FoodLuxMea;
 			productName = FoodLuxMea;
 			productReference = 250BBBD024F3F8F700FC0C84 /* FoodLuxMea.app */;
 			productType = "com.apple.product-type.application";
 		};
+		25152E00252510F400BE63BF /* CafeNameExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25152E1D252510F400BE63BF /* Build configuration list for PBXNativeTarget "CafeNameExtension" */;
+			buildPhases = (
+				25152DFD252510F400BE63BF /* Sources */,
+				25152DFE252510F400BE63BF /* Frameworks */,
+				25152DFF252510F400BE63BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CafeNameExtension;
+			productName = CafeNameExtension;
+			productReference = 25152E01252510F400BE63BF /* CafeNameExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		25988CA5251F5005006E24A3 /* FoodLuxMeaTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25988CAD251F5005006E24A3 /* Build configuration list for PBXNativeTarget "FoodLuxMeaTests" */;
 			buildPhases = (
+				496734BE3205357EEE3FCB46 /* [CP] Check Pods Manifest.lock */,
 				25988CA2251F5005006E24A3 /* Sources */,
 				25988CA3251F5005006E24A3 /* Frameworks */,
 				25988CA4251F5005006E24A3 /* Resources */,
@@ -539,9 +670,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25988CC5251F542E006E24A3 /* Build configuration list for PBXNativeTarget "FoodLuxMeaUITests" */;
 			buildPhases = (
+				B89513F9525B6EB8353C9D7E /* [CP] Check Pods Manifest.lock */,
 				25988CBA251F542E006E24A3 /* Sources */,
 				25988CBB251F542E006E24A3 /* Frameworks */,
 				25988CBC251F542E006E24A3 /* Resources */,
+				180CB621BC0D44D9ADBE4BE5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -557,7 +690,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25B52B60251BBDF000D7A94E /* Build configuration list for PBXNativeTarget "SnuYumAppClip" */;
 			buildPhases = (
-				B99A6A1F40D4817465075F29 /* [CP] Check Pods Manifest.lock */,
+				0E6D9A0F4AABF85E88947C0A /* [CP] Check Pods Manifest.lock */,
 				25B52B44251BBDEC00D7A94E /* Sources */,
 				25B52B45251BBDEC00D7A94E /* Frameworks */,
 				25B52B46251BBDEC00D7A94E /* Resources */,
@@ -571,6 +704,24 @@
 			productReference = 25B52B48251BBDEC00D7A94E /* SnuYumAppClip.app */;
 			productType = "com.apple.product-type.application.on-demand-install-capable";
 		};
+		25E005132524F3E0001C5783 /* SnuYumWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25E005262524F3E3001C5783 /* Build configuration list for PBXNativeTarget "SnuYumWidgetExtension" */;
+			buildPhases = (
+				0F6A1AA201CE410C5ACB3EA0 /* [CP] Check Pods Manifest.lock */,
+				25E005102524F3E0001C5783 /* Sources */,
+				25E005112524F3E0001C5783 /* Frameworks */,
+				25E005122524F3E0001C5783 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SnuYumWidgetExtension;
+			productName = SnuYumWidgetExtension;
+			productReference = 25E005142524F3E0001C5783 /* SnuYumWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -583,6 +734,9 @@
 					250BBBCF24F3F8F700FC0C84 = {
 						CreatedOnToolsVersion = 12.0;
 					};
+					25152E00252510F400BE63BF = {
+						CreatedOnToolsVersion = 12.0;
+					};
 					25988CA5251F5005006E24A3 = {
 						CreatedOnToolsVersion = 12.0;
 						TestTargetID = 250BBBCF24F3F8F700FC0C84;
@@ -593,6 +747,9 @@
 					};
 					25B52B47251BBDEC00D7A94E = {
 						CreatedOnToolsVersion = 12.2;
+					};
+					25E005132524F3E0001C5783 = {
+						CreatedOnToolsVersion = 12.0;
 					};
 				};
 			};
@@ -614,6 +771,8 @@
 				25B52B47251BBDEC00D7A94E /* SnuYumAppClip */,
 				25988CA5251F5005006E24A3 /* FoodLuxMeaTests */,
 				25988CBD251F542E006E24A3 /* FoodLuxMeaUITests */,
+				25E005132524F3E0001C5783 /* SnuYumWidgetExtension */,
+				25152E00252510F400BE63BF /* CafeNameExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -629,6 +788,13 @@
 				250BBBDD24F3F8F900FC0C84 /* Preview Assets.xcassets in Resources */,
 				25C8050A2501171B00B7E4CC /* NanumBarunpenR.ttf in Resources */,
 				250BBBDA24F3F8F900FC0C84 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25152DFF252510F400BE63BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,49 +822,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25E005122524F3E0001C5783 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25E0051D2524F3E3001C5783 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		252B96A92517AD02000475C6 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint\n";
-		};
-		B1A8392E441BF37EAA8D2D36 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FoodLuxMea-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B99A6A1F40D4817465075F29 /* [CP] Check Pods Manifest.lock */ = {
+		0E6D9A0F4AABF85E88947C0A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -720,7 +855,85 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E39D5EB1C972FFC938F8BD53 /* [CP] Embed Pods Frameworks */ = {
+		0F6A1AA201CE410C5ACB3EA0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SnuYumWidgetExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		180CB621BC0D44D9ADBE4BE5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		252B96A92517AD02000475C6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+		496734BE3205357EEE3FCB46 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FoodLuxMeaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B73D9575112122F12E04A15 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -737,6 +950,50 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B349259A0F42798BDD429890 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FoodLuxMea-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B89513F9525B6EB8353C9D7E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FoodLuxMea-FoodLuxMeaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -744,6 +1001,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25152DCA25250C5700BE63BF /* CafeList.swift in Sources */,
 				250BBC2424F3FAC800FC0C84 /* CafeRow.swift in Sources */,
 				251E352B251E9B47003F017D /* CustomizedCorneredRadius.swift in Sources */,
 				25B52BA3251BC47800D7A94E /* Cafeteria.swift in Sources */,
@@ -772,9 +1030,9 @@
 				250BBC2224F3FAC800FC0C84 /* SettingView.swift in Sources */,
 				2593233224FBB5F40036C148 /* AccentedText.swift in Sources */,
 				25A627962513BB5000313CD3 /* CustomHeader.swift in Sources */,
+				25E005202524F3E3001C5783 /* SnuYumWidget.intentdefinition in Sources */,
 				25A627942513B92600313CD3 /* RowBackground.swift in Sources */,
 				2589DF38251B37FC00813B51 /* ErasableRow.swift in Sources */,
-				250BBBF024F3F92E00FC0C84 /* CafeList.swift in Sources */,
 				255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */,
 				250BBBF324F3F92E00FC0C84 /* OperatingTime.swift in Sources */,
 				25647B6F24F9FFC900E1C3F0 /* CafeInformation.swift in Sources */,
@@ -786,6 +1044,15 @@
 				250BBC2924F3FAC800FC0C84 /* CafeView+.swift in Sources */,
 				250ADF5E251A8701008D83B8 /* AppStatus.swift in Sources */,
 				250BBC1F24F3FAC800FC0C84 /* ListOrderSettingView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25152DFD252510F400BE63BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25152E6B2525136100BE63BF /* IntentHandler.swift in Sources */,
+				25152EA6252515C400BE63BF /* SnuYumWidget.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,9 +1097,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25E005102524F3E0001C5783 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				252528632525028D00FD2069 /* CafeInformation.swift in Sources */,
+				25E0051A2524F3E0001C5783 /* SnuYumWidget.swift in Sources */,
+				252528572525016400FD2069 /* OperatingTime.swift in Sources */,
+				2525283F2525002700FD2069 /* SNUCODownloader.swift in Sources */,
+				25137FC425260A6D00A1326C /* DailyProposer.swift in Sources */,
+				252528512525016200FD2069 /* Menu+.swift in Sources */,
+				2525285D2525016600FD2069 /* SimpleTime.swift in Sources */,
+				25152E822525141C00BE63BF /* IntentHandler.swift in Sources */,
+				25E0051F2524F3E3001C5783 /* SnuYumWidget.intentdefinition in Sources */,
+				2525284B2525015D00FD2069 /* Cafe.swift in Sources */,
+				252528452525002800FD2069 /* OurhomeStorage.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		25152E18252510F400BE63BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25152E00252510F400BE63BF /* CafeNameExtension */;
+			targetProxy = 25152E17252510F400BE63BF /* PBXContainerItemProxy */;
+		};
 		25988CAC251F5005006E24A3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 250BBBCF24F3F8F700FC0C84 /* FoodLuxMea */;
@@ -847,6 +1137,11 @@
 			isa = PBXTargetDependency;
 			target = 25B52B47251BBDEC00D7A94E /* SnuYumAppClip */;
 			targetProxy = 25B52B5A251BBDF000D7A94E /* PBXContainerItemProxy */;
+		};
+		25E005222524F3E3001C5783 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 25E005132524F3E0001C5783 /* SnuYumWidgetExtension */;
+			targetProxy = 25E005212524F3E3001C5783 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -993,7 +1288,7 @@
 		};
 		250BBBE524F3F8F900FC0C84 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A4E52AF76FB79DBCE25EE1C /* Pods-FoodLuxMea.debug.xcconfig */;
+			baseConfigurationReference = 18270B4A5321495CE7541736 /* Pods-FoodLuxMea.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1029,7 +1324,7 @@
 		};
 		250BBBE624F3F8F900FC0C84 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82B2DC576B3E996455CB35A5 /* Pods-FoodLuxMea.release.xcconfig */;
+			baseConfigurationReference = E845E7793229617ACDF816C8 /* Pods-FoodLuxMea.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1062,8 +1357,51 @@
 			};
 			name = Release;
 		};
+		25152E1E252510F400BE63BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4954Z45396;
+				INFOPLIST_FILE = CafeNameExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea.CafeNameExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		25152E1F252510F400BE63BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4954Z45396;
+				INFOPLIST_FILE = CafeNameExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea.CafeNameExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		25988CAE251F5005006E24A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C6E45AC807A0A392296A2C52 /* Pods-FoodLuxMeaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1085,6 +1423,7 @@
 		};
 		25988CAF251F5005006E24A3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B95DA39F2FE62C301FBEAF5 /* Pods-FoodLuxMeaTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1106,6 +1445,7 @@
 		};
 		25988CC6251F542E006E24A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B93678AC489B46A176BEF1F /* Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4954Z45396;
@@ -1126,6 +1466,7 @@
 		};
 		25988CC7251F542E006E24A3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 355847C25783CC79EC1C31FA /* Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4954Z45396;
@@ -1146,7 +1487,7 @@
 		};
 		25B52B5E251BBDF000D7A94E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A751E6CB3AFC7AC3CEF96689 /* Pods-SnuYumAppClip.debug.xcconfig */;
+			baseConfigurationReference = A75BA360685537A426E6B8D2 /* Pods-SnuYumAppClip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1173,7 +1514,7 @@
 		};
 		25B52B5F251BBDF000D7A94E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0EE2AF767B2705D69DFCF00B /* Pods-SnuYumAppClip.release.xcconfig */;
+			baseConfigurationReference = 1315845988EF02B55A98FA99 /* Pods-SnuYumAppClip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1198,6 +1539,54 @@
 			};
 			name = Release;
 		};
+		25E005242524F3E3001C5783 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C986CEDFE724DD68C1B7446C /* Pods-SnuYumWidgetExtension.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4954Z45396;
+				INFOPLIST_FILE = SnuYumWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea.SnuYumWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		25E005252524F3E3001C5783 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D02A90BAAA9F2295A16EECA3 /* Pods-SnuYumWidgetExtension.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4954Z45396;
+				INFOPLIST_FILE = SnuYumWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea.SnuYumWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1215,6 +1604,15 @@
 			buildConfigurations = (
 				250BBBE524F3F8F900FC0C84 /* Debug */,
 				250BBBE624F3F8F900FC0C84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25152E1D252510F400BE63BF /* Build configuration list for PBXNativeTarget "CafeNameExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25152E1E252510F400BE63BF /* Debug */,
+				25152E1F252510F400BE63BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1242,6 +1640,15 @@
 			buildConfigurations = (
 				25B52B5E251BBDF000D7A94E /* Debug */,
 				25B52B5F251BBDF000D7A94E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25E005262524F3E3001C5783 /* Build configuration list for PBXNativeTarget "SnuYumWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25E005242524F3E3001C5783 /* Debug */,
+				25E005252524F3E3001C5783 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

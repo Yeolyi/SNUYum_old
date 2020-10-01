@@ -100,7 +100,7 @@ struct ContentView: View {
                 }
             }
         }
-        .appStoreOverlay(isPresented: $showApp, configuration: {SKOverlay.AppClipConfiguration(position: .bottom)})
+        //.appStoreOverlay(isPresented: $showApp, configuration: {SKOverlay.AppClipConfiguration(position: .bottom)})
     }
     
     func isMenuEmpty(of cafe: Cafe) -> Bool {
