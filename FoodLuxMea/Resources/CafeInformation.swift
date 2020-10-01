@@ -21,6 +21,7 @@ var previewCafe = Cafe(
     dinnerMenuList: [
         Menu(name: "dinnerMenu1", cost: 1700),
         Menu(name: "dinnerMenu2", cost: 5000),
+        Menu(name: "dinnerMenu3", cost: 2000),
     ]
 )
 
