@@ -112,7 +112,7 @@ var cafeOperatingHour: [String: WeeklyOperatingHour] = [
     ),
     
     "공대간이식당": .init(
-        weekday: .init(nil, "11:00-16:00", "16:00-18:30"),
+        weekday: .init(nil, "11:00-14:30", "15:30-18:30"),
         saturday: nil,
         sunday: nil
     ),

@@ -1165,7 +1165,7 @@
 				CODE_SIGN_ENTITLEMENTS = FoodLuxMea/FoodLuxMea.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodLuxMea/Preview Content\"";
 				DEVELOPMENT_TEAM = 4954Z45396;
 				ENABLE_ONLY_ACTIVE_RESOURCES = YES;
@@ -1223,7 +1223,7 @@
 					"-framework",
 					"\"StoreKit\"",
 					"-framework",
-					"\"SwiftSoup-iOS13.0\"",
+					"\"SwiftSoup\"",
 					"-framework",
 					"\"SystemConfiguration\"",
 					"-framework",
@@ -1261,7 +1261,7 @@
 				CODE_SIGN_ENTITLEMENTS = FoodLuxMea/FoodLuxMea.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodLuxMea/Preview Content\"";
 				DEVELOPMENT_TEAM = 4954Z45396;
 				ENABLE_ONLY_ACTIVE_RESOURCES = YES;
@@ -1318,7 +1318,7 @@
 					"-framework",
 					"\"StoreKit\"",
 					"-framework",
-					"\"SwiftSoup-iOS13.0\"",
+					"\"SwiftSoup\"",
 					"-framework",
 					"\"SystemConfiguration\"",
 					"-framework",
@@ -1352,7 +1352,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 4954Z45396;
 				INFOPLIST_FILE = CafeNameExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1376,7 +1376,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 4954Z45396;
 				INFOPLIST_FILE = CafeNameExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1403,7 +1403,7 @@
 				CODE_SIGN_ENTITLEMENTS = SnuYumAppClip/SnuYumAppClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"SnuYumAppClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 4954Z45396;
 				ENABLE_PREVIEWS = YES;
@@ -1417,7 +1417,7 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
-					"\"SwiftSoup-iOS14.0\"",
+					"\"SwiftSoup\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1435,7 +1435,7 @@
 				CODE_SIGN_ENTITLEMENTS = SnuYumAppClip/SnuYumAppClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"SnuYumAppClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 4954Z45396;
 				ENABLE_PREVIEWS = YES;
@@ -1449,7 +1449,7 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
-					"\"SwiftSoup-iOS14.0\"",
+					"\"SwiftSoup\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea.Clip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1466,7 +1466,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 4954Z45396;
 				INFOPLIST_FILE = SnuYumWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1479,7 +1479,7 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
-					"\"SwiftSoup-iOS14.0\"",
+					"\"SwiftSoup\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea.SnuYumWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1497,7 +1497,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 4954Z45396;
 				INFOPLIST_FILE = SnuYumWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1510,7 +1510,7 @@
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
-					"\"SwiftSoup-iOS14.0\"",
+					"\"SwiftSoup\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wannasleep.FoodLuxMea.SnuYumWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";

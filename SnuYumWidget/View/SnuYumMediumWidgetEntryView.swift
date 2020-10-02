@@ -30,7 +30,7 @@ struct SnuYumMediumWidgetEntryView: View {
         }
         dayOfWeek = dateFormatter.string(from: targetDate)
         endTime = cafeOperatingHour[entry.cafe.name]?.daily(at: entry.date)?.endTime(at: entry.meal)?.string()
-        menuTrimmed = entry.cafe.menus(at: entry.meal).filter{ !$0.name.contains("운영") && !$0.name.contains("혼잡") }
+        menuTrimmed = entry.cafe.menus(at: entry.meal).filter { !$0.name.contains("운영") && !$0.name.contains("혼잡") }
     }
     
     var body: some View {
