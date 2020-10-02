@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B6C7DA59B21F61328C3CA2B /* Pods_SnuYumWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB65E838D4CC2E56A1701D45 /* Pods_SnuYumWidgetExtension.framework */; };
-		17AFA1BC3447B0485271A0EF /* Pods_FoodLuxMeaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0763F1A3724B11276CF43C /* Pods_FoodLuxMeaTests.framework */; };
+		198033BF04002D2BF9DDA6A5 /* libPods-FoodLuxMea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 220351ACEAC2B15D95C185AC /* libPods-FoodLuxMea.a */; };
 		2500739624F54A37009A32FA /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2500739524F54A37009A32FA /* UserSetting.swift */; };
 		2505883625267E8F0018E3A8 /* SnuYumMediumWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505882E25267E250018E3A8 /* SnuYumMediumWidgetEntryView.swift */; };
 		2505884325267E920018E3A8 /* SnuYumSmallWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505882025267DF10018E3A8 /* SnuYumSmallWidgetEntryView.swift */; };
@@ -108,9 +107,10 @@
 		25E0051F2524F3E3001C5783 /* SnuYumWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 25E0051B2524F3E0001C5783 /* SnuYumWidget.intentdefinition */; };
 		25E005232524F3E3001C5783 /* SnuYumWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25E005142524F3E0001C5783 /* SnuYumWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		25FF78012503B306006372C7 /* OurhomeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF78002503B306006372C7 /* OurhomeStorage.swift */; };
-		65BAFE5205915E3B1E001E0B /* Pods_SnuYumAppClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A70EC8F2E9AB7F6E5CEF6B6 /* Pods_SnuYumAppClip.framework */; };
-		BAF44E20DC87E7219D205B7B /* Pods_FoodLuxMea_FoodLuxMeaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 327A3EE3EC6BA805D2F31A43 /* Pods_FoodLuxMea_FoodLuxMeaUITests.framework */; };
-		FBE843D577F3F7BBA9308FA2 /* Pods_FoodLuxMea.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69F320498E8A1BE9F91ABB4 /* Pods_FoodLuxMea.framework */; };
+		4C9283F79D74F19E26DB38CB /* libPods-FoodLuxMeaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 379ADA996BEC2978C50A070F /* libPods-FoodLuxMeaTests.a */; };
+		9DF8A0BA9EA3614427BB3440 /* Pods_SnuYumAppClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57E0D9C544A555926DCE57BC /* Pods_SnuYumAppClip.framework */; };
+		B4945F8E143F76EC86F86BCC /* libPods-FoodLuxMea-FoodLuxMeaUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C36BACC4C714EBF6FA950F9A /* libPods-FoodLuxMea-FoodLuxMeaUITests.a */; };
+		E1894223D074105BFDC3B7DA /* libPods-SnuYumWidgetExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 743A86D82DA93DC88AC123EC /* libPods-SnuYumWidgetExtension.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,10 +178,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0060A39B1F922FC7D80BABB5 /* Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig"; sourceTree = "<group>"; };
-		12BE302460695BFA56CDC014 /* Pods-FoodLuxMeaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMeaTests.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMeaTests/Pods-FoodLuxMeaTests.release.xcconfig"; sourceTree = "<group>"; };
-		15DFD7EFA00E2CB0C2C27772 /* Pods-SnuYumAppClip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.release.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.release.xcconfig"; sourceTree = "<group>"; };
-		1A70EC8F2E9AB7F6E5CEF6B6 /* Pods_SnuYumAppClip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnuYumAppClip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0145FED9A187717EA004772A /* Pods-FoodLuxMea.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.debug.xcconfig"; sourceTree = "<group>"; };
+		220351ACEAC2B15D95C185AC /* libPods-FoodLuxMea.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodLuxMea.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2500739524F54A37009A32FA /* UserSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
 		2505882025267DF10018E3A8 /* SnuYumSmallWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnuYumSmallWidgetEntryView.swift; sourceTree = "<group>"; };
 		2505882E25267E250018E3A8 /* SnuYumMediumWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnuYumMediumWidgetEntryView.swift; sourceTree = "<group>"; };
@@ -269,17 +267,19 @@
 		25E0051C2524F3E3001C5783 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25E0051E2524F3E3001C5783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25FF78002503B306006372C7 /* OurhomeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurhomeStorage.swift; sourceTree = "<group>"; };
-		2D7569D17449E728D32ACE5E /* Pods-FoodLuxMea.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.debug.xcconfig"; sourceTree = "<group>"; };
-		327A3EE3EC6BA805D2F31A43 /* Pods_FoodLuxMea_FoodLuxMeaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLuxMea_FoodLuxMeaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		34FF6DE6E393A740378F93A7 /* Pods-SnuYumAppClip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.debug.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.debug.xcconfig"; sourceTree = "<group>"; };
-		5D0763F1A3724B11276CF43C /* Pods_FoodLuxMeaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLuxMeaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A68D1FB3A0529AAF6DF66C04 /* Pods-FoodLuxMea.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.release.xcconfig"; sourceTree = "<group>"; };
-		A69F320498E8A1BE9F91ABB4 /* Pods_FoodLuxMea.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLuxMea.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B050E3261CC871C49293F284 /* Pods-SnuYumWidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumWidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-SnuYumWidgetExtension/Pods-SnuYumWidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		C2BD736AAE5F4856C2418510 /* Pods-FoodLuxMeaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMeaTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMeaTests/Pods-FoodLuxMeaTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C7CE8D2C867572FDD461DA3C /* Pods-SnuYumWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-SnuYumWidgetExtension/Pods-SnuYumWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
-		C93163A83B9D39895C84314D /* Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		DB65E838D4CC2E56A1701D45 /* Pods_SnuYumWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnuYumWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		337C6F27DE35162C1F8178FB /* Pods-SnuYumWidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumWidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-SnuYumWidgetExtension/Pods-SnuYumWidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		379ADA996BEC2978C50A070F /* libPods-FoodLuxMeaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodLuxMeaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		45EAAC8C64A863B08A30AC9F /* Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		57E0D9C544A555926DCE57BC /* Pods_SnuYumAppClip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnuYumAppClip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		743A86D82DA93DC88AC123EC /* libPods-SnuYumWidgetExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnuYumWidgetExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		99685A43628BBAFC26B6DF08 /* Pods-FoodLuxMeaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMeaTests.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMeaTests/Pods-FoodLuxMeaTests.release.xcconfig"; sourceTree = "<group>"; };
+		A8BE1141FD86493CDB1F8149 /* Pods-FoodLuxMea.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.release.xcconfig"; sourceTree = "<group>"; };
+		AEC1249794A19A9CFB46C600 /* Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B0BBD4F6A4E02E27568AAE58 /* Pods-SnuYumAppClip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.release.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.release.xcconfig"; sourceTree = "<group>"; };
+		BC640270424499D627FC0ADB /* Pods-SnuYumAppClip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.debug.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.debug.xcconfig"; sourceTree = "<group>"; };
+		BFF8A7A7CA47C5DD21DABE40 /* Pods-SnuYumWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-SnuYumWidgetExtension/Pods-SnuYumWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
+		C36BACC4C714EBF6FA950F9A /* libPods-FoodLuxMea-FoodLuxMeaUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FoodLuxMea-FoodLuxMeaUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA53B874376C0C9F87DE838D /* Pods-FoodLuxMeaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMeaTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMeaTests/Pods-FoodLuxMeaTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,7 +287,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBE843D577F3F7BBA9308FA2 /* Pods_FoodLuxMea.framework in Frameworks */,
+				198033BF04002D2BF9DDA6A5 /* libPods-FoodLuxMea.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,7 +302,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17AFA1BC3447B0485271A0EF /* Pods_FoodLuxMeaTests.framework in Frameworks */,
+				4C9283F79D74F19E26DB38CB /* libPods-FoodLuxMeaTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,7 +310,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAF44E20DC87E7219D205B7B /* Pods_FoodLuxMea_FoodLuxMeaUITests.framework in Frameworks */,
+				B4945F8E143F76EC86F86BCC /* libPods-FoodLuxMea-FoodLuxMeaUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +318,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65BAFE5205915E3B1E001E0B /* Pods_SnuYumAppClip.framework in Frameworks */,
+				9DF8A0BA9EA3614427BB3440 /* Pods_SnuYumAppClip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +328,7 @@
 			files = (
 				25E005172524F3E0001C5783 /* SwiftUI.framework in Frameworks */,
 				25E005162524F3E0001C5783 /* WidgetKit.framework in Frameworks */,
-				0B6C7DA59B21F61328C3CA2B /* Pods_SnuYumWidgetExtension.framework in Frameworks */,
+				E1894223D074105BFDC3B7DA /* libPods-SnuYumWidgetExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,11 +417,11 @@
 				250BBBFF24F3F9CD00FC0C84 /* SwiftUI.framework */,
 				25E005152524F3E0001C5783 /* WidgetKit.framework */,
 				25152E0B252510F400BE63BF /* IntentsUI.framework */,
-				A69F320498E8A1BE9F91ABB4 /* Pods_FoodLuxMea.framework */,
-				327A3EE3EC6BA805D2F31A43 /* Pods_FoodLuxMea_FoodLuxMeaUITests.framework */,
-				5D0763F1A3724B11276CF43C /* Pods_FoodLuxMeaTests.framework */,
-				1A70EC8F2E9AB7F6E5CEF6B6 /* Pods_SnuYumAppClip.framework */,
-				DB65E838D4CC2E56A1701D45 /* Pods_SnuYumWidgetExtension.framework */,
+				220351ACEAC2B15D95C185AC /* libPods-FoodLuxMea.a */,
+				C36BACC4C714EBF6FA950F9A /* libPods-FoodLuxMea-FoodLuxMeaUITests.a */,
+				379ADA996BEC2978C50A070F /* libPods-FoodLuxMeaTests.a */,
+				57E0D9C544A555926DCE57BC /* Pods_SnuYumAppClip.framework */,
+				743A86D82DA93DC88AC123EC /* libPods-SnuYumWidgetExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -644,16 +644,16 @@
 		8AA4CDD938B269F0A7BB912D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2D7569D17449E728D32ACE5E /* Pods-FoodLuxMea.debug.xcconfig */,
-				A68D1FB3A0529AAF6DF66C04 /* Pods-FoodLuxMea.release.xcconfig */,
-				C93163A83B9D39895C84314D /* Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig */,
-				0060A39B1F922FC7D80BABB5 /* Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig */,
-				C2BD736AAE5F4856C2418510 /* Pods-FoodLuxMeaTests.debug.xcconfig */,
-				12BE302460695BFA56CDC014 /* Pods-FoodLuxMeaTests.release.xcconfig */,
-				34FF6DE6E393A740378F93A7 /* Pods-SnuYumAppClip.debug.xcconfig */,
-				15DFD7EFA00E2CB0C2C27772 /* Pods-SnuYumAppClip.release.xcconfig */,
-				B050E3261CC871C49293F284 /* Pods-SnuYumWidgetExtension.debug.xcconfig */,
-				C7CE8D2C867572FDD461DA3C /* Pods-SnuYumWidgetExtension.release.xcconfig */,
+				0145FED9A187717EA004772A /* Pods-FoodLuxMea.debug.xcconfig */,
+				A8BE1141FD86493CDB1F8149 /* Pods-FoodLuxMea.release.xcconfig */,
+				45EAAC8C64A863B08A30AC9F /* Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig */,
+				AEC1249794A19A9CFB46C600 /* Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig */,
+				EA53B874376C0C9F87DE838D /* Pods-FoodLuxMeaTests.debug.xcconfig */,
+				99685A43628BBAFC26B6DF08 /* Pods-FoodLuxMeaTests.release.xcconfig */,
+				BC640270424499D627FC0ADB /* Pods-SnuYumAppClip.debug.xcconfig */,
+				B0BBD4F6A4E02E27568AAE58 /* Pods-SnuYumAppClip.release.xcconfig */,
+				337C6F27DE35162C1F8178FB /* Pods-SnuYumWidgetExtension.debug.xcconfig */,
+				BFF8A7A7CA47C5DD21DABE40 /* Pods-SnuYumWidgetExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -665,14 +665,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 250BBBE424F3F8F900FC0C84 /* Build configuration list for PBXNativeTarget "FoodLuxMea" */;
 			buildPhases = (
-				1739E8F1E6F275CDB87D84FB /* [CP] Check Pods Manifest.lock */,
+				2EDFDAF5A7647A969F80CC16 /* [CP] Check Pods Manifest.lock */,
 				250BBBCC24F3F8F700FC0C84 /* Sources */,
 				250BBBCD24F3F8F700FC0C84 /* Frameworks */,
 				250BBBCE24F3F8F700FC0C84 /* Resources */,
 				250BBC0D24F3F9CF00FC0C84 /* Embed App Extensions */,
 				252B96A92517AD02000475C6 /* ShellScript */,
 				25B52B5D251BBDF000D7A94E /* Embed App Clips */,
-				01F04FD7788CEA9650BD984E /* [CP] Embed Pods Frameworks */,
+				928D1C4301D3B0C1991B435C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -707,7 +707,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25988CAD251F5005006E24A3 /* Build configuration list for PBXNativeTarget "FoodLuxMeaTests" */;
 			buildPhases = (
-				0EC876EBC772A7998B7C7E95 /* [CP] Check Pods Manifest.lock */,
+				90048EBBACBE6A51B303B683 /* [CP] Check Pods Manifest.lock */,
 				25988CA2251F5005006E24A3 /* Sources */,
 				25988CA3251F5005006E24A3 /* Frameworks */,
 				25988CA4251F5005006E24A3 /* Resources */,
@@ -726,11 +726,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25988CC5251F542E006E24A3 /* Build configuration list for PBXNativeTarget "FoodLuxMeaUITests" */;
 			buildPhases = (
-				B613135DA5F6F4645995B8D5 /* [CP] Check Pods Manifest.lock */,
+				F7A861D685790FB7CE6117D7 /* [CP] Check Pods Manifest.lock */,
 				25988CBA251F542E006E24A3 /* Sources */,
 				25988CBB251F542E006E24A3 /* Frameworks */,
 				25988CBC251F542E006E24A3 /* Resources */,
-				7235A62D2E51FD2ECD2A44EE /* [CP] Embed Pods Frameworks */,
+				5E27FBE2356B09FA920094E6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -746,7 +746,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25B52B60251BBDF000D7A94E /* Build configuration list for PBXNativeTarget "SnuYumAppClip" */;
 			buildPhases = (
-				5EAE47833F0F982B9DA4E2C3 /* [CP] Check Pods Manifest.lock */,
+				F09F285F6C7FD7253D2CC211 /* [CP] Check Pods Manifest.lock */,
 				25B52B44251BBDEC00D7A94E /* Sources */,
 				25B52B45251BBDEC00D7A94E /* Frameworks */,
 				25B52B46251BBDEC00D7A94E /* Resources */,
@@ -764,7 +764,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25E005262524F3E3001C5783 /* Build configuration list for PBXNativeTarget "SnuYumWidgetExtension" */;
 			buildPhases = (
-				107C4CB275DFA5E7EB1B0BDC /* [CP] Check Pods Manifest.lock */,
+				2703A5EF549EFE55812694BA /* [CP] Check Pods Manifest.lock */,
 				25E005102524F3E0001C5783 /* Sources */,
 				25E005112524F3E0001C5783 /* Frameworks */,
 				25E005122524F3E0001C5783 /* Resources */,
@@ -889,24 +889,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		01F04FD7788CEA9650BD984E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0EC876EBC772A7998B7C7E95 /* [CP] Check Pods Manifest.lock */ = {
+		252B96A92517AD02000475C6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -914,21 +897,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FoodLuxMeaTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
-		107C4CB275DFA5E7EB1B0BDC /* [CP] Check Pods Manifest.lock */ = {
+		2703A5EF549EFE55812694BA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -950,7 +928,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1739E8F1E6F275CDB87D84FB /* [CP] Check Pods Manifest.lock */ = {
+		2EDFDAF5A7647A969F80CC16 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -972,7 +950,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		252B96A92517AD02000475C6 /* ShellScript */ = {
+		5E27FBE2356B09FA920094E6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90048EBBACBE6A51B303B683 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -980,16 +975,38 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FoodLuxMeaTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
-		5EAE47833F0F982B9DA4E2C3 /* [CP] Check Pods Manifest.lock */ = {
+		928D1C4301D3B0C1991B435C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F09F285F6C7FD7253D2CC211 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1011,24 +1028,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7235A62D2E51FD2ECD2A44EE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea-FoodLuxMeaUITests/Pods-FoodLuxMea-FoodLuxMeaUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B613135DA5F6F4645995B8D5 /* [CP] Check Pods Manifest.lock */ = {
+		F7A861D685790FB7CE6117D7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1352,7 +1352,7 @@
 		};
 		250BBBE524F3F8F900FC0C84 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D7569D17449E728D32ACE5E /* Pods-FoodLuxMea.debug.xcconfig */;
+			baseConfigurationReference = 0145FED9A187717EA004772A /* Pods-FoodLuxMea.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1361,7 +1361,7 @@
 				CODE_SIGN_ENTITLEMENTS = FoodLuxMea/FoodLuxMea.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodLuxMea/Preview Content\"";
 				DEVELOPMENT_TEAM = 4954Z45396;
 				ENABLE_ONLY_ACTIVE_RESOURCES = YES;
@@ -1388,7 +1388,7 @@
 		};
 		250BBBE624F3F8F900FC0C84 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A68D1FB3A0529AAF6DF66C04 /* Pods-FoodLuxMea.release.xcconfig */;
+			baseConfigurationReference = A8BE1141FD86493CDB1F8149 /* Pods-FoodLuxMea.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1397,7 +1397,7 @@
 				CODE_SIGN_ENTITLEMENTS = FoodLuxMea/FoodLuxMea.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"FoodLuxMea/Preview Content\"";
 				DEVELOPMENT_TEAM = 4954Z45396;
 				ENABLE_ONLY_ACTIVE_RESOURCES = YES;
@@ -1426,6 +1426,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 4954Z45396;
 				INFOPLIST_FILE = CafeNameExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1439,7 +1440,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1448,6 +1449,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 4954Z45396;
 				INFOPLIST_FILE = CafeNameExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1461,13 +1463,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		25988CAE251F5005006E24A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C2BD736AAE5F4856C2418510 /* Pods-FoodLuxMeaTests.debug.xcconfig */;
+			baseConfigurationReference = EA53B874376C0C9F87DE838D /* Pods-FoodLuxMeaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1489,7 +1491,7 @@
 		};
 		25988CAF251F5005006E24A3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 12BE302460695BFA56CDC014 /* Pods-FoodLuxMeaTests.release.xcconfig */;
+			baseConfigurationReference = 99685A43628BBAFC26B6DF08 /* Pods-FoodLuxMeaTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1511,7 +1513,7 @@
 		};
 		25988CC6251F542E006E24A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C93163A83B9D39895C84314D /* Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig */;
+			baseConfigurationReference = 45EAAC8C64A863B08A30AC9F /* Pods-FoodLuxMea-FoodLuxMeaUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4954Z45396;
@@ -1532,7 +1534,7 @@
 		};
 		25988CC7251F542E006E24A3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0060A39B1F922FC7D80BABB5 /* Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig */;
+			baseConfigurationReference = AEC1249794A19A9CFB46C600 /* Pods-FoodLuxMea-FoodLuxMeaUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4954Z45396;
@@ -1553,14 +1555,14 @@
 		};
 		25B52B5E251BBDF000D7A94E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34FF6DE6E393A740378F93A7 /* Pods-SnuYumAppClip.debug.xcconfig */;
+			baseConfigurationReference = BC640270424499D627FC0ADB /* Pods-SnuYumAppClip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SnuYumAppClip/SnuYumAppClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"SnuYumAppClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 4954Z45396;
 				ENABLE_PREVIEWS = YES;
@@ -1580,14 +1582,14 @@
 		};
 		25B52B5F251BBDF000D7A94E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15DFD7EFA00E2CB0C2C27772 /* Pods-SnuYumAppClip.release.xcconfig */;
+			baseConfigurationReference = B0BBD4F6A4E02E27568AAE58 /* Pods-SnuYumAppClip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SnuYumAppClip/SnuYumAppClip.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"SnuYumAppClip/Preview Content\"";
 				DEVELOPMENT_TEAM = 4954Z45396;
 				ENABLE_PREVIEWS = YES;
@@ -1607,12 +1609,13 @@
 		};
 		25E005242524F3E3001C5783 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B050E3261CC871C49293F284 /* Pods-SnuYumWidgetExtension.debug.xcconfig */;
+			baseConfigurationReference = 337C6F27DE35162C1F8178FB /* Pods-SnuYumWidgetExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 4954Z45396;
 				INFOPLIST_FILE = SnuYumWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1632,12 +1635,13 @@
 		};
 		25E005252524F3E3001C5783 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7CE8D2C867572FDD461DA3C /* Pods-SnuYumWidgetExtension.release.xcconfig */;
+			baseConfigurationReference = BFF8A7A7CA47C5DD21DABE40 /* Pods-SnuYumWidgetExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 4954Z45396;
 				INFOPLIST_FILE = SnuYumWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

@@ -3,7 +3,7 @@
 
 target 'FoodLuxMea' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+  # use_frameworks!
   pod 'SwiftSoup'
   pod 'NMapsMap'
   pod 'Google-Mobile-Ads-SDK'
@@ -31,7 +31,7 @@ end
 
 target 'SnuYumWidgetExtension' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+  # use_frameworks!
   pod 'SwiftSoup'
   # Pods for SnuYumWidgetExtension
 
