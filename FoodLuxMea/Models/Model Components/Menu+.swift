@@ -16,6 +16,21 @@ enum MealType: String, Codable {
     case breakfast = "아침"
     case lunch = "점심"
     case dinner = "저녁"
+    
+    static func next(meal: MealType) -> MealType {
+        switch meal {
+        case .breakfast: return .lunch
+        case .lunch: return .dinner
+        case .dinner: return .breakfast
+        }
+    }
+    static func previous(meal: MealType) -> MealType {
+        switch meal {
+        case .breakfast: return .dinner
+        case .lunch: return .breakfast
+        case .dinner: return .lunch
+        }
+    }
 }
 
 /// Data of a single menu.

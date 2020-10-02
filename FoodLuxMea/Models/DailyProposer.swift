@@ -17,6 +17,17 @@ class DailyProposer {
     static let lunchDefaultTime = SimpleTime(hour: 15)
     static let dinnerDefaultTime = SimpleTime(hour: 19)
     
+    static func getDefault(meal: MealType) -> SimpleTime {
+        switch meal {
+        case .breakfast:
+            return bkfDefaultTime
+        case .lunch:
+            return lunchDefaultTime
+        case .dinner:
+            return dinnerDefaultTime
+        }
+    }
+    //??왜 이따구로 짬??
     static func menu(at date: Date, cafeName: String) -> (isTomorrow: Bool, meal: MealType) {
         let currentSimpleDate = SimpleTime(date: date)
         let bkfEndTime: SimpleTime?

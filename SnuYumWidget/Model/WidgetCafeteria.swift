@@ -1,15 +1,13 @@
 //
-//  CafeDataManager.swift
+//  WidgetCafeteria.swift
 //  FoodLuxMea
 //
-//  Created by Seong Yeol Yi on 2020/08/23.
+//  Created by Seong Yeol Yi on 2020/10/02.
 //
 
-import SwiftUI
-import WidgetKit
+import Foundation
 
-/// Retrieves, saves and updates all cafe datas.
-class Cafeteria: ObservableObject {
+class Cafeteria {
     
     /// Cafe struct storage.
     ///
@@ -28,30 +26,19 @@ class Cafeteria: ObservableObject {
      - Important: If data managing algorithm changes, existing data should be deleted and reloaded
      */
     init() {
-        if appStatus.isFirstVersionRun {
-            if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
-                userDefault.removeObject(forKey: "cafeData")
-                print("Cafe data cleared.")
-                return
-            }
-        }
         if let loadedData =
             UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")?.value(forKey: "cafeData") as? Data {
             do {
                 cafeData = try PropertyListDecoder().decode([URL: [Cafe]].self, from: loadedData)
-                print("DataManager loaded.")
+                print("Widget: DataManager loaded.")
             } catch {
-                print("DataManager load failed.")
+                print("Widget: DataManager load failed.")
             }
         }
     }
     
     func clear() {
         cafeData = [:]
-        ourhomeManager.clear()
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        } 
     }
     
     func save() {
@@ -73,18 +60,12 @@ class Cafeteria: ObservableObject {
         if let data = cafeData[uRLString] {
             return data
         } else {
-            if appStatus.isInternetConnected {
-                print("Downloading cafe data at \(date)")
-                let newData =
-                    SNUCODownloader.download(at: date) +
-                    (ourhomeManager.getCafe(date: date) != nil ? [ourhomeManager.getCafe(date: date)!] : [])
-                cafeData[uRLString] = newData
-                save()
-                return newData
-            } else {
-                print("CafeDataManager.getData(): 인터넷 연결 안됨 \(date)")
-                return []
-            }
+            let newData =
+                SNUCODownloader.download(at: date) +
+                (ourhomeManager.getCafe(date: date) != nil ? [ourhomeManager.getCafe(date: date)!] : [])
+            cafeData[uRLString] = newData
+            save()
+            return newData
         }
     }
     
@@ -98,23 +79,10 @@ class Cafeteria: ObservableObject {
         if let data = cafeData[uRLString] {
             return data.first { $0.name == name }
         } else {
-            if appStatus.isInternetConnected {
-                print("CafeDataManager.getData(at: name: ): 다운로드 중, \(uRLString)")
-                let newData = self.loadAll(at: date)
-                cafeData[uRLString] = newData
-                for cafe in newData where cafe.name == name {
-                    return cafe
-                }
-            } else {
-                print("CafeDataManager.getData(at: , name: ): 인터넷 연결 안됨 \(date)")
-                return
-                    Cafe(
-                        name: name,
-                        phoneNum: phoneNumList[name] ?? "",
-                        bkfMenuList: [],
-                        lunchMenuList: [],
-                        dinnerMenuList: []
-                    )
+            let newData = self.loadAll(at: date)
+            cafeData[uRLString] = newData
+            for cafe in newData where cafe.name == name {
+                return cafe
             }
         }
         return nil

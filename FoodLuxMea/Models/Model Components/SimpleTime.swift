@@ -24,6 +24,10 @@ struct SimpleTime {
         self.minute = minute
     }
     
+    func string() -> String {
+        (hour > 12 ? "오후 " : "오전 ") + String(format: "%02d", hour) + ":" + String(format: "%02d", minute)
+    }
+    
     static func < (left: SimpleTime, right: SimpleTime) -> Bool {
         if left.hour < right.hour {
             return true

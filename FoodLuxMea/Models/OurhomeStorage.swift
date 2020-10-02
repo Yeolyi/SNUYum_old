@@ -33,6 +33,10 @@ class OurhomeStorage {
         }
     }
     
+    func clear() {
+        cafeData = [:]
+    }
+    
     /// Save downloaded data to optimize app.
     func save() {
         if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
@@ -108,7 +112,7 @@ class OurhomeStorage {
                     let menuName = try mealArray[columnNum].select("li").text()
                     let dayOfWeek = columnNum - wasteDataNum[rowNum]
                     let cost = getCost(menuName: try mealArray[columnNum].select("li").attr("class"))
-                    let menu = menuName == "" ? nil : Menu(name: "\(cafeNameOrder[rowNum]) - \(menuName)", cost: cost)
+                    let menu = menuName == "" ? nil : Menu(name: "\(menuName) - \(cafeNameOrder[rowNum])", cost: cost)
                     cafeDayofWeek[dayOfWeek]!.append(menu)
                 }
             }

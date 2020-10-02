@@ -75,7 +75,7 @@ struct CafeTimer: View {
             cafeOperatingHour[cafe.name]?.daily(
                 at: settingManager.date)?.endTime(at: settingManager.suggestedMeal) {
             // If menu exists in next meal.
-            if !cafe.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: settingManager.closedKeywords) {
+            if !cafe.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: closedKeywords) {
                 // Force unwrap is available becaufe startDate and endDate are always together.
                 let startTime = cafeOperatingHour[cafe.name]!.daily(at: settingManager.date)!
                     .startTime(at: settingManager.suggestedMeal)!

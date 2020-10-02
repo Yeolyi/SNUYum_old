@@ -76,7 +76,7 @@ struct CafeRowsFiltered: View {
     func listFilter(listElement: CafeMaterial) -> Bool {
         if let targetCafe = dataManager.cafe(at: settingManager.date, name: listElement.name) {
             if searchWord == "" {
-                if targetCafe.isEmpty(at: [settingManager.meal], emptyKeywords: settingManager.closedKeywords) {
+                if targetCafe.isEmpty(at: [settingManager.meal], emptyKeywords: closedKeywords) {
                     return !settingManager.hideEmptyCafe
                 } else {
                     return true

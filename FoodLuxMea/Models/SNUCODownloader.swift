@@ -134,13 +134,11 @@ struct SNUCODownloader {
                 // Exceptions.
                 if trimmedMenuNCost.isEmpty {
                     continue
-                } else if trimmedMenuNCost[trimmedMenuNCost.startIndex] == "※" {
-                    if trimmedMenuNCost.contains("운영") {
-                        continue
-                    } else if trimmedMenuNCost.contains("혼잡") {
-                        returnValue.append(.init(name: trimmedMenuNCost, cost: nil))
-                        continue
-                    }
+                } else if trimmedMenuNCost.contains("운영") {
+                    continue
+                } else if trimmedMenuNCost.contains("혼잡") {
+                    returnValue.append(.init(name: trimmedMenuNCost, cost: nil))
+                    continue
                 } else if trimmedMenuNCost[trimmedMenuNCost.startIndex] == "<" {
                     returnValue.append(.init(name: trimmedMenuNCost))
                     continue

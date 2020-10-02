@@ -46,9 +46,6 @@ class UserSetting: ObservableObject {
     /// Main view timer cafe name; nil if timer is set to be hidden.
     @Published var alimiCafeName: String? = "학생회관식당" 
     
-    /// Array of string which means there is no menu.
-    var closedKeywords = ["방학중휴점", "폐    점", "코로나19", "방학중 휴무", "당분간 폐점", "폐  점", "폐   점"]
-    
     /// Final cafe date considering custom date and date suggestion.
     var date: Date {
         var date = isCustomDate ? debugDate : Date()

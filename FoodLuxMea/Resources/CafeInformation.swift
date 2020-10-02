@@ -7,21 +7,30 @@
 
 import Foundation
 
+/// Array of string which means there is no menu.
+var closedKeywords = ["방학중휴점", "폐    점", "코로나19", "방학중 휴무", "당분간 폐점", "폐  점", "폐   점"]
+
 /// Cafe struct for debug/preview/canvas
 var previewCafe = Cafe(
-    name: "아워홈",
-    phoneNum: "3280-8642",
+    name: "3식당",
+    phoneNum: "1234-5678",
     bkfMenuList: [
-        Menu(name: "bkfMenu1", cost: 1000),
+        Menu(name: "쇠고기미역국", cost: 3000),
     ],
     lunchMenuList: [
-        Menu(name: "lunchMenu1", cost: 3000),
-        Menu(name: "lunchMenu2", cost: 2500),
+        Menu(name: "목살김치찌개", cost: 3000),
+        Menu(name: "치킨가츠동", cost: 3500),
+        Menu(name: "돌솥순두부찌개", cost: 3010),
+        Menu(name: "목살김치찌개", cost: 3000),
+        Menu(name: "치킨가츠동", cost: 3500),
+        Menu(name: "돌솥순두부찌개", cost: 3010),
+        Menu(name: "목살김치찌개", cost: 3000),
+        Menu(name: "치킨가츠동", cost: 3500),
+        Menu(name: "돌솥순두부찌개", cost: 3010),
     ],
     dinnerMenuList: [
-        Menu(name: "dinnerMenu1", cost: 1700),
-        Menu(name: "dinnerMenu2", cost: 5000),
-        Menu(name: "dinnerMenu3", cost: 2000),
+        Menu(name: "왕갈비탕", cost: 11000),
+        Menu(name: "규동", cost: 3500),
     ]
 )
 
@@ -103,7 +112,7 @@ var cafeOperatingHour: [String: WeeklyOperatingHour] = [
     ),
     
     "공대간이식당": .init(
-        weekday: .init(nil, "11:00-18:30", "11:00-18:30"),
+        weekday: .init(nil, "11:00-16:00", "16:00-18:30"),
         saturday: nil,
         sunday: nil
     ),
