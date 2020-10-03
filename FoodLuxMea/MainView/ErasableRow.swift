@@ -10,13 +10,9 @@ import SwiftUI
 class ErasableRowManager: ObservableObject {
     
     @Published var erasableMessages = [String]()
-    
-    let messagesDefault = [
-        "생협 공지: 코로나19 수도권 사회적 거리두기 강화에 따라 점심식사 이용 시 식당 혼잡시간을 피하여 이용을 부탁드립니다.",
-        "1.4 업데이트: 일부 식당에 혼잡시간 정보를 추가했어요."
-    ]
-    let newMessages = [
-        "1.5 업데이트: iOS 14부터 위젯 기능이 추가되었어요! 홈화면에서 식단을 바로 확인해보세요. 위젯을 길게 눌러 설정할 수 있어요."
+
+    let messages = [
+        "1.6 업데이트: iPad를 지원해요."
     ]
     
     init() {
@@ -26,11 +22,12 @@ class ErasableRowManager: ObservableObject {
                 erasableMessages = savedValue
             } else {
                 print("ErasableMessage initialized to default value.")
-                erasableMessages = messagesDefault
+                erasableMessages = messages
+                return
             }
         }
         if appStatus.isFirstVersionRun {
-            erasableMessages += newMessages
+            erasableMessages += messages
         }
     }
     
@@ -42,7 +39,7 @@ class ErasableRowManager: ObservableObject {
     
     func clear() {
         if let userDefaults = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
-            erasableMessages = messagesDefault + newMessages
+            erasableMessages = messages
             userDefaults.setValue(erasableMessages, forKey: "erasableMessages")
         }
     }
