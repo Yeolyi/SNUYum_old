@@ -62,5 +62,9 @@ class AppStatus: ObservableObject {
         }
         let queue = DispatchQueue(label: "Monitor")
         monitor.start(queue: queue)
+        
+        if executionTimeCount > 20 {
+            SKStoreReviewController.requestReview()
+        }
     }
 }
