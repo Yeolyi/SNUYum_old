@@ -21,12 +21,6 @@ var previewCafe = Cafe(
         Menu(name: "목살김치찌개", cost: 3000),
         Menu(name: "치킨가츠동", cost: 3500),
         Menu(name: "돌솥순두부찌개", cost: 3010),
-        Menu(name: "목살김치찌개", cost: 3000),
-        Menu(name: "치킨가츠동", cost: 3500),
-        Menu(name: "돌솥순두부찌개", cost: 3010),
-        Menu(name: "목살김치찌개", cost: 3000),
-        Menu(name: "치킨가츠동", cost: 3500),
-        Menu(name: "돌솥순두부찌개", cost: 3010),
     ],
     dinnerMenuList: [
         Menu(name: "왕갈비탕", cost: 11000),

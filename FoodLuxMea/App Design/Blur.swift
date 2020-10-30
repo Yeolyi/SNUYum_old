@@ -18,48 +18,39 @@ struct Blur: UIViewRepresentable {
 }
 
 struct BlurHeader<Content: View>: View {
-    let headerBottomHeading: CGFloat
-    let headerView: AnyView
-    let content: () -> Content
-
+    let headerBottomPadding: CGFloat
+    let headerView: Content
+    
+    init(padding: CGFloat, @ViewBuilder headerView: @escaping () -> Content) {
+        self.headerBottomPadding = padding
+        self.headerView = headerView()
+    }
+    
     var body: some View {
-        ZStack {
-            VStack {
-                HStack {
-                    Spacer()
-                    headerView
-                    Spacer()
-                }
-                .padding(.bottom, headerBottomHeading)
-                .background(
-                    Blur(style: .systemUltraThinMaterial)
-                        .clipShape(
-                            RoundedCorner(radius: 30, corners: [.bottomLeft, .bottomRight])
-                        )
-                        .edgesIgnoringSafeArea(.top)
-                        .shadow(radius: 5)
-                    )
+        VStack {
+            HStack {
+                Spacer()
+                headerView
                 Spacer()
             }
-            .zIndex(1)
-            content()
+            .padding(.bottom, headerBottomPadding)
+            .background(
+                Blur(style: .systemUltraThinMaterial)
+                    .clipShape(
+                        RoundedCorner(radius: 30, corners: [.bottomLeft, .bottomRight])
+                    )
+                    .edgesIgnoringSafeArea(.top)
+                    .shadow(radius: 5)
+            )
+            Spacer()
         }
     }
 }
 
 struct Blur_Previews: PreviewProvider {
     static var previews: some View {
-        BlurHeader(
-            headerBottomHeading: 10,
-            headerView: AnyView(CustomHeader(title: "테스트", subTitle: "부제"))
-        ) {
-            List {
-                ForEach(0..<50) { i in
-                    Rectangle()
-                        .foregroundColor(i % 2 == 0 ? .red : .blue)
-                        .centered()
-                }
-            }
+        BlurHeader(padding: 10) {
+            CustomHeader(title: "테스트", subTitle: "부제")
         }
     }
 }

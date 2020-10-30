@@ -16,9 +16,9 @@ struct CafeView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
-    
     @EnvironmentObject var cafeList: CafeList
     @EnvironmentObject var settingManager: UserSetting
+    
     let themeColor = ThemeColor()
     
     /// - Parameter cafeInfo: Cafe data to show in this view.
@@ -30,24 +30,15 @@ struct CafeView: View {
         VStack {
             // MARK: - Custom navigationbar view.
             HStack {
-                VStack(alignment: .leading) {
-                    Text("식단 자세히 보기")
-                        .font(.system(size: CGFloat(18), weight: .bold))
-                        .foregroundColor(.secondary)
-                    Text(cafe.name)
-                        .font(.system(size: CGFloat(25), weight: .bold))
-                }
-                .padding([.leading, .top])
+                CustomHeader(title: cafe.name, subTitle: "식단 자세히 보기")
                 Spacer()
-                Button(action: {
-                    _ = self.cafeList.toggleFixed(cafeName: self.cafe.name)
-                }) {
-                    Image(systemName: cafeList.isFixed(cafeName: self.cafe.name) ? "pin" : "pin.slash")
+                Button(action: { _ = cafeList.toggleFixed(cafeName: cafe.name) }) {
+                    Image(systemName: cafeList.isFixed(cafeName: cafe.name) ? "pin" : "pin.slash")
                         .font(.system(size: 25, weight: .semibold))
                         .foregroundColor(themeColor.icon(colorScheme))
                         .offset(y: 10)
                 }
-                Button(action: { self.presentationMode.wrappedValue.dismiss()}) {
+                Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
                     Text("닫기")
                         .font(.system(size: CGFloat(20), weight: .semibold))
                         .foregroundColor(themeColor.icon(colorScheme))
@@ -56,7 +47,6 @@ struct CafeView: View {
                 }
             }
             Divider()
-            // MARK: - Various cafe information.
             ScrollView {
                 Text("안내")
                     .sectionText()
@@ -64,7 +54,6 @@ struct CafeView: View {
                 MealSection(cafe: cafe, mealType: .breakfast)
                 MealSection(cafe: cafe, mealType: .lunch)
                 MealSection(cafe: cafe, mealType: .dinner)
-                // MARK: - Cafe information with phone call and map view.
                 Text("식당 정보")
                     .sectionText()
                 VStack {

@@ -8,10 +8,6 @@
 import Foundation
 
 /// Indicates one of these three meals; breakfast, lunch and dinner.
-///
-/// Support raw string value in korean.
-///
-/// - Note: Codable protocol adopted to encoded/decoded while using Userdefault.
 enum MealType: String, Codable {
     case breakfast = "아침"
     case lunch = "점심"
@@ -34,39 +30,13 @@ enum MealType: String, Codable {
 }
 
 /// Data of a single menu.
-///
-/// If there's no cost data in server, cost value is -1.
-///
-/// - Precondition: 'cost' variable cannot be negative other than -1.
-///
-/// - Note: Hashable protocol to make Menu array.
-///
-/// Codable protocol to encoded/decoded while using Userdefault.
-///
-/// Identifiable adopted to give id in list view.
-///
-/// - Todo: Change cost type to optional Int to stop using -1.
 struct Menu: Hashable, Codable, Identifiable {
+    
     var id = UUID()
     let name: String
     let cost: Int?
     
-    /**
-     Creates an menu struct.
-     
-     - Parameter cost: Defult value is -1.
-     */
-    init(name: String, cost: Int? = nil) {
-        self.name = name
-        self.cost = cost
-    }
-    
-    /**
-     Interpret cost value to adequate string.
-     
-     - ToDo: Search appropriate class to place this function.
-     */
-    func costInterpret() -> String {
+    var costStr: String {
         if let cost = cost {
             if (cost - 10) % 100 == 0 {
                 return String(cost - 10) + "원부터"
@@ -76,5 +46,10 @@ struct Menu: Hashable, Codable, Identifiable {
         } else {
             return ""
         }
+    }
+    
+    init(name: String, cost: Int? = nil) {
+        self.name = name
+        self.cost = cost
     }
 }

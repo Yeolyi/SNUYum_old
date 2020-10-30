@@ -20,7 +20,7 @@ struct ListOrderSettingView: View {
     @State var tempListManager = CafeList()
     
     /// - Parameter cafeListBackup: Backup [ListElement] to restore data when sheet is closed or dismissed
-    init(cafeListBackup: [CafeMaterial]) {
+    init(cafeListBackup: [ListElement]) {
         tempListManager.cafeList = cafeListBackup
     }
     

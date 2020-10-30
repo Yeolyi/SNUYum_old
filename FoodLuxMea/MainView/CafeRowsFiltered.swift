@@ -7,11 +7,7 @@
 
 import SwiftUI
 
-/**
- Return VStack of CafeRows after filtering.
- 
- **Cafe name in ListManager is converted to cafe struct in Datamanager.**
- */
+/// Return VStack of CafeRows after filtering.
 struct CafeRowsFiltered: View {
     
     let isFixed: Bool
@@ -33,47 +29,34 @@ struct CafeRowsFiltered: View {
     }
     
     var body: some View {
-        Group {
-            let list = isFixed ? listManager.fixedList : listManager.unfixedList
-            if list.filter(listFilter).isEmpty {
-                if isFixed {
-                    EmptyView()
-                } else {
-                    Text(isFixed ? "고정됨" : "일반")
-                        .sectionText()
-                    HStack {
-                        Spacer()
-                        Text(searchWord == "" ? "운영중인 식당이 없어요" : "검색 결과가 없어요")
-                        Spacer()
-                    }
-                    .rowBackground()
-                }
+        let list = isFixed ? listManager.fixedList : listManager.unfixedList
+        if list.filter(listFilter).isEmpty {
+            if isFixed {
+                EmptyView()
             } else {
-                Text(isFixed ? "고정됨" : "일반")
+                Text("일반")
                     .sectionText()
-                ForEach(list.filter(listFilter)) { listElement in
-                    if let cafe = dataManager.cafe(at: settingManager.date, name: listElement.name) {
-                        CafeRow(
-                            cafe: cafe,
-                            suggestedMeal: settingManager.meal,
-                            searchText: searchWord
-                        )
-                        
-                    } else {
-                        CafeRow(
-                            cafe: Cafe(name: listElement.name),
-                            suggestedMeal: settingManager.meal,
-                            searchText: searchWord
-                        )
-                        
-                    }
+                HStack {
+                    Spacer()
+                    Text(searchWord == "" ? "운영중인 식당이 없어요" : "검색 결과가 없어요")
+                    Spacer()
                 }
+                .rowBackground()
+            }
+        } else {
+            Text(isFixed ? "고정됨" : "일반")
+                .sectionText()
+            ForEach(list.filter(listFilter)) { listElement in
+                CafeRow(
+                    cafe: dataManager.cafe(at: settingManager.date, name: listElement.name) ?? Cafe(name: listElement.name),
+                    suggestedMeal: settingManager.meal, searchText: searchWord
+                )
             }
         }
     }
     
     /// Evaluate ListElement and return appropriate filter result.
-    func listFilter(listElement: CafeMaterial) -> Bool {
+    func listFilter(listElement: ListElement) -> Bool {
         if let targetCafe = dataManager.cafe(at: settingManager.date, name: listElement.name) {
             if searchWord == "" {
                 if targetCafe.isEmpty(at: [settingManager.meal], emptyKeywords: closedKeywords) {

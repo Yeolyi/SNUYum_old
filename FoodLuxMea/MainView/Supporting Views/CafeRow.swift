@@ -18,7 +18,6 @@ struct CafeRow: View {
     let themeColor = ThemeColor()
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var listManager: CafeList
-    @EnvironmentObject var dataManager: Cafeteria
     @EnvironmentObject var settingManager: UserSetting
 
     /**
@@ -52,7 +51,7 @@ struct CafeRow: View {
                                     .lineLimit(1)
                                     .foregroundColor(Color(.label))
                                 Spacer()
-                                Text(menu.costInterpret())
+                                Text(menu.costStr)
                                     .font(.system(size: 15))
                                     .padding(.trailing, 10)
                                     .foregroundColor(Color(.secondaryLabel))
@@ -78,7 +77,6 @@ struct CafeRow: View {
             CafeView(cafeInfo: cafe)
                 .environmentObject(self.listManager)
                 .environmentObject(self.settingManager)
-                .environmentObject(self.dataManager)
         }
         .rowBackground()
     }
@@ -125,7 +123,7 @@ struct CafeRow: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .lineLimit(nil)
                         Spacer()
-                        Text(menu.costInterpret())
+                        Text(menu.costStr)
                             .font(.system(size: 15))
                             .padding(.trailing, 10)
                             .foregroundColor(Color(.secondaryLabel))

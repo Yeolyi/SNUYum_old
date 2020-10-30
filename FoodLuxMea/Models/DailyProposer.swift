@@ -7,52 +7,65 @@
 
 import Foundation
 
-/**
- Manage adequate meal type based on time.
- */
-class DailyProposer {
+/// Manage adequate meal type based on time.
+struct DailyProposer {
+    
+    var isTomorrow: Bool {
+        let currentSimpleDate = SimpleTime(date: date)
+        var dinnerEndTime: SimpleTime?
+        if cafeName != nil, let weeklyOperatingHour = cafeOperatingHour[cafeName!] {
+            dinnerEndTime = weeklyOperatingHour.daily(at: date)?.endTime(at: .dinner)
+        }
+        let isTomorrow = (dinnerEndTime ?? dinnerDefaultTime) < currentSimpleDate
+        return isTomorrow
+    }
+    
+    var meal: MealType {
+        let currentSimpleDate = SimpleTime(date: date)
+        var bkfEndTime: SimpleTime?
+        var lunchEndTime: SimpleTime?
+        var dinnerEndTime: SimpleTime?
+        if cafeName != nil, let weeklyOperatingHour = cafeOperatingHour[cafeName!] {
+            bkfEndTime = weeklyOperatingHour.daily(at: date)?.endTime(at: .breakfast)
+            lunchEndTime = weeklyOperatingHour.daily(at: date)?.endTime(at: .lunch)
+            dinnerEndTime = weeklyOperatingHour.daily(at: date)?.endTime(at: .dinner)
+        }
+        let suggestedMeal: MealType
+        switch currentSimpleDate {
+        case ..<(bkfEndTime ?? bkfDefaultTime):
+            suggestedMeal = .breakfast
+        case (bkfEndTime ?? bkfDefaultTime)..<(lunchEndTime ?? lunchDefaultTime):
+            suggestedMeal = .lunch
+        case (lunchEndTime ?? lunchDefaultTime)..<(dinnerEndTime ?? dinnerDefaultTime):
+            suggestedMeal = .dinner
+        default:
+            suggestedMeal = .breakfast
+        }
+        
+        return suggestedMeal
+    }
+    
+    init(at date: Date, cafeName: String?) {
+        self.date = date
+        self.cafeName = cafeName
+    }
     
     // Default SimpleTimeBorder structs in case operating hour does not exists.
-    static let bkfDefaultTime = SimpleTime(hour: 10)
-    static let lunchDefaultTime = SimpleTime(hour: 15)
-    static let dinnerDefaultTime = SimpleTime(hour: 19)
+    private let bkfDefaultTime = SimpleTime(hour: 10)
+    private let lunchDefaultTime = SimpleTime(hour: 15)
+    private let dinnerDefaultTime = SimpleTime(hour: 19)
+    
+    private let date: Date
+    private let cafeName: String?
     
     static func getDefault(meal: MealType) -> SimpleTime {
         switch meal {
         case .breakfast:
-            return bkfDefaultTime
+            return SimpleTime(hour: 10)
         case .lunch:
-            return lunchDefaultTime
+            return SimpleTime(hour: 15)
         case .dinner:
-            return dinnerDefaultTime
+            return SimpleTime(hour: 19)
         }
-    }
-    //??왜 이따구로 짬??
-    static func menu(at date: Date, cafeName: String) -> (isTomorrow: Bool, meal: MealType) {
-        let currentSimpleDate = SimpleTime(date: date)
-        let bkfEndTime: SimpleTime?
-        let lunchEndTime: SimpleTime?
-        let dinnerEndTime: SimpleTime?
-        if let weeklyOperatingHour = cafeOperatingHour[cafeName] {
-            bkfEndTime = weeklyOperatingHour.daily(at: date)?.endTime(at: .breakfast)
-            lunchEndTime = weeklyOperatingHour.daily(at: date)?.endTime(at: .lunch)
-            dinnerEndTime = weeklyOperatingHour.daily(at: date)?.endTime(at: .dinner)
-        } else {
-            bkfEndTime = nil
-            lunchEndTime = nil
-            dinnerEndTime = nil
-        }
-        let isTomorrow = (dinnerEndTime ?? DailyProposer.dinnerDefaultTime) < currentSimpleDate
-        let suggestedMeal: MealType
-        if currentSimpleDate < (bkfEndTime ?? DailyProposer.bkfDefaultTime) {
-            suggestedMeal = .breakfast
-        } else if currentSimpleDate < (lunchEndTime ?? DailyProposer.lunchDefaultTime) {
-            suggestedMeal = .lunch
-        } else if currentSimpleDate < (dinnerEndTime ?? DailyProposer.dinnerDefaultTime) {
-            suggestedMeal = .dinner
-        } else {
-            suggestedMeal = .breakfast
-        }
-        return (isTomorrow, suggestedMeal)
     }
 }

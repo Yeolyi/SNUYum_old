@@ -8,17 +8,6 @@
 import Foundation
 
 /// Data of a single cafeteria.
-///
-/// Includes cafe name, cafe phone number, three meals' menus.
-///
-/// - Note: Hashable protocol to make Menu array.
-///
-/// Codable protocol to encoded/decoded while using Userdefault.
-///
-/// Identifiable adopted to give id in list view.
-///
-/// - ToDo: As phoneNum variable is available in another struct, delete it and let settingmanager
-/// manage it. Also change name of bkfMenuList to breakfastMenuList.
 struct Cafe: Hashable, Codable, Identifiable {
     
     internal var id = UUID()
@@ -26,14 +15,14 @@ struct Cafe: Hashable, Codable, Identifiable {
     let name: String
     public let phoneNum: String
     
-    private let bkfMenuList: [Menu]
+    private let breakfastMenuList: [Menu]
     private let lunchMenuList: [Menu]
     private let dinnerMenuList: [Menu]
     
     init(name: String) {
         self.name = name
         self.phoneNum = phoneNumList[name] ?? ""
-        self.bkfMenuList = []
+        self.breakfastMenuList = []
         self.lunchMenuList = []
         self.dinnerMenuList = []
     }
@@ -44,7 +33,7 @@ struct Cafe: Hashable, Codable, Identifiable {
         }
         self.name = name
         self.phoneNum = phoneNum
-        self.bkfMenuList = bkfMenuList
+        self.breakfastMenuList = bkfMenuList
         self.lunchMenuList = lunchMenuList
         self.dinnerMenuList = dinnerMenuList
     }
@@ -77,7 +66,7 @@ struct Cafe: Hashable, Codable, Identifiable {
     func menus(at mealType: MealType) -> [Menu] {
         switch mealType {
         case .breakfast:
-            return bkfMenuList
+            return breakfastMenuList
         case .lunch:
             return lunchMenuList
         case .dinner:

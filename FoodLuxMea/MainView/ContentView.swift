@@ -9,13 +9,6 @@ import SwiftUI
 import GoogleMobileAds
 import Network
 
-enum ActiveAlert: Identifiable {
-    var id: Int {
-        self.hashValue
-    }
-    case clearCafe, clearAll
-}
-
 struct ContentView: View {
     
     let themeColor = ThemeColor()
@@ -31,120 +24,86 @@ struct ContentView: View {
     @EnvironmentObject var appStatus: AppStatus
     
     var body: some View {
-            // MARK: - Custom navigation bar title and item.
-            BlurHeader(
-                headerBottomHeading: isSettingView ? 20 : 5,
-                headerView:
-                    AnyView(
-                        VStack(spacing: 0) {
-                            HStack {
-                                CustomHeader(title: isSettingView ? "설정" : (searchWord == "" ? "식단 바로보기" : "식단 검색"), subTitle: "스누냠")
-                                Spacer()
-                                Button(action: {
-                                    if isSettingView {
-                                        listManager.update(newCafeList: dataManager.loadAll(at: self.settingManager.date))
-                                        settingManager.update()
-                                    }
-                                    withAnimation {
-                                        self.isSettingView.toggle()
-                                    }
-                                }) {
-                                    if isSettingView {
-                                        Text("닫기")
-                                            .font(.system(size: CGFloat(20), weight: .semibold))
-                                            .foregroundColor(themeColor.icon(colorScheme))
-                                    } else {
-                                        Image(systemName: "gear")
-                                            .font(.system(size: 25, weight: .regular))
-                                            .foregroundColor(themeColor.icon(colorScheme))
-                                    }
-                                }
-                                .padding()
-                                .offset(y: 10)
-                            }
-                            if !isSettingView {
-                                MealSelect()
-                                    .padding()
-                            }
-                        }
-                    )
-            ) {
+        ZStack {
+            BlurHeader(padding: isSettingView ? 20 : 5) {
                 VStack(spacing: 0) {
-                // MARK: - ScrollView starts here
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 0) {
-                            if isSettingView {
-                                SettingView(isPresented: $isSettingView, activeAlert: $activeAlert)
-                            } else {
-                                Text("")
-                                    .padding(75)
-                                // Searchbar
-                                SearchBar(searchWord: self.$searchWord)
-                                // Cafe timer row.
-                                if searchWord == "" && (!erasableRowManager.erasableMessages.isEmpty || settingManager.alimiCafeName != nil || !appStatus.isInternetConnected) {
-                                    Text("안내")
-                                        .sectionText()
-                                    if !appStatus.isInternetConnected {
-                                        HStack {
-                                            Text("인터넷 연결 안됨")
-                                                .foregroundColor(.secondary)
-                                            Spacer()
-                                        }
-                                            .rowBackground()
-                                    }
-                                    if !erasableRowManager.erasableMessages.isEmpty {
-                                        ErasableRow()
-                                    }
-                                    if settingManager.alimiCafeName != nil {
-                                        if let cafe = dataManager.cafe(
-                                            at: settingManager.date,
-                                            name: settingManager.alimiCafeName!
-                                        ) {
-                                            CafeTimer(of: cafe, isInMainView: true)
-                                        } else {
-                                            CafeTimer(of: Cafe(name: settingManager.alimiCafeName!), isInMainView: true)
-                                        }
-                                    }
-                                }
-                                // Fixed cafe section.
-                                if self.listManager.fixedList.isEmpty == false {
-                                    CafeRowsFiltered(isFixed: true, searchWord: self.searchWord)
-                                }
-                                // Ordinary cafe section.
-                                CafeRowsFiltered(isFixed: false, searchWord: self.searchWord)
-                                // Scroll view ends here.
-                            }
-                        }
+                    HStack {
+                        CustomHeader(title: headerTitle, subTitle: "스누냠")
+                        Spacer()
+                        settingButton()
+                            .padding()
+                            .offset(y: 10)
                     }
-                    Divider()
-                    // Google Admob.
-                    GADBannerViewController()
-                        .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+                    if !isSettingView {
+                        MealSelect()
+                            .padding()
+                    }
                 }
             }
-
+            .zIndex(1)
+            VStack(spacing: 0) {
+                if isSettingView {
+                    SettingView(isPresented: $isSettingView, activeAlert: $activeAlert)
+                } else {
+                    CafeScrollView(searchWord: $searchWord, isSettingView: $isSettingView, activeAlert: $activeAlert)
+                }
+                // Google Admob.
+                GADBannerViewController()
+                    .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+            }
+        }
         .alert(item: $activeAlert) { item in
-            switch item {
-            case .clearCafe:
-                return Alert(
+            mainAlert(item: item)
+        }
+    }
+    
+    private var headerTitle: String {
+        isSettingView ? "설정" : (searchWord == "" ? "식단 바로보기" : "식단 검색")
+    }
+    
+    private func settingButton() -> Button<AnyView> {
+        return Button(action: {
+            withAnimation {
+                self.isSettingView.toggle()
+            }
+        }) {
+            if isSettingView {
+                return AnyView(
+                    Text("닫기")
+                        .font(.system(size: CGFloat(20), weight: .semibold))
+                        .foregroundColor(themeColor.icon(colorScheme))
+                )
+            } else {
+                return AnyView(
+                    Image(systemName: "gear")
+                        .font(.system(size: 25, weight: .regular))
+                        .foregroundColor(themeColor.icon(colorScheme))
+                )
+            }
+        }
+    }
+    
+    private func mainAlert(item: ActiveAlert) -> Alert {
+        switch item {
+        case .clearCafe:
+            return Alert(
                 title: Text("다운로드된 데이터를 삭제합니다"),
                 message: Text("사용자 설정은 영향받지 않습니다."),
                 primaryButton: .destructive(Text("삭제"), action: { dataManager.clear()}),
                 secondaryButton: .cancel()
-                )
-            case .clearAll:
-                return Alert(
-                    title: Text("앱을 초기 상태로 되돌립니다."),
-                    primaryButton: .destructive(Text("삭제"), action: {
-                        dataManager.clear()
-                        settingManager.clear()
-                        listManager.clear()
-                        erasableRowManager.clear()
-                    }
-                    ),
-                    secondaryButton: .cancel()
-                )
-            }
+            )
+        case .clearAll:
+            return Alert(
+                title: Text("앱을 초기 상태로 되돌립니다."),
+                primaryButton: .destructive(Text("삭제"), action: {
+                    dataManager.clear()
+                    settingManager.clear()
+                    listManager.clear()
+                    erasableRowManager.clear()
+                }
+                ),
+                secondaryButton: .cancel()
+            )
         }
     }
 }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F60BA61FEC6E30C2E4B151F /* Pods_SnuYumWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1587BD5BD6653FC7769E41BA /* Pods_SnuYumWidgetExtension.framework */; };
 		2500739624F54A37009A32FA /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2500739524F54A37009A32FA /* UserSetting.swift */; };
 		2505883625267E8F0018E3A8 /* SnuYumMediumWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505882E25267E250018E3A8 /* SnuYumMediumWidgetEntryView.swift */; };
 		2505884325267E920018E3A8 /* SnuYumSmallWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2505882025267DF10018E3A8 /* SnuYumSmallWidgetEntryView.swift */; };
@@ -18,7 +17,7 @@
 		250BBBF124F3F92E00FC0C84 /* DailyProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEA24F3F92D00FC0C84 /* DailyProposer.swift */; };
 		250BBBF324F3F92E00FC0C84 /* OperatingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEC24F3F92D00FC0C84 /* OperatingTime.swift */; };
 		250BBBF524F3F92E00FC0C84 /* ThemeColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEE24F3F92D00FC0C84 /* ThemeColor+.swift */; };
-		250BBBF624F3F92E00FC0C84 /* SNUCODownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* SNUCODownloader.swift */; };
+		250BBBF624F3F92E00FC0C84 /* SNUCOHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* SNUCOHandler.swift */; };
 		250BBC1E24F3FAC800FC0C84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1124F3FAC700FC0C84 /* AppDelegate.swift */; };
 		250BBC1F24F3FAC800FC0C84 /* ListOrderSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1224F3FAC700FC0C84 /* ListOrderSettingView.swift */; };
 		250BBC2024F3FAC800FC0C84 /* NaverMapProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1324F3FAC700FC0C84 /* NaverMapProvider.swift */; };
@@ -29,6 +28,7 @@
 		250BBC2824F3FAC800FC0C84 /* SectionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1B24F3FAC700FC0C84 /* SectionText.swift */; };
 		250BBC2924F3FAC800FC0C84 /* CafeView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1C24F3FAC800FC0C84 /* CafeView+.swift */; };
 		250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */; };
+		251239A6253ACF3F00D425FD /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251239A5253ACF3F00D425FD /* UserDefaultWrapper.swift */; };
 		25137FC425260A6D00A1326C /* DailyProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEA24F3F92D00FC0C84 /* DailyProposer.swift */; };
 		25152DCA25250C5700BE63BF /* CafeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBE924F3F92D00FC0C84 /* CafeList.swift */; };
 		25152E19252510F400BE63BF /* CafeNameExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25152E01252510F400BE63BF /* CafeNameExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -40,8 +40,8 @@
 		25235FB225271AE400B83F27 /* WidgetTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25235F9D25271A5700B83F27 /* WidgetTitle.swift */; };
 		25235FC025271B9000B83F27 /* WidgetAccent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25235FBF25271B9000B83F27 /* WidgetAccent.swift */; };
 		25235FC825271CD800B83F27 /* WidgetNormal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25235FC725271CD800B83F27 /* WidgetNormal.swift */; };
-		2525283F2525002700FD2069 /* SNUCODownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* SNUCODownloader.swift */; };
-		252528452525002800FD2069 /* OurhomeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF78002503B306006372C7 /* OurhomeStorage.swift */; };
+		2525283F2525002700FD2069 /* SNUCOHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* SNUCOHandler.swift */; };
+		252528452525002800FD2069 /* OurhomeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF78002503B306006372C7 /* OurhomeHandler.swift */; };
 		2525284B2525015D00FD2069 /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25340D5E251395CC00E7FA7A /* Cafe.swift */; };
 		252528512525016200FD2069 /* Menu+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C58CA25165D0200310FA8 /* Menu+.swift */; };
 		252528572525016400FD2069 /* OperatingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEC24F3F92D00FC0C84 /* OperatingTime.swift */; };
@@ -51,16 +51,23 @@
 		25340D5F251395CC00E7FA7A /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25340D5E251395CC00E7FA7A /* Cafe.swift */; };
 		253637DD251D112C001038FD /* CustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A627952513BB5000313CD3 /* CustomHeader.swift */; };
 		253637E0251D13DC001038FD /* CenterModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE49E0251A12C600D4CB55 /* CenterModifier.swift */; };
-		2541D06F252634CD00FD3504 /* WidgetCafeteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2541D05B252634BA00FD3504 /* WidgetCafeteria.swift */; };
+		2540D0EB254C3DF400379027 /* CafeScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2540D0EA254C3DF400379027 /* CafeScrollView.swift */; };
+		2540D0F5254C46DC00379027 /* ErasableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2540D0F4254C46DC00379027 /* ErasableRow.swift */; };
+		2540D114254C55CB00379027 /* ClippedCafeteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2541D05B252634BA00FD3504 /* ClippedCafeteria.swift */; };
+		2540D11E254C562900379027 /* SnuYumWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E005192524F3E0001C5783 /* SnuYumWidget.swift */; };
+		2541D06F252634CD00FD3504 /* ClippedCafeteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2541D05B252634BA00FD3504 /* ClippedCafeteria.swift */; };
 		2541D07E2526350400FD3504 /* WidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2541D0762526350100FD3504 /* WidgetProvider.swift */; };
 		2541D10D2526366300FD3504 /* SnuYumWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 25E0051B2524F3E0001C5783 /* SnuYumWidget.intentdefinition */; };
-		25478BE9251E967C00B4C3EA /* CafeMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25478BE8251E967C00B4C3EA /* CafeMaterial.swift */; };
+		25477E42253AE61500A959A2 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251239A5253ACF3F00D425FD /* UserDefaultWrapper.swift */; };
+		25477E47253AE61600A959A2 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251239A5253ACF3F00D425FD /* UserDefaultWrapper.swift */; };
+		25478BE9251E967C00B4C3EA /* ListElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25478BE8251E967C00B4C3EA /* ListElement.swift */; };
 		25478C0C251E98AF00B4C3EA /* MealSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25478C0B251E98AF00B4C3EA /* MealSection.swift */; };
 		2548872625263CFB001E9024 /* ThemeColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEE24F3F92D00FC0C84 /* ThemeColor+.swift */; };
 		2549427224F505730049F32E /* SimpleToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2549427124F505730049F32E /* SimpleToggle.swift */; };
+		2552F1D9254C2E1100235D4A /* ActiveAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2552F1D8254C2E1100235D4A /* ActiveAlert.swift */; };
 		255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */; };
 		25647B6F24F9FFC900E1C3F0 /* CafeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25647B6E24F9FFC900E1C3F0 /* CafeInformation.swift */; };
-		2589DF38251B37FC00813B51 /* ErasableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589DF37251B37FC00813B51 /* ErasableRow.swift */; };
+		2589DF38251B37FC00813B51 /* ErasableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589DF37251B37FC00813B51 /* ErasableRowView.swift */; };
 		2591C74025020F4E00704673 /* PrivateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2591C73F25020F4E00704673 /* PrivateData.swift */; };
 		2593232E24FAE76F0036C148 /* CafeTimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593232D24FAE76F0036C148 /* CafeTimerButton.swift */; };
 		2593233024FAE8310036C148 /* CafeRowsFiltered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593232F24FAE8310036C148 /* CafeRowsFiltered.swift */; };
@@ -84,8 +91,8 @@
 		25B52B54251BBDF000D7A94E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25B52B53251BBDF000D7A94E /* Preview Assets.xcassets */; };
 		25B52B57251BBDF000D7A94E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B52B55251BBDF000D7A94E /* LaunchScreen.storyboard */; };
 		25B52B5C251BBDF000D7A94E /* SnuYumAppClip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = 25B52B48251BBDEC00D7A94E /* SnuYumAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		25B52B63251BC29900D7A94E /* SNUCODownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* SNUCODownloader.swift */; };
-		25B52B66251BC29B00D7A94E /* OurhomeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF78002503B306006372C7 /* OurhomeStorage.swift */; };
+		25B52B63251BC29900D7A94E /* SNUCOHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BBBEF24F3F92E00FC0C84 /* SNUCOHandler.swift */; };
+		25B52B66251BC29B00D7A94E /* OurhomeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF78002503B306006372C7 /* OurhomeHandler.swift */; };
 		25B52B79251BC3B500D7A94E /* Menu+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C58CA25165D0200310FA8 /* Menu+.swift */; };
 		25B52B7C251BC3BA00D7A94E /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25340D5E251395CC00E7FA7A /* Cafe.swift */; };
 		25B52B7F251BC3C000D7A94E /* SimpleTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259C58CC25165DD200310FA8 /* SimpleTime.swift */; };
@@ -100,14 +107,14 @@
 		25CDB5F0251BCB2F0041D0BD /* RowBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A627932513B92600313CD3 /* RowBackground.swift */; };
 		25E005162524F3E0001C5783 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E005152524F3E0001C5783 /* WidgetKit.framework */; };
 		25E005172524F3E0001C5783 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 250BBBFF24F3F9CD00FC0C84 /* SwiftUI.framework */; };
-		25E0051A2524F3E0001C5783 /* SnuYumWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E005192524F3E0001C5783 /* SnuYumWidget.swift */; };
 		25E0051D2524F3E3001C5783 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25E0051C2524F3E3001C5783 /* Assets.xcassets */; };
 		25E0051F2524F3E3001C5783 /* SnuYumWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 25E0051B2524F3E0001C5783 /* SnuYumWidget.intentdefinition */; };
 		25E005232524F3E3001C5783 /* SnuYumWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 25E005142524F3E0001C5783 /* SnuYumWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		25FF78012503B306006372C7 /* OurhomeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF78002503B306006372C7 /* OurhomeStorage.swift */; };
-		887B11935AE41EF3966615AB /* Pods_CafeNameExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DC57736CB8B26A07BDDA23 /* Pods_CafeNameExtension.framework */; };
-		A9BE59618F76D9FE57659BA7 /* Pods_FoodLuxMea.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05433193FD5DE6755A4A115 /* Pods_FoodLuxMea.framework */; };
-		B851E87E5AFDC4DD7C46DC30 /* Pods_SnuYumAppClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2437EA92BD94DA8500642B58 /* Pods_SnuYumAppClip.framework */; };
+		25FF78012503B306006372C7 /* OurhomeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF78002503B306006372C7 /* OurhomeHandler.swift */; };
+		6F9A28D2E70037CCB10F2CE5 /* Pods_SnuYumAppClip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AE21B515CD2AF2C5A095E09 /* Pods_SnuYumAppClip.framework */; };
+		A26ECC5409A77A16F65F333F /* Pods_FoodLuxMea.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5BF0E5188846923554C5AC /* Pods_FoodLuxMea.framework */; };
+		CFB2D196E900E31CFF42B28D /* Pods_CafeNameExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4CA83AAFE76D094F4D49AE /* Pods_CafeNameExtension.framework */; };
+		F4C5F953DDE5BDD23C179034 /* Pods_SnuYumWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5864780D1DE62046AAA9553 /* Pods_SnuYumWidgetExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,9 +168,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		074730A757AB55526D933531 /* Pods-FoodLuxMea.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.release.xcconfig"; sourceTree = "<group>"; };
-		1587BD5BD6653FC7769E41BA /* Pods_SnuYumWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnuYumWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2437EA92BD94DA8500642B58 /* Pods_SnuYumAppClip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnuYumAppClip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CD49590DC8B5523012C169A /* Pods-SnuYumAppClip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.debug.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.debug.xcconfig"; sourceTree = "<group>"; };
+		23CEBA5FE4784BFE9E103CA0 /* Pods-SnuYumWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-SnuYumWidgetExtension/Pods-SnuYumWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		2500739524F54A37009A32FA /* UserSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
 		2505882025267DF10018E3A8 /* SnuYumSmallWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnuYumSmallWidgetEntryView.swift; sourceTree = "<group>"; };
 		2505882E25267E250018E3A8 /* SnuYumMediumWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnuYumMediumWidgetEntryView.swift; sourceTree = "<group>"; };
@@ -178,7 +184,7 @@
 		250BBBEB24F3F92D00FC0C84 /* Cafeteria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cafeteria.swift; sourceTree = "<group>"; };
 		250BBBEC24F3F92D00FC0C84 /* OperatingTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatingTime.swift; sourceTree = "<group>"; usesTabs = 0; };
 		250BBBEE24F3F92D00FC0C84 /* ThemeColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ThemeColor+.swift"; sourceTree = "<group>"; };
-		250BBBEF24F3F92E00FC0C84 /* SNUCODownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNUCODownloader.swift; sourceTree = "<group>"; };
+		250BBBEF24F3F92E00FC0C84 /* SNUCOHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNUCOHandler.swift; sourceTree = "<group>"; };
 		250BBBFF24F3F9CD00FC0C84 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		250BBC1124F3FAC700FC0C84 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		250BBC1224F3FAC700FC0C84 /* ListOrderSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListOrderSettingView.swift; sourceTree = "<group>"; };
@@ -190,6 +196,7 @@
 		250BBC1B24F3FAC700FC0C84 /* SectionText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionText.swift; sourceTree = "<group>"; };
 		250BBC1C24F3FAC800FC0C84 /* CafeView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CafeView+.swift"; sourceTree = "<group>"; };
 		250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealSelect.swift; sourceTree = "<group>"; };
+		251239A5253ACF3F00D425FD /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
 		25152E01252510F400BE63BF /* CafeNameExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CafeNameExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		25152E03252510F400BE63BF /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		25152E05252510F400BE63BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -203,14 +210,17 @@
 		252B96AB2517ADBC000475C6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		25340D5E251395CC00E7FA7A /* Cafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cafe.swift; sourceTree = "<group>"; };
 		253637C4251C6334001038FD /* FoodLuxMea.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FoodLuxMea.entitlements; sourceTree = "<group>"; };
-		2541D05B252634BA00FD3504 /* WidgetCafeteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCafeteria.swift; sourceTree = "<group>"; };
+		2540D0EA254C3DF400379027 /* CafeScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeScrollView.swift; sourceTree = "<group>"; };
+		2540D0F4254C46DC00379027 /* ErasableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErasableRow.swift; sourceTree = "<group>"; };
+		2541D05B252634BA00FD3504 /* ClippedCafeteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippedCafeteria.swift; sourceTree = "<group>"; };
 		2541D0762526350100FD3504 /* WidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetProvider.swift; sourceTree = "<group>"; };
-		25478BE8251E967C00B4C3EA /* CafeMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeMaterial.swift; sourceTree = "<group>"; };
+		25478BE8251E967C00B4C3EA /* ListElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListElement.swift; sourceTree = "<group>"; };
 		25478C0B251E98AF00B4C3EA /* MealSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealSection.swift; sourceTree = "<group>"; };
 		2549427124F505730049F32E /* SimpleToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleToggle.swift; sourceTree = "<group>"; };
+		2552F1D8254C2E1100235D4A /* ActiveAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveAlert.swift; sourceTree = "<group>"; };
 		255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparency.swift; sourceTree = "<group>"; };
 		25647B6E24F9FFC900E1C3F0 /* CafeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeInformation.swift; sourceTree = "<group>"; };
-		2589DF37251B37FC00813B51 /* ErasableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErasableRow.swift; sourceTree = "<group>"; };
+		2589DF37251B37FC00813B51 /* ErasableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErasableRowView.swift; sourceTree = "<group>"; };
 		2591C73F25020F4E00704673 /* PrivateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateData.swift; sourceTree = "<group>"; };
 		2593232D24FAE76F0036C148 /* CafeTimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeTimerButton.swift; sourceTree = "<group>"; };
 		2593232F24FAE8310036C148 /* CafeRowsFiltered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeRowsFiltered.swift; sourceTree = "<group>"; };
@@ -244,16 +254,17 @@
 		25E0051C2524F3E3001C5783 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25E0051E2524F3E3001C5783 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25EDDAD6252F5191004F1D69 /* SwiftSoup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSoup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		25FF78002503B306006372C7 /* OurhomeStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurhomeStorage.swift; sourceTree = "<group>"; };
-		280FCA9D98549BF369387125 /* Pods-SnuYumAppClip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.release.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.release.xcconfig"; sourceTree = "<group>"; };
-		2918A41F50A11CFA4F029B90 /* Pods-FoodLuxMea.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.debug.xcconfig"; sourceTree = "<group>"; };
-		39F83E4572E31BA47C05DE83 /* Pods-SnuYumAppClip.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.debug.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.debug.xcconfig"; sourceTree = "<group>"; };
-		6CCCA847F78F7AC4FC799559 /* Pods-CafeNameExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CafeNameExtension.debug.xcconfig"; path = "Target Support Files/Pods-CafeNameExtension/Pods-CafeNameExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		D05433193FD5DE6755A4A115 /* Pods_FoodLuxMea.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLuxMea.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6263E1B0AEB8867B53E9764 /* Pods-SnuYumWidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumWidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-SnuYumWidgetExtension/Pods-SnuYumWidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		D6DC57736CB8B26A07BDDA23 /* Pods_CafeNameExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CafeNameExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E20B21D64A70DFB7C0D19961 /* Pods-SnuYumWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-SnuYumWidgetExtension/Pods-SnuYumWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
-		E401ACE73A0026F5CF8DA2EE /* Pods-CafeNameExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CafeNameExtension.release.xcconfig"; path = "Target Support Files/Pods-CafeNameExtension/Pods-CafeNameExtension.release.xcconfig"; sourceTree = "<group>"; };
+		25FF78002503B306006372C7 /* OurhomeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OurhomeHandler.swift; sourceTree = "<group>"; };
+		43AD1530C17FDD745436DDE5 /* Pods-CafeNameExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CafeNameExtension.release.xcconfig"; path = "Target Support Files/Pods-CafeNameExtension/Pods-CafeNameExtension.release.xcconfig"; sourceTree = "<group>"; };
+		4A1AEAC853988863B46C01B3 /* Pods-SnuYumAppClip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumAppClip.release.xcconfig"; path = "Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip.release.xcconfig"; sourceTree = "<group>"; };
+		5769B29FC979374721BD0C41 /* Pods-SnuYumWidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnuYumWidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-SnuYumWidgetExtension/Pods-SnuYumWidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		5AB5395AE27A9CEB7E0BA02B /* Pods-FoodLuxMea.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.release.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.release.xcconfig"; sourceTree = "<group>"; };
+		7AE21B515CD2AF2C5A095E09 /* Pods_SnuYumAppClip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnuYumAppClip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F4CA83AAFE76D094F4D49AE /* Pods_CafeNameExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CafeNameExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAD7F2572F08E8FCCE29320B /* Pods-CafeNameExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CafeNameExtension.debug.xcconfig"; path = "Target Support Files/Pods-CafeNameExtension/Pods-CafeNameExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		AE5BF0E5188846923554C5AC /* Pods_FoodLuxMea.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodLuxMea.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6E0A6567411ED07B1852B7A /* Pods-FoodLuxMea.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodLuxMea.debug.xcconfig"; path = "Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea.debug.xcconfig"; sourceTree = "<group>"; };
+		E5864780D1DE62046AAA9553 /* Pods_SnuYumWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnuYumWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,7 +272,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9BE59618F76D9FE57659BA7 /* Pods_FoodLuxMea.framework in Frameworks */,
+				A26ECC5409A77A16F65F333F /* Pods_FoodLuxMea.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +280,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				887B11935AE41EF3966615AB /* Pods_CafeNameExtension.framework in Frameworks */,
+				CFB2D196E900E31CFF42B28D /* Pods_CafeNameExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +288,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B851E87E5AFDC4DD7C46DC30 /* Pods_SnuYumAppClip.framework in Frameworks */,
+				6F9A28D2E70037CCB10F2CE5 /* Pods_SnuYumAppClip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +298,7 @@
 			files = (
 				25E005172524F3E0001C5783 /* SwiftUI.framework in Frameworks */,
 				25E005162524F3E0001C5783 /* WidgetKit.framework in Frameworks */,
-				0F60BA61FEC6E30C2E4B151F /* Pods_SnuYumWidgetExtension.framework in Frameworks */,
+				F4C5F953DDE5BDD23C179034 /* Pods_SnuYumWidgetExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,10 +383,10 @@
 				250BBBFF24F3F9CD00FC0C84 /* SwiftUI.framework */,
 				25E005152524F3E0001C5783 /* WidgetKit.framework */,
 				25152E0B252510F400BE63BF /* IntentsUI.framework */,
-				D6DC57736CB8B26A07BDDA23 /* Pods_CafeNameExtension.framework */,
-				D05433193FD5DE6755A4A115 /* Pods_FoodLuxMea.framework */,
-				2437EA92BD94DA8500642B58 /* Pods_SnuYumAppClip.framework */,
-				1587BD5BD6653FC7769E41BA /* Pods_SnuYumWidgetExtension.framework */,
+				8F4CA83AAFE76D094F4D49AE /* Pods_CafeNameExtension.framework */,
+				AE5BF0E5188846923554C5AC /* Pods_FoodLuxMea.framework */,
+				7AE21B515CD2AF2C5A095E09 /* Pods_SnuYumAppClip.framework */,
+				E5864780D1DE62046AAA9553 /* Pods_SnuYumWidgetExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -416,6 +427,7 @@
 				250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */,
 				250BBC1724F3FAC700FC0C84 /* CafeRow.swift */,
 				2593232D24FAE76F0036C148 /* CafeTimerButton.swift */,
+				2552F1D8254C2E1100235D4A /* ActiveAlert.swift */,
 			);
 			path = "Supporting Views";
 			sourceTree = "<group>";
@@ -425,9 +437,10 @@
 			children = (
 				259C58CA25165D0200310FA8 /* Menu+.swift */,
 				25340D5E251395CC00E7FA7A /* Cafe.swift */,
-				25478BE8251E967C00B4C3EA /* CafeMaterial.swift */,
+				25478BE8251E967C00B4C3EA /* ListElement.swift */,
 				259C58CC25165DD200310FA8 /* SimpleTime.swift */,
 				250BBBEC24F3F92D00FC0C84 /* OperatingTime.swift */,
+				251239A5253ACF3F00D425FD /* UserDefaultWrapper.swift */,
 			);
 			path = "Model Components";
 			sourceTree = "<group>";
@@ -452,7 +465,7 @@
 		2541D05A252634A700FD3504 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2541D05B252634BA00FD3504 /* WidgetCafeteria.swift */,
+				2541D05B252634BA00FD3504 /* ClippedCafeteria.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -475,6 +488,16 @@
 				250BBC1224F3FAC700FC0C84 /* ListOrderSettingView.swift */,
 			);
 			path = "Supporting Views";
+			sourceTree = "<group>";
+		};
+		256931B425440382007734DE /* HTMLHandler */ = {
+			isa = PBXGroup;
+			children = (
+				250BBBEF24F3F92E00FC0C84 /* SNUCOHandler.swift */,
+				25FF78002503B306006372C7 /* OurhomeHandler.swift */,
+				250BBBEB24F3F92D00FC0C84 /* Cafeteria.swift */,
+			);
+			path = HTMLHandler;
 			sourceTree = "<group>";
 		};
 		25A627922513B8DC00313CD3 /* Fonts */ = {
@@ -512,13 +535,12 @@
 		25BF46AC24F40C8800CC2355 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				250BBBEF24F3F92E00FC0C84 /* SNUCODownloader.swift */,
-				25FF78002503B306006372C7 /* OurhomeStorage.swift */,
-				250BBBEB24F3F92D00FC0C84 /* Cafeteria.swift */,
+				256931B425440382007734DE /* HTMLHandler */,
 				2500739524F54A37009A32FA /* UserSetting.swift */,
 				250BBBEA24F3F92D00FC0C84 /* DailyProposer.swift */,
 				250BBBE924F3F92D00FC0C84 /* CafeList.swift */,
 				250ADF5D251A8701008D83B8 /* AppStatus.swift */,
+				2540D0F4254C46DC00379027 /* ErasableRow.swift */,
 				25340D64251396D000E7FA7A /* Model Components */,
 			);
 			path = Models;
@@ -537,8 +559,9 @@
 			isa = PBXGroup;
 			children = (
 				25A0824924F3FDEC00593CB3 /* ContentView.swift */,
+				2540D0EA254C3DF400379027 /* CafeScrollView.swift */,
 				2593232F24FAE8310036C148 /* CafeRowsFiltered.swift */,
-				2589DF37251B37FC00813B51 /* ErasableRow.swift */,
+				2589DF37251B37FC00813B51 /* ErasableRowView.swift */,
 				25340D63251396B900E7FA7A /* Supporting Views */,
 				25BF46AE24F40CB700CC2355 /* Admob */,
 			);
@@ -566,11 +589,11 @@
 		25E005182524F3E0001C5783 /* SnuYumWidget */ = {
 			isa = PBXGroup;
 			children = (
+				25E005192524F3E0001C5783 /* SnuYumWidget.swift */,
 				25235F882527196D00B83F27 /* Theme */,
 				2505885F25267F1D0018E3A8 /* Provider */,
 				2505881F25267DDD0018E3A8 /* View */,
 				2541D05A252634A700FD3504 /* Model */,
-				25E005192524F3E0001C5783 /* SnuYumWidget.swift */,
 				25E0051C2524F3E3001C5783 /* Assets.xcassets */,
 				25E0051E2524F3E3001C5783 /* Info.plist */,
 			);
@@ -580,14 +603,14 @@
 		8AA4CDD938B269F0A7BB912D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6CCCA847F78F7AC4FC799559 /* Pods-CafeNameExtension.debug.xcconfig */,
-				E401ACE73A0026F5CF8DA2EE /* Pods-CafeNameExtension.release.xcconfig */,
-				2918A41F50A11CFA4F029B90 /* Pods-FoodLuxMea.debug.xcconfig */,
-				074730A757AB55526D933531 /* Pods-FoodLuxMea.release.xcconfig */,
-				39F83E4572E31BA47C05DE83 /* Pods-SnuYumAppClip.debug.xcconfig */,
-				280FCA9D98549BF369387125 /* Pods-SnuYumAppClip.release.xcconfig */,
-				D6263E1B0AEB8867B53E9764 /* Pods-SnuYumWidgetExtension.debug.xcconfig */,
-				E20B21D64A70DFB7C0D19961 /* Pods-SnuYumWidgetExtension.release.xcconfig */,
+				AAD7F2572F08E8FCCE29320B /* Pods-CafeNameExtension.debug.xcconfig */,
+				43AD1530C17FDD745436DDE5 /* Pods-CafeNameExtension.release.xcconfig */,
+				C6E0A6567411ED07B1852B7A /* Pods-FoodLuxMea.debug.xcconfig */,
+				5AB5395AE27A9CEB7E0BA02B /* Pods-FoodLuxMea.release.xcconfig */,
+				1CD49590DC8B5523012C169A /* Pods-SnuYumAppClip.debug.xcconfig */,
+				4A1AEAC853988863B46C01B3 /* Pods-SnuYumAppClip.release.xcconfig */,
+				5769B29FC979374721BD0C41 /* Pods-SnuYumWidgetExtension.debug.xcconfig */,
+				23CEBA5FE4784BFE9E103CA0 /* Pods-SnuYumWidgetExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -599,14 +622,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 250BBBE424F3F8F900FC0C84 /* Build configuration list for PBXNativeTarget "FoodLuxMea" */;
 			buildPhases = (
-				7CE705BCE0D977325E8C2F93 /* [CP] Check Pods Manifest.lock */,
+				450CEACD17ED47A215478686 /* [CP] Check Pods Manifest.lock */,
 				250BBBCC24F3F8F700FC0C84 /* Sources */,
 				250BBBCD24F3F8F700FC0C84 /* Frameworks */,
 				250BBBCE24F3F8F700FC0C84 /* Resources */,
 				250BBC0D24F3F9CF00FC0C84 /* Embed App Extensions */,
 				25B52B5D251BBDF000D7A94E /* Embed App Clips */,
 				252B96A92517AD02000475C6 /* ShellScript */,
-				BA48BE25254FB5540EF27D2A /* [CP] Embed Pods Frameworks */,
+				8819BF2BF9D250AB86A990F1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -624,7 +647,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25152E1D252510F400BE63BF /* Build configuration list for PBXNativeTarget "CafeNameExtension" */;
 			buildPhases = (
-				EEC061DB50E750723F5DA24E /* [CP] Check Pods Manifest.lock */,
+				31CB656172D677B3CA95FA7F /* [CP] Check Pods Manifest.lock */,
 				25152DFD252510F400BE63BF /* Sources */,
 				25152DFE252510F400BE63BF /* Frameworks */,
 				25152DFF252510F400BE63BF /* Resources */,
@@ -642,11 +665,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25B52B60251BBDF000D7A94E /* Build configuration list for PBXNativeTarget "SnuYumAppClip" */;
 			buildPhases = (
-				AAB34AB04C29C61F588EAB56 /* [CP] Check Pods Manifest.lock */,
+				B67CF619E3270C373512BBDF /* [CP] Check Pods Manifest.lock */,
 				25B52B44251BBDEC00D7A94E /* Sources */,
 				25B52B45251BBDEC00D7A94E /* Frameworks */,
 				25B52B46251BBDEC00D7A94E /* Resources */,
-				785529C59F0E53BCAAA2BC49 /* [CP] Embed Pods Frameworks */,
+				AB1A3C8270D4A94245414EA0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -661,7 +684,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25E005262524F3E3001C5783 /* Build configuration list for PBXNativeTarget "SnuYumWidgetExtension" */;
 			buildPhases = (
-				3A6E87BC5AFD5113356019FA /* [CP] Check Pods Manifest.lock */,
+				CB5F4C6FF3F0B2D9D1E4A753 /* [CP] Check Pods Manifest.lock */,
 				25E005102524F3E0001C5783 /* Sources */,
 				25E005112524F3E0001C5783 /* Frameworks */,
 				25E005122524F3E0001C5783 /* Resources */,
@@ -779,7 +802,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
-		3A6E87BC5AFD5113356019FA /* [CP] Check Pods Manifest.lock */ = {
+		31CB656172D677B3CA95FA7F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -794,31 +817,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SnuYumWidgetExtension-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-CafeNameExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		785529C59F0E53BCAAA2BC49 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7CE705BCE0D977325E8C2F93 /* [CP] Check Pods Manifest.lock */ = {
+		450CEACD17ED47A215478686 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -840,7 +846,41 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AAB34AB04C29C61F588EAB56 /* [CP] Check Pods Manifest.lock */ = {
+		8819BF2BF9D250AB86A990F1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB1A3C8270D4A94245414EA0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SnuYumAppClip/Pods-SnuYumAppClip-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B67CF619E3270C373512BBDF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -862,24 +902,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BA48BE25254FB5540EF27D2A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodLuxMea/Pods-FoodLuxMea-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EEC061DB50E750723F5DA24E /* [CP] Check Pods Manifest.lock */ = {
+		CB5F4C6FF3F0B2D9D1E4A753 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -894,7 +917,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CafeNameExtension-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SnuYumWidgetExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -923,30 +946,34 @@
 				2500739624F54A37009A32FA /* UserSetting.swift in Sources */,
 				2549427224F505730049F32E /* SimpleToggle.swift in Sources */,
 				2593233424FBBDF60036C148 /* MapView.swift in Sources */,
-				25FF78012503B306006372C7 /* OurhomeStorage.swift in Sources */,
+				25FF78012503B306006372C7 /* OurhomeHandler.swift in Sources */,
 				25340D5F251395CC00E7FA7A /* Cafe.swift in Sources */,
 				250BBC2024F3FAC800FC0C84 /* NaverMapProvider.swift in Sources */,
+				2540D0EB254C3DF400379027 /* CafeScrollView.swift in Sources */,
 				259C58CB25165D0200310FA8 /* Menu+.swift in Sources */,
 				250BBC2724F3FAC800FC0C84 /* SceneDelegate.swift in Sources */,
-				250BBBF624F3F92E00FC0C84 /* SNUCODownloader.swift in Sources */,
+				250BBBF624F3F92E00FC0C84 /* SNUCOHandler.swift in Sources */,
 				2593232E24FAE76F0036C148 /* CafeTimerButton.swift in Sources */,
 				2593233624FBCE7C0036C148 /* AboutAppView.swift in Sources */,
 				2591C74025020F4E00704673 /* PrivateData.swift in Sources */,
 				259F8D5824FA9088000F9A92 /* TimerCafeSettingView.swift in Sources */,
 				250BBC2824F3FAC800FC0C84 /* SectionText.swift in Sources */,
+				251239A6253ACF3F00D425FD /* UserDefaultWrapper.swift in Sources */,
 				250BBC2224F3FAC800FC0C84 /* SettingView.swift in Sources */,
 				2593233224FBB5F40036C148 /* AccentedText.swift in Sources */,
 				25A627962513BB5000313CD3 /* CustomHeader.swift in Sources */,
 				25A627942513B92600313CD3 /* RowBackground.swift in Sources */,
-				2589DF38251B37FC00813B51 /* ErasableRow.swift in Sources */,
+				2589DF38251B37FC00813B51 /* ErasableRowView.swift in Sources */,
 				255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */,
 				250BBBF324F3F92E00FC0C84 /* OperatingTime.swift in Sources */,
 				25647B6F24F9FFC900E1C3F0 /* CafeInformation.swift in Sources */,
 				25AE49E1251A12C600D4CB55 /* CenterModifier.swift in Sources */,
+				2552F1D9254C2E1100235D4A /* ActiveAlert.swift in Sources */,
 				250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */,
 				2593233024FAE8310036C148 /* CafeRowsFiltered.swift in Sources */,
 				259B889524F68B6F001C710C /* GADBannerViewController.swift in Sources */,
-				25478BE9251E967C00B4C3EA /* CafeMaterial.swift in Sources */,
+				2540D0F5254C46DC00379027 /* ErasableRow.swift in Sources */,
+				25478BE9251E967C00B4C3EA /* ListElement.swift in Sources */,
 				250BBC2924F3FAC800FC0C84 /* CafeView+.swift in Sources */,
 				250ADF5E251A8701008D83B8 /* AppStatus.swift in Sources */,
 				250BBC1F24F3FAC800FC0C84 /* ListOrderSettingView.swift in Sources */,
@@ -967,13 +994,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				25988CE1251F6162006E24A3 /* CustomizedCorneredRadius.swift in Sources */,
-				25B52B63251BC29900D7A94E /* SNUCODownloader.swift in Sources */,
+				25B52B63251BC29900D7A94E /* SNUCOHandler.swift in Sources */,
 				25CDB5EA251BCA260041D0BD /* ThemeColor+.swift in Sources */,
 				25CDB5F0251BCB2F0041D0BD /* RowBackground.swift in Sources */,
 				25B52B4B251BBDEC00D7A94E /* AppDelegate.swift in Sources */,
 				25B52B79251BC3B500D7A94E /* Menu+.swift in Sources */,
 				25B52B4D251BBDEC00D7A94E /* SceneDelegate.swift in Sources */,
 				25988CCC251F607C006E24A3 /* Blur.swift in Sources */,
+				25477E42253AE61500A959A2 /* UserDefaultWrapper.swift in Sources */,
 				25B52B85251BC3C500D7A94E /* DailyProposer.swift in Sources */,
 				25B52B7F251BC3C000D7A94E /* SimpleTime.swift in Sources */,
 				25CDB5ED251BCA870041D0BD /* AccentedText.swift in Sources */,
@@ -981,7 +1009,8 @@
 				25B52B88251BC3D100D7A94E /* CafeInformation.swift in Sources */,
 				25B52B4F251BBDEC00D7A94E /* ContentView.swift in Sources */,
 				25B52B82251BC3C200D7A94E /* OperatingTime.swift in Sources */,
-				25B52B66251BC29B00D7A94E /* OurhomeStorage.swift in Sources */,
+				2540D114254C55CB00379027 /* ClippedCafeteria.swift in Sources */,
+				25B52B66251BC29B00D7A94E /* OurhomeHandler.swift in Sources */,
 				25B52B7C251BC3BA00D7A94E /* Cafe.swift in Sources */,
 				253637E0251D13DC001038FD /* CenterModifier.swift in Sources */,
 			);
@@ -992,12 +1021,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				25235FB225271AE400B83F27 /* WidgetTitle.swift in Sources */,
-				2541D06F252634CD00FD3504 /* WidgetCafeteria.swift in Sources */,
+				2541D06F252634CD00FD3504 /* ClippedCafeteria.swift in Sources */,
 				252528632525028D00FD2069 /* CafeInformation.swift in Sources */,
+				25477E47253AE61600A959A2 /* UserDefaultWrapper.swift in Sources */,
 				25235FC025271B9000B83F27 /* WidgetAccent.swift in Sources */,
-				25E0051A2524F3E0001C5783 /* SnuYumWidget.swift in Sources */,
 				252528572525016400FD2069 /* OperatingTime.swift in Sources */,
-				2525283F2525002700FD2069 /* SNUCODownloader.swift in Sources */,
+				2525283F2525002700FD2069 /* SNUCOHandler.swift in Sources */,
 				25137FC425260A6D00A1326C /* DailyProposer.swift in Sources */,
 				252528512525016200FD2069 /* Menu+.swift in Sources */,
 				2525285D2525016600FD2069 /* SimpleTime.swift in Sources */,
@@ -1009,7 +1038,8 @@
 				2505884325267E920018E3A8 /* SnuYumSmallWidgetEntryView.swift in Sources */,
 				2548872625263CFB001E9024 /* ThemeColor+.swift in Sources */,
 				2525284B2525015D00FD2069 /* Cafe.swift in Sources */,
-				252528452525002800FD2069 /* OurhomeStorage.swift in Sources */,
+				2540D11E254C562900379027 /* SnuYumWidget.swift in Sources */,
+				252528452525002800FD2069 /* OurhomeHandler.swift in Sources */,
 				25235FAB25271AE200B83F27 /* WidgetSubtitle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1177,7 +1207,7 @@
 		};
 		250BBBE524F3F8F900FC0C84 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2918A41F50A11CFA4F029B90 /* Pods-FoodLuxMea.debug.xcconfig */;
+			baseConfigurationReference = C6E0A6567411ED07B1852B7A /* Pods-FoodLuxMea.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1273,7 +1303,7 @@
 		};
 		250BBBE624F3F8F900FC0C84 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 074730A757AB55526D933531 /* Pods-FoodLuxMea.release.xcconfig */;
+			baseConfigurationReference = 5AB5395AE27A9CEB7E0BA02B /* Pods-FoodLuxMea.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1368,7 +1398,7 @@
 		};
 		25152E1E252510F400BE63BF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6CCCA847F78F7AC4FC799559 /* Pods-CafeNameExtension.debug.xcconfig */;
+			baseConfigurationReference = AAD7F2572F08E8FCCE29320B /* Pods-CafeNameExtension.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1392,7 +1422,7 @@
 		};
 		25152E1F252510F400BE63BF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E401ACE73A0026F5CF8DA2EE /* Pods-CafeNameExtension.release.xcconfig */;
+			baseConfigurationReference = 43AD1530C17FDD745436DDE5 /* Pods-CafeNameExtension.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1416,7 +1446,7 @@
 		};
 		25B52B5E251BBDF000D7A94E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39F83E4572E31BA47C05DE83 /* Pods-SnuYumAppClip.debug.xcconfig */;
+			baseConfigurationReference = 1CD49590DC8B5523012C169A /* Pods-SnuYumAppClip.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1448,7 +1478,7 @@
 		};
 		25B52B5F251BBDF000D7A94E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 280FCA9D98549BF369387125 /* Pods-SnuYumAppClip.release.xcconfig */;
+			baseConfigurationReference = 4A1AEAC853988863B46C01B3 /* Pods-SnuYumAppClip.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1480,7 +1510,7 @@
 		};
 		25E005242524F3E3001C5783 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6263E1B0AEB8867B53E9764 /* Pods-SnuYumWidgetExtension.debug.xcconfig */;
+			baseConfigurationReference = 5769B29FC979374721BD0C41 /* Pods-SnuYumWidgetExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -1511,7 +1541,7 @@
 		};
 		25E005252524F3E3001C5783 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E20B21D64A70DFB7C0D19961 /* Pods-SnuYumWidgetExtension.release.xcconfig */;
+			baseConfigurationReference = 23CEBA5FE4784BFE9E103CA0 /* Pods-SnuYumWidgetExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;

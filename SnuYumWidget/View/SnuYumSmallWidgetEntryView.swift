@@ -11,10 +11,11 @@ import Intents
 
 struct SnuYumSmallWidgetEntryView: View {
     
-    var entry: Provider.Entry
-    var dayOfWeek: String
-    let themeColor = ThemeColor()
-    let menuTrimmed: [Menu]
+    private var entry: Provider.Entry
+
+    private var dayOfWeek: String
+    private let themeColor = ThemeColor()
+    private let menuTrimmed: [Menu]
     @Environment(\.colorScheme) var colorScheme
     
     init(entry: SimpleEntry) {
@@ -23,8 +24,8 @@ struct SnuYumSmallWidgetEntryView: View {
         dateFormatter.locale = Locale(identifier: "ko")
         dateFormatter.dateFormat = "EEEE"
         var targetDate = entry.date
-        let proposer = DailyProposer.menu(at: entry.date, cafeName: entry.cafe.name)
-        if proposer.isTomorrow {
+        let proposer = DailyProposer(at: entry.date, cafeName: entry.cafe.name).isTomorrow
+        if proposer {
             targetDate = Calendar.current.date(byAdding: .day, value: 1, to: entry.date)!
         }
         dayOfWeek = dateFormatter.string(from: targetDate)

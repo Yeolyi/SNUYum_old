@@ -22,7 +22,6 @@ struct SettingView: View {
     @Binding var isPresented: Bool {
         willSet {
             listManager.update(newCafeList: dataManager.loadAll(at: self.settingManager.date))
-            settingManager.update()
         }
     }
     @State var activeSheet: ActiveSheet?
@@ -42,17 +41,20 @@ struct SettingView: View {
     }
     
     var body: some View {
-            // List rows
-            Text("")
-                .padding(45)
-            Group {
-                Text("기본 설정")
-                    .sectionText()
-                // Basic setting - Cafe reorder.
-                Button(action: { self.activeSheet = .reorder }) {
+        // List rows
+        ScrollView {
+            VStack(spacing: 0) {
+                // Prevents BlurHeader hides scrollview object.
+                Text("")
+                    .padding(45)
+                Group {
+                    Text("기본 설정")
+                        .sectionText()
+                    // Basic setting - Cafe reorder.
                     HStack {
                         Text("식당 순서 변경")
                             .font(.system(size: 18))
+                            .foregroundColor(themeColor.title(colorScheme))
                         Spacer()
                         if listManager.fixedList.count != 0 {
                             Text("\(listManager.fixedList.count)개 식당이 고정되었어요")
@@ -65,41 +67,44 @@ struct SettingView: View {
                         }
                     }
                     .rowBackground()
-                }
-                .accentColor(themeColor.title(colorScheme))
-                // Basic setting - Cafe timer.
-                Button(action: { self.activeSheet = .timer }) {
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        self.activeSheet = .reorder
+                    }
+                    // Basic setting - Cafe timer.
                     HStack {
                         Text("운영정보 바로보기")
                             .font(.system(size: 18))
+                            .foregroundColor(themeColor.title(colorScheme))
                         Spacer()
                         Text(settingManager.alimiCafeName ?? "꺼짐")
                             .font(.system(size: 16))
                             .foregroundColor(.secondary)
                     }
                     .rowBackground()
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        self.activeSheet = .timer
+                    }
                 }
-                .accentColor(themeColor.title(colorScheme))
-            }
-            // Basic setting - Hide empty cafe.
-            SimpleToggle(isOn: $settingManager.hideEmptyCafe, label: "정보가 없는 식당 숨기기")
-                .rowBackground()
-            // Advanced setting.
-            Text("고급")
-                .sectionText()
-            // Advanced setting - custom date.
-            SimpleToggle(isOn: $settingManager.isCustomDate, label: "사용자 설정 날짜")
-                .rowBackground()
-            if settingManager.isCustomDate {
-                Text("참고: 이 설정은 저장되지 않습니다.")
-                    .foregroundColor(.secondary)
-                    .centered()
+                // Basic setting - Hide empty cafe.
+                SimpleToggle(isOn: $settingManager.hideEmptyCafe, label: "정보가 없는 식당 숨기기")
                     .rowBackground()
-                DatePicker(selection: $settingManager.debugDate, label: { EmptyView() })
+                // Advanced setting.
+                Text("고급")
+                    .sectionText()
+                // Advanced setting - custom date.
+                SimpleToggle(isOn: $settingManager.isDebugDate, label: "사용자 설정 날짜")
                     .rowBackground()
-                    .accentColor(themeColor.title(colorScheme))
-            }
-            Button(action: { activeAlert = ActiveAlert.clearCafe }) {
+                if settingManager.isDebugDate {
+                    Text("참고: 이 설정은 저장되지 않습니다.")
+                        .foregroundColor(.secondary)
+                        .centered()
+                        .rowBackground()
+                    DatePicker(selection: $settingManager.debugDate, label: { EmptyView() })
+                        .rowBackground()
+                        .accentColor(themeColor.title(colorScheme))
+                }
                 HStack {
                     Text("저장된 식단 삭제")
                         .font(.system(size: 18))
@@ -107,8 +112,10 @@ struct SettingView: View {
                     Spacer()
                 }
                 .rowBackground()
-            }
-            Button(action: { activeAlert = ActiveAlert.clearAll }) {
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    activeAlert = ActiveAlert.clearCafe
+                }
                 HStack {
                     Text("전체 초기화")
                         .font(.system(size: 18))
@@ -116,19 +123,24 @@ struct SettingView: View {
                     Spacer()
                 }
                 .rowBackground()
-            }
-            // Info
-            Text("정보")
-                .sectionText()
-            Button(action: { activeSheet = ActiveSheet.info }) {
-                HStack {
-                    Text("스누냠 정보")
-                        .foregroundColor(themeColor.title(colorScheme))
-                        .font(.system(size: 18))
-                    Spacer()
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    activeAlert = ActiveAlert.clearAll
                 }
+                // Info
+                Text("정보")
+                    .sectionText()
+                Button(action: { activeSheet = ActiveSheet.info }) {
+                    HStack {
+                        Text("스누냠 정보")
+                            .foregroundColor(themeColor.title(colorScheme))
+                            .font(.system(size: 18))
+                        Spacer()
+                    }
+                }
+                .rowBackground()
             }
-            .rowBackground()
+        }
         .background(colorScheme == .dark ? Color.black : Color.white)
         // Caution: Sheet modifier position matters.
         .sheet(item: self.$activeSheet) { item in

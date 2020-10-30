@@ -24,8 +24,8 @@ struct SnuYumMediumWidgetEntryView: View {
         dateFormatter.locale = Locale(identifier: "ko")
         dateFormatter.dateFormat = "EEEE"
         var targetDate = entry.date
-        let proposer = DailyProposer.menu(at: entry.date, cafeName: entry.cafe.name)
-        if proposer.isTomorrow {
+        let proposer = DailyProposer(at: entry.date, cafeName: entry.cafe.name).isTomorrow
+        if proposer {
             targetDate = Calendar.current.date(byAdding: .day, value: 1, to: entry.date)!
         }
         dayOfWeek = dateFormatter.string(from: targetDate)

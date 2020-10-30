@@ -8,7 +8,7 @@
 import Foundation
 
 /// Tuple with hour and minute.
-struct SimpleTime {
+struct SimpleTime: Comparable {
     let hour: Int
     let minute: Int
     

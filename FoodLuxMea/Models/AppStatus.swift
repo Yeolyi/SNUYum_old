@@ -11,8 +11,19 @@ import StoreKit
 
 class AppStatus: ObservableObject {
     
-    private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-    private let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+    @AutoSave("appVersion", defaultValue: "")
+    private var appVersion: String {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
+    @AutoSave("build", defaultValue: "")
+    private var build: String {
+        willSet {
+            objectWillChange.send()
+        }
+    }
     
     @Published var isInternetConnected = false
     
@@ -20,34 +31,22 @@ class AppStatus: ObservableObject {
     
     let monitor = NWPathMonitor()
     
-    var executionTimeCount: Int = 0
+    @AutoSave("executionTimeCount", defaultValue: 0)
+    var executionTimeCount: Int
     
     init() {
-        
-        if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
-            // To delete garbage data from previous versions.
-            userDefault.removeObject(forKey: "1.1firstRun")
-            
-            let storedAppVersion = userDefault.string(forKey: "appVersion") ?? ""
-            let storedBuild = userDefault.string(forKey: "build") ?? ""
-            if storedAppVersion != appVersion || storedBuild != build {
-                print("Version first run TRUE.")
-                isFirstVersionRun = true
-                userDefault.set(appVersion as String, forKey: "appVersion")
-                userDefault.set(build as String, forKey: "build")
-            } else {
-                isFirstVersionRun = false
-                print("Version first run FALSE.")
-            }
-            
-            executionTimeCount = userDefault.integer(forKey: "executionTimeCount")
-            print("\(executionTimeCount) times executed.")
-            executionTimeCount += 1
-            userDefault.set(executionTimeCount as Int, forKey: "executionTimeCount")
-        } else {
-            assertionFailure("Userdefault failed in RuntimeManager")
+        executionTimeCount += 1
+        print("\(executionTimeCount) time executed.")
+        let currentBuild = (Bundle.main.infoDictionary?["CFBundleVersionString"] as? String) ?? ""
+        let currentAppVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+        if appVersion != currentAppVersion || build != currentBuild {
+            isFirstVersionRun = true
+            appVersion = currentAppVersion
+            build = currentBuild
         }
-        
+        if executionTimeCount > 20 {
+            SKStoreReviewController.requestReview()
+        }
         // Update variable isInternetConnected using Network framework
         monitor.pathUpdateHandler = { path in
             DispatchQueue.main.async {
@@ -62,9 +61,5 @@ class AppStatus: ObservableObject {
         }
         let queue = DispatchQueue(label: "Monitor")
         monitor.start(queue: queue)
-        
-        if executionTimeCount > 20 {
-            SKStoreReviewController.requestReview()
-        }
     }
 }

@@ -26,34 +26,33 @@ struct MealSection: View {
     
     var body: some View {
         if cafe.menus(at: mealType).isEmpty == false {
-                VStack {
-                    Text(
-                        
-                        mealType.rawValue + " (" +
-                            (cafeOperatingHour[cafe.name]?.daily(at: settingManager.date)?
-                                .rawValue(at: mealType) ?? "시간 정보 없음")
-                            + ")"
-                    )
-                    .sectionText()
-                    ForEach(cafe.menus(at: mealType)) { menu in
-                        HStack {
-                            Text(menu.name)
-                                .accentedText()
-                                .foregroundColor(self.themeColor.title(self.colorScheme))
-                                .fixedSize(horizontal: false, vertical: true)
-                                .onTapGesture {
-                                    print(menu.name)
-                                }
-                            Spacer()
-                            Text(menu.costInterpret())
-                                .foregroundColor(Color(.gray))
-                        }
-                        .onTapGesture {
-                            print(menu.name)
-                        }
-                        .rowBackground()
+            VStack {
+                Text(
+                    mealType.rawValue + " (" +
+                        (cafeOperatingHour[cafe.name]?.daily(at: settingManager.date)?
+                            .rawValue(at: mealType) ?? "시간 정보 없음")
+                        + ")"
+                )
+                .sectionText()
+                ForEach(cafe.menus(at: mealType)) { menu in
+                    HStack {
+                        Text(menu.name)
+                            .accentedText()
+                            .foregroundColor(self.themeColor.title(self.colorScheme))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .onTapGesture {
+                                print(menu.name)
+                            }
+                        Spacer()
+                        Text(menu.costStr)
+                            .foregroundColor(Color(.gray))
                     }
+                    .onTapGesture {
+                        print(menu.name)
+                    }
+                    .rowBackground()
                 }
+            }
         }
     }
 }
