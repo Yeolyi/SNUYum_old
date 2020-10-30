@@ -42,6 +42,7 @@ struct SimpleToggle: View {
                     .transition(.asymmetric(insertion: .slide, removal: .opacity))
             }
         }
+        .contentShape(Rectangle())
         .onTapGesture {
             withAnimation {
                 isOn.toggle()
