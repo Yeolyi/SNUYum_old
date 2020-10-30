@@ -48,7 +48,7 @@ struct CafeRowsFiltered: View {
                 .sectionText()
             ForEach(list.filter(listFilter)) { listElement in
                 CafeRow(
-                    cafe: dataManager.cafe(at: settingManager.date, name: listElement.name) ?? Cafe(name: listElement.name),
+                    cafe: dataManager.asyncData.first(where: {$0.name == listElement.name}) ?? Cafe(name: listElement.name),
                     suggestedMeal: settingManager.meal, searchText: searchWord
                 )
             }
@@ -57,7 +57,7 @@ struct CafeRowsFiltered: View {
     
     /// Evaluate ListElement and return appropriate filter result.
     func listFilter(listElement: ListElement) -> Bool {
-        if let targetCafe = dataManager.cafe(at: settingManager.date, name: listElement.name) {
+        if let targetCafe =  dataManager.asyncData.first(where: {$0.name == listElement.name}) {
             if searchWord == "" {
                 if targetCafe.isEmpty(at: [settingManager.meal], emptyKeywords: closedKeywords) {
                     return !settingManager.hideEmptyCafe

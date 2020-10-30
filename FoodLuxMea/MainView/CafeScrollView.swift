@@ -17,6 +17,7 @@ struct CafeScrollView: View {
     @EnvironmentObject var settingManager: UserSetting
     @EnvironmentObject var erasableRowManager: ErasableRowManager
     @EnvironmentObject var listManager: CafeList
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ScrollView {
@@ -25,12 +26,20 @@ struct CafeScrollView: View {
                 Text("")
                     .padding(75)
                 SearchBar(searchWord: self.$searchWord)
-                // Cafe timer row.
                 if searchWord == "" &&
                     (!erasableRowManager.erasableMessages.isEmpty
                         || settingManager.alimiCafeName != nil || !appStatus.isInternetConnected) {
                     Text("안내")
                         .sectionText()
+                }
+                if appStatus.isDownloading {
+                    HStack {
+                        Text("학식 정보 다운로드중...")
+                            .accentedText()
+                            .foregroundColor(ThemeColor().title(colorScheme))
+                        Spacer()
+                    }
+                    .rowBackground()
                 }
                 if !appStatus.isInternetConnected {
                     HStack {
@@ -45,7 +54,7 @@ struct CafeScrollView: View {
                 }
                 if settingManager.alimiCafeName != nil {
                     CafeTimer(
-                        of: dataManager.cafe(at: settingManager.date, name: settingManager.alimiCafeName!)
+                        of: dataManager.asyncData.first(where: {$0.name == settingManager.alimiCafeName!}) 
                             ?? Cafe(name: settingManager.alimiCafeName!),
                         isInMainView: true
                     )

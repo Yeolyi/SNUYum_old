@@ -60,7 +60,7 @@ struct MealTypeButton: View {
     }
     
     var body: some View {
-        Button(action: { withAnimation{updateSetting()} }) {
+        Button(action: { withAnimation {updateSetting()} }) {
             ZStack {
                 if isSelected() {
                 RoundedRectangle(cornerRadius: 10)

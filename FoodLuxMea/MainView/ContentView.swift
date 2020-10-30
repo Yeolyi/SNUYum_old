@@ -63,6 +63,11 @@ struct ContentView: View {
     
     private func settingButton() -> Button<AnyView> {
         return Button(action: {
+            if isSettingView == true {
+                dataManager.update(at: settingManager.date) { cafeList in
+                    listManager.update(newCafeList: cafeList)
+                }
+            }
             withAnimation {
                 self.isSettingView.toggle()
             }
@@ -115,12 +120,9 @@ struct ContentView_Previews: PreviewProvider {
     
     static var previews: some View {
         ContentView_Previews.settingManager.update()
-        ContentView_Previews.listManager.update(
-            newCafeList:
-                ContentView_Previews.dataManager.loadAll(
-                    at: ContentView_Previews.self.settingManager.date
-                )
-        )
+        ContentView_Previews.dataManager.update(at: ContentView_Previews.settingManager.date) { cafeList in
+            ContentView_Previews.listManager.update(newCafeList: cafeList)
+        }
         let contentView = ContentView()
             .environmentObject(listManager)
             .environmentObject(dataManager)

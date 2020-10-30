@@ -11,6 +11,8 @@ import WidgetKit
 /// Retrieves, saves and updates all cafe datas.
 class Cafeteria: ObservableObject {
     
+    @Published var asyncData: [Cafe] = []
+    
     /// Loads existing datas or initializes them into default values.
     init() {
         if appStatus.isFirstVersionRun {
@@ -29,12 +31,23 @@ class Cafeteria: ObservableObject {
     }
     
     /// Get all data of certain date.
-    func loadAll(at date: Date) -> [Cafe] {
-        try! SNUCOHandler.cafe(date: date) + (OurhomeHandler.cafe(date: date) != nil ? [OurhomeHandler.cafe(date: date)!] : [])
-    }
-
-    /// Get specific cafe data from selected date.
-    func cafe(at date: Date, name: String) -> Cafe? {
-        loadAll(at: date).first(where: {$0.name == name})
+    func update(at date: Date, completion: @escaping ([Cafe]) -> Void) {
+        asyncData = []
+        var downloadedData: [Cafe] = []
+        appStatus.isDownloading = true
+        OperationQueue().addOperation {
+            print("Cafeteria updating...")
+            do {
+                downloadedData = try SNUCOHandler.cafe(date: date) + (OurhomeHandler.cafe(date: date) != nil ? [OurhomeHandler.cafe(date: date)!] : [])
+                completion(self.asyncData)
+                DispatchQueue.main.async {
+                    self.asyncData = downloadedData
+                    appStatus.isDownloading = false
+                }
+            } catch {
+                assertionFailure()
+                completion([])
+            }
+        }
     }
 }

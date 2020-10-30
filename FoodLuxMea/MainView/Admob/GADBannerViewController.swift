@@ -25,6 +25,5 @@ struct GADBannerViewController: UIViewControllerRepresentable {
     func updateUIViewController(
         _ uiViewController: UIViewController,
         context: Context) {
-        
     }
 }

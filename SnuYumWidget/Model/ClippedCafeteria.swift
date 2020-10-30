@@ -10,6 +10,14 @@ import WidgetKit
 
 class ClippedCafeteria {
 
+    @Published var asyncData: [Cafe] = []
+
+    init() {
+        update(at: Date()) { cafeList in
+            self.asyncData = cafeList
+        }
+    }
+    
     func clear() {
         SNUCOHandler.clear()
         OurhomeHandler.clear()
@@ -19,12 +27,21 @@ class ClippedCafeteria {
     }
     
     /// Get all data of certain date.
-    func loadAll(at date: Date) -> [Cafe] {
-        try! SNUCOHandler.cafe(date: date) + (OurhomeHandler.cafe(date: date) != nil ? [OurhomeHandler.cafe(date: date)!] : [])
-    }
-
-    /// Get specific cafe data from selected date.
-    func cafe(at date: Date, name: String) -> Cafe? {
-        loadAll(at: date).first(where: {$0.name == name})
+    func update(at date: Date, completion: @escaping ([Cafe]) -> Void) {
+        asyncData = []
+        var downloadedData: [Cafe] = []
+        OperationQueue().addOperation {
+            print("Cafeteria updating...")
+            do {
+                downloadedData = try SNUCOHandler.cafe(date: date) + (OurhomeHandler.cafe(date: date) != nil ? [OurhomeHandler.cafe(date: date)!] : [])
+                completion(self.asyncData)
+                DispatchQueue.main.async {
+                    self.asyncData = downloadedData
+                }
+            } catch {
+                assertionFailure()
+                completion([])
+            }
+        }
     }
 }

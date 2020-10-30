@@ -15,16 +15,16 @@ var previewCafe = Cafe(
     name: "3식당",
     phoneNum: "1234-5678",
     bkfMenuList: [
-        Menu(name: "쇠고기미역국", cost: 3000),
+        Menu(name: "쇠고기미역국", cost: 3000)
     ],
     lunchMenuList: [
         Menu(name: "목살김치찌개", cost: 3000),
         Menu(name: "치킨가츠동", cost: 3500),
-        Menu(name: "돌솥순두부찌개", cost: 3010),
+        Menu(name: "돌솥순두부찌개", cost: 3010)
     ],
     dinnerMenuList: [
         Menu(name: "왕갈비탕", cost: 11000),
-        Menu(name: "규동", cost: 3500),
+        Menu(name: "규동", cost: 3500)
     ]
 )
 
@@ -44,7 +44,7 @@ var coordList: [String : (lat: Double, lng: Double)] = [
     "소담마루": (37.465035, 126.951673),
     "라운지오": (37.465035, 126.951673),
     "샤반": (37.459212, 126.948113),
-    "아워홈": (37.462050, 126.957779),
+    "아워홈": (37.462050, 126.957779)
 ]
 
 /// Cafeteria phone number
@@ -157,7 +157,7 @@ var cafeOperatingHour: [String: WeeklyOperatingHour] = [
         weekday: .init("07:30-09:30", "11:30-13:30", "17:30-19:30"),
         saturday: .init("08:00-09:30", "11:30-13:30", "17:30-19:30"),
         sunday: .init("08:00-09:30", "11:30-13:30", "17:30-19:30")
-    ),
+    )
     
 ]
 
@@ -177,7 +177,7 @@ var cafePosition: [String: String] = [
     "소담마루": "113동[동원생활관] 지상3층",
     "라운지오": "113동[동원생활관] 지상1층",
     "샤반": "500동[대학원연구동(2단계)] 지상1층",
-    "아워홈": "901동[학생생활관] 지상1층",
+    "아워홈": "901동[학생생활관] 지상1층"
 ]
 
 /// Cafeteria description
@@ -198,5 +198,5 @@ var cafeDescription: [String: String] = [
     "소담마루": "한식, 일식 위주의 식단을 판매합니다. 주로 교직원을 대상으로 운영합니다.",
     "라운지오": "피자, 파스타등의 이태리 메뉴를 판매하고 있습니다.",
     "샤반": "한식 뷔폐 올반의 좋은 메뉴를 선별하여 판매합니다.",
-    "아워홈": "날마다 한식 위주의 식단을 판매합니다.",
+    "아워홈": "날마다 한식 위주의 식단을 판매합니다."
 ]

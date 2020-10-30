@@ -74,10 +74,10 @@ struct SnuYumSmallWidgetEntryView: View {
                             }
                         }
                     case 3...:
-                        ForEach((0..<2), id: \.self) { i in
-                            Text(menuTrimmed[i].name)
+                        ForEach((0..<2), id: \.self) { showableCafeIterate in
+                            Text(menuTrimmed[showableCafeIterate].name)
                                 .widgetAccent()
-                            if let cost = menuTrimmed[i].cost {
+                            if let cost = menuTrimmed[showableCafeIterate].cost {
                                 Text(String(cost) + "원")
                                     .widgetNormal()
                             }

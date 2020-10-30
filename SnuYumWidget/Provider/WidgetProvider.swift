@@ -39,16 +39,18 @@ struct Provider: IntentTimelineProvider {
             targetDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
         }
         
-        var cafe = widgetCafemanager.cafe(at: targetDate, name: cafeName) ?? Cafe(name: cafeName)
+        var cafe = widgetCafemanager.asyncData.first {$0.name == cafeName} ?? Cafe(name: cafeName)
         
         entries.append(.init(date: Date(), configuration: Intent(), cafe: cafe, meal: mealIterate))
         print("Widget: Add entries - \(mealIterate.rawValue) at \(Date())")
         
         for _ in 0..<3 {
             if mealIterate == .dinner {
-                let dinnerEndTime = cafeOperatingHour[cafeName]?.daily(at: targetDate)?.endTime(at: .dinner) ?? DailyProposer.getDefault(meal: .dinner)
+                let dinnerEndTime =
+                    cafeOperatingHour[cafeName]?.daily(at: targetDate)?.endTime(at: .dinner)
+                    ?? DailyProposer.getDefault(meal: .dinner)
                 targetDate = Calendar.current.date(bySettingHour: dinnerEndTime.hour, minute: dinnerEndTime.minute, second: 0, of: targetDate)!
-                cafe = widgetCafemanager.cafe(at: targetDate, name: cafeName) ?? Cafe(name: cafeName)
+                cafe = widgetCafemanager.asyncData.first {$0.name == cafeName} ?? Cafe(name: cafeName)
                 mealIterate = MealType.next(meal: mealIterate)
                 entries.append(.init(date: targetDate, configuration: Intent(), cafe: cafe, meal: mealIterate))
                 print("Widget: Add entries - \(MealType.next(meal: mealIterate).rawValue) at \(targetDate)")

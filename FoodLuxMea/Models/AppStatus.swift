@@ -27,6 +27,8 @@ class AppStatus: ObservableObject {
     
     @Published var isInternetConnected = false
     
+    @Published var isDownloading = false
+    
     var isFirstVersionRun = false
     
     let monitor = NWPathMonitor()

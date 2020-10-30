@@ -34,15 +34,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Create the SwiftUI view that provides the window contents.
         
-        // As essential class is now initialized, mark that it is no longer first run.
-        if let userDefault = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea") {
-            userDefault.set(true as Bool, forKey: "firstRun")
-            userDefault.set(true as Bool, forKey: "1.1firstRun")
-        }
-        
         // Update classes to set date.
         settingManager.update()
-        self.listManager.update(newCafeList: self.dataManager.loadAll(at: self.settingManager.date))
+        self.dataManager.update(at: self.settingManager.date) { cafeList in
+            self.listManager.update(newCafeList: cafeList)
+        }
         
         //requestPermission()
         
@@ -86,7 +82,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Update class values preventing old view is shown.
         settingManager.update()
-        listManager.update(newCafeList: self.dataManager.loadAll(at: self.settingManager.date))
+        self.dataManager.update(at: self.settingManager.date) { cafeList in
+            self.listManager.update(newCafeList: cafeList)
+        }
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {

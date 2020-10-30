@@ -39,7 +39,14 @@ struct SnuYumWidget: Widget {
 
 struct SnuYumWidget_Previews: PreviewProvider {
     static var previews: some View {
-        SnuYumWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), cafe: previewCafe, meal: .lunch))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        SnuYumWidgetEntryView(
+            entry: SimpleEntry(
+                date: Date(),
+                configuration: ConfigurationIntent(),
+                cafe: previewCafe,
+                meal: .lunch
+            )
+        )
+        .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

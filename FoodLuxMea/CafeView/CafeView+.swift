@@ -120,7 +120,9 @@ struct CafeView_Previews: PreviewProvider {
     static var previews: some View {
         
         CafeView_Previews.settingManager.update()
-        CafeView_Previews.listManager.update(newCafeList: CafeView_Previews.dataManager.loadAll(at: Date()))
+        CafeView_Previews.dataManager.update(at: Date()) {cafeList in
+            CafeView_Previews.listManager.update(newCafeList: cafeList)
+        }
         
         return CafeView(cafeInfo: previewCafe)
             .environmentObject(self.dataManager)

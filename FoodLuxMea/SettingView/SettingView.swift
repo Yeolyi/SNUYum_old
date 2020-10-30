@@ -19,11 +19,7 @@ enum ActiveSheet: Identifiable {
 
 struct SettingView: View {
     
-    @Binding var isPresented: Bool {
-        willSet {
-            listManager.update(newCafeList: dataManager.loadAll(at: self.settingManager.date))
-        }
-    }
+    @Binding var isPresented: Bool
     @State var activeSheet: ActiveSheet?
     @Binding var activeAlert: ActiveAlert?
     

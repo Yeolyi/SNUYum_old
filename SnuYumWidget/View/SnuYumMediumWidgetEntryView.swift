@@ -92,11 +92,11 @@ struct SnuYumMediumWidgetEntryView: View {
                     }
                 default:
                     VStack(alignment: .leading, spacing: 5) {
-                        ForEach((0..<3), id: \.self) { i in
+                        ForEach((0..<3), id: \.self) { showableCafeIterate in
                             HStack {
-                                Text(menuTrimmed[i].name)
+                                Text(menuTrimmed[showableCafeIterate].name)
                                     .widgetAccent()
-                                if let cost = menuTrimmed[i].cost {
+                                if let cost = menuTrimmed[showableCafeIterate].cost {
                                     Text(String(cost) + "원")
                                         .widgetNormal()
                                 }
@@ -109,11 +109,11 @@ struct SnuYumMediumWidgetEntryView: View {
                             .foregroundColor(themeColor.title(colorScheme))
                             .cornerRadius(2)
                         VStack(alignment: .leading, spacing: 5) {
-                            ForEach((3..<min(menuTrimmed.count, 5)), id: \.self) { i in
+                            ForEach((3..<min(menuTrimmed.count, 5)), id: \.self) { secondShowableCafeIterate in
                                 HStack {
-                                    Text(menuTrimmed[i].name)
+                                    Text(menuTrimmed[secondShowableCafeIterate].name)
                                         .widgetAccent()
-                                    if let cost = menuTrimmed[i].cost {
+                                    if let cost = menuTrimmed[secondShowableCafeIterate].cost {
                                         Text(String(cost) + "원")
                                             .widgetNormal()
                                     }

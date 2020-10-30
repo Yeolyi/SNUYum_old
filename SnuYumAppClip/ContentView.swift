@@ -41,7 +41,7 @@ struct ContentView: View {
                     .font(.headline)
                     .centered()
                     .rowBackground()
-                ForEach(cafeteria.loadAll(at: Date()).filter { isMenuEmpty(of: $0) == false }) { cafe in
+                ForEach(cafeteria.asyncData.filter { isMenuEmpty(of: $0) == false }) { cafe in
                     VStack(alignment: .leading) {
                         HStack {
                             Text(cafe.name)
