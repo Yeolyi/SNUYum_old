@@ -17,6 +17,7 @@ struct CafeTimer: View {
     /// Determines to show sheet on tap or not.
     let isInMainView: Bool
     @State var isCafeViewSheet = false
+    @Binding var selectedCafe: Cafe?
     
     @EnvironmentObject var listManager: CafeList
     @EnvironmentObject var dataManager: Cafeteria
@@ -25,14 +26,14 @@ struct CafeTimer: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    init(of cafe: Cafe, isInMainView: Bool) {
-        self.cafe = cafe
-        self.isInMainView = isInMainView
-    }
-    
     var body: some View {
         // If view is in mainview, show sheet.
-        Button(action: { isCafeViewSheet = isInMainView }) {
+        Button(action: {
+            isCafeViewSheet = isInMainView
+            withAnimation {
+                selectedCafe = cafe
+            }
+        }) {
             VStack {
                 HStack {
                     Text(isInMainView ? "\(cafe.name) 운영정보" : "운영정보")
@@ -49,12 +50,6 @@ struct CafeTimer: View {
                 }
             }
             .rowBackground()
-        }
-        .sheet(isPresented: $isCafeViewSheet) {
-            CafeView(cafeInfo: cafe)
-                .environmentObject(self.listManager)
-                .environmentObject(self.settingManager)
-                .environmentObject(self.dataManager)
         }
     }
     
@@ -121,7 +116,7 @@ struct CafeTimer: View {
 
 struct CafeTimerText_Previews: PreviewProvider {
     static var previews: some View {
-        CafeTimer(of: previewCafe, isInMainView: true)
+        CafeTimer(cafe: previewCafe, isInMainView: true, selectedCafe: .constant(nil))
             .environmentObject(Cafeteria())
             .environmentObject(UserSetting())
             .environmentObject(CafeList())

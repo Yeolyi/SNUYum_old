@@ -15,6 +15,7 @@ struct ContentView: View {
     @State var searchWord = ""
     @State var isSettingView = false
     @State var activeAlert: ActiveAlert?
+    @State var currentCafe: Cafe?
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var listManager: CafeList
@@ -25,16 +26,16 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            BlurHeader(padding: isSettingView ? 20 : 5) {
+            BlurHeader(padding: isSettingView || currentCafe != nil ? 20 : 5) {
                 VStack(spacing: 0) {
                     HStack {
-                        CustomHeader(title: headerTitle, subTitle: "스누냠")
+                        CustomHeader(title: headerTitle, subTitle: headerSubTitle)
                         Spacer()
                         settingButton()
                             .padding()
                             .offset(y: 10)
                     }
-                    if !isSettingView {
+                    if !isSettingView && currentCafe == nil {
                         MealSelect()
                             .padding()
                     }
@@ -44,8 +45,10 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 if isSettingView {
                     SettingView(isPresented: $isSettingView, activeAlert: $activeAlert)
+                } else if let cafe = currentCafe {
+                    CafeView(cafeInfo: cafe)
                 } else {
-                    CafeScrollView(searchWord: $searchWord, isSettingView: $isSettingView, activeAlert: $activeAlert)
+                    CafeScrollView(searchWord: $searchWord, selectedCafe: $currentCafe)
                 }
                 // Google Admob.
                 GADBannerViewController()
@@ -58,34 +61,61 @@ struct ContentView: View {
     }
     
     private var headerTitle: String {
-        isSettingView ? "설정" : (searchWord == "" ? "식단 바로보기" : "식단 검색")
+        if let cafe = currentCafe {
+            return cafe.name
+        }
+        return isSettingView ? "설정" : (searchWord == "" ? "식단 바로보기" : "식단 검색")
     }
     
-    private func settingButton() -> Button<AnyView> {
-        return Button(action: {
-            if isSettingView == true {
-                dataManager.update(at: settingManager.date) { cafeList in
-                    listManager.update(newCafeList: cafeList)
+    private var headerSubTitle: String {
+        currentCafe != nil ? "식단 자세히 보기" : "스누냠"
+    }
+    
+    private func settingButton() -> AnyView {
+        if currentCafe != nil {
+            return AnyView(
+                HStack {
+                    Button(action: {
+                            _ = listManager.toggleFixed(cafeName: currentCafe!.name)
+                    }) {
+                        Image(systemName: listManager.isFixed(cafeName: currentCafe!.name) ? "pin" : "pin.slash")
+                            .font(.system(size: 23, weight: .semibold))
+                            .foregroundColor(themeColor.icon(colorScheme))
+                            .padding(.trailing, 10)
+                    }
+                    Button(action: {
+                        withAnimation {
+                            currentCafe = nil
+                        }
+                    }) {
+                        Text("닫기")
+                            .font(.system(size: CGFloat(20), weight: .semibold))
+                            .foregroundColor(themeColor.icon(colorScheme))
+                    }
+                })
+        }
+        return AnyView(
+            Button(action: {
+                if isSettingView == true {
+                    dataManager.update(at: settingManager.date) { cafeList in
+                        listManager.update(newCafeList: cafeList)
+                    }
                 }
-            }
-            withAnimation {
-                self.isSettingView.toggle()
-            }
-        }) {
-            if isSettingView {
-                return AnyView(
+                withAnimation {
+                    self.isSettingView.toggle()
+                }
+            }) {
+                if isSettingView {
                     Text("닫기")
                         .font(.system(size: CGFloat(20), weight: .semibold))
                         .foregroundColor(themeColor.icon(colorScheme))
-                )
-            } else {
-                return AnyView(
+                } else {
                     Image(systemName: "gear")
                         .font(.system(size: 25, weight: .regular))
                         .foregroundColor(themeColor.icon(colorScheme))
-                )
+                }
             }
-        }
+        )
     }
     
     private func mainAlert(item: ActiveAlert) -> Alert {

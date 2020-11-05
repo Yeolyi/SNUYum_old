@@ -14,25 +14,20 @@ struct CafeRow: View {
     var suggestedMeal: MealType
     let searchText: String
     @State var isSheet = false
+    @Binding var selectedCafe: Cafe?
     
     let themeColor = ThemeColor()
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var listManager: CafeList
     @EnvironmentObject var settingManager: UserSetting
-
-    /**
-     - Parameters:
-     - cafe: Cafe struct which this view shows.
-     - suggestedMeal: Meal type in cafe struct which this view shows.
-     */
-    init(cafe: Cafe, suggestedMeal: MealType, searchText: String) {
-        self.cafe = cafe
-        self.suggestedMeal = suggestedMeal
-        self.searchText = searchText
-    }
     
     var body: some View {
-        Button(action: {isSheet = true}) {
+        Button(action: {
+            isSheet = true
+            withAnimation {
+                selectedCafe = cafe
+            }
+        }) {
             VStack(alignment: .leading) {
                 HStack {
                     Text(cafe.name)
@@ -72,11 +67,6 @@ struct CafeRow: View {
                     }
                 }
             }
-        }
-        .sheet(isPresented: $isSheet) {
-            CafeView(cafeInfo: cafe)
-                .environmentObject(self.listManager)
-                .environmentObject(self.settingManager)
         }
         .rowBackground()
     }
@@ -136,7 +126,7 @@ struct CafeRow: View {
 
 struct CafeListRow_Previews: PreviewProvider {
     static var previews: some View {
-        CafeRow(cafe: previewCafe, suggestedMeal: .lunch, searchText: "")
+        CafeRow(cafe: previewCafe, suggestedMeal: .lunch, searchText: "", selectedCafe: .constant(nil))
             .environmentObject(CafeList())
             .environmentObject(Cafeteria())
             .environmentObject(UserSetting())

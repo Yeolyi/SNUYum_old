@@ -13,20 +13,12 @@ struct CafeRowsFiltered: View {
     let isFixed: Bool
     let searchWord: String
     
+    @Binding var selectedCafe: Cafe?
+    
     @EnvironmentObject var listManager: CafeList
     @EnvironmentObject var settingManager: UserSetting
     @EnvironmentObject var dataManager: Cafeteria
     let themeColor = ThemeColor()
-    
-    /**
-     - Parameters:
-     - isFixed: Show fixed cafe only or not
-     - searchWord: If something is searched, filters the cafe list
-     */
-    init(isFixed: Bool, searchWord: String) {
-        self.isFixed = isFixed
-        self.searchWord = searchWord
-    }
     
     var body: some View {
         let list = isFixed ? listManager.fixedList : listManager.unfixedList
@@ -49,7 +41,7 @@ struct CafeRowsFiltered: View {
             ForEach(list.filter(listFilter)) { listElement in
                 CafeRow(
                     cafe: dataManager.asyncData.first(where: {$0.name == listElement.name}) ?? Cafe(name: listElement.name),
-                    suggestedMeal: settingManager.meal, searchText: searchWord
+                    suggestedMeal: settingManager.meal, searchText: searchWord, selectedCafe: $selectedCafe
                 )
             }
         }

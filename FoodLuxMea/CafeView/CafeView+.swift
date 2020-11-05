@@ -27,83 +27,61 @@ struct CafeView: View {
     }
     
     var body: some View {
-        VStack {
-            // MARK: - Custom navigationbar view.
-            HStack {
-                CustomHeader(title: cafe.name, subTitle: "식단 자세히 보기")
-                Spacer()
-                Button(action: { _ = cafeList.toggleFixed(cafeName: cafe.name) }) {
-                    Image(systemName: cafeList.isFixed(cafeName: cafe.name) ? "pin" : "pin.slash")
-                        .font(.system(size: 25, weight: .semibold))
-                        .foregroundColor(themeColor.icon(colorScheme))
-                        .offset(y: 10)
-                }
-                Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-                    Text("닫기")
-                        .font(.system(size: CGFloat(20), weight: .semibold))
-                        .foregroundColor(themeColor.icon(colorScheme))
-                        .padding()
-                        .offset(y: 10)
-                }
-            }
-            Divider()
-            ScrollView {
-                Text("안내")
-                    .sectionText()
-                CafeTimer(of: cafe, isInMainView: false)
-                MealSection(cafe: cafe, mealType: .breakfast)
-                MealSection(cafe: cafe, mealType: .lunch)
-                MealSection(cafe: cafe, mealType: .dinner)
-                Text("식당 정보")
-                    .sectionText()
-                VStack {
-                    Text(cafeDescription[cafe.name] ?? "정보 없음")
-                        .font(.system(size: 16))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding()
+        ScrollView {
+            // Prevents BlurHeader hides scrollview object.
+            Text("")
+                .padding(45)
+            Text("안내")
+                .sectionText()
+            CafeTimer(cafe: cafe, isInMainView: false, selectedCafe: .constant(nil))
+            MealSection(cafe: cafe, mealType: .breakfast)
+            MealSection(cafe: cafe, mealType: .lunch)
+            MealSection(cafe: cafe, mealType: .dinner)
+            Text("식당 정보")
+                .sectionText()
+            VStack {
+                Text(cafeDescription[cafe.name] ?? "정보 없음")
+                    .font(.system(size: 16))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding()
+                HStack {
+                    // Phone call
                     HStack {
-                        // Phone call
-                        HStack {
-                            Spacer()
-                            Image(systemName: "phone")
-                                .font(.system(size: 20))
-                                .foregroundColor(themeColor.title(colorScheme))
-                            Text("전화 걸기")
-                                .font(.system(size: 16))
-                                .foregroundColor(themeColor.title(colorScheme))
-                            Spacer()
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            let telephone = "tel://02-"
-                            let formattedString = telephone + self.cafe.phoneNum
-                            guard let url = URL(string: formattedString) else { return }
-                            UIApplication.shared.open(url)
-                        }
-                        Divider()
-                        // Map view.
-                        HStack {
-                            Spacer()
-                            Image(systemName: "map")
-                                .font(.system(size: 20, weight: .light))
-                                .foregroundColor(themeColor.title(colorScheme))
-                            Text("위치 보기")
-                                .font(.system(size: 16))
-                                .foregroundColor(themeColor.title(colorScheme))
-                            Spacer()
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            self.isMapSheet = true
-                        }
+                        Spacer()
+                        Image(systemName: "phone")
+                            .font(.system(size: 20))
+                            .foregroundColor(themeColor.title(colorScheme))
+                        Text("전화 걸기")
+                            .font(.system(size: 16))
+                            .foregroundColor(themeColor.title(colorScheme))
+                        Spacer()
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        let telephone = "tel://02-"
+                        let formattedString = telephone + self.cafe.phoneNum
+                        guard let url = URL(string: formattedString) else { return }
+                        UIApplication.shared.open(url)
+                    }
+                    Divider()
+                    // Map view.
+                    HStack {
+                        Spacer()
+                        Image(systemName: "map")
+                            .font(.system(size: 20, weight: .light))
+                            .foregroundColor(themeColor.title(colorScheme))
+                        Text("위치 보기")
+                            .font(.system(size: 16))
+                            .foregroundColor(themeColor.title(colorScheme))
+                        Spacer()
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        self.isMapSheet = true
                     }
                 }
-                .rowBackground()
             }
-            // MARK: - Google admob.
-            Divider()
-            GADBannerViewController()
-                .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+            .rowBackground()
         }
         .sheet(isPresented: $isMapSheet) {
             MapView(cafeInfo: self.cafe)

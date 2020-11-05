@@ -10,8 +10,7 @@ import SwiftUI
 struct CafeScrollView: View {
     
     @Binding var searchWord: String
-    @Binding var isSettingView: Bool
-    @Binding var activeAlert: ActiveAlert?
+    @Binding var selectedCafe: Cafe?
     
     @EnvironmentObject var dataManager: Cafeteria
     @EnvironmentObject var settingManager: UserSetting
@@ -54,17 +53,17 @@ struct CafeScrollView: View {
                 }
                 if settingManager.alimiCafeName != nil {
                     CafeTimer(
-                        of: dataManager.asyncData.first(where: {$0.name == settingManager.alimiCafeName!}) 
+                        cafe: dataManager.asyncData.first(where: {$0.name == settingManager.alimiCafeName!})
                             ?? Cafe(name: settingManager.alimiCafeName!),
-                        isInMainView: true
+                        isInMainView: true, selectedCafe: $selectedCafe
                     )
                 }
                 // Fixed cafe section.
                 if self.listManager.fixedList.isEmpty == false {
-                    CafeRowsFiltered(isFixed: true, searchWord: self.searchWord)
+                    CafeRowsFiltered(isFixed: true, searchWord: self.searchWord, selectedCafe: $selectedCafe)
                 }
                 // Ordinary cafe section.
-                CafeRowsFiltered(isFixed: false, searchWord: self.searchWord)
+                CafeRowsFiltered(isFixed: false, searchWord: self.searchWord, selectedCafe: $selectedCafe)
             }
         }
     }
