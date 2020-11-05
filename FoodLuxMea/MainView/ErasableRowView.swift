@@ -21,7 +21,7 @@ struct ErasableRow: View {
                     .foregroundColor(.secondary)
                 Spacer()
                 Image(systemName: "xmark")
-                    .font(.system(size: 15, weight: .light))
+                    .font(.system(size: 20, weight: .light))
                     .foregroundColor(.secondary)
                     .onTapGesture {
                         withAnimation {
