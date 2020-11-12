@@ -19,6 +19,12 @@ class CafeList: ObservableObject {
         }
     }
     
+    init() {
+        if cafeList == [] {
+            clear()
+        }
+    }
+    
     /// Return fixed cafe ListElement array.
     var fixedList: [ListElement] {
         cafeList.filter { $0.isFixed == true }
@@ -28,12 +34,6 @@ class CafeList: ObservableObject {
         cafeList.filter { $0.isFixed == false }
     }
 
-    init() {
-        if appStatus.executionTimeCount == 1 {
-            clear()
-        }
-    }
-    
     func clear() {
         cafeList = []
         let cafeNameList = [

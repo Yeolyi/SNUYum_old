@@ -91,7 +91,6 @@ struct SNUCOHandler {
         if menuNCost.isEmpty {
             return (true, false)
         } else if menuNCost.contains("운영") {
-            print(menuNCost)
             return (true, false)
         } else if menuNCost.contains("혼잡") {
             return (true, true)

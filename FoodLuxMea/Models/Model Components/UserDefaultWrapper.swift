@@ -19,8 +19,9 @@ struct AutoSave<T: Codable> {
 
     var wrappedValue: T {
         get {
+            
             // Read value from UserDefaults
-            guard let data = UserDefaults.snuYum?.object(forKey: key) as? Data else {
+            guard let data = UserDefaults.snuYum.object(forKey: key) as? Data else {
                 // Return defaultValue when no data in UserDefaults
                 return defaultValue
             }
@@ -34,12 +35,11 @@ struct AutoSave<T: Codable> {
             let data = try? JSONEncoder().encode(newValue)
             
             // Set value to UserDefaults
-            UserDefaults.snuYum?.set(data, forKey: key)
-            
+            UserDefaults.snuYum.set(data, forKey: key)
         }
     }
 }
 
 extension UserDefaults {
-    static let snuYum = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")
+    static let snuYum = UserDefaults(suiteName: "group.com.wannasleep.FoodLuxMea")!
 }
