@@ -31,8 +31,7 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: Intent, in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         var entries: [Entry] = []
         let cafeName = configuration.cafeName?.displayString ?? "학생회관식당"
-        let proposer = DailyProposer(at: Date(), cafeName: cafeName)
-        var mealIterate = proposer.meal
+        var mealIterate = DailyProposer(at: Date(), cafeName: cafeName).meal
         
         var targetDate = Date()
         if DailyProposer(at: Date(), cafeName: cafeName).isTomorrow {

@@ -11,6 +11,10 @@ import Network
 
 struct ContentView: View {
     
+    enum ViewStatus {
+        case main, cafe, setting
+    } 
+    
     let themeColor = ThemeColor()
     @State var searchWord = ""
     @State var isSettingView = false
