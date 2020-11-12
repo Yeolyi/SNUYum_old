@@ -26,8 +26,6 @@ struct CafeRowsFiltered: View {
             if isFixed {
                 EmptyView()
             } else {
-                Text("일반")
-                    .sectionText()
                 HStack {
                     Spacer()
                     Text(searchWord == "" ? "운영중인 식당이 없어요" : "검색 결과가 없어요")
@@ -36,8 +34,6 @@ struct CafeRowsFiltered: View {
                 .rowBackground()
             }
         } else {
-            Text(isFixed ? "고정됨" : "일반")
-                .sectionText()
             ForEach(list.filter(listFilter)) { listElement in
                 CafeRow(
                     cafe: dataManager.asyncData.first(where: {$0.name == listElement.name}) ?? Cafe(name: listElement.name),

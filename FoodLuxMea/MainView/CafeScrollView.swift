@@ -25,12 +25,6 @@ struct CafeScrollView: View {
                 Text("")
                     .padding(75)
                 SearchBar(searchWord: self.$searchWord)
-                if searchWord == "" &&
-                    (!erasableRowManager.erasableMessages.isEmpty
-                        || settingManager.alimiCafeName != nil || !appStatus.isInternetConnected) {
-                    Text("안내")
-                        .sectionText()
-                }
                 if appStatus.isDownloading {
                     HStack {
                         Text("학식 정보 다운로드중...")
@@ -48,10 +42,7 @@ struct CafeScrollView: View {
                     }
                     .rowBackground()
                 }
-                if !erasableRowManager.erasableMessages.isEmpty {
-                    ErasableRow()
-                }
-                if settingManager.alimiCafeName != nil {
+                if settingManager.alimiCafeName != nil && !appStatus.isDownloading {
                     CafeTimer(
                         cafe: dataManager.asyncData.first(where: {$0.name == settingManager.alimiCafeName!})
                             ?? Cafe(name: settingManager.alimiCafeName!),

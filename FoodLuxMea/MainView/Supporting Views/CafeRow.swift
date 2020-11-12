@@ -29,7 +29,12 @@ struct CafeRow: View {
             }
         }) {
             VStack(alignment: .leading) {
-                HStack {
+                HStack(spacing: 0) {
+                    if listManager.isFixed(cafeName: cafe.name) {
+                        Image(systemName: "pin")
+                            .foregroundColor(themeColor.icon(colorScheme))
+                            .font(.system(size: 15, weight: .bold, design: .default))
+                    }
                     Text(cafe.name)
                         .accentedText()
                         .foregroundColor(themeColor.title(colorScheme))
