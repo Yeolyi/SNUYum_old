@@ -13,12 +13,11 @@ struct Provider: IntentTimelineProvider {
     
     typealias Entry = SimpleEntry
     typealias Intent = ConfigurationIntent
-    var widgetCafemanager = ClippedCafeteria()
     
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: Intent(), cafe: previewCafe, meal: .lunch)
     }
-
+    
     func getSnapshot(for configuration: Intent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(
             date: Date(),
@@ -27,19 +26,18 @@ struct Provider: IntentTimelineProvider {
         )
         completion(entry)
     }
-
+    
     func getTimeline(for configuration: Intent, in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         var entries: [Entry] = []
         let cafeName = configuration.cafeName?.displayString ?? "학생회관식당"
         var mealIterate = DailyProposer(at: Date(), cafeName: cafeName).meal
         
+        let widgetCafemanager = ClippedCafeteria()
         var targetDate = Date()
         if DailyProposer(at: Date(), cafeName: cafeName).isTomorrow {
             targetDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
         }
-        
-        var cafe = widgetCafemanager.asyncData.first {$0.name == cafeName} ?? Cafe(name: cafeName)
-        
+        var cafe = ClippedCafeteria.getCafe(name: cafeName) ?? Cafe(name: cafeName)
         entries.append(.init(date: Date(), configuration: Intent(), cafe: cafe, meal: mealIterate))
         print("Widget: Add entries - \(mealIterate.rawValue) at \(Date())")
         
@@ -66,6 +64,7 @@ struct Provider: IntentTimelineProvider {
         
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
+        
     }
 }
 

@@ -495,7 +495,6 @@
 			children = (
 				250BBBEF24F3F92E00FC0C84 /* SNUCOHandler.swift */,
 				25FF78002503B306006372C7 /* OurhomeHandler.swift */,
-				250BBBEB24F3F92D00FC0C84 /* Cafeteria.swift */,
 			);
 			path = HTMLHandler;
 			sourceTree = "<group>";
@@ -537,6 +536,7 @@
 			children = (
 				256931B425440382007734DE /* HTMLHandler */,
 				2500739524F54A37009A32FA /* UserSetting.swift */,
+				250BBBEB24F3F92D00FC0C84 /* Cafeteria.swift */,
 				250BBBEA24F3F92D00FC0C84 /* DailyProposer.swift */,
 				250BBBE924F3F92D00FC0C84 /* CafeList.swift */,
 				250ADF5D251A8701008D83B8 /* AppStatus.swift */,

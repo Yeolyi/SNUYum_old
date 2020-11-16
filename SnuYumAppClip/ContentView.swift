@@ -51,7 +51,7 @@ struct ContentView: View {
                             Spacer()
                         }
                         Spacer()
-                        ForEach(cafe.menus(at: .lunch).filter { !$0.name.contains("※")}) { menu in
+                        ForEach(cafe.menus(at: proposer.meal).filter { !$0.name.contains("※")}) { menu in
                             HStack {
                                 Text(menu.name)
                                     .font(.system(size: 15))
@@ -74,7 +74,7 @@ struct ContentView: View {
     }
     
     func isMenuEmpty(of cafe: Cafe) -> Bool {
-        cafe.menus(at: DailyProposer(at: Date(), cafeName: cafe.name).meal).isEmpty
+        cafe.menus(at: proposer.meal).isEmpty
     }
 }
 

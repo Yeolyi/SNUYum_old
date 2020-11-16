@@ -8,6 +8,7 @@
 import SwiftUI
 import Network
 import StoreKit
+import WidgetKit
 
 class AppStatus: ObservableObject {
     
@@ -51,7 +52,6 @@ class AppStatus: ObservableObject {
             UserDefaults.snuYum.set(try? JSONEncoder().encode(isAuto), forKey: "isAuto")
             let hideEmptyCafe = UserDefaults.snuYum.bool(forKey: "isHide")
             UserDefaults.snuYum.set(try? JSONEncoder().encode(hideEmptyCafe), forKey: "isHide")
-            
             if let loadedData = UserDefaults.snuYum.value(forKey: "cafeList") as? Data {
                 do {
                     let cafeList = try PropertyListDecoder().decode([ListElement].self, from: loadedData)
@@ -62,7 +62,6 @@ class AppStatus: ObservableObject {
                 }
             }
         }
-        
         executionTimeCount += 1
         print("\(executionTimeCount) time executed.")
         let currentBuild = (Bundle.main.infoDictionary?["CFBundleVersionString"] as? String) ?? ""
@@ -71,11 +70,13 @@ class AppStatus: ObservableObject {
             isFirstVersionRun = true
             appVersion = currentAppVersion
             build = currentBuild
+            if #available(iOS 14.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
         if executionTimeCount > 20 {
             SKStoreReviewController.requestReview()
-        }
-        // Update variable isInternetConnected using Network framework
+        } 
         monitor.pathUpdateHandler = { path in
             DispatchQueue.main.async {
                 if path.status == .satisfied {
