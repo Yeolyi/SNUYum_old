@@ -19,7 +19,6 @@ struct AutoSave<T: Codable> {
 
     var wrappedValue: T {
         get {
-            
             // Read value from UserDefaults
             guard let data = UserDefaults.snuYum.object(forKey: key) as? Data else {
                 // Return defaultValue when no data in UserDefaults
@@ -33,7 +32,6 @@ struct AutoSave<T: Codable> {
         set {
             // Convert newValue to data
             let data = try? JSONEncoder().encode(newValue)
-            
             // Set value to UserDefaults
             UserDefaults.snuYum.set(data, forKey: key)
         }

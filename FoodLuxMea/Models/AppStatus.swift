@@ -51,13 +51,13 @@ class AppStatus: ObservableObject {
             UserDefaults.snuYum.set(try? JSONEncoder().encode(isAuto), forKey: "isAuto")
             let hideEmptyCafe = UserDefaults.snuYum.bool(forKey: "isHide")
             UserDefaults.snuYum.set(try? JSONEncoder().encode(hideEmptyCafe), forKey: "isHide")
+            
             if let loadedData = UserDefaults.snuYum.value(forKey: "cafeList") as? Data {
                 do {
                     let cafeList = try PropertyListDecoder().decode([ListElement].self, from: loadedData)
-                    print(cafeList)
-                    UserDefaults.snuYum.set((try? JSONEncoder().encode(cafeList)) ?? [], forKey: "cafeList")
-                    
+                    UserDefaults.snuYum.set(try JSONEncoder().encode(cafeList), forKey: "cafeList")
                 } catch {
+                    print(error)
                     assertionFailure("ListManager load error.")
                 }
             }

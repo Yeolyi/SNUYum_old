@@ -15,13 +15,9 @@ class CafeList: ObservableObject {
     @AutoSave("cafeList", defaultValue: [])
     var cafeList: [ListElement] {
         willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    init() {
-        if cafeList == [] {
-            clear()
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
         }
     }
     
