@@ -53,7 +53,6 @@
 		253637DD251D112C001038FD /* CustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A627952513BB5000313CD3 /* CustomHeader.swift */; };
 		253637E0251D13DC001038FD /* CenterModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE49E0251A12C600D4CB55 /* CenterModifier.swift */; };
 		2540D0EB254C3DF400379027 /* CafeScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2540D0EA254C3DF400379027 /* CafeScrollView.swift */; };
-		2540D0F5254C46DC00379027 /* ErasableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2540D0F4254C46DC00379027 /* ErasableRow.swift */; };
 		2540D114254C55CB00379027 /* ClippedCafeteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2541D05B252634BA00FD3504 /* ClippedCafeteria.swift */; };
 		2540D11E254C562900379027 /* SnuYumWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E005192524F3E0001C5783 /* SnuYumWidget.swift */; };
 		2541D06F252634CD00FD3504 /* ClippedCafeteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2541D05B252634BA00FD3504 /* ClippedCafeteria.swift */; };
@@ -68,7 +67,6 @@
 		2552F1D9254C2E1100235D4A /* ActiveAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2552F1D8254C2E1100235D4A /* ActiveAlert.swift */; };
 		255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */; };
 		25647B6F24F9FFC900E1C3F0 /* CafeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25647B6E24F9FFC900E1C3F0 /* CafeInformation.swift */; };
-		2589DF38251B37FC00813B51 /* ErasableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589DF37251B37FC00813B51 /* ErasableRowView.swift */; };
 		2591C74025020F4E00704673 /* PrivateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2591C73F25020F4E00704673 /* PrivateData.swift */; };
 		2593232E24FAE76F0036C148 /* CafeTimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593232D24FAE76F0036C148 /* CafeTimerButton.swift */; };
 		2593233024FAE8310036C148 /* CafeRowsFiltered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593232F24FAE8310036C148 /* CafeRowsFiltered.swift */; };
@@ -209,7 +207,6 @@
 		25340D5E251395CC00E7FA7A /* Cafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cafe.swift; sourceTree = "<group>"; };
 		253637C4251C6334001038FD /* FoodLuxMea.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FoodLuxMea.entitlements; sourceTree = "<group>"; };
 		2540D0EA254C3DF400379027 /* CafeScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeScrollView.swift; sourceTree = "<group>"; };
-		2540D0F4254C46DC00379027 /* ErasableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErasableRow.swift; sourceTree = "<group>"; };
 		2541D05B252634BA00FD3504 /* ClippedCafeteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippedCafeteria.swift; sourceTree = "<group>"; };
 		2541D0762526350100FD3504 /* WidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetProvider.swift; sourceTree = "<group>"; };
 		25478BE8251E967C00B4C3EA /* ListElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListElement.swift; sourceTree = "<group>"; };
@@ -218,7 +215,6 @@
 		2552F1D8254C2E1100235D4A /* ActiveAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveAlert.swift; sourceTree = "<group>"; };
 		255F312824FCE60700CB6487 /* AppTrackingTransparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTrackingTransparency.swift; sourceTree = "<group>"; };
 		25647B6E24F9FFC900E1C3F0 /* CafeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeInformation.swift; sourceTree = "<group>"; };
-		2589DF37251B37FC00813B51 /* ErasableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErasableRowView.swift; sourceTree = "<group>"; };
 		2591C73F25020F4E00704673 /* PrivateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateData.swift; sourceTree = "<group>"; };
 		2593232D24FAE76F0036C148 /* CafeTimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeTimerButton.swift; sourceTree = "<group>"; };
 		2593232F24FAE8310036C148 /* CafeRowsFiltered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeRowsFiltered.swift; sourceTree = "<group>"; };
@@ -540,7 +536,6 @@
 				250BBBEA24F3F92D00FC0C84 /* DailyProposer.swift */,
 				250BBBE924F3F92D00FC0C84 /* CafeList.swift */,
 				250ADF5D251A8701008D83B8 /* AppStatus.swift */,
-				2540D0F4254C46DC00379027 /* ErasableRow.swift */,
 				25340D64251396D000E7FA7A /* Model Components */,
 			);
 			path = Models;
@@ -561,7 +556,6 @@
 				25A0824924F3FDEC00593CB3 /* ContentView.swift */,
 				2540D0EA254C3DF400379027 /* CafeScrollView.swift */,
 				2593232F24FAE8310036C148 /* CafeRowsFiltered.swift */,
-				2589DF37251B37FC00813B51 /* ErasableRowView.swift */,
 				25340D63251396B900E7FA7A /* Supporting Views */,
 				25BF46AE24F40CB700CC2355 /* Admob */,
 			);
@@ -963,7 +957,6 @@
 				2593233224FBB5F40036C148 /* AccentedText.swift in Sources */,
 				25A627962513BB5000313CD3 /* CustomHeader.swift in Sources */,
 				25A627942513B92600313CD3 /* RowBackground.swift in Sources */,
-				2589DF38251B37FC00813B51 /* ErasableRowView.swift in Sources */,
 				255F312924FCE60700CB6487 /* AppTrackingTransparency.swift in Sources */,
 				250BBBF324F3F92E00FC0C84 /* OperatingTime.swift in Sources */,
 				25647B6F24F9FFC900E1C3F0 /* CafeInformation.swift in Sources */,
@@ -972,7 +965,6 @@
 				250BBC2A24F3FAC800FC0C84 /* MealSelect.swift in Sources */,
 				2593233024FAE8310036C148 /* CafeRowsFiltered.swift in Sources */,
 				259B889524F68B6F001C710C /* GADBannerViewController.swift in Sources */,
-				2540D0F5254C46DC00379027 /* ErasableRow.swift in Sources */,
 				25478BE9251E967C00B4C3EA /* ListElement.swift in Sources */,
 				250BBC2924F3FAC800FC0C84 /* CafeView+.swift in Sources */,
 				250ADF5E251A8701008D83B8 /* AppStatus.swift in Sources */,

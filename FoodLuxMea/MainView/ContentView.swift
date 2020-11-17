@@ -25,7 +25,6 @@ struct ContentView: View {
     @EnvironmentObject var listManager: CafeList
     @EnvironmentObject var dataManager: Cafeteria
     @EnvironmentObject var settingManager: UserSetting
-    @EnvironmentObject var erasableRowManager: ErasableRowManager
     @EnvironmentObject var appStatus: AppStatus
     
     var body: some View {
@@ -138,7 +137,6 @@ struct ContentView: View {
                     dataManager.clear()
                     settingManager.clear()
                     listManager.clear()
-                    erasableRowManager.clear()
                 }
                 ),
                 secondaryButton: .cancel()
@@ -146,7 +144,6 @@ struct ContentView: View {
         }
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var dataManager = Cafeteria()
@@ -162,7 +159,6 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(listManager)
             .environmentObject(dataManager)
             .environmentObject(settingManager)
-            .environmentObject(ErasableRowManager())
             .environmentObject(AppStatus())
         
     }

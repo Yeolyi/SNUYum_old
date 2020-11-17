@@ -19,7 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let dataManager = Cafeteria()
     let contentView = ContentView()
     let settingManager = UserSetting()
-    let erasableRowManager = ErasableRowManager()
     
     func scene(
         _ scene: UIScene,
@@ -49,8 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                                                 .environmentObject(listManager)
                                                                 .environmentObject(dataManager)
                                                                 .environmentObject(settingManager)
-                                                                .environmentObject(appStatus)
-                                                                .environmentObject(erasableRowManager))
+                                                                .environmentObject(appStatus))
             self.window = window
             window.makeKeyAndVisible()
         }
@@ -62,8 +60,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded
         // (see `application:didDiscardSceneSessions` instead).
-
-        erasableRowManager.save()
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -91,7 +87,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-        erasableRowManager.save()
     }
     
 }

@@ -14,7 +14,6 @@ struct CafeScrollView: View {
     
     @EnvironmentObject var dataManager: Cafeteria
     @EnvironmentObject var settingManager: UserSetting
-    @EnvironmentObject var erasableRowManager: ErasableRowManager
     @EnvironmentObject var listManager: CafeList
     @Environment(\.colorScheme) var colorScheme
     
