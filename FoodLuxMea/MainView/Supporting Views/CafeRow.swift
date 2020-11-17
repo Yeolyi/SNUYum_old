@@ -13,9 +13,9 @@ struct CafeRow: View {
     var cafe: Cafe
     var suggestedMeal: MealType
     let searchText: String
-    @State var isSheet = false
     @Binding var selectedCafe: Cafe?
     
+    @State var isExpanded = false
     let themeColor = ThemeColor()
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var listManager: CafeList
@@ -23,26 +23,33 @@ struct CafeRow: View {
     
     var body: some View {
         Button(action: {
-            isSheet = true
             withAnimation {
                 selectedCafe = cafe
             }
         }) {
             VStack(alignment: .leading) {
                 HStack(spacing: 0) {
-                    if listManager.isFixed(cafeName: cafe.name) {
-                        Image(systemName: "pin")
-                            .foregroundColor(themeColor.icon(colorScheme))
-                            .font(.system(size: 15, weight: .bold, design: .default))
-                    }
                     Text(cafe.name)
                         .accentedText()
                         .foregroundColor(themeColor.title(colorScheme))
                         .padding(.bottom, 1.5)
                     Spacer()
+                    if listManager.isFixed(cafeName: cafe.name) {
+                        Image(systemName: isExpanded ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right")
+                            .foregroundColor(themeColor.icon(colorScheme))
+                            .font(.system(size: 20, weight: .semibold, design: .default))
+                            .onTapGesture {
+                                isExpanded.toggle()
+                            }
+                    }
                 }
-                Group {
-                    if searchText == "" {
+                .padding([.top, .bottom], 5)
+                if searchText == "" {
+                    if isExpanded {
+                        mealView(mealType: .breakfast)
+                        mealView(mealType: .lunch)
+                        mealView(mealType: .dinner)
+                    } else {
                         ForEach(cafe.menus(at: suggestedMeal).filter { !$0.name.contains("※")}) { menu in
                             HStack {
                                 Text(menu.name)
@@ -57,24 +64,63 @@ struct CafeRow: View {
                                     .foregroundColor(Color(.secondaryLabel))
                             }
                         }
-                    } else {
-                        VStack {
-                            if cafe.includes(searchText, at: [.breakfast]) {
-                                searchResult(at: .breakfast)
-                            }
-                            if cafe.includes(searchText, at: [.lunch]) {
-                                searchResult(at: .lunch)
-                            }
-                            if cafe.includes(searchText, at: [.dinner]) {
-                                searchResult(at: .dinner)
-                            }
+                    }
+                } else {
+                    VStack {
+                        if cafe.includes(searchText, at: [.breakfast]) {
+                            searchResult(at: .breakfast)
+                        }
+                        if cafe.includes(searchText, at: [.lunch]) {
+                            searchResult(at: .lunch)
+                        }
+                        if cafe.includes(searchText, at: [.dinner]) {
+                            searchResult(at: .dinner)
                         }
                     }
                 }
             }
         }
-        .rowBackground()
+        .optionalRowBackground(isAccented: listManager.isFixed(cafeName: cafe.name))
     }
+    
+    func mealView(mealType: MealType) -> AnyView {
+        AnyView(
+            VStack {
+                HStack {
+                    Text(mealType.rawValue)
+                        .padding(.top, 0.5)
+                        .foregroundColor(themeColor.icon(colorScheme))
+                        .font(.system(size: 14, weight: .semibold))
+                    Spacer()
+                }
+                if cafe.menus(at: mealType).filter { !$0.name.contains("※")}.isEmpty {
+                    HStack {
+                        Text("메뉴가 없어요")
+                            .font(.system(size: 15))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .lineLimit(1)
+                            .foregroundColor(Color(.label))
+                        Spacer()
+                    }
+                }
+                ForEach(cafe.menus(at: mealType).filter { !$0.name.contains("※")}) { menu in
+                    HStack {
+                        Text(menu.name)
+                            .font(.system(size: 15))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .lineLimit(1)
+                            .foregroundColor(Color(.label))
+                        Spacer()
+                        Text(menu.costStr)
+                            .font(.system(size: 15))
+                            .padding(.trailing, 10)
+                            .foregroundColor(Color(.secondaryLabel))
+                    }
+                }
+            }
+        )
+    }
+    
     
     func searchResult(at mealType: MealType) -> AnyView {
         
@@ -131,8 +177,10 @@ struct CafeRow: View {
 
 struct CafeListRow_Previews: PreviewProvider {
     static var previews: some View {
-        CafeRow(cafe: previewCafe, suggestedMeal: .lunch, searchText: "", selectedCafe: .constant(nil))
-            .environmentObject(CafeList())
+        let cafeList = CafeList()
+        _ = cafeList.toggleFixed(cafeName: "3식당")
+        return CafeRow(cafe: previewCafe, suggestedMeal: .lunch, searchText: "", selectedCafe: .constant(nil))
+            .environmentObject(cafeList)
             .environmentObject(Cafeteria())
             .environmentObject(UserSetting())
     }
