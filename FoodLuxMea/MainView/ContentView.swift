@@ -147,6 +147,7 @@ struct ContentView: View {
     }
 }
 
+
 struct ContentView_Previews: PreviewProvider {
     static var dataManager = Cafeteria()
     static var listManager = CafeList()
@@ -157,19 +158,12 @@ struct ContentView_Previews: PreviewProvider {
         ContentView_Previews.dataManager.update(at: ContentView_Previews.settingManager.date) { cafeList in
             ContentView_Previews.listManager.update(newCafeList: cafeList)
         }
-        let contentView = ContentView()
+        return ContentView()
             .environmentObject(listManager)
             .environmentObject(dataManager)
             .environmentObject(settingManager)
             .environmentObject(ErasableRowManager())
             .environmentObject(AppStatus())
-        return Group {
-            contentView
-                .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
-            contentView
-                .previewDevice(PreviewDevice(rawValue: "iPhone 8 Plus"))
-            contentView
-                .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
-        }
+        
     }
 }

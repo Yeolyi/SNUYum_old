@@ -18,20 +18,21 @@ struct TimerCafeSettingView: View {
     let themeColor = ThemeColor()
     
     @State var selectedCafeName: String?
-    @State var tempIsTimerCafe = false
-    let timerGuide = """
-식당 사정에 따라 조금 일찍/늦게 끝날 수도 있습니다.
-학생회관식당: 1층 기준
-자하연 식당: 2층(학생식당) 기준
-3식당: 4층 기준
-301동 식당: 지하 기준
-"""
     
+    /*
+     let timerGuide = """
+     선택된 식당의 운영시간을 기준으로 아침, 점심, 저녁을 자동으로 보여드립니다.
+     학생회관식당: 1층 기준
+     자하연 식당: 2층(학생식당) 기준
+     3식당: 4층 기준
+     301동 식당: 지하 기준
+     """
+     */
     var body: some View {
         VStack {
             // MARK: - Custom Navigation bar.
             HStack {
-                CustomHeader(title: "운영정보 바로보기", subTitle: "설정")
+                CustomHeader(title: "기준 식당 선택", subTitle: "설정")
                 Spacer()
                 Button(action: {
                         self.presentationMode.wrappedValue.dismiss()}) {
@@ -41,7 +42,7 @@ struct TimerCafeSettingView: View {
                         .offset(y: 10)
                 }
                 Button(action: {
-                        self.settingManager.alimiCafeName = self.tempIsTimerCafe ? self.selectedCafeName : nil
+                        self.settingManager.alimiCafeName = self.selectedCafeName
                         self.presentationMode.wrappedValue.dismiss()}) {
                     Text("저장")
                         .font(.system(size: CGFloat(20), weight: .semibold))
@@ -55,35 +56,28 @@ struct TimerCafeSettingView: View {
                 VStack(spacing: 0) {
                     HStack {
                         Spacer()
-                        Text(timerGuide)
+                        Text("선택된 식당의 운영시간을 기준으로 아침, 점심, 저녁을 자동으로 보여드립니다.")
                         Spacer()
                     }
                     .rowBackground()
-                    Text("설정")
-                        .sectionText()
-                    SimpleToggle(isOn: $tempIsTimerCafe, label: "알리미 켜기")
-                        .rowBackground()
                     // MARK: - Selectable cafe list.
-                    if tempIsTimerCafe {
-                        Text("목록")
-                            .sectionText()
-                        ForEach(listManager.cafeList) { listElement in
-                            Button(action: {self.selectedCafeName = listElement.name}) {
-                                HStack {
-                                    Spacer()
-                                    Text(listElement.name)
-                                    Spacer()
-                                }
-                                .rowBackground()
-                                .foregroundColor(self.getColor(cafeName: listElement.name))
+                    Text("식당 목록")
+                        .sectionText()
+                    ForEach(listManager.cafeList) { listElement in
+                        Button(action: {self.selectedCafeName = listElement.name}) {
+                            HStack {
+                                Spacer()
+                                Text(listElement.name)
+                                Spacer()
                             }
+                            .rowBackground()
+                            .foregroundColor(self.getColor(cafeName: listElement.name))
                         }
                     }
                 }
             }
         }
         .onAppear {
-            tempIsTimerCafe = self.settingManager.alimiCafeName != nil
             self.selectedCafeName = self.settingManager.alimiCafeName
         }
     }
@@ -101,8 +95,10 @@ struct TimerCafeSettingView: View {
 
 struct TimerSelectView_Previews: PreviewProvider {
     static var previews: some View {
-        TimerCafeSettingView()
-            .environmentObject(CafeList())
+        let cafeList = CafeList()
+        cafeList.clear()
+        return TimerCafeSettingView()
+            .environmentObject(cafeList)
             .environmentObject(UserSetting())
     }
 }

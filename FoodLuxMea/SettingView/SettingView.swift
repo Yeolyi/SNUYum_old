@@ -69,7 +69,7 @@ struct SettingView: View {
                     }
                     // Basic setting - Cafe timer.
                     HStack {
-                        Text("운영정보 바로보기")
+                        Text("기준 식당 선택")
                             .font(.system(size: 18))
                             .foregroundColor(themeColor.title(colorScheme))
                         Spacer()
@@ -86,17 +86,26 @@ struct SettingView: View {
                 // Basic setting - Hide empty cafe.
                 SimpleToggle(isOn: $settingManager.hideEmptyCafe, label: "정보가 없는 식당 숨기기")
                     .rowBackground()
+                // Info
+                Text("정보")
+                    .sectionText()
+                Button(action: { activeSheet = ActiveSheet.info }) {
+                    HStack {
+                        Text("스누냠 정보")
+                            .foregroundColor(themeColor.title(colorScheme))
+                            .font(.system(size: 18))
+                        Spacer()
+                    }
+                }
+                .rowBackground()
                 // Advanced setting.
-                Text("고급")
+                #if DEBUG
+                Text("디버그")
                     .sectionText()
                 // Advanced setting - custom date.
                 SimpleToggle(isOn: $settingManager.isDebugDate, label: "사용자 설정 날짜")
                     .rowBackground()
                 if settingManager.isDebugDate {
-                    Text("참고: 이 설정은 저장되지 않습니다.")
-                        .foregroundColor(.secondary)
-                        .centered()
-                        .rowBackground()
                     DatePicker(selection: $settingManager.debugDate, label: { EmptyView() })
                         .rowBackground()
                         .accentColor(themeColor.title(colorScheme))
@@ -123,18 +132,7 @@ struct SettingView: View {
                 .onTapGesture {
                     activeAlert = ActiveAlert.clearAll
                 }
-                // Info
-                Text("정보")
-                    .sectionText()
-                Button(action: { activeSheet = ActiveSheet.info }) {
-                    HStack {
-                        Text("스누냠 정보")
-                            .foregroundColor(themeColor.title(colorScheme))
-                            .font(.system(size: 18))
-                        Spacer()
-                    }
-                }
-                .rowBackground()
+                #endif
             }
         }
         .background(colorScheme == .dark ? Color.black : Color.white)

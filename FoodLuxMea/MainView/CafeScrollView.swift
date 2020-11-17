@@ -42,13 +42,6 @@ struct CafeScrollView: View {
                     }
                     .rowBackground()
                 }
-                if settingManager.alimiCafeName != nil && !appStatus.isDownloading {
-                    CafeTimer(
-                        cafe: dataManager.asyncData.first(where: {$0.name == settingManager.alimiCafeName!})
-                            ?? Cafe(name: settingManager.alimiCafeName!),
-                        isInMainView: true, selectedCafe: $selectedCafe
-                    )
-                }
                 // Fixed cafe section.
                 if self.listManager.fixedList.isEmpty == false {
                     CafeRowsFiltered(isFixed: true, searchWord: self.searchWord, selectedCafe: $selectedCafe)
@@ -57,5 +50,11 @@ struct CafeScrollView: View {
                 CafeRowsFiltered(isFixed: false, searchWord: self.searchWord, selectedCafe: $selectedCafe)
             }
         }
+    }
+}
+struct CafeScrollView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        CafeScrollView(searchWord: .constant(""), selectedCafe: .constant(nil))
     }
 }
