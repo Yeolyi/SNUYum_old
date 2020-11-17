@@ -17,12 +17,7 @@ struct ListOrderSettingView: View {
     @EnvironmentObject var settingManager: UserSetting
     let themeColor = ThemeColor()
     
-    @State var tempListManager = CafeList()
-    
-    /// - Parameter cafeListBackup: Backup [ListElement] to restore data when sheet is closed or dismissed
-    init(cafeListBackup: [ListElement]) {
-        tempListManager.cafeList = cafeListBackup
-    }
+    @State var backupList: [ListElement] = []
     
     var body: some View {
         VStack {
@@ -31,6 +26,7 @@ struct ListOrderSettingView: View {
                 CustomHeader(title: "목록 수정", subTitle: "설정")
                 Spacer()
                 Button(action: {
+                        self.listManager.cafeList = backupList
                         self.presentationMode.wrappedValue.dismiss()}) {
                     Text("취소")
                         .font(.system(size: CGFloat(20), weight: .semibold))
@@ -38,7 +34,6 @@ struct ListOrderSettingView: View {
                         .offset(y: 10)
                 }
                 Button(action: {
-                        self.listManager.cafeList = self.tempListManager.cafeList
                         self.presentationMode.wrappedValue.dismiss()}) {
                     Text("저장")
                         .font(.system(size: CGFloat(20), weight: .semibold))
@@ -54,10 +49,10 @@ struct ListOrderSettingView: View {
                             .sectionText()
                             .padding([.top], 40)
                 ) {
-                    if tempListManager.fixedList.isEmpty {
+                    if listManager.fixedList.isEmpty {
                         Text("고정된 식당이 없어요")
                     }
-                    ForEach(tempListManager.cafeList.filter { $0.isFixed }) { cafe in
+                    ForEach(listManager.cafeList.filter { $0.isFixed }) { cafe in
                         Text(cafe.name)
                             .accentedText()
                     }
@@ -66,7 +61,7 @@ struct ListOrderSettingView: View {
                 Section(header:
                             Text("일반").sectionText()
                 ) {
-                    ForEach(tempListManager.cafeList.filter { $0.isFixed == false }) { cafe in
+                    ForEach(listManager.cafeList.filter { $0.isFixed == false }) { cafe in
                         Text(cafe.name)
                             .accentedText()
                     }
@@ -76,21 +71,24 @@ struct ListOrderSettingView: View {
             .environment(\.editMode, .constant(EditMode.active))
             .listStyle(GroupedListStyle())
         }
+        .onAppear {
+            backupList = listManager.cafeList
+        }
     }
     
     /// Move ListElement which is fixed
     func moveFixed(from source: IndexSet, to destination: Int) {
         var intIndexSet: [Int] = []
         for index in source {
-            if let moveIndex = tempListManager.index(of: tempListManager.fixedList[index].name) {
+            if let moveIndex = listManager.index(of: listManager.fixedList[index].name) {
                 intIndexSet.append(moveIndex)
             }
         }
-        if let destinationIndex = tempListManager.index(of: tempListManager.fixedList[destination].name) {
+        if let destinationIndex = listManager.index(of: listManager.fixedList[destination].name) {
             let newDestination =
-                destination == tempListManager.fixedList.count ? tempListManager.cafeList.count : destinationIndex
+                destination == listManager.fixedList.count ? listManager.cafeList.count : destinationIndex
             let newSource = IndexSet(intIndexSet)
-            tempListManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
+            listManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
         }
     }
     
@@ -98,22 +96,22 @@ struct ListOrderSettingView: View {
     func moveUnfixed(from source: IndexSet, to destination: Int) {
         var intIndexSet: [Int] = []
         for index in source {
-            if let moveName = tempListManager.index(of: tempListManager.unfixedList[index].name) {
+            if let moveName = listManager.index(of: listManager.unfixedList[index].name) {
                 intIndexSet.append(moveName)
             }
         }
-        if let destinationIndex = tempListManager.index(of: tempListManager.unfixedList[destination].name) {
+        if let destinationIndex = listManager.index(of: listManager.unfixedList[destination].name) {
             let newDestination =
-                destination == tempListManager.unfixedList.count ? tempListManager.cafeList.count : destinationIndex
+                destination == listManager.unfixedList.count ? listManager.cafeList.count : destinationIndex
             let newSource = IndexSet(intIndexSet)
-            tempListManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
+            listManager.cafeList.move(fromOffsets: newSource, toOffset: newDestination)
         }
     }
 }
 
 struct ListReorder_Previews: PreviewProvider {
     static var previews: some View {
-        ListOrderSettingView(cafeListBackup: [])
+        ListOrderSettingView()
             .environmentObject(CafeList())
             .environmentObject(Cafeteria())
             .environmentObject(UserSetting())

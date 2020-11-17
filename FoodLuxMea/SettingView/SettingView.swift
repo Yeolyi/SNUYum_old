@@ -140,7 +140,7 @@ struct SettingView: View {
         .sheet(item: self.$activeSheet) { item in
             switch item {
             case .reorder:
-                ListOrderSettingView(cafeListBackup: self.listManager.cafeList)
+                ListOrderSettingView()
                     .environmentObject(self.listManager)
                     .environmentObject(self.settingManager)
             case .timer:
