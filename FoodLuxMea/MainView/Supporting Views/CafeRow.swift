@@ -34,12 +34,16 @@ struct CafeRow: View {
                         .padding(.bottom, 1.5)
                     Spacer()
                     if listManager.isFixed(cafeName: cafe.name) {
-                        Image(systemName: listManager.isExpanded(cafeName: cafe.name) ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right")
-                            .foregroundColor(themeColor.icon(colorScheme))
-                            .font(.system(size: 20, weight: .semibold, design: .default))
-                            .onTapGesture {
+                        Button(action: {
+                            withAnimation {
                                 listManager.toggleExpanded(cafeName: cafe.name)
                             }
+                        }) {
+                            Image(systemName: listManager.isExpanded(cafeName: cafe.name) ? "chevron.up" : "chevron.down")
+                                .foregroundColor(themeColor.icon(colorScheme))
+                                .opacity(0.5)
+                                .font(.system(size: 20, weight: .semibold, design: .default))
+                        }
                     }
                 }
                 .padding([.top, .bottom], 5)
@@ -100,9 +104,11 @@ struct CafeRow: View {
                     Text(mealType.rawValue)
                         .padding(.top, 0.5)
                         .foregroundColor(themeColor.icon(colorScheme))
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.system(size: 16, weight: .semibold))
                     Spacer()
                 }
+                .padding(.top, 1.5)
+                .padding(.bottom, 1)
                 if cafe.menus(at: mealType).filter { !$0.name.contains("※")}.isEmpty {
                     HStack {
                         Text("메뉴가 없어요")

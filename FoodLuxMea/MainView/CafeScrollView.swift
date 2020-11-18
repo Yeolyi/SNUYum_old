@@ -48,7 +48,7 @@ struct CafeScrollView: View {
                 // Ordinary cafe section.
                 CafeRowsFiltered(isFixed: false, searchWord: self.searchWord, selectedCafe: $selectedCafe)
                 Text("")
-                    .padding(10)
+                    .padding(20)
             }
         }
     }

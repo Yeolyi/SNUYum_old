@@ -38,48 +38,16 @@ struct CafeView: View {
             Text("식당 정보")
                 .sectionText()
             VStack {
+                Spacer()
                 Text(cafeDescription[cafe.name] ?? "정보 없음")
                     .font(.system(size: 16))
                     .fixedSize(horizontal: false, vertical: true)
                     .padding()
-                HStack {
-                    // Phone call
-                    HStack {
-                        Spacer()
-                        Image(systemName: "phone")
-                            .font(.system(size: 20))
-                            .foregroundColor(themeColor.title(colorScheme))
-                        Text("전화 걸기")
-                            .font(.system(size: 16))
-                            .foregroundColor(themeColor.title(colorScheme))
-                        Spacer()
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        let telephone = "tel://02-"
-                        let formattedString = telephone + self.cafe.phoneNum
-                        guard let url = URL(string: formattedString) else { return }
-                        UIApplication.shared.open(url)
-                    }
-                    Divider()
-                    // Map view.
-                    HStack {
-                        Spacer()
-                        Image(systemName: "map")
-                            .font(.system(size: 20, weight: .light))
-                            .foregroundColor(themeColor.title(colorScheme))
-                        Text("위치 보기")
-                            .font(.system(size: 16))
-                            .foregroundColor(themeColor.title(colorScheme))
-                        Spacer()
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        self.isMapSheet = true
-                    }
-                }
+                Spacer()
             }
             .rowBackground()
+            Text("")
+                .padding(43)
         }
         .sheet(isPresented: $isMapSheet) {
             MapView(cafeInfo: self.cafe)

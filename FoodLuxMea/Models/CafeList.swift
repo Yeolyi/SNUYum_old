@@ -5,8 +5,7 @@
 //  Created by Seong Yeol Yi on 2020/08/23.
 //
 
-import Foundation
-import CoreData
+import SwiftUI
 
 /// Manages how whole cafe data will be displayed.
 class CafeList: ObservableObject {
