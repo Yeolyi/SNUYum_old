@@ -15,7 +15,6 @@ struct CafeRow: View {
     let searchText: String
     @Binding var selectedCafe: Cafe?
     
-    @State var isExpanded = false
     let themeColor = ThemeColor()
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var listManager: CafeList
@@ -35,21 +34,31 @@ struct CafeRow: View {
                         .padding(.bottom, 1.5)
                     Spacer()
                     if listManager.isFixed(cafeName: cafe.name) {
-                        Image(systemName: isExpanded ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right")
+                        Image(systemName: listManager.isExpanded(cafeName: cafe.name) ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right")
                             .foregroundColor(themeColor.icon(colorScheme))
                             .font(.system(size: 20, weight: .semibold, design: .default))
                             .onTapGesture {
-                                isExpanded.toggle()
+                                listManager.toggleExpanded(cafeName: cafe.name)
                             }
                     }
                 }
                 .padding([.top, .bottom], 5)
                 if searchText == "" {
-                    if isExpanded {
+                    if listManager.isExpanded(cafeName: cafe.name) {
                         mealView(mealType: .breakfast)
                         mealView(mealType: .lunch)
                         mealView(mealType: .dinner)
                     } else {
+                        if cafe.isEmpty(at: [settingManager.meal], emptyKeywords: []) {
+                            HStack {
+                                Text("메뉴가 없어요")
+                                    .font(.system(size: 15))
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .lineLimit(1)
+                                    .foregroundColor(Color(.label))
+                                Spacer()
+                            }
+                        }
                         ForEach(cafe.menus(at: suggestedMeal).filter { !$0.name.contains("※")}) { menu in
                             HStack {
                                 Text(menu.name)
@@ -120,7 +129,6 @@ struct CafeRow: View {
             }
         )
     }
-    
     
     func searchResult(at mealType: MealType) -> AnyView {
         

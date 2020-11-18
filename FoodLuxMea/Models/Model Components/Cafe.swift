@@ -19,6 +19,10 @@ struct Cafe: Hashable, Codable, Identifiable {
     private let lunchMenuList: [Menu]
     private let dinnerMenuList: [Menu]
     
+    var isEmpty: Bool {
+        breakfastMenuList.isEmpty && lunchMenuList.isEmpty && dinnerMenuList.isEmpty
+    }
+    
     init(name: String) {
         self.name = name
         self.phoneNum = phoneNumList[name] ?? ""

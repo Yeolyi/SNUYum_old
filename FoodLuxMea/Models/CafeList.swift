@@ -21,6 +21,15 @@ class CafeList: ObservableObject {
         }
     }
     
+    @AutoSave("expandedRow", defaultValue: [])
+    private var expandedRow: Set<String> {
+        willSet {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
+    }
+    
     /// Return fixed cafe ListElement array.
     var fixedList: [ListElement] {
         cafeList.filter { $0.isFixed == true }
@@ -28,6 +37,26 @@ class CafeList: ObservableObject {
     /// Return unfixed cafe ListElement array.
     var unfixedList: [ListElement] {
         cafeList.filter { $0.isFixed == false }
+    }
+    
+    func isExpanded(cafeName: String) -> Bool {
+        expandedRow.contains(cafeName)
+    }
+    
+    func expand(cafeName: String) {
+        expandedRow.insert(cafeName)
+    }
+    
+    func contract(cafeName: String) {
+        expandedRow.remove(cafeName)
+    }
+    
+    func toggleExpanded(cafeName: String) {
+        if isExpanded(cafeName: cafeName) {
+            contract(cafeName: cafeName)
+        } else {
+            expand(cafeName: cafeName)
+        }
     }
 
     func clear() {
@@ -61,6 +90,9 @@ class CafeList: ObservableObject {
     func toggleFixed(cafeName: String) -> Bool {
         if let index = index(of: cafeName) {
             cafeList[index].isFixed.toggle()
+            if !cafeList[index].isFixed {
+                expandedRow.remove(cafeName)
+            }
             return true
         } else {
             assertionFailure("ListMananer/toggleFixed: 존재하지 않는 카페값에 접근했습니다.")
