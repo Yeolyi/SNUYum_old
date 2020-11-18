@@ -14,10 +14,7 @@ import SwiftUI
 struct CafeTimer: View {
     
     let cafe: Cafe
-    /// Determines to show sheet on tap or not.
-    let isInMainView: Bool
     @State var isCafeViewSheet = false
-    @Binding var selectedCafe: Cafe?
     
     @EnvironmentObject var listManager: CafeList
     @EnvironmentObject var dataManager: Cafeteria
@@ -28,35 +25,30 @@ struct CafeTimer: View {
     
     var body: some View {
         // If view is in mainview, show sheet.
-        Button(action: {
-            isCafeViewSheet = isInMainView
-            withAnimation {
-                selectedCafe = cafe
+        VStack {
+            HStack {
+                Text("운영정보")
+                    .accentedText()
+                    .foregroundColor(themeColor.title(colorScheme))
+                    .padding(.bottom, 1.5)
+                Spacer()
             }
-        }) {
-            VStack {
-                HStack {
-                    Text(isInMainView ? "\(cafe.name) 운영정보" : "운영정보")
-                        .accentedText()
-                        .foregroundColor(themeColor.title(colorScheme))
-                        .padding(.bottom, 1.5)
-                    Spacer()
-                }
-                HStack {
-                    Text(remainingTimeNotice())
-                        .font(.system(size: 15))
-                        .foregroundColor(.primary)
-                    Spacer()
-                }
+            HStack {
+                Text(remainingTimeNotice)
+                    .font(.system(size: 15))
+                    .foregroundColor(.primary)
+                Spacer()
             }
-            .rowBackground()
         }
+        .rowBackground()
     }
     
-    func remainingTimeNotice() -> String {
+    var remainingTimeNotice: String {
         
         // Get current setting time component.
         let currentSimpleTime = SimpleTime(date: settingManager.date)
+        
+        let localProposer = DailyProposer(at: settingManager.date, cafeName: cafe.name)
         
         var dayOfTheWeek: String {
             let dateFormatter = DateFormatter()
@@ -68,30 +60,30 @@ struct CafeTimer: View {
         // When cafe operating hour data exists
         if let endDate =
             cafeOperatingHour[cafe.name]?.daily(
-                at: settingManager.date)?.endTime(at: settingManager.suggestedMeal) {
+                at: settingManager.date)?.endTime(at: localProposer.meal) {
             // If menu exists in next meal.
-            if !cafe.isEmpty(at: [settingManager.suggestedMeal], emptyKeywords: closedKeywords) {
+            if !cafe.isEmpty(at: [localProposer.meal], emptyKeywords: closedKeywords) {
                 // Force unwrap is available becaufe startDate and endDate are always together.
                 let startTime = cafeOperatingHour[cafe.name]!.daily(at: settingManager.date)!
-                    .startTime(at: settingManager.suggestedMeal)!
+                    .startTime(at: localProposer.meal)!
                 if currentSimpleTime.hour < 5 || currentSimpleTime.hour > endDate.hour {
                     return "영업 종료🌙"
                 } else if currentSimpleTime < startTime {
                     return
                         "\(settingManager.isSuggestedTomorrow ? "내일" : "오늘")" +
-                    " \(settingManager.suggestedMeal.rawValue)밥 준비중!"
+                        " \(localProposer.meal.rawValue)밥 준비중!"
                 } else {
                     let time = remainTime(from: SimpleTime(date: settingManager.date), to: endDate)
-                    return "\(settingManager.suggestedMeal.rawValue) 마감까지 \(time.hour)시간 \(time.minute)분!"
+                    return "\(localProposer.meal.rawValue) 마감까지 \(time.hour)시간 \(time.minute)분!"
                 }
-            // If menu not exists in next meal.
+                // If menu not exists in next meal.
             } else {
-                return "\(settingManager.suggestedMeal.rawValue) 메뉴가 없어요."
+                return "\(localProposer.meal.rawValue) 메뉴가 없어요."
             }
         }
         // When cafe operating hour data not exists
         else {
-            return "\(dayOfTheWeek) \(settingManager.suggestedMeal.rawValue)에는 운영하지 않아요."
+            return "\(dayOfTheWeek) \(localProposer.meal.rawValue)에는 운영하지 않아요."
         }
     }
     
@@ -116,7 +108,7 @@ struct CafeTimer: View {
 
 struct CafeTimerText_Previews: PreviewProvider {
     static var previews: some View {
-        CafeTimer(cafe: previewCafe, isInMainView: true, selectedCafe: .constant(nil))
+        CafeTimer(cafe: previewCafe)
             .environmentObject(Cafeteria())
             .environmentObject(UserSetting())
             .environmentObject(CafeList())

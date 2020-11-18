@@ -31,9 +31,7 @@ struct CafeView: View {
             // Prevents BlurHeader hides scrollview object.
             Text("")
                 .padding(45)
-            Text("안내")
-                .sectionText()
-            CafeTimer(cafe: cafe, isInMainView: false, selectedCafe: .constant(nil))
+            CafeTimer(cafe: cafe)
             MealSection(cafe: cafe, mealType: .breakfast)
             MealSection(cafe: cafe, mealType: .lunch)
             MealSection(cafe: cafe, mealType: .dinner)

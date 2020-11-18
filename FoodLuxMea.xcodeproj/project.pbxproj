@@ -422,7 +422,6 @@
 				250BBC1824F3FAC700FC0C84 /* SearchBar.swift */,
 				250BBC1D24F3FAC800FC0C84 /* MealSelect.swift */,
 				250BBC1724F3FAC700FC0C84 /* CafeRow.swift */,
-				2593232D24FAE76F0036C148 /* CafeTimerButton.swift */,
 				2552F1D8254C2E1100235D4A /* ActiveAlert.swift */,
 			);
 			path = "Supporting Views";
@@ -472,6 +471,7 @@
 				250BBC1324F3FAC700FC0C84 /* NaverMapProvider.swift */,
 				2593233324FBBDF60036C148 /* MapView.swift */,
 				25478C0B251E98AF00B4C3EA /* MealSection.swift */,
+				2593232D24FAE76F0036C148 /* CafeTimerButton.swift */,
 			);
 			path = "Supporting Views";
 			sourceTree = "<group>";
