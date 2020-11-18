@@ -39,8 +39,22 @@ struct ContentView: View {
                             .offset(y: 10)
                     }
                     if !isSettingView && currentCafe == nil {
-                        MealSelect()
-                            .padding()
+                        if settingManager.showMealSelectView {
+                            MealSelect()
+                                .padding()
+                        }
+                        Button(action: {
+                            withAnimation {
+                                settingManager.showMealSelectView.toggle()
+                            }
+                        }) {
+                            Image(systemName: settingManager.showMealSelectView ? "chevron.compact.up" : "chevron.compact.down")
+                                .font(.system(size: 30, weight: .regular))
+                                .foregroundColor(themeColor.icon(colorScheme))
+                                .padding([.leading, .trailing], 6)
+                                .padding(.top, 8)
+                                .padding(.bottom, 2)
+                        }
                     }
                 }
             }
@@ -67,7 +81,15 @@ struct ContentView: View {
         if let cafe = currentCafe {
             return cafe.name
         }
-        return isSettingView ? "설정" : (searchWord == "" ? "식단 바로보기" : "식단 검색")
+        if isSettingView {
+            return "설정"
+        } else if searchWord != "" {
+            return "식단 검색"
+        } else if settingManager.showMealSelectView {
+            return "식단 바로보기"
+        } else {
+            return "\(settingManager.meal.rawValue) 식단 바로보기"
+        }
     }
     
     private var headerSubTitle: String {
@@ -79,7 +101,7 @@ struct ContentView: View {
             return AnyView(
                 HStack {
                     Button(action: {
-                            _ = listManager.toggleFixed(cafeName: currentCafe!.name)
+                        _ = listManager.toggleFixed(cafeName: currentCafe!.name)
                     }) {
                         Image(systemName: listManager.isFixed(cafeName: currentCafe!.name) ? "pin" : "pin.slash")
                             .font(.system(size: 23, weight: .semibold))

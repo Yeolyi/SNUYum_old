@@ -20,6 +20,13 @@ class UserSetting: ObservableObject {
         }
     }
     
+    @AutoSave("showMealSelectView", defaultValue: false)
+    var showMealSelectView: Bool {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
     /// Turn on meal type suggestion.
     @AutoSave("isAuto", defaultValue: true)
     var isAuto: Bool {

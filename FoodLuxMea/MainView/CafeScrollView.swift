@@ -22,7 +22,7 @@ struct CafeScrollView: View {
             VStack(spacing: 0) {
                 // Prevents BlurHeader hides scrollview object.
                 Text("")
-                    .padding(75)
+                    .padding(settingManager.showMealSelectView ? 83: 45)
                 SearchBar(searchWord: self.$searchWord)
                 if appStatus.isDownloading {
                     HStack {

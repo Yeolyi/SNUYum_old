@@ -63,7 +63,9 @@ class AppStatus: ObservableObject {
             }
         }
         executionTimeCount += 1
-        print("\(executionTimeCount) time executed.")
+        if executionTimeCount > 20 {
+            SKStoreReviewController.requestReview()
+        } 
         let currentBuild = (Bundle.main.infoDictionary?["CFBundleVersionString"] as? String) ?? ""
         let currentAppVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
         if appVersion != currentAppVersion || build != currentBuild {
@@ -74,9 +76,6 @@ class AppStatus: ObservableObject {
                 WidgetCenter.shared.reloadAllTimelines()
             }
         }
-        if executionTimeCount > 20 {
-            SKStoreReviewController.requestReview()
-        } 
         monitor.pathUpdateHandler = { path in
             DispatchQueue.main.async {
                 if path.status == .satisfied {
