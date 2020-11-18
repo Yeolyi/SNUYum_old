@@ -11,10 +11,6 @@ import Network
 
 struct ContentView: View {
     
-    enum ViewStatus {
-        case main, cafe, setting
-    } 
-    
     let themeColor = ThemeColor()
     @State var searchWord = ""
     @State var isSettingView = false
@@ -67,10 +63,18 @@ struct ContentView: View {
                 } else {
                     CafeScrollView(searchWord: $searchWord, selectedCafe: $currentCafe)
                 }
-                // Google Admob.
+               
+            }
+            // Google Admob.
+            VStack {
+                Spacer()
                 GADBannerViewController()
                     .frame(width: kGADAdSizeBanner.size.width, height: kGADAdSizeBanner.size.height)
+                if currentCafe != nil {
+                    BottomBar(currentCafe: $currentCafe)
+                }
             }
+            .zIndex(2)
         }
         .alert(item: $activeAlert) { item in
             mainAlert(item: item)
@@ -98,26 +102,7 @@ struct ContentView: View {
     
     private func settingButton() -> AnyView {
         if currentCafe != nil {
-            return AnyView(
-                HStack {
-                    Button(action: {
-                        _ = listManager.toggleFixed(cafeName: currentCafe!.name)
-                    }) {
-                        Image(systemName: listManager.isFixed(cafeName: currentCafe!.name) ? "pin" : "pin.slash")
-                            .font(.system(size: 23, weight: .semibold))
-                            .foregroundColor(themeColor.icon(colorScheme))
-                            .padding(.trailing, 10)
-                    }
-                    Button(action: {
-                        withAnimation {
-                            currentCafe = nil
-                        }
-                    }) {
-                        Text("닫기")
-                            .font(.system(size: CGFloat(20), weight: .semibold))
-                            .foregroundColor(themeColor.icon(colorScheme))
-                    }
-                })
+            return AnyView(EmptyView())
         }
         return AnyView(
             Button(action: {

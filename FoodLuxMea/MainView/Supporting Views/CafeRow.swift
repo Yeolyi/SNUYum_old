@@ -72,6 +72,7 @@ struct CafeRow: View {
                                     .padding(.trailing, 10)
                                     .foregroundColor(Color(.secondaryLabel))
                             }
+                            .padding(.bottom, 1)
                         }
                     }
                 } else {
@@ -125,6 +126,7 @@ struct CafeRow: View {
                             .padding(.trailing, 10)
                             .foregroundColor(Color(.secondaryLabel))
                     }
+                    .padding(.bottom, 1)
                 }
             }
         )
