@@ -74,7 +74,10 @@ struct CafeTimer: View {
                         " \(localProposer.meal.rawValue)밥 준비중!"
                 } else {
                     let time = remainTime(from: SimpleTime(date: settingManager.date), to: endDate)
-                    return "\(localProposer.meal.rawValue) 마감까지 \(time.hour)시간 \(time.minute)분!"
+                    return time.hour == 0 ?
+                        "\(localProposer.meal.rawValue) 마감까지 \(time.minute)분!" :
+                        "\(localProposer.meal.rawValue) 마감까지 \(time.hour)시간 \(time.minute)분!"
+                    
                 }
                 // If menu not exists in next meal.
             } else {

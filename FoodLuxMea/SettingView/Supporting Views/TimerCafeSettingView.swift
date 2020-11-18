@@ -67,7 +67,7 @@ struct TimerCafeSettingView: View {
                         Button(action: {self.selectedCafeName = listElement.name}) {
                             HStack {
                                 Spacer()
-                                Text(listElement.name)
+                                Text(addInfo(listElement.name))
                                 Spacer()
                             }
                             .rowBackground()
@@ -89,6 +89,21 @@ struct TimerCafeSettingView: View {
             return Color(.systemGray)
         } else {
             return Color(.systemFill)
+        }
+    }
+    
+    func addInfo(_ cafeName: String) -> String {
+        switch cafeName {
+        case "학생회관식당":
+            return "학생회관식당(1층 기준)"
+        case "자하연식당":
+            return "자하연식당(2층 학생식당 기준)"
+        case "3식당":
+            return "3식당(4층 기준)"
+        case "301동식당":
+            return "301동식당(지하 기준)"
+        default:
+            return cafeName
         }
     }
 }
