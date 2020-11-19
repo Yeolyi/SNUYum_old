@@ -37,11 +37,10 @@ struct CafeView: View {
             MealSection(cafe: cafe, mealType: .dinner)
             Text("식당 정보")
                 .sectionText()
-            VStack {
+            HStack {
                 Spacer()
                 Text(cafeDescription[cafe.name] ?? "정보 없음")
                     .font(.system(size: 16))
-                    .fixedSize(horizontal: false, vertical: true)
                     .padding()
                 Spacer()
             }

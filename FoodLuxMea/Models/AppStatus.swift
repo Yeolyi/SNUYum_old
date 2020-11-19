@@ -9,6 +9,7 @@ import SwiftUI
 import Network
 import StoreKit
 import WidgetKit
+import Firebase
 
 class AppStatus: ObservableObject {
     
@@ -30,6 +31,8 @@ class AppStatus: ObservableObject {
     
     @Published var isDownloading = false
     
+    @Published var userID: String?
+    
     var isFirstVersionRun = false
     
     let monitor = NWPathMonitor()
@@ -38,30 +41,12 @@ class AppStatus: ObservableObject {
     var executionTimeCount: Int
     
     init() {
-        let storedAppVersion = UserDefaults.snuYum.string(forKey: "appVersion")
-        if let storedAppVersion = storedAppVersion {
-            print("Converting data to new UserDefault system")
-            let storedBuild = UserDefaults.snuYum.string(forKey: "build") ?? ""
-            UserDefaults.snuYum.set(try? JSONEncoder().encode(storedAppVersion), forKey: "appVersion")
-            UserDefaults.snuYum.set(try? JSONEncoder().encode(storedBuild), forKey: "build")
-            let storedMealViewMode = MealType(rawValue: UserDefaults.snuYum.string(forKey: "mealViewMode") ?? "점심")
-            UserDefaults.snuYum.set(try? JSONEncoder().encode(storedMealViewMode), forKey: "mealViewMode")
-            let alimiCafeName = UserDefaults.snuYum.string(forKey: "timerCafeName")
-            UserDefaults.snuYum.set(try? JSONEncoder().encode(alimiCafeName), forKey: "timerCafeName")
-            let isAuto = UserDefaults.snuYum.bool(forKey: "isAuto")
-            UserDefaults.snuYum.set(try? JSONEncoder().encode(isAuto), forKey: "isAuto")
-            let hideEmptyCafe = UserDefaults.snuYum.bool(forKey: "isHide")
-            UserDefaults.snuYum.set(try? JSONEncoder().encode(hideEmptyCafe), forKey: "isHide")
-            if let loadedData = UserDefaults.snuYum.value(forKey: "cafeList") as? Data {
-                do {
-                    let cafeList = try PropertyListDecoder().decode([ListElement].self, from: loadedData)
-                    UserDefaults.snuYum.set(try JSONEncoder().encode(cafeList), forKey: "cafeList")
-                } catch {
-                    print(error)
-                    assertionFailure("ListManager load error.")
-                }
+        Auth.auth().addStateDidChangeListener { (_, user) in
+            if let user = user {
+                self.userID = user.uid
             }
         }
+        previousUserDefaultCompatability()
         executionTimeCount += 1
         if executionTimeCount > 20 {
             SKStoreReviewController.requestReview()
@@ -89,5 +74,32 @@ class AppStatus: ObservableObject {
         }
         let queue = DispatchQueue(label: "Monitor")
         monitor.start(queue: queue)
+    }
+    
+    func previousUserDefaultCompatability() {
+        let storedAppVersion = UserDefaults.snuYum.string(forKey: "appVersion")
+        if let storedAppVersion = storedAppVersion {
+            print("Converting data to new UserDefault system")
+            let storedBuild = UserDefaults.snuYum.string(forKey: "build") ?? ""
+            UserDefaults.snuYum.set(try? JSONEncoder().encode(storedAppVersion), forKey: "appVersion")
+            UserDefaults.snuYum.set(try? JSONEncoder().encode(storedBuild), forKey: "build")
+            let storedMealViewMode = MealType(rawValue: UserDefaults.snuYum.string(forKey: "mealViewMode") ?? "점심")
+            UserDefaults.snuYum.set(try? JSONEncoder().encode(storedMealViewMode), forKey: "mealViewMode")
+            let alimiCafeName = UserDefaults.snuYum.string(forKey: "timerCafeName")
+            UserDefaults.snuYum.set(try? JSONEncoder().encode(alimiCafeName), forKey: "timerCafeName")
+            let isAuto = UserDefaults.snuYum.bool(forKey: "isAuto")
+            UserDefaults.snuYum.set(try? JSONEncoder().encode(isAuto), forKey: "isAuto")
+            let hideEmptyCafe = UserDefaults.snuYum.bool(forKey: "isHide")
+            UserDefaults.snuYum.set(try? JSONEncoder().encode(hideEmptyCafe), forKey: "isHide")
+            if let loadedData = UserDefaults.snuYum.value(forKey: "cafeList") as? Data {
+                do {
+                    let cafeList = try PropertyListDecoder().decode([ListElement].self, from: loadedData)
+                    UserDefaults.snuYum.set(try JSONEncoder().encode(cafeList), forKey: "cafeList")
+                } catch {
+                    print(error)
+                    assertionFailure("ListManager load error.")
+                }
+            }
+        }
     }
 }

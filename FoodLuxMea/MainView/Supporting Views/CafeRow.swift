@@ -72,7 +72,7 @@ struct CafeRow: View {
                                     .foregroundColor(Color(.label))
                                 Spacer()
                                 Text(menu.costStr)
-                                    .font(.system(size: 15))
+                                    .font(.system(size: 15, weight: .semibold))
                                     .padding(.trailing, 10)
                                     .foregroundColor(Color(.secondaryLabel))
                             }
@@ -104,7 +104,7 @@ struct CafeRow: View {
                     Text(mealType.rawValue)
                         .padding(.top, 0.5)
                         .foregroundColor(themeColor.icon(colorScheme))
-                        .font(.system(size: 16, weight: .semibold))
+                        .font(.system(size: 14, weight: .bold))
                     Spacer()
                 }
                 .padding(.top, 1.5)
@@ -128,7 +128,7 @@ struct CafeRow: View {
                             .foregroundColor(Color(.label))
                         Spacer()
                         Text(menu.costStr)
-                            .font(.system(size: 15))
+                            .font(.system(size: 15, weight: .semibold))
                             .padding(.trailing, 10)
                             .foregroundColor(Color(.secondaryLabel))
                     }

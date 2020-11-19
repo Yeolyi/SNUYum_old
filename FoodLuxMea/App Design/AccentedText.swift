@@ -11,7 +11,7 @@ import SwiftUI
 struct AccentedText: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.system(size: CGFloat(18), weight: .medium, design: .default))
+            .font(.system(size: 16, weight: .semibold, design: .default))
     }
 }
 

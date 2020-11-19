@@ -20,7 +20,6 @@ struct MealSection: View {
     let mealType: MealType
     
     @Environment(\.colorScheme) var colorScheme
-    
     @EnvironmentObject var settingManager: UserSetting
     let themeColor = ThemeColor()
     
@@ -35,20 +34,21 @@ struct MealSection: View {
                 )
                 .sectionText()
                 ForEach(cafe.menus(at: mealType)) { menu in
-                    HStack {
-                        Text(menu.name)
-                            .accentedText()
-                            .foregroundColor(self.themeColor.title(self.colorScheme))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .onTapGesture {
-                                print(menu.name)
+                    VStack {
+                        Button(action: {
+                            
+                        }) {
+                            HStack {
+                                Text(menu.name)
+                                    .accentedText()
+                                    .foregroundColor(self.themeColor.title(self.colorScheme))
+                                    .fixedSize(horizontal: false, vertical: true)
+                                Spacer()
+                                Text(menu.costStr)
+                                    .font(.system(size: 15, weight: .semibold))
+                                    .foregroundColor(Color(.gray))
                             }
-                        Spacer()
-                        Text(menu.costStr)
-                            .foregroundColor(Color(.gray))
-                    }
-                    .onTapGesture {
-                        print(menu.name)
+                        }
                     }
                     .rowBackground()
                 }

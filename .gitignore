@@ -3,9 +3,10 @@ AppIcon/
 .ttf
 .otf
 Info.plist
+GoogleService-Info.plist
 
-# Created by https://www.toptal.com/developers/gitignore/api/swift,xcode,macos,cocoapods
-# Edit at https://www.toptal.com/developers/gitignore?templates=swift,xcode,macos,cocoapods
+# Created by https://www.toptal.com/developers/gitignore/api/xcode,macos,swift,cocoapods,firebase
+# Edit at https://www.toptal.com/developers/gitignore?templates=xcode,macos,swift,cocoapods,firebase
 
 ### CocoaPods ###
 ## CocoaPods GitIgnore Template
@@ -15,6 +16,15 @@ Info.plist
 #           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGNORE THE LOCK FILE
 Pods/
 
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
+
 ### macOS ###
 # General
 .DS_Store
@@ -23,6 +33,7 @@ Pods/
 
 # Icon must end with two \r
 Icon
+
 
 # Thumbnails
 ._*
@@ -96,7 +107,7 @@ playground.xcworkspace
 # We recommend against adding the Pods directory to your .gitignore. However
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-Pods/
+# Pods/
 # Add this line if you want to avoid checking in source code from the Xcode workspace
 # *.xcworkspace
 
@@ -144,4 +155,4 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# End of https://www.toptal.com/developers/gitignore/api/swift,xcode,macos,cocoapods
+# End of https://www.toptal.com/developers/gitignore/api/xcode,macos,swift,cocoapods,firebase
