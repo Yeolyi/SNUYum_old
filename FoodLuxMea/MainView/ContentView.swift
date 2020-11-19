@@ -14,7 +14,6 @@ struct ContentView: View {
     let themeColor = ThemeColor()
     @State var searchWord = ""
     @State var isSettingView = false
-    @State var activeAlert: ActiveAlert?
     @State var currentCafe: Cafe?
     
     @Environment(\.colorScheme) var colorScheme
@@ -57,7 +56,7 @@ struct ContentView: View {
             .zIndex(1)
             VStack(spacing: 0) {
                 if isSettingView {
-                    SettingView(isPresented: $isSettingView, activeAlert: $activeAlert)
+                    SettingView(isPresented: $isSettingView)
                 } else if let cafe = currentCafe {
                     CafeView(cafeInfo: cafe)
                 } else {
@@ -75,9 +74,6 @@ struct ContentView: View {
                 }
             }
             .zIndex(2)
-        }
-        .alert(item: $activeAlert) { item in
-            mainAlert(item: item)
         }
     }
     
@@ -126,29 +122,6 @@ struct ContentView: View {
                 }
             }
         )
-    }
-    
-    private func mainAlert(item: ActiveAlert) -> Alert {
-        switch item {
-        case .clearCafe:
-            return Alert(
-                title: Text("다운로드된 데이터를 삭제합니다"),
-                message: Text("사용자 설정은 영향받지 않습니다."),
-                primaryButton: .destructive(Text("삭제"), action: { dataManager.clear()}),
-                secondaryButton: .cancel()
-            )
-        case .clearAll:
-            return Alert(
-                title: Text("앱을 초기 상태로 되돌립니다."),
-                primaryButton: .destructive(Text("삭제"), action: {
-                    dataManager.clear()
-                    settingManager.clear()
-                    listManager.clear()
-                }
-                ),
-                secondaryButton: .cancel()
-            )
-        }
     }
 }
 

@@ -16,6 +16,9 @@ target 'FoodLuxMea' do
   pod 'NMapsMap'
   pod 'Google-Mobile-Ads-SDK'
   pod 'SwiftLint'
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/OAuth'
   # Pods for FoodLuxMea
 
 end

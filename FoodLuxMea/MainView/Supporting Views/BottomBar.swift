@@ -25,7 +25,7 @@ struct BottomBar: View {
             }) {
                 Image(systemName: "phone")
                     .font(.system(size: 23, weight: .light))
-                    .foregroundColor(.green)
+                    .foregroundColor(themeColor.title(colorScheme))
             }
             Spacer()
             Button(action: {
@@ -33,7 +33,7 @@ struct BottomBar: View {
             }) {
                 Image(systemName: "map")
                     .font(.system(size: 23, weight: .light))
-                    .foregroundColor(.purple)
+                    .foregroundColor(themeColor.title(colorScheme))
             }
             Spacer()
             Button(action: {
@@ -43,7 +43,7 @@ struct BottomBar: View {
             }) {
                 Image(systemName: listManager.isFixed(cafeName: currentCafe?.name ?? "없음") ? "pin" : "pin.slash")
                     .font(.system(size: 23, weight: .light))
-                    .foregroundColor(.orange)
+                    .foregroundColor(themeColor.title(colorScheme))
             }
             Spacer()
             Button(action: {
@@ -52,7 +52,7 @@ struct BottomBar: View {
                 }
             }) {
                 Text("닫기")
-                    .font(.system(size: 23, weight: .light))
+                    .font(.system(size: 23))
                     .foregroundColor(themeColor.title(colorScheme))
             }
         }

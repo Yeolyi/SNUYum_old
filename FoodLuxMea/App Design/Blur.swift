@@ -36,9 +36,6 @@ struct BlurHeader<Content: View>: View {
             .padding(.bottom, headerBottomPadding)
             .background(
                 Blur(style: .systemUltraThinMaterial)
-                    .clipShape(
-                        RoundedCorner(radius: 30, corners: [.bottomLeft, .bottomRight])
-                    )
                     .edgesIgnoringSafeArea(.top)
                     .shadow(radius: 5)
             )

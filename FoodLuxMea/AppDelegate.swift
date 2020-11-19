@@ -7,6 +7,8 @@
 
 import UIKit
 import GoogleMobileAds
+import Firebase
+import FirebaseUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         requestPermission()
         //Initialize Google Admob.
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        FirebaseApp.configure()
+        FUIOAuth.appleAuthProvider()
         return true
     }
     

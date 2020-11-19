@@ -7,21 +7,22 @@
 
 import SwiftUI
 import GoogleMobileAds
+import FirebaseAuth
 
 /// Indicate which type of setting sheet is shown.
-enum ActiveSheet: Identifiable {
+enum SettingSheet: Identifiable {
     // ID to use iOS 14 compatible 'item' syntax in sheet modifier.
     var id: Int {
         self.hashValue
     }
-    case reorder, timer, info
+    case reorder, timer, info, account
 }
 
 struct SettingView: View {
     
     @Binding var isPresented: Bool
-    @State var activeSheet: ActiveSheet?
-    @Binding var activeAlert: ActiveAlert?
+    @State var activeSheet: SettingSheet?
+    @State var logOutAlert = false
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -31,9 +32,8 @@ struct SettingView: View {
     let themeColor = ThemeColor()
     
     /// - Parameter isPresented: Pass main view to show current view or not.
-    init(isPresented: Binding<Bool>, activeAlert: Binding<ActiveAlert?>) {
+    init(isPresented: Binding<Bool>) {
         self._isPresented = isPresented
-        self._activeAlert = activeAlert
     }
     
     var body: some View {
@@ -44,96 +44,94 @@ struct SettingView: View {
                 Text("")
                     .padding(45)
                 Group {
-                    Text("기본 설정")
+                    Text("기본")
                         .sectionText()
                     // Basic setting - Cafe reorder.
-                    HStack {
-                        Text("식당 순서 변경")
-                            .font(.system(size: 18))
-                            .foregroundColor(themeColor.title(colorScheme))
-                        Spacer()
-                        if listManager.fixedList.count != 0 {
-                            Text("\(listManager.fixedList.count)개 식당이 고정되었어요")
-                                .font(.system(size: 16))
-                                .foregroundColor(Color(.gray))
-                        } else {
-                            Text("고정된 식당이 없어요")
-                                .font(.system(size: 15))
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    .rowBackground()
-                    .contentShape(Rectangle())
-                    .onTapGesture {
+                    Button(action: {
                         self.activeSheet = .reorder
+                    }) {
+                        HStack {
+                            Text("식당 순서 변경")
+                                .font(.system(size: 18))
+                                .foregroundColor(themeColor.title(colorScheme))
+                            Spacer()
+                            if listManager.fixedList.count != 0 {
+                                Text("\(listManager.fixedList.count)개 식당이 고정되었어요")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(Color(.gray))
+                            } else {
+                                Text("고정된 식당이 없어요")
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .rowBackground()
+                        .contentShape(Rectangle())
                     }
                     // Basic setting - Cafe timer.
+                    Button(action: {
+                        self.activeSheet = .timer
+                    }) {
+                        HStack {
+                            Text("기준 식당 선택")
+                                .font(.system(size: 18))
+                                .foregroundColor(themeColor.title(colorScheme))
+                            Spacer()
+                            Text(settingManager.alimiCafeName ?? "꺼짐")
+                                .font(.system(size: 16))
+                                .foregroundColor(.secondary)
+                        }
+                        .rowBackground()
+                        .contentShape(Rectangle())
+                    }
+                }
+                // Basic setting - Hide empty cafe.
+                SimpleToggle(isOn: $settingManager.hideEmptyCafe, label: "메뉴가 없는 식당 숨기기")
+                    .rowBackground()
+                Text("계정")
+                    .sectionText()
+                Button(action: {
+                    self.activeSheet = .account
+                }) {
                     HStack {
-                        Text("기준 식당 선택")
+                        Text("로그인")
                             .font(.system(size: 18))
                             .foregroundColor(themeColor.title(colorScheme))
                         Spacer()
-                        Text(settingManager.alimiCafeName ?? "꺼짐")
-                            .font(.system(size: 16))
+                        Text(appStatus.userID ?? "로그인 안됨")
+                            .font(.system(size: 18))
                             .foregroundColor(.secondary)
                     }
                     .rowBackground()
                     .contentShape(Rectangle())
-                    .onTapGesture {
-                        self.activeSheet = .timer
-                    }
                 }
-                // Basic setting - Hide empty cafe.
-                SimpleToggle(isOn: $settingManager.hideEmptyCafe, label: "정보가 없는 식당 숨기기")
-                    .rowBackground()
-                // Info
-                Text("정보")
-                    .sectionText()
-                Button(action: { activeSheet = ActiveSheet.info }) {
-                    HStack {
-                        Text("스누냠 정보")
-                            .foregroundColor(themeColor.title(colorScheme))
-                            .font(.system(size: 18))
-                        Spacer()
-                    }
-                }
-                .rowBackground()
-                // Advanced setting.
-                #if DEBUG
-                Text("디버그")
-                    .sectionText()
-                // Advanced setting - custom date.
-                SimpleToggle(isOn: $settingManager.isDebugDate, label: "사용자 설정 날짜")
-                    .rowBackground()
-                if settingManager.isDebugDate {
-                    DatePicker(selection: $settingManager.debugDate, label: { EmptyView() })
+                if appStatus.userID != nil {
+                    Button(action: {
+                        self.logOutAlert = true
+                    }) {
+                        HStack {
+                            Text("로그아웃")
+                                .font(.system(size: 18))
+                                .foregroundColor(.secondary)
+                            Spacer()
+                        }
                         .rowBackground()
-                        .accentColor(themeColor.title(colorScheme))
+                        .contentShape(Rectangle())
+                    }
                 }
-                HStack {
-                    Text("저장된 식단 삭제")
-                        .font(.system(size: 18))
-                        .foregroundColor(.secondary)
-                    Spacer()
-                }
-                .rowBackground()
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    activeAlert = ActiveAlert.clearCafe
-                }
-                HStack {
-                    Text("전체 초기화")
-                        .font(.system(size: 18))
-                        .foregroundColor(.secondary)
-                    Spacer()
-                }
-                .rowBackground()
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    activeAlert = ActiveAlert.clearAll
-                }
-                #endif
             }
+            // Info
+            Text("정보")
+                .sectionText()
+            Button(action: { activeSheet = SettingSheet.info }) {
+                HStack {
+                    Text("스누냠 정보")
+                        .foregroundColor(themeColor.title(colorScheme))
+                        .font(.system(size: 18))
+                    Spacer()
+                }
+            }
+            .rowBackground()
         }
         .background(colorScheme == .dark ? Color.black : Color.white)
         // Caution: Sheet modifier position matters.
@@ -149,7 +147,31 @@ struct SettingView: View {
                     .environmentObject(self.settingManager)
             case .info:
                 AboutAppView()
+                    .environmentObject(self.settingManager)
+                    .environmentObject(self.listManager)
+                    .environmentObject(self.dataManager)
+            case .account:
+                AccountSetting()
             }
+        }
+        .alert(isPresented: $logOutAlert) {
+            Alert(
+                title: Text("로그아웃하시겠어요?"),
+                message: Text("일부 기능이 제한됩니다"),
+                primaryButton: .cancel(),
+                secondaryButton: .default(
+                    Text("로그아웃하기"),
+                    action: {
+                        let firebaseAuth = Auth.auth()
+                        do {
+                            try firebaseAuth.signOut()
+                            appStatus.userID = nil
+                        } catch let signOutError as NSError {
+                            print("Error signing out: %@", signOutError)
+                        }
+                    }
+                )
+            )
         }
     }
 }
@@ -157,7 +179,7 @@ struct SettingView: View {
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 0) {
-            SettingView(isPresented: .constant(true), activeAlert: .constant(.none))
+            SettingView(isPresented: .constant(true))
                 .environmentObject(CafeList())
                 .environmentObject(Cafeteria())
                 .environmentObject(UserSetting())
