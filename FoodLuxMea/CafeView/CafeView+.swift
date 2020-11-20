@@ -56,6 +56,7 @@ struct CafeView: View {
                 Text("")
                     .padding(43)
             }
+            .blur(radius: isRatingWindow ? 10 : 0)
             .sheet(isPresented: $isMapSheet) {
                 MapView(cafeInfo: self.cafe)
                     .environmentObject(self.themeColor)

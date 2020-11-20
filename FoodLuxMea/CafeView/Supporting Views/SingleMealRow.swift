@@ -31,20 +31,20 @@ struct SingleMealRow: View {
                 ratedCafe = ratedMenuInfo
                 isRatingWindow = true
             }) {
-                HStack {
+                HStack(spacing: 0) {
                     Text(menu.name)
                         .accentedText()
                         .foregroundColor(self.themeColor.title(self.colorScheme))
                         .fixedSize(horizontal: false, vertical: true)
                     Spacer()
                     if asyncRating.rating != nil {
-                        Image("star")
+                        Image(systemName: asyncRating.isRated ? "star.fill": "star")
                             .font(.system(size: 13, weight: .semibold))
                             .foregroundColor(Color(.lightGray))
-                            .padding(.trailing, 3)
                         Text(asyncRating.rating!)
                             .font(.system(size: 15, weight: .semibold))
                             .foregroundColor(Color(.lightGray))
+                            .padding(.trailing, 7)
                     }
                     Text(menu.costStr)
                         .font(.system(size: 15, weight: .semibold))
@@ -57,12 +57,38 @@ struct SingleMealRow: View {
 }
 
 class AsyncRating: ObservableObject {
+    
+    @Published var participants: Int?
     @Published var rating: String?
+    @Published var myRate: Int?
+    @Published var isRated: Bool = false
+    
     init(_ ratedMenuInfo: RatedMenuInfo) {
-        RatingMessenger.getMenuRating(info: ratedMenuInfo) { value in
-            if let value = value {
-                self.rating = String(round(value*10)/10)
+        RatingMessenger.getMenuRating(info: ratedMenuInfo) { values in
+            if let values = values {
+                self.rating = String(round(values.0*10)/10)
+                self.participants = values.1
             }
         }
+        RatingMessenger.isAlreadyRated(ratedMenuInfo) { isRated in
+            self.isRated = isRated
+        }
+        RatingMessenger.getMyRate(ratedMenuInfo) { rate in
+            self.myRate = rate
+        }
+    }
+}
+
+struct SingleMealRow_Previews: PreviewProvider {
+    
+    static let testMenuInfo = RatedMenuInfo(at: Date(), cafe: "3식당", menu: "테스트 메뉴")
+    
+    static var previews: some View {
+        SingleMealRow(
+            menu: Menu(name: "테스트 메뉴"),
+            ratedMenuInfo: testMenuInfo,
+            ratedCafe: .constant(testMenuInfo),
+            isRatingWindow: .constant(false)
+        )
     }
 }
