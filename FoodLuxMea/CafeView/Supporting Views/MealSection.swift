@@ -18,6 +18,8 @@ struct MealSection: View {
     
     let cafe: Cafe
     let mealType: MealType
+    @Binding var ratedCafe: RatedMenuInfo
+    @Binding var isRatingWindow: Bool
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var settingManager: UserSetting
@@ -34,23 +36,7 @@ struct MealSection: View {
                 )
                 .sectionText()
                 ForEach(cafe.menus(at: mealType)) { menu in
-                    VStack {
-                        Button(action: {
-                            
-                        }) {
-                            HStack {
-                                Text(menu.name)
-                                    .accentedText()
-                                    .foregroundColor(self.themeColor.title(self.colorScheme))
-                                    .fixedSize(horizontal: false, vertical: true)
-                                Spacer()
-                                Text(menu.costStr)
-                                    .font(.system(size: 15, weight: .semibold))
-                                    .foregroundColor(Color(.gray))
-                            }
-                        }
-                    }
-                    .rowBackground()
+                    SingleMealRow(menu: menu, ratedMenuInfo: .init(at: settingManager.date, cafe: cafe.name, menu: menu.name), ratedCafe: $ratedCafe, isRatingWindow: $isRatingWindow)
                 }
             }
         }

@@ -12,6 +12,7 @@ struct AccountSetting: View {
    
     let themeColor = ThemeColor()
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
         VStack {
@@ -20,7 +21,7 @@ struct AccountSetting: View {
                 .font(.system(size: 35, weight: .bold, design: .default))
                 .padding(.top, 40)
                 .padding(.bottom, 3)
-            Text("로그인 후 바로 사용하세요")
+            Text("\(appStatus.userID != nil ? "지금 " : "로그인 후 ")바로 사용하세요")
                 .font(.system(size: 20, weight: .bold, design: .default))
                 .padding(.bottom, 40)
                 .foregroundColor(.secondary)
@@ -39,12 +40,16 @@ struct AccountSetting: View {
                 Spacer()
             }
             Spacer()
-            SignInWithAppleToFirebase { _ in
-                
+            if appStatus.userID == nil {
+                SignInWithAppleToFirebase { state in
+                    if state == .success {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: 50)
+                .padding(30)
+                .padding(.bottom, 40)
             }
-            .frame(maxWidth: .infinity, maxHeight: 50)
-            .padding(30)
-            .padding(.bottom, 40)
         }
     }
 }

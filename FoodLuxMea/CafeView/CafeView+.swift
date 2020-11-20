@@ -12,7 +12,10 @@ import GoogleMobileAds
 struct CafeView: View {
     
     @State var cafe: Cafe
+    
     @State var isMapSheet = false
+    @State var ratedCafe = RatedMenuInfo(at: Date(), cafe: "3식당", menu: "테스트")
+    @State var isRatingWindow = false
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
@@ -27,30 +30,36 @@ struct CafeView: View {
     }
     
     var body: some View {
-        ScrollView {
-            // Prevents BlurHeader hides scrollview object.
-            Text("")
-                .padding(45)
-            CafeTimer(cafe: cafe)
-            MealSection(cafe: cafe, mealType: .breakfast)
-            MealSection(cafe: cafe, mealType: .lunch)
-            MealSection(cafe: cafe, mealType: .dinner)
-            Text("식당 정보")
-                .sectionText()
-            HStack {
-                Spacer()
-                Text(cafeDescription[cafe.name] ?? "정보 없음")
-                    .font(.system(size: 16))
-                    .padding()
-                Spacer()
+        ZStack {
+            if isRatingWindow {
+                RatingWindow(isShown: $isRatingWindow, ratedMenuInfo: ratedCafe)
+                    .zIndex(1)
             }
-            .rowBackground()
-            Text("")
-                .padding(43)
-        }
-        .sheet(isPresented: $isMapSheet) {
-            MapView(cafeInfo: self.cafe)
-                .environmentObject(self.themeColor)
+            ScrollView {
+                // Prevents BlurHeader hides scrollview object.
+                Text("")
+                    .padding(45)
+                CafeTimer(cafe: cafe)
+                MealSection(cafe: cafe, mealType: .breakfast, ratedCafe: $ratedCafe, isRatingWindow: $isRatingWindow)
+                MealSection(cafe: cafe, mealType: .lunch, ratedCafe: $ratedCafe, isRatingWindow: $isRatingWindow)
+                MealSection(cafe: cafe, mealType: .dinner, ratedCafe: $ratedCafe, isRatingWindow: $isRatingWindow)
+                Text("식당 정보")
+                    .sectionText()
+                HStack {
+                    Spacer()
+                    Text(cafeDescription[cafe.name] ?? "정보 없음")
+                        .font(.system(size: 16))
+                        .padding()
+                    Spacer()
+                }
+                .rowBackground()
+                Text("")
+                    .padding(43)
+            }
+            .sheet(isPresented: $isMapSheet) {
+                MapView(cafeInfo: self.cafe)
+                    .environmentObject(self.themeColor)
+            }
         }
     }
 }

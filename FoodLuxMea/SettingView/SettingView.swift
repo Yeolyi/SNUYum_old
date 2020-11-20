@@ -57,7 +57,7 @@ struct SettingView: View {
                             Spacer()
                             if listManager.fixedList.count != 0 {
                                 Text("\(listManager.fixedList.count)개 식당이 고정되었어요")
-                                    .font(.system(size: 16))
+                                    .font(.system(size: 15))
                                     .foregroundColor(Color(.gray))
                             } else {
                                 Text("고정된 식당이 없어요")
@@ -78,7 +78,7 @@ struct SettingView: View {
                                 .foregroundColor(themeColor.title(colorScheme))
                             Spacer()
                             Text(settingManager.alimiCafeName ?? "꺼짐")
-                                .font(.system(size: 16))
+                                .font(.system(size: 15))
                                 .foregroundColor(.secondary)
                         }
                         .rowBackground()
@@ -98,8 +98,8 @@ struct SettingView: View {
                             .font(.system(size: 18))
                             .foregroundColor(themeColor.title(colorScheme))
                         Spacer()
-                        Text(appStatus.userID ?? "로그인 안됨")
-                            .font(.system(size: 18))
+                        Text(appStatus.userID != nil ? "로그인 완료!" : "로그인 후 더 많은 기능을 사용하세요")
+                            .font(.system(size: 15))
                             .foregroundColor(.secondary)
                     }
                     .rowBackground()
@@ -157,7 +157,7 @@ struct SettingView: View {
         .alert(isPresented: $logOutAlert) {
             Alert(
                 title: Text("로그아웃하시겠어요?"),
-                message: Text("일부 기능이 제한됩니다"),
+                message: Text("일부 기능이 제한돼요"),
                 primaryButton: .cancel(),
                 secondaryButton: .default(
                     Text("로그아웃하기"),

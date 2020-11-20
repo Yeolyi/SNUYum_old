@@ -35,9 +35,9 @@ struct BlurHeader<Content: View>: View {
             }
             .padding(.bottom, headerBottomPadding)
             .background(
-                Blur(style: .systemUltraThinMaterial)
+                Blur(style: .systemMaterial)
                     .edgesIgnoringSafeArea(.top)
-                    .shadow(radius: 5)
+                    .shadow(radius: 2)
             )
             Spacer()
         }

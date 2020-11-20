@@ -59,9 +59,9 @@ struct BottomBar: View {
         .padding([.leading, .trailing], 20)
         .padding([.top, .bottom], 10)
         .background(
-            Blur(style: .systemUltraThinMaterial)
+            Blur(style: .systemMaterial)
                 .edgesIgnoringSafeArea(.bottom)
-                .shadow(radius: 5)
+                .shadow(radius: 2)
         )
         .sheet(isPresented: $isMapSheet) {
             if let cafe = currentCafe {
