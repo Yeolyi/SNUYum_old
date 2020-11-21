@@ -15,6 +15,15 @@ struct RatingWindow: View {
     let ratedMenuInfo: RatedMenuInfo
     let themeColor = ThemeColor()
     @Environment(\.colorScheme) var colorScheme
+    @State var isLoginSheet = false
+    
+    var confirmMessage: String {
+        if appStatus.userID != nil {
+            return asyncRating.isRated ? "다시 등록" : "등록"
+        } else {
+            return "로그인 후 등록"
+        }
+    }
     
     init(isShown: Binding<Bool>, ratedMenuInfo: RatedMenuInfo) {
         self._isShown = isShown
@@ -93,10 +102,14 @@ struct RatingWindow: View {
                     }
                     .padding(.trailing, 40)
                     Button(action: {
-                        RatingMessenger.sendIndividualRating(info: ratedMenuInfo, star: self.asyncRating.myRate ?? 3)
-                        self.isShown = false
+                        if appStatus.userID != nil {
+                            RatingMessenger.sendIndividualRating(info: ratedMenuInfo, star: self.asyncRating.myRate ?? 3)
+                            self.isShown = false
+                        } else {
+                            self.isLoginSheet = true
+                        }
                     }) {
-                        Text(asyncRating.isRated ? "다시 등록" : "등록")
+                        Text(confirmMessage)
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(.gray)
                             .fixedSize()
@@ -113,6 +126,9 @@ struct RatingWindow: View {
             )
             .padding(.top, 50)
             Spacer()
+        }
+        .sheet(isPresented: $isLoginSheet) {
+            AccountSetting()
         }
     }
     
