@@ -17,6 +17,7 @@ struct GoogleLogin: View {
             GIDSignIn.sharedInstance().presentingViewController =
             UIApplication.shared.windows.first?.rootViewController
             GIDSignIn.sharedInstance()?.signIn()
+            presentationMode.wrappedValue.dismiss()
         }) {
             HStack {
                 Image("googleLogo")

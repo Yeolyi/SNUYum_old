@@ -45,26 +45,6 @@ struct AboutAppView: View {
                         Spacer()
                     }
                     .rowBackground()
-                    if #available(iOS 14, *) {
-                        Text("관련 링크")
-                            .sectionText()
-                        HStack {
-                            Spacer()
-                            Link("소스코드(github)",
-                                 destination: URL(string: "https://github.com/Yeolyi/SNUYum")!)
-                                .foregroundColor(.primary)
-                            Spacer()
-                        }
-                        .rowBackground()
-                        HStack {
-                            Spacer()
-                            Link("어플리케이션 지원",
-                                 destination: URL(string: "https://yeolyi.github.io/SnuYumSupport/")!)
-                                .foregroundColor(.primary)
-                            Spacer()
-                        }
-                        .rowBackground()
-                    }
                     Text("개발자")
                         .sectionText()
                     HStack {

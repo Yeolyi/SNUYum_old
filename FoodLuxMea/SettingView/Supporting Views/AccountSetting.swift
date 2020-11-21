@@ -40,18 +40,16 @@ struct AccountSetting: View {
                 Spacer()
             }
             Spacer()
-            if appStatus.userID == nil {
-                SignInWithAppleToFirebase { state in
-                    if state == .success {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
+            SignInWithAppleToFirebase { state in
+                if state == .success {
+                    self.presentationMode.wrappedValue.dismiss()
                 }
-                .frame(maxWidth: .infinity, maxHeight: 50)
-                .padding([.leading, .trailing], 30)
-                .padding(.bottom, 15)
-                GoogleLogin()
-                    .padding(.bottom, 60)
             }
+            .frame(maxWidth: .infinity, maxHeight: 50)
+            .padding([.leading, .trailing], 30)
+            .padding(.bottom, 15)
+            GoogleLogin()
+                .padding(.bottom, 60)
         }
     }
 }
