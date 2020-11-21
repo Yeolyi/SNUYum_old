@@ -82,7 +82,7 @@ struct RatingMessenger {
         }
     }
     
-    static func checkRatingNumber(_ ratedMenuInfo: RatedMenuInfo, completion: @escaping (Bool) -> Void) {
+    static func checkRatingNumber(_ ratedMenuInfo: RatedMenuInfo, setValue: Bool, completion: @escaping (Bool) -> Void) {
         if let id = appStatus.userID {
             let filteredMenuName = removeBadString(ratedMenuInfo.menuName)
             Database.database().reference().child("stars").child(ratedMenuInfo.cafeName).child(ratedMenuInfo.date).child(filteredMenuName).observeSingleEvent(of: .value) { (snapshot) in
@@ -96,13 +96,17 @@ struct RatingMessenger {
                 ref.observeSingleEvent(of: .value) { snapshot in
                     if let value = snapshot.value as? Int {
                         if value < 4 {
-                            ref.setValue(value+1)
+                            if setValue {
+                                ref.setValue(value+1)
+                            }
                             completion(true)
                         } else {
                             completion(false)
                         }
                     } else {
-                        ref.setValue(1)
+                        if setValue {
+                            ref.setValue(1)
+                        }
                         completion(true)
                     }
                 }
@@ -113,7 +117,7 @@ struct RatingMessenger {
     }
     
     static func sendIndividualRating(info ratedMenuInfo: RatedMenuInfo, star starValue: Int) {
-        checkRatingNumber(ratedMenuInfo) { isRatingAvailable in
+        checkRatingNumber(ratedMenuInfo, setValue: true) { isRatingAvailable in
             if isRatingAvailable {
                 let filteredMenuName = removeBadString(ratedMenuInfo.menuName)
                 let ref = Database.database().reference().child("stars").child(ratedMenuInfo.cafeName).child(ratedMenuInfo.date).child(filteredMenuName)

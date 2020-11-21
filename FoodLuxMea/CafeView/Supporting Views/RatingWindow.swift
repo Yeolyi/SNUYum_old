@@ -16,6 +16,7 @@ struct RatingWindow: View {
     let themeColor = ThemeColor()
     @Environment(\.colorScheme) var colorScheme
     @State var isLoginSheet = false
+    @State var isMaxAlert = false
     
     var confirmMessage: String {
         if appStatus.userID != nil {
@@ -102,7 +103,12 @@ struct RatingWindow: View {
                     }
                     .padding(.trailing, 40)
                     Button(action: {
+                        //순서 중요, 리팩토링 필요
                         if appStatus.userID != nil {
+                            guard asyncRating.isRatingAvailable == true else {
+                                self.isMaxAlert = true
+                                return
+                            }
                             RatingMessenger.sendIndividualRating(info: ratedMenuInfo, star: self.asyncRating.myRate ?? 3)
                             self.isShown = false
                         } else {
@@ -129,6 +135,9 @@ struct RatingWindow: View {
         }
         .sheet(isPresented: $isLoginSheet) {
             AccountSetting()
+        }
+        .alert(isPresented: $isMaxAlert) {
+            Alert(title: Text("하루 최대 4개의 평점을 남기실 수 있어요."))
         }
     }
     

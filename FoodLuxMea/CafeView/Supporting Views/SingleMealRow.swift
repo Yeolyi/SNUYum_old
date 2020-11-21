@@ -62,6 +62,7 @@ class AsyncRating: ObservableObject {
     @Published var rating: String?
     @Published var myRate: Int?
     @Published var isRated: Bool = false
+    @Published var isRatingAvailable: Bool = false
     
     init(_ ratedMenuInfo: RatedMenuInfo) {
         RatingMessenger.getMenuRating(info: ratedMenuInfo) { values in
@@ -75,6 +76,9 @@ class AsyncRating: ObservableObject {
         }
         RatingMessenger.getMyRate(ratedMenuInfo) { rate in
             self.myRate = rate
+        }
+        RatingMessenger.checkRatingNumber(ratedMenuInfo, setValue: false) { isAvailable in
+            self.isRatingAvailable = isAvailable
         }
     }
 }

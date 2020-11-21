@@ -54,6 +54,7 @@ struct AboutAppView: View {
                     }
                     .rowBackground()
                     // Advanced setting.
+                    #if DEBUG
                     Group {
                         Text("디버그")
                             .sectionText()
@@ -88,6 +89,7 @@ struct AboutAppView: View {
                             activeAlert = ActiveAlert.clearAll
                         }
                     }
+                    #endif
                 }
             }
             
