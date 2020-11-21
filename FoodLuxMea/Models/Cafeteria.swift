@@ -45,7 +45,8 @@ class Cafeteria: ObservableObject {
                     appStatus.isDownloading = false
                 }
             } catch {
-                assertionFailure()
+                print(error.localizedDescription)
+                appStatus.isDownloading = false
                 completion([])
             }
         }

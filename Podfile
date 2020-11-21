@@ -20,6 +20,7 @@ target 'FoodLuxMea' do
   pod 'FirebaseUI/OAuth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'GoogleSignIn'
   pod 'NMapsMap', '<= 3.9.1'
   # Pods for FoodLuxMea
 

@@ -8,6 +8,7 @@
 import SwiftUI
 import GoogleMobileAds
 import FirebaseAuth
+import GoogleSignIn
 
 /// Indicate which type of setting sheet is shown.
 enum SettingSheet: Identifiable {
@@ -30,6 +31,21 @@ struct SettingView: View {
     @EnvironmentObject var dataManager: Cafeteria
     @EnvironmentObject var settingManager: UserSetting
     let themeColor = ThemeColor()
+    
+    var loginMethodStr: String {
+        if let id = Auth.auth().currentUser?.providerData.first?.providerID {
+            switch id {
+            case "apple.com":
+                return "애플로 로그인 완료!"
+            case "google.com":
+                return "구글로 로그인 완료!"
+            default:
+                return "로그인 완료!"
+            }
+        } else {
+            return "로그인 완료!"
+        }
+    }
     
     /// - Parameter isPresented: Pass main view to show current view or not.
     init(isPresented: Binding<Bool>) {
@@ -98,7 +114,7 @@ struct SettingView: View {
                             .font(.system(size: 18))
                             .foregroundColor(themeColor.title(colorScheme))
                         Spacer()
-                        Text(appStatus.userID != nil ? "로그인 완료!" : "로그인 후 더 많은 기능을 사용하세요")
+                        Text(appStatus.userID != nil ? loginMethodStr : "로그인 후 더 많은 기능을 사용하세요")
                             .font(.system(size: 15))
                             .foregroundColor(.secondary)
                     }

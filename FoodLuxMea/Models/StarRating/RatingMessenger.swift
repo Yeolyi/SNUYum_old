@@ -15,7 +15,7 @@ struct RatingMessenger {
             if isRated {
                 let id = appStatus.userID!
                 let filteredMenuName = removeBadString(ratedMenuInfo.menuName)
-                Database.database().reference().child("stars").child(ratedMenuInfo.cafeName).child(ratedMenuInfo.date).child(filteredMenuName).child(id).removeValue { _,_ in
+                Database.database().reference().child("stars").child(ratedMenuInfo.cafeName).child(ratedMenuInfo.date).child(filteredMenuName).child(id).removeValue {_, _ in
                     let ref = Database.database().reference().child("users").child(id).child(ratedMenuInfo.date).child("ratingNum")
                     ref.observeSingleEvent(of: .value) { snapshot in
                         if let value = snapshot.value as? Int {
@@ -95,7 +95,6 @@ struct RatingMessenger {
                 let ref = Database.database().reference().child("users").child(id).child(ratedMenuInfo.date).child("ratingNum")
                 ref.observeSingleEvent(of: .value) { snapshot in
                     if let value = snapshot.value as? Int {
-                        print(value)
                         if value < 4 {
                             ref.setValue(value+1)
                             completion(true)

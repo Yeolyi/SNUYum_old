@@ -47,8 +47,10 @@ struct AccountSetting: View {
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: 50)
-                .padding(30)
-                .padding(.bottom, 40)
+                .padding([.leading, .trailing], 30)
+                .padding(.bottom, 15)
+                GoogleLogin()
+                    .padding(.bottom, 60)
             }
         }
     }

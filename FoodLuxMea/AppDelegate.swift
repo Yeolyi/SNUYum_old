@@ -9,9 +9,10 @@ import UIKit
 import GoogleMobileAds
 import Firebase
 import FirebaseUI
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(
         _ application: UIApplication,
@@ -21,8 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         requestPermission()
         //Initialize Google Admob.
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
         FirebaseApp.configure()
         FUIOAuth.appleAuthProvider()
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
         return true
     }
     
@@ -43,6 +47,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running,
         // this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any])
+      -> Bool {
+      return GIDSignIn.sharedInstance().handle(url)
+    }
+    
+    func sign(_ signIn: GIDSignIn!,
+              didSignInFor user: GIDGoogleUser!,
+              withError error: Error!) {
+        
+        // Check for sign in error
+        if let error = error {
+            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+                print("The user has not signed in before or they have since signed out.")
+            } else {
+                print("\(error.localizedDescription)")
+            }
+            return
+        }
+        
+        // Get credential object using Google ID token and Google access token
+        guard let authentication = user.authentication else {
+            return
+        }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        
+        // Authenticate with Firebase using the credential object
+        Auth.auth().signIn(with: credential) { (_, error) in
+            if let error = error {
+                print("Error occurs when authenticate with Firebase: \(error.localizedDescription)")
+            }
+                
+        }
+
     }
     
 }
