@@ -48,6 +48,9 @@ class AppStatus: ObservableObject {
         }
         previousUserDefaultCompatability()
         executionTimeCount += 1
+        if executionTimeCount == 1 {
+            isFirstVersionRun = true
+        }
         if executionTimeCount > 20 {
             SKStoreReviewController.requestReview()
         } 

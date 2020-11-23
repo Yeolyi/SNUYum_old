@@ -48,8 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = UIHostingController(rootView: contentView
                                                                 .environmentObject(listManager)
                                                                 .environmentObject(dataManager)
-                                                                .environmentObject(settingManager)
-                                                                .environmentObject(appStatus))
+                                                                .environmentObject(settingManager))
             self.window = window
             window.makeKeyAndVisible()
         }

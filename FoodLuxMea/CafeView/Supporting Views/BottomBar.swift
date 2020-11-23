@@ -25,7 +25,7 @@ struct BottomBar: View {
             }) {
                 Image(systemName: "phone")
                     .font(.system(size: 23, weight: .light))
-                    .foregroundColor(themeColor.title(colorScheme))
+                    .foregroundColor(Color(red: 90/255, green: 196/255, blue: 119/255))
             }
             Spacer()
             Button(action: {
@@ -33,7 +33,7 @@ struct BottomBar: View {
             }) {
                 Image(systemName: "map")
                     .font(.system(size: 23, weight: .light))
-                    .foregroundColor(themeColor.title(colorScheme))
+                    .foregroundColor(Color(red: 65/255, green: 154/255, blue: 215/255))
             }
             Spacer()
             Button(action: {
@@ -43,7 +43,7 @@ struct BottomBar: View {
             }) {
                 Image(systemName: listManager.isFixed(cafeName: currentCafe?.name ?? "없음") ? "pin" : "pin.slash")
                     .font(.system(size: 23, weight: .light))
-                    .foregroundColor(themeColor.title(colorScheme))
+                    .foregroundColor(Color(red: 147/255, green: 101/255, blue: 179/255))
             }
             Spacer()
             Button(action: {

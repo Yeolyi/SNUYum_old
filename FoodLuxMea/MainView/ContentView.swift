@@ -20,7 +20,6 @@ struct ContentView: View {
     @EnvironmentObject var listManager: CafeList
     @EnvironmentObject var dataManager: Cafeteria
     @EnvironmentObject var settingManager: UserSetting
-    @EnvironmentObject var appStatus: AppStatus
     
     var body: some View {
         ZStack {
@@ -85,10 +84,8 @@ struct ContentView: View {
             return "설정"
         } else if searchWord != "" {
             return "식단 검색"
-        } else if settingManager.showMealSelectView {
-            return "식단 바로보기"
         } else {
-            return "\(settingManager.meal.rawValue) 식단 바로보기"
+            return "\(settingManager.isSuggestedTomorrow ? "내일" : "오늘") \(settingManager.meal.rawValue) 식단"
         }
     }
     

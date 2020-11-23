@@ -17,6 +17,7 @@ struct CustomHeader: View {
                 Text(subTitle)
                     .font(.system(size: CGFloat(18), weight: .bold))
                     .foregroundColor(.secondary)
+                    .animation(nil)
                 Text(title)
                     .font(.system(size: CGFloat(25), weight: .bold))
                     .animation(nil)

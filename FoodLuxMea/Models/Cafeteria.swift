@@ -13,15 +13,6 @@ class Cafeteria: ObservableObject {
     
     @Published var asyncData: [Cafe] = []
     
-    /// Loads existing datas or initializes them into default values.
-    init() {
-        if appStatus.isFirstVersionRun {
-            SNUCOHandler.clear()
-            OurhomeHandler.clear()
-            print("Version first run: Cafe data eliminated.")
-        }
-    }
-    
     func clear() {
         SNUCOHandler.clear()
         OurhomeHandler.clear()

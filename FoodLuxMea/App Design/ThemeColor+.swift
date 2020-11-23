@@ -17,11 +17,12 @@ class ThemeColor: ObservableObject {
     private var iconDark = Color(hex: "#7B848C")
     
     func icon(_ colorScheme: ColorScheme) -> Color {
-        colorScheme == .dark ? iconDark : iconLight
+        iconLight
+        //colorScheme == .dark ? iconDark : iconLight
     }
     
     func title(_ colorScheme: ColorScheme) -> Color {
-        colorScheme == .dark ? titleDark : titleLight
+        titleLight//colorScheme == .dark ? titleDark : titleLight
     }
     
 }
